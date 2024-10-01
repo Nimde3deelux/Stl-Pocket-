@@ -92,9 +92,7 @@
             max-width: 800px; /* Largeur maximale */
         }
 
-        #login,
-        #signup,
-        #chat {
+        #login-signup {
             background-color: rgba(255, 255, 255, 0.3);
             border-radius: 10px;
             padding: 20px;
@@ -167,8 +165,8 @@
             transform: scale(1.2);
         }
 
-        /* Styles du jeu de ping pong */
-        #pingPongGame {
+        /* Styles du jeu de Tetris */
+        #tetrisGame {
             border: 1px solid #333;
             width: 100%;
             height: 400px;
@@ -178,21 +176,9 @@
             border-radius: 10px;
         }
 
-        #paddle {
-            width: 10px;
-            height: 80px;
-            background-color: #333;
+        .tetris-block {
             position: absolute;
-            bottom: 10px;
-            left: 50px;
-        }
-
-        #ball {
-            width: 10px;
-            height: 10px;
             background-color: #ff5722;
-            border-radius: 50%;
-            position: absolute;
         }
     </style>
 
@@ -210,28 +196,19 @@
     <!-- Menu de navigation -->
     <nav>
         <ul>
-            <li><a href="#login">Connexion</a></li>
-            <li><a href="#signup">Inscription</a></li>
+            <li><a href="#login-signup">Connexion / Inscription</a></li>
             <li><a href="#chat">Chat</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#music" onclick="toggleMusic()">Musique</a></li>
         </ul>
     </nav>
 
-    <!-- Section de connexion -->
-    <section id="login">
-        <h1>Connexion</h1>
+    <!-- Section de connexion et d'inscription -->
+    <section id="login-signup">
+        <h1>Connexion / Inscription</h1>
         <input type="text" id="loginEmail" placeholder="Email ou Téléphone" required />
         <input type="password" id="loginPassword" placeholder="Mot de passe" required />
         <button onclick="login()">Se connecter</button>
-    </section>
-
-    <!-- Section d'inscription -->
-    <section id="signup">
-        <h1>Inscription</h1>
-        <input type="email" id="signupEmail" placeholder="Email" required />
-        <input type="text" id="signupPhone" placeholder="Téléphone" required />
-        <input type="password" id="signupPassword" placeholder="Mot de passe" required />
         <button onclick="signup()">S'inscrire</button>
     </section>
 
@@ -253,17 +230,14 @@
         </div>
     </section>
 
-    <!-- Section des services avec mini jeu de ping pong -->
+    <!-- Section des services avec mini jeu de Tetris -->
     <section id="services">
         <h1>Nos Services</h1>
         <p>Découvrez nos services d'assistance pour étudiants.</p>
         
-        <!-- Jeu de Ping Pong -->
-        <div id="pingPongGame">
-            <div id="paddle"></div>
-            <div id="ball"></div>
-        </div>
-        <button onclick="startPingPong()">Jouer</button>
+        <!-- Jeu de Tetris -->
+        <div id="tetrisGame"></div>
+        <button onclick="startTetris()">Jouer à Tetris</button>
     </section>
 
     <!-- Section musique -->
@@ -302,12 +276,11 @@
 
         // Fonction d'inscription
         async function signup() {
-            const email = document.getElementById("signupEmail").value;
-            const phone = document.getElementById("signupPhone").value;
-            const password = document.getElementById("signupPassword").value;
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
             try {
                 await auth.createUserWithEmailAndPassword(email, password);
-                alert(`Inscription réussie pour ${email} avec le téléphone ${phone}`);
+                alert(`Inscription réussie pour ${email}`);
             } catch (error) {
                 alert(`Erreur d'inscription : ${error.message}`);
             }
@@ -359,16 +332,6 @@
             }
         }
 
-        // Animation du curseur
-        const cursorEffect = document.createElement('div');
-        cursorEffect.classList.add('cursor-effect');
-        document.body.appendChild(cursorEffect);
-
-        document.addEventListener('mousemove', (e) => {
-            cursorEffect.style.left = e.pageX + 'px';
-            cursorEffect.style.top = e.pageY + 'px';
-        });
-
         // Lecture de la musique de fond au chargement
         window.onload = function () {
             loadMessages(); // Charger les messages au démarrage
@@ -379,58 +342,110 @@
             loadMessages();
         });
 
-        // Mini jeu de ping pong
-        let ball = document.getElementById('ball');
-        let paddle = document.getElementById('paddle');
-        let gameContainer = document.getElementById('pingPongGame');
-        let ballDirectionX = 2; // Vitesse horizontale
-        let ballDirectionY = 2; // Vitesse verticale
-        let isGameActive = false;
+        // Tetris
+        const tetrisGame = document.getElementById('tetrisGame');
+        const width = 10; // Largeur de la grille
+        const height = 20; // Hauteur de la grille
+        let board = Array.from({ length: height }, () => Array(width).fill(0));
+        let currentPiece;
+        let currentPosition;
+        let timer;
 
-        function startPingPong() {
-            isGameActive = true;
-            ball.style.top = '200px';
-            ball.style.left = '200px';
-            moveBall();
-            document.addEventListener('mousemove', movePaddle);
+        // Définition des pièces Tetris
+        const pieces = [
+            [[1, 1, 1, 1]], // I
+            [[1, 1, 1], [0, 1, 0]], // T
+            [[1, 1, 0], [0, 1, 1]], // Z
+            [[0, 1, 1], [1, 1, 0]], // S
+            [[1, 1], [1, 1]], // O
+            [[1, 1, 1], [1, 0, 0]], // L
+            [[1, 1, 1], [0, 0, 1]]  // J
+        ];
+
+        // Fonction pour démarrer le jeu
+        function startTetris() {
+            clearInterval(timer);
+            board = Array.from({ length: height }, () => Array(width).fill(0));
+            drawBoard();
+            generatePiece();
+            timer = setInterval(moveDown, 1000);
         }
 
-        function movePaddle(event) {
-            const paddleHeight = paddle.offsetHeight;
-            const containerHeight = gameContainer.offsetHeight;
-            let mouseY = event.clientY - gameContainer.getBoundingClientRect().top;
-            paddle.style.top = Math.min(Math.max(mouseY - paddleHeight / 2, 0), containerHeight - paddleHeight) + 'px';
+        // Fonction pour dessiner la grille
+        function drawBoard() {
+            tetrisGame.innerHTML = '';
+            for (let row = 0; row < height; row++) {
+                for (let col = 0; col < width; col++) {
+                    if (board[row][col] === 1) {
+                        const block = document.createElement('div');
+                        block.className = 'tetris-block';
+                        block.style.width = '10%';
+                        block.style.height = '20px';
+                        block.style.top = row * 20 + 'px';
+                        block.style.left = col * (tetrisGame.offsetWidth / width) + 'px';
+                        tetrisGame.appendChild(block);
+                    }
+                }
+            }
         }
 
-        function moveBall() {
-            if (!isGameActive) return;
-
-            let ballRect = ball.getBoundingClientRect();
-            let paddleRect = paddle.getBoundingClientRect();
-            let containerRect = gameContainer.getBoundingClientRect();
-
-            // Collision avec les murs
-            if (ballRect.top <= containerRect.top || ballRect.bottom >= containerRect.bottom) {
-                ballDirectionY = -ballDirectionY; // Inverser la direction verticale
+        // Fonction pour générer une nouvelle pièce
+        function generatePiece() {
+            currentPiece = pieces[Math.floor(Math.random() * pieces.length)];
+            currentPosition = { x: Math.floor(width / 2) - Math.floor(currentPiece[0].length / 2), y: 0 };
+            if (!isValidMove(currentPiece, currentPosition)) {
+                alert('Game Over');
+                clearInterval(timer);
             }
+        }
 
-            // Collision avec la raquette
-            if (ballRect.left <= paddleRect.right && ballRect.top + ballRect.height >= paddleRect.top && ballRect.bottom <= paddleRect.bottom) {
-                ballDirectionX = -ballDirectionX; // Inverser la direction horizontale
+        // Fonction pour déplacer la pièce vers le bas
+        function moveDown() {
+            if (isValidMove(currentPiece, { x: currentPosition.x, y: currentPosition.y + 1 })) {
+                currentPosition.y++;
+            } else {
+                merge();
+                generatePiece();
             }
+            drawBoard();
+        }
 
-            // Collision avec le côté droit (perte de jeu)
-            if (ballRect.left <= containerRect.left) {
-                alert("Vous avez perdu !");
-                isGameActive = false;
-                return;
+        // Fonction pour vérifier si le mouvement est valide
+        function isValidMove(piece, position) {
+            for (let row = 0; row < piece.length; row++) {
+                for (let col = 0; col < piece[0].length; col++) {
+                    if (piece[row][col] === 1) {
+                        let newX = position.x + col;
+                        let newY = position.y + row;
+                        if (newX < 0 || newX >= width || newY >= height || (newY >= 0 && board[newY][newX] === 1)) {
+                            return false;
+                        }
+                    }
+                }
             }
+            return true;
+        }
 
-            // Déplacer la balle
-            ball.style.left = (ball.offsetLeft + ballDirectionX) + 'px';
-            ball.style.top = (ball.offsetTop + ballDirectionY) + 'px';
+        // Fonction pour fusionner la pièce avec le tableau
+        function merge() {
+            for (let row = 0; row < currentPiece.length; row++) {
+                for (let col = 0; col < currentPiece[0].length; col++) {
+                    if (currentPiece[row][col] === 1) {
+                        board[currentPosition.y + row][currentPosition.x + col] = 1;
+                    }
+                }
+            }
+            clearRows();
+        }
 
-            requestAnimationFrame(moveBall); // Continuer à déplacer la balle
+        // Fonction pour effacer les lignes complètes
+        function clearRows() {
+            for (let row = height - 1; row >= 0; row--) {
+                if (board[row].every(cell => cell === 1)) {
+                    board.splice(row, 1);
+                    board.unshift(Array(width).fill(0));
+                }
+            }
         }
     </script>
 </body>
