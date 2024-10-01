@@ -70,13 +70,6 @@
             background-color: rgba(0, 0, 0, 0.5);
         }
 
-        #login, #signup {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px;
-        }
-
         input {
             padding: 10px;
             margin: 10px;
@@ -97,14 +90,6 @@
 
         button:hover {
             background-color: #00cccc;
-        }
-
-        #chat {
-            display: none;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px;
         }
 
         .cursor-effect {
@@ -128,12 +113,12 @@
     <script>
         // Configuration de Firebase
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyCb2GEcCJyqCKPm9YRRvOrYZza8csma16E",
+            authDomain: "stl-pocket.firebaseapp.com",
+            projectId: "stl-pocket",
+            storageBucket: "stl-pocket.appspot.com",
+            messagingSenderId: "831100924140",
+            appId: "1:831100924140:web:5218cf351bf7962eb2f5c9"
         };
 
         // Initialiser Firebase
@@ -230,7 +215,7 @@
 
     <!-- Musique de fond -->
     <audio id="backgroundMusic" loop>
-        <source src="path_to_your_music_file.mp3" type="audio/mpeg">
+        <source src="MDickies Hard Time Theme Song.mp3" type="audio/mpeg">
         Votre navigateur ne supporte pas la lecture de l'audio.
     </audio>
     <script>
