@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STL Pocket</title>
     <style>
+        /* ---- Styles de base ---- */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
         /* ---- Animation de fond ---- */
         @keyframes backgroundAnimation {
             0% { background-color: #111; }
@@ -16,12 +27,6 @@
 
         body {
             animation: backgroundAnimation 10s infinite alternate;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            overflow-x: hidden;
-            position: relative;
         }
 
         nav {
@@ -70,10 +75,19 @@
             background-color: rgba(0, 0, 0, 0.5);
         }
 
+        #login, #signup, #chat {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            width: 80%; /* Ajustement de la largeur */
+            max-width: 400px; /* Largeur maximale */
+        }
+
         input {
             padding: 10px;
-            margin: 10px;
-            width: 300px;
+            margin: 10px 0;
+            width: 100%; /* Prend la largeur disponible */
             border: none;
             border-radius: 5px;
         }
@@ -92,6 +106,15 @@
             background-color: #00cccc;
         }
 
+        #messages {
+            height: 200px;
+            overflow-y: scroll;
+            border: 1px solid #fff;
+            padding: 10px;
+            margin: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
         .cursor-effect {
             position: absolute;
             width: 15px;
@@ -108,121 +131,104 @@
             display: none;
         }
     </style>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
-    <script>
-        // Configuration de Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyCb2GEcCJyqCKPm9YRRvOrYZza8csma16E",
-            authDomain: "stl-pocket.firebaseapp.com",
-            projectId: "stl-pocket",
-            storageBucket: "stl-pocket.appspot.com",
-            messagingSenderId: "831100924140",
-            appId: "1:831100924140:web:5218cf351bf7962eb2f5c9"
-        };
-
-        // Initialiser Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-
-        // Fonction de connexion
-        function login() {
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-
-            auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // Connexion réussie
-                    alert("Bienvenue, " + userCredential.user.email);
-                })
-                .catch((error) => {
-                    alert("Erreur: " + error.message);
-                });
-        }
-
-        // Fonction d'inscription
-        function register() {
-            const email = document.getElementById("registerEmail").value;
-            const password = document.getElementById("registerPassword").value;
-
-            auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    // Inscription réussie
-                    alert("Inscription réussie, bienvenue " + userCredential.user.email);
-                })
-                .catch((error) => {
-                    alert("Erreur: " + error.message);
-                });
-        }
-
-        // Effet de curseur personnalisé
-        document.addEventListener('mousemove', function(e) {
-            const cursorEffect = document.querySelector('.cursor-effect');
-            cursorEffect.style.left = e.pageX + 'px';
-            cursorEffect.style.top = e.pageY + 'px';
-        });
-    </script>
 </head>
-<body>
-    <div class="cursor-effect"></div>
 
+<body>
+
+    <!-- Musique de fond -->
+    <audio id="backgroundMusic" src="https://example.com/path/to/your/music.mp3" loop></audio>
+
+    <!-- Menu de navigation -->
     <nav>
         <ul>
-            <li><a href="#hero">Accueil</a></li>
-            <li><a href="#contact">Contact</a></li>
             <li><a href="#login">Connexion</a></li>
+            <li><a href="#signup">Inscription</a></li>
+            <li><a href="#chat">Chat</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#music" onclick="toggleMusic()">Musique</a></li>
         </ul>
     </nav>
 
-    <!-- Section Hero -->
-    <section id="hero">
-        <h1>Bienvenue sur STL Pocket</h1>
-        <p>La meilleure solution pour vos besoins numériques !</p>
-        <a href="#login" class="neon-btn">Nous contacter</a>
-    </section>
-
-    <!-- Section Connexion -->
+    <!-- Section de connexion -->
     <section id="login">
-        <h2>Connexion</h2>
-        <form onsubmit="event.preventDefault(); login();">
-            <input type="email" id="email" placeholder="Email" required />
-            <input type="password" id="password" placeholder="Mot de passe" required />
-            <button type="submit">Se connecter</button>
-        </form>
-
-        <h2>Inscription</h2>
-        <form onsubmit="event.preventDefault(); register();">
-            <input type="email" id="registerEmail" placeholder="Email" required />
-            <input type="password" id="registerPassword" placeholder="Mot de passe" required />
-            <button type="submit">S'inscrire</button>
-        </form>
+        <h1>Connexion</h1>
+        <input type="text" id="loginEmail" placeholder="Email ou Téléphone" required />
+        <input type="password" id="loginPassword" placeholder="Mot de passe" required />
+        <button onclick="login()">Se connecter</button>
     </section>
 
-    <!-- Section Contact -->
-    <section id="contact">
-        <h2>Contactez-nous</h2>
-        <form id="contactForm">
-            <input type="text" placeholder="Votre nom" required>
-            <input type="email" placeholder="Votre email" required>
-            <textarea placeholder="Votre message" required></textarea>
-            <button type="submit">Envoyer</button>
-        </form>
+    <!-- Section d'inscription -->
+    <section id="signup">
+        <h1>Inscription</h1>
+        <input type="email" id="signupEmail" placeholder="Email" required />
+        <input type="text" id="signupPhone" placeholder="Téléphone" required />
+        <input type="password" id="signupPassword" placeholder="Mot de passe" required />
+        <button onclick="signup()">S'inscrire</button>
     </section>
 
-    <footer>
-        <p>&copy; 2024 STL Pocket - Tous droits réservés</p>
-    </footer>
+    <!-- Section de chat -->
+    <section id="chat">
+        <h1>Chat</h1>
+        <div id="messages"></div>
+        <input type="text" id="chatInput" placeholder="Votre message..." />
+        <button onclick="sendMessage()">Envoyer</button>
+    </section>
 
-    <!-- Musique de fond -->
-    <audio id="backgroundMusic" loop>
-        <source src="MDickies Hard Time Theme Song.mp3" type="audio/mpeg">
-        Votre navigateur ne supporte pas la lecture de l'audio.
-    </audio>
+    <!-- Section des services -->
+    <section id="services">
+        <h1>Nos Services</h1>
+        <p>Découvrez nos services d'assistance pour étudiants.</p>
+    </section>
+
+    <!-- Section musique -->
+    <section id="music">
+        <h1>Musique de Fond</h1>
+        <button onclick="toggleMusic()">Jouer / Pause Musique</button>
+    </section>
+
     <script>
-        // Lecture de la musique de fond
-        window.onload = function() {
-            document.getElementById('backgroundMusic').play();
-        };
+        function login() {
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+            alert(`Connexion avec ${email}`);
+            // Ajouter ici la logique de connexion
+        }
+
+        function signup() {
+            const email = document.getElementById("signupEmail").value;
+            const phone = document.getElementById("signupPhone").value;
+            const password = document.getElementById("signupPassword").value;
+            alert(`Inscription avec ${email} et ${phone}`);
+            // Ajouter ici la logique d'inscription
+        }
+
+        function sendMessage() {
+            const input = document.getElementById("chatInput");
+            const message = input.value;
+            const messagesDiv = document.getElementById("messages");
+            messagesDiv.innerHTML += `<div>${message}</div>`;
+            input.value = '';
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; // faire défiler vers le bas
+        }
+
+        function toggleMusic() {
+            const music = document.getElementById("backgroundMusic");
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        }
+
+        // Animation du curseur
+        const cursorEffect = document.createElement('div');
+        cursorEffect.classList.add('cursor-effect');
+        document.body.appendChild(cursorEffect);
+
+        document.addEventListener('mousemove', (e) => {
+            cursorEffect.style.left = e.pageX + 'px';
+            cursorEffect.style.top = e.pageY + 'px';
+        });
     </script>
 </body>
 </html>
