@@ -10,19 +10,20 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            color: #fff;
+            color: #333;
             text-align: center;
             overflow: hidden;
             position: relative;
+            background-color: #e0f7fa; /* Couleur de fond bleu clair */
         }
 
         /* ---- Animation de fond ---- */
         @keyframes backgroundAnimation {
-            0% { background-color: #111; }
-            25% { background-color: #222; }
-            50% { background-color: #333; }
-            75% { background-color: #444; }
-            100% { background-color: #555; }
+            0% { background-color: #b2ebf2; }
+            25% { background-color: #80deea; }
+            50% { background-color: #4dd0e1; }
+            75% { background-color: #26c6da; }
+            100% { background-color: #00bcd4; }
         }
 
         body {
@@ -72,11 +73,12 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(255, 255, 255, 0.2); /* Légère opacité */
+            border-radius: 10px; /* Coins arrondis */
         }
 
         #login, #signup, #chat {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.3);
             border-radius: 10px;
             padding: 20px;
             margin: 20px;
@@ -112,7 +114,8 @@
             border: 1px solid #fff;
             padding: 10px;
             margin: 10px;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
         }
 
         .cursor-effect {
@@ -130,13 +133,35 @@
         audio {
             display: none;
         }
+
+        /* Styles pour la barre d'émojis */
+        #emojiContainer {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .emoji {
+            cursor: pointer;
+            font-size: 24px;
+            margin: 0 5px;
+        }
+
+        .emoji:hover {
+            transform: scale(1.2);
+        }
     </style>
+
+    <!-- Inclusion des SDK Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
 </head>
 
 <body>
 
     <!-- Musique de fond -->
-    <audio id="backgroundMusic" src="https://example.com/path/to/your/music.mp3" loop></audio>
+    <audio id="backgroundMusic" src="MDickies Hard Time Theme Song.mp3" loop autoplay></audio>
 
     <!-- Menu de navigation -->
     <nav>
@@ -172,6 +197,16 @@
         <div id="messages"></div>
         <input type="text" id="chatInput" placeholder="Votre message..." />
         <button onclick="sendMessage()">Envoyer</button>
+
+        <!-- Barre d'émojis -->
+        <div id="emojiContainer">
+            <span class="emoji" onclick="insertEmoji('😀')">😀</span>
+            <span class="emoji" onclick="insertEmoji('😅')">😅</span>
+            <span class="emoji" onclick="insertEmoji('😎')">😎</span>
+            <span class="emoji" onclick="insertEmoji('🥳')">🥳</span>
+            <span class="emoji" onclick="insertEmoji('❤️')">❤️</span>
+            <span class="emoji" onclick="insertEmoji('👍')">👍</span>
+        </div>
     </section>
 
     <!-- Section des services -->
@@ -187,30 +222,83 @@
     </section>
 
     <script>
-        function login() {
+        // Configuration de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCb2GEcCJyqCKPm9YRRvOrYZza8csma16E",
+            authDomain: "stl-pocket.firebaseapp.com",
+            projectId: "stl-pocket",
+            storageBucket: "stl-pocket.appspot.com",
+            messagingSenderId: "831100924140",
+            appId: "1:831100924140:web:5218cf351bf7962eb2f5c9"
+        };
+
+        // Initialisation de Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Fonction de connexion
+        async function login() {
             const email = document.getElementById("loginEmail").value;
             const password = document.getElementById("loginPassword").value;
-            alert(`Connexion avec ${email}`);
-            // Ajouter ici la logique de connexion
+            try {
+                await auth.signInWithEmailAndPassword(email, password);
+                alert(`Connexion réussie avec ${email}`);
+            } catch (error) {
+                alert(`Erreur de connexion : ${error.message}`);
+            }
         }
 
-        function signup() {
+        // Fonction d'inscription
+        async function signup() {
             const email = document.getElementById("signupEmail").value;
             const phone = document.getElementById("signupPhone").value;
             const password = document.getElementById("signupPassword").value;
-            alert(`Inscription avec ${email} et ${phone}`);
-            // Ajouter ici la logique d'inscription
+            try {
+                await auth.createUserWithEmailAndPassword(email, password);
+                alert(`Inscription réussie pour ${email} avec le téléphone ${phone}`);
+            } catch (error) {
+                alert(`Erreur d'inscription : ${error.message}`);
+            }
         }
 
-        function sendMessage() {
+        // Fonction d'envoi de message
+        async function sendMessage() {
             const input = document.getElementById("chatInput");
             const message = input.value;
+            if (message.trim() !== '') {
+                try {
+                    await db.collection("messages").add({
+                        text: message,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    input.value = '';
+                } catch (error) {
+                    alert(`Erreur d'envoi de message : ${error.message}`);
+                }
+            }
+        }
+
+        // Fonction pour insérer des émojis dans le chat
+        function insertEmoji(emoji) {
+            const input = document.getElementById("chatInput");
+            input.value += emoji; // Ajouter l'émoji au champ de texte
+            input.focus(); // Reprendre le focus sur le champ de texte
+        }
+
+        // Fonction pour récupérer les messages
+        async function loadMessages() {
             const messagesDiv = document.getElementById("messages");
-            messagesDiv.innerHTML += `<div>${message}</div>`;
-            input.value = '';
+            messagesDiv.innerHTML = ''; // Clear previous messages
+            const querySnapshot = await db.collection("messages").orderBy("timestamp").get();
+            querySnapshot.forEach((doc) => {
+                const message = doc.data().text;
+                messagesDiv.innerHTML += `<div>${message}</div>`;
+            });
             messagesDiv.scrollTop = messagesDiv.scrollHeight; // faire défiler vers le bas
         }
 
+        // Toggle music
         function toggleMusic() {
             const music = document.getElementById("backgroundMusic");
             if (music.paused) {
@@ -228,6 +316,16 @@
         document.addEventListener('mousemove', (e) => {
             cursorEffect.style.left = e.pageX + 'px';
             cursorEffect.style.top = e.pageY + 'px';
+        });
+
+        // Lecture de la musique de fond au chargement
+        window.onload = function() {
+            loadMessages(); // Charger les messages au démarrage
+        };
+
+        // Écouter les nouvelles messages en temps réel
+        db.collection("messages").orderBy("timestamp").onSnapshot((snapshot) => {
+            loadMessages();
         });
     </script>
 </body>
