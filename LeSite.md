@@ -256,4 +256,49 @@
     <!-- Ton contenu ici -->
 </body>
 </html>
+<h2>Connexion</h2>
+<form onsubmit="event.preventDefault(); login();">
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Mot de passe" required />
+    <button type="submit">Se connecter</button>
+</form>
+
+<h2>Inscription</h2>
+<form onsubmit="event.preventDefault(); register();">
+    <input type="email" id="registerEmail" placeholder="Email" required />
+    <input type="password" id="registerPassword" placeholder="Mot de passe" required />
+    <button type="submit">S'inscrire</button>
+</form>
+
+<script>
+    // Fonction de connexion
+    function login() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        auth.signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                // Connexion réussie
+                alert("Bienvenue, " + userCredential.user.email);
+            })
+            .catch((error) => {
+                alert("Erreur: " + error.message);
+            });
+    }
+
+    // Fonction d'inscription
+    function register() {
+        const email = document.getElementById("registerEmail").value;
+        const password = document.getElementById("registerPassword").value;
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                // Inscription réussie
+                alert("Inscription réussie, bienvenue " + userCredential.user.email);
+            })
+            .catch((error) => {
+                alert("Erreur: " + error.message);
+            });
+    }
+</script>
 
