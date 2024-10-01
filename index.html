@@ -11,19 +11,38 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            color: #fff;
+            color: #333;
             text-align: center;
             overflow: hidden;
             position: relative;
-            background-color: #1a1a1a; /* Couleur de fond principale */
+            background-color: #e0f7fa; /* Couleur de fond bleu clair */
         }
 
-        /* ---- Canevas pour le fond animé ---- */
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1; /* Mettre le canevas derrière le contenu */
+        /* ---- Animation de fond ---- */
+        @keyframes backgroundAnimation {
+            0% {
+                background-color: #b2ebf2;
+            }
+
+            25% {
+                background-color: #80deea;
+            }
+
+            50% {
+                background-color: #4dd0e1;
+            }
+
+            75% {
+                background-color: #26c6da;
+            }
+
+            100% {
+                background-color: #00bcd4;
+            }
+        }
+
+        body {
+            animation: backgroundAnimation 10s infinite alternate;
         }
 
         nav {
@@ -56,7 +75,7 @@
 
         h1,
         h2 {
-            text-shadow: 0 0 5px #f0f, 0 0 10px #f0f;
+            text-shadow: none; /* Suppression des effets de néon */
         }
 
         section {
@@ -66,22 +85,25 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(255, 255, 255, 0.2); /* Légère opacité */
+            border-radius: 10px; /* Coins arrondis */
+            margin: 20px auto; /* Centrage des sections */
+            width: 90%; /* Ajustement de la largeur */
+            max-width: 800px; /* Largeur maximale */
         }
 
         #login-signup {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.3);
             border-radius: 10px;
             padding: 20px;
-            margin: 20px;
-            width: 80%;
-            max-width: 400px;
+            margin: 20px 0;
+            width: 100%; /* Prend la largeur disponible */
         }
 
         input {
             padding: 10px;
             margin: 10px 0;
-            width: 100%;
+            width: 100%; /* Prend la largeur disponible */
             border: none;
             border-radius: 5px;
         }
@@ -100,55 +122,73 @@
             background-color: #00cccc;
         }
 
-        #message {
-            color: red;
-            margin-top: 10px;
-        }
-
-        /* Style pour la section de chat */
-        #chat {
-            margin-top: 50px;
-            width: 80%;
-            max-width: 600px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-        }
-
         #messages {
-            height: 300px;
+            height: 200px;
             overflow-y: scroll;
             border: 1px solid #fff;
             padding: 10px;
-            margin: 10px 0;
-            background-color: rgba(255, 255, 255, 0.1);
+            margin: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
         }
 
-        #chatInput {
-            width: calc(100% - 30px); /* Ajuste pour le bouton */
-            display: inline-block;
-        }
-
-        /* Style pour la section de Tetris */
-        #tetris {
-            width: 400px;
-            height: 600px;
-            border: 1px solid #fff;
-            background-color: rgba(255, 255, 255, 0.1);
-            margin-top: 20px;
+        .cursor-effect {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: rgba(0, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: transform 0.2s ease, background 0.2s ease;
         }
 
         /* Musique */
         audio {
             display: none;
         }
+
+        /* Styles pour la barre d'émojis */
+        #emojiContainer {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .emoji {
+            cursor: pointer;
+            font-size: 24px;
+            margin: 0 5px;
+        }
+
+        .emoji:hover {
+            transform: scale(1.2);
+        }
+
+        /* Styles du jeu de Tetris */
+        #tetrisGame {
+            border: 1px solid #333;
+            width: 100%;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .tetris-block {
+            position: absolute;
+            background-color: #ff5722;
+        }
     </style>
+
+    <!-- Inclusion des SDK Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
 </head>
 
 <body>
-
-    <!-- Canevas pour le fond animé -->
-    <canvas id="backgroundCanvas"></canvas>
 
     <!-- Musique de fond -->
     <audio id="backgroundMusic" src="MDickies Hard Time Theme Song.mp3" loop autoplay></audio>
@@ -158,7 +198,7 @@
         <ul>
             <li><a href="#login-signup">Connexion / Inscription</a></li>
             <li><a href="#chat">Chat</a></li>
-            <li><a href="#tetris">Jeu de Tetris</a></li>
+            <li><a href="#services">Services</a></li>
             <li><a href="#music" onclick="toggleMusic()">Musique</a></li>
         </ul>
     </nav>
@@ -170,7 +210,6 @@
         <input type="password" id="loginPassword" placeholder="Mot de passe" required />
         <button onclick="login()">Se connecter</button>
         <button onclick="signup()">S'inscrire</button>
-        <div id="message"></div>
     </section>
 
     <!-- Section de chat -->
@@ -179,85 +218,156 @@
         <div id="messages"></div>
         <input type="text" id="chatInput" placeholder="Votre message..." />
         <button onclick="sendMessage()">Envoyer</button>
+
+        <!-- Barre d'émojis -->
+        <div id="emojiContainer">
+            <span class="emoji" onclick="insertEmoji('😀')">😀</span>
+            <span class="emoji" onclick="insertEmoji('😅')">😅</span>
+            <span class="emoji" onclick="insertEmoji('😎')">😎</span>
+            <span class="emoji" onclick="insertEmoji('🥳')">🥳</span>
+            <span class="emoji" onclick="insertEmoji('❤️')">❤️</span>
+            <span class="emoji" onclick="insertEmoji('👍')">👍</span>
+        </div>
     </section>
 
-    <!-- Section du jeu de Tetris -->
-    <section id="tetris">
-        <h1>Jeu de Tetris</h1>
-        <canvas id="tetrisCanvas" width="400" height="600"></canvas>
+    <!-- Section des services avec mini jeu de Tetris -->
+    <section id="services">
+        <h1>Nos Services</h1>
+        <p>Découvrez nos services d'assistance pour étudiants.</p>
+        
+        <!-- Jeu de Tetris -->
+        <div id="tetrisGame"></div>
+        <button onclick="startTetris()">Jouer à Tetris</button>
+    </section>
+
+    <!-- Section musique -->
+    <section id="music">
+        <h1>Musique de Fond</h1>
+        <button onclick="toggleMusic()">Jouer / Pause Musique</button>
     </section>
 
     <script>
-        // Configuration Firebase (remplacez par vos propres informations)
+        // Configuration de Firebase
         const firebaseConfig = {
-            apiKey: "AIzaSyCb2GEcCJyqCKPm9YRRvOrYZza8csma16E",
-            authDomain: "stl-pocket.firebaseapp.com",
-            projectId: "stl-pocket",
-            storageBucket: "stl-pocket.appspot.com",
-            messagingSenderId: "831100924140",
-            appId: "1:831100924140:web:5218cf351bf7962eb2f5c9"
+            apiKey: "AIzaSyCb2GEcCJyqCKPm9YRRvOrYZza8csma16I",
+            authDomain: "stlpocket-d8fbc.firebaseapp.com",
+            projectId: "stlpocket-d8fbc",
+            storageBucket: "stlpocket-d8fbc.appspot.com",
+            messagingSenderId: "301138774193",
+            appId: "1:301138774193:web:7b618dc6dc1aa8e587d103"
         };
-
+        
         // Initialisation de Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
-
-        // Fonction d'inscription
-        async function signup() {
-            const email = document.getElementById("loginEmail").value;
-            const password = document.getElementById("loginPassword").value;
-
-            // Vérification des champs
-            if (!validateEmail(email)) {
-                document.getElementById("message").innerText = "Veuillez entrer une adresse e-mail valide.";
-                return;
-            }
-
-            if (password.length < 6) {
-                document.getElementById("message").innerText = "Le mot de passe doit contenir au moins 6 caractères.";
-                return;
-            }
-
-            try {
-                await auth.createUserWithEmailAndPassword(email, password);
-                document.getElementById("message").innerText = `Inscription réussie pour ${email}`;
-                // Redirection vers Firebase ou une autre page
-                window.location.href = 'https://your-firebase-page-url.com'; // Remplacez par votre URL
-            } catch (error) {
-                document.getElementById("message").innerText = `Erreur d'inscription : ${error.message}`;
-            }
-        }
+        const db = firebase.firestore();
 
         // Fonction de connexion
         async function login() {
             const email = document.getElementById("loginEmail").value;
             const password = document.getElementById("loginPassword").value;
-
             try {
                 await auth.signInWithEmailAndPassword(email, password);
-                document.getElementById("message").innerText = `Connexion réussie pour ${email}`;
-                // Redirection vers Firebase ou une autre page
-                window.location.href = 'https://your-firebase-page-url.com'; // Remplacez par votre URL
+                alert(`Connexion réussie pour ${email}`);
             } catch (error) {
-                document.getElementById("message").innerText = `Erreur de connexion : ${error.message}`;
+                alert(`Erreur de connexion : ${error.message}`);
             }
         }
 
-        // Fonction pour valider l'e-mail
-        function validateEmail(email) {
-            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return regex.test(email);
+        // Fonction d'inscription
+        async function signup() {
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+            try {
+                await auth.createUserWithEmailAndPassword(email, password);
+                alert(`Inscription réussie pour ${email}`);
+            } catch (error) {
+                alert(`Erreur d'inscription : ${error.message}`);
+            }
         }
 
-        // Configuration du canevas pour le fond animé
-        const canvas = document.getElementById('backgroundCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // Fonction pour envoyer un message dans le chat
+        async function sendMessage() {
+            const messageInput = document.getElementById("chatInput");
+            const message = messageInput.value;
+            if (message.trim() !== "") {
+                const chatMessages = document.getElementById("messages");
+                chatMessages.innerHTML += `<p>${message}</p>`;
+                messageInput.value = "";
 
-        const sticks = [];
+                // Enregistrement du message dans Firestore
+                await db.collection("messages").add({ text: message });
+            }
+        }
 
-        function createStick() {
-            const x = Math.random() * canvas.width;
-            const length = Math.random() * 30 + 10; // Longueur entre 10 et 40
-            const speed = Math.random() * 3 + 2;
+        // Fonction pour insérer un émoji dans le chat
+        function insertEmoji(emoji) {
+            const chatInput = document.getElementById("chatInput");
+            chatInput.value += emoji;
+        }
+
+        // Fonction pour basculer la musique
+        function toggleMusic() {
+            const music = document.getElementById("backgroundMusic");
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        }
+
+        // Variables pour le jeu de Tetris
+        let gameInterval;
+        const gameWidth = 10;
+        const gameHeight = 20;
+        const tetrisGame = document.getElementById('tetrisGame');
+        let currentBlock;
+
+        // Fonction pour commencer le jeu de Tetris
+        function startTetris() {
+            clearInterval(gameInterval);
+            tetrisGame.innerHTML = '';
+            currentBlock = createBlock();
+            drawBlock(currentBlock);
+            gameInterval = setInterval(updateGame, 1000);
+        }
+
+        // Fonction pour créer un bloc
+        function createBlock() {
+            return {
+                x: Math.floor(gameWidth / 2) - 1,
+                y: 0,
+                shape: [[1, 1, 1], [0, 1, 0]] // Exemple de forme en T
+            };
+        }
+
+        // Fonction pour dessiner un bloc
+        function drawBlock(block) {
+            const blockColor = '#ff5722';
+            for (let row = 0; row < block.shape.length; row++) {
+                for (let col = 0; col < block.shape[row].length; col++) {
+                    if (block.shape[row][col]) {
+                        const blockElement = document.createElement('div');
+                        blockElement.className = 'tetris-block';
+                        blockElement.style.backgroundColor = blockColor;
+                        blockElement.style.width = '40px'; // Ajustement de la largeur du bloc
+                        blockElement.style.height = '40px'; // Ajustement de la hauteur du bloc
+                        blockElement.style.left = (block.x + col) * 40 + 'px';
+                        blockElement.style.top = (block.y + row) * 40 + 'px';
+                        tetrisGame.appendChild(blockElement);
+                    }
+                }
+            }
+        }
+
+        // Fonction pour mettre à jour le jeu
+        function updateGame() {
+            // Logique du jeu (descente du bloc, collision, etc.) à ajouter ici
+            currentBlock.y += 1; // Descendre le bloc
+            tetrisGame.innerHTML = ''; // Effacer les anciens blocs
+            drawBlock(currentBlock); // Redessiner le bloc
+        }
+    </script>
+</body>
+
+</html>
