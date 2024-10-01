@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +18,7 @@
             background-color: #1a1a1a; /* Couleur de fond principale */
         }
 
-        /* ---- Animation de fond ---- */
+        /* ---- Canevas pour le fond animé ---- */
         canvas {
             position: absolute;
             top: 0;
@@ -53,7 +54,8 @@
             transition: text-shadow 0.3s;
         }
 
-        h1, h2 {
+        h1,
+        h2 {
             text-shadow: 0 0 5px #f0f, 0 0 10px #f0f;
         }
 
@@ -102,6 +104,44 @@
             color: red;
             margin-top: 10px;
         }
+
+        /* Style pour la section de chat */
+        #chat {
+            margin-top: 50px;
+            width: 80%;
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        #messages {
+            height: 300px;
+            overflow-y: scroll;
+            border: 1px solid #fff;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        #chatInput {
+            width: calc(100% - 30px); /* Ajuste pour le bouton */
+            display: inline-block;
+        }
+
+        /* Style pour la section de Tetris */
+        #tetris {
+            width: 400px;
+            height: 600px;
+            border: 1px solid #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+        }
+
+        /* Musique */
+        audio {
+            display: none;
+        }
     </style>
 </head>
 
@@ -110,13 +150,16 @@
     <!-- Canevas pour le fond animé -->
     <canvas id="backgroundCanvas"></canvas>
 
+    <!-- Musique de fond -->
+    <audio id="backgroundMusic" src="MDickies Hard Time Theme Song.mp3" loop autoplay></audio>
+
     <!-- Menu de navigation -->
     <nav>
         <ul>
             <li><a href="#login-signup">Connexion / Inscription</a></li>
             <li><a href="#chat">Chat</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#music">Musique</a></li>
+            <li><a href="#tetris">Jeu de Tetris</a></li>
+            <li><a href="#music" onclick="toggleMusic()">Musique</a></li>
         </ul>
     </nav>
 
@@ -128,6 +171,20 @@
         <button onclick="login()">Se connecter</button>
         <button onclick="signup()">S'inscrire</button>
         <div id="message"></div>
+    </section>
+
+    <!-- Section de chat -->
+    <section id="chat">
+        <h1>Chat</h1>
+        <div id="messages"></div>
+        <input type="text" id="chatInput" placeholder="Votre message..." />
+        <button onclick="sendMessage()">Envoyer</button>
+    </section>
+
+    <!-- Section du jeu de Tetris -->
+    <section id="tetris">
+        <h1>Jeu de Tetris</h1>
+        <canvas id="tetrisCanvas" width="400" height="600"></canvas>
     </section>
 
     <script>
@@ -149,7 +206,7 @@
         async function signup() {
             const email = document.getElementById("loginEmail").value;
             const password = document.getElementById("loginPassword").value;
-            
+
             // Vérification des champs
             if (!validateEmail(email)) {
                 document.getElementById("message").innerText = "Veuillez entrer une adresse e-mail valide.";
@@ -203,29 +260,4 @@
         function createStick() {
             const x = Math.random() * canvas.width;
             const length = Math.random() * 30 + 10; // Longueur entre 10 et 40
-            const speed = Math.random() * 3 + 2; // Vitesse entre 2 et 5
-            sticks.push({ x: x, y: -length, length: length, speed: speed });
-        }
-
-        function updateSticks() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            sticks.forEach((stick, index) => {
-                stick.y += stick.speed;
-                ctx.fillStyle = '#00ffff';
-                ctx.fillRect(stick.x, stick.y, 5, stick.length);
-                if (stick.y > canvas.height) {
-                    sticks.splice(index, 1); // Supprimer le bâton lorsqu'il sort de l'écran
-                }
-            });
-        }
-
-        function animate() {
-            if (Math.random() < 0.05) createStick(); // Créer un bâton aléatoirement
-            updateSticks();
-            requestAnimationFrame(animate);
-        }
-
-        animate(); // Démarrer l'animation
-    </script>
-</body>
-</html>
+            const speed = Math.random() * 3 + 2;
