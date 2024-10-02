@@ -132,17 +132,6 @@
             border-radius: 10px;
         }
 
-        .cursor-effect {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: rgba(0, 255, 255, 0.6);
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            transition: transform 0.2s ease, background 0.2s ease;
-        }
-
         /* Musique */
         audio {
             display: none;
@@ -180,6 +169,47 @@
             position: absolute;
             background-color: #ff5722;
         }
+
+        /* Styles pour l'emploi du temps */
+        #schedule {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 10px;
+        }
+
+        .schedule-item {
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Styles pour les notifications */
+        #notifications {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .notification {
+            background-color: #e7f3fe;
+            border: 1px solid #2196F3;
+            color: #0c5460;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            width: 90%;
+        }
     </style>
 
     <!-- Inclusion des SDK Firebase -->
@@ -196,12 +226,22 @@
     <!-- Menu de navigation -->
     <nav>
         <ul>
+            <li><a href="#home">Accueil</a></li>
             <li><a href="#login-signup">Connexion / Inscription</a></li>
             <li><a href="#chat">Chat</a></li>
+            <li><a href="#schedule">Emploi du temps</a></li>
+            <li><a href="#notifications">Notifications</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#music" onclick="toggleMusic()">Musique</a></li>
         </ul>
     </nav>
+
+    <!-- Section d'accueil -->
+    <section id="home">
+        <h1>Bienvenue sur STL Pocket</h1>
+        <p>Votre plateforme d'assistance pour étudiants.</p>
+        <button onclick="document.getElementById('login-signup').scrollIntoView()">Commencer</button>
+    </section>
 
     <!-- Section de connexion et d'inscription -->
     <section id="login-signup">
@@ -230,11 +270,36 @@
         </div>
     </section>
 
+    <!-- Section emploi du temps -->
+    <section id="schedule">
+        <h1>Emploi du Temps</h1>
+        <div id="schedule">
+            <div class="schedule-item">Lundi 9h-10h: Mathématiques</div>
+            <div class="schedule-item">Lundi 10h-11h: Physique</div>
+            <div class="schedule-item">Mardi 9h-10h: Chimie</div>
+            <div class="schedule-item">Mardi 10h-11h: Histoire</div>
+            <div class="schedule-item">Mercredi 9h-10h: Anglais</div>
+            <div class="schedule-item">Mercredi 10h-11h: Informatique</div>
+            <div class="schedule-item">Jeudi 9h-10h: Français</div>
+            <div class="schedule-item">Jeudi 10h-11h: Éducation Physique</div>
+            <div class="schedule-item">Vendredi 9h-10h: Art</div>
+            <div class="schedule-item">Vendredi 10h-11h: Projet Personnel</div>
+        </div>
+    </section>
+
+    <!-- Section des notifications -->
+    <section id="notifications">
+        <h1>Notifications</h1>
+        <div class="notification">Rendez-vous parent-professeur le vendredi à 18h.</div>
+        <div class="notification">Devoir de mathématiques à rendre lundi prochain.</div>
+        <div class="notification">Événement scolaire le mercredi prochain.</div>
+    </section>
+
     <!-- Section des services avec mini jeu de Tetris -->
     <section id="services">
         <h1>Nos Services</h1>
         <p>Découvrez nos services d'assistance pour étudiants.</p>
-        
+
         <!-- Jeu de Tetris -->
         <div id="tetrisGame"></div>
         <button onclick="startTetris()">Jouer à Tetris</button>
@@ -256,7 +321,7 @@
             messagingSenderId: "301138774193",
             appId: "1:301138774193:web:7b618dc6dc1aa8e587d103"
         };
-        
+
         // Initialisation de Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
@@ -362,7 +427,6 @@
 
         // Fonction pour mettre à jour le jeu
         function updateGame() {
-            // Logique du jeu (descente du bloc, collision, etc.) à ajouter ici
             currentBlock.y += 1; // Descendre le bloc
             tetrisGame.innerHTML = ''; // Effacer les anciens blocs
             drawBlock(currentBlock); // Redessiner le bloc
