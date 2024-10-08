@@ -1,107 +1,102 @@
-/* styles.css */
+<!DOCTYPE html>
+<html lang="fr">
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STL Pocket</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
 
-html, body {
-    height: 100%;
-    overflow: hidden;
-}
+<body>
 
-/* Vidéo de fond */
-.background-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: -1;
-}
+    <!-- Musique de fond -->
+    <audio id="backgroundMusic" src="MDickies_Hard_Time_Theme_Song.mp3" loop autoplay></audio>
 
-#video-background {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+    <!-- Menu de navigation -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#login-signup">Connexion / Inscription</a></li>
+                <li><a href="#chat">Chat</a></li>
+                <li><a href="#schedule">Emploi du temps</a></li>
+                <li><a href="#notifications">Notifications</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#music" onclick="toggleMusic()">Musique</a></li>
+            </ul>
+        </nav>
+    </header>
 
-/* Contenu principal */
-.content {
-    position: relative;
-    z-index: 1;
-    padding: 20px;
-    color: white;
-}
+    <!-- Section d'accueil -->
+    <section id="home">
+        <h1>Bienvenue sur STL Pocket</h1>
+        <p>Votre plateforme d'assistance pour étudiants.</p>
+        <button onclick="document.getElementById('login-signup').scrollIntoView()">Commencer</button>
+    </section>
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background: rgba(0, 0, 0, 0.7);
-}
+    <!-- Section de connexion et d'inscription -->
+    <section id="login-signup">
+        <h2>Connexion / Inscription</h2>
+        <form id="loginForm">
+            <input type="text" id="loginEmail" placeholder="Email ou Téléphone" required />
+            <input type="password" id="loginPassword" placeholder="Mot de passe" required />
+            <button type="button" onclick="login()">Se connecter</button>
+            <button type="button" onclick="signup()">S'inscrire</button>
+        </form>
+    </section>
 
-nav ul {
-    list-style: none;
-    display: flex;
-}
+    <!-- Section de chat -->
+    <section id="chat">
+        <h2>Chat</h2>
+        <div id="messages"></div>
+        <input type="text" id="chatInput" placeholder="Votre message..." />
+        <button onclick="sendMessage()">Envoyer</button>
+        <div id="emojiContainer">
+            <span class="emoji" onclick="insertEmoji('😀')">😀</span>
+            <span class="emoji" onclick="insertEmoji('😅')">😅</span>
+            <span class="emoji" onclick="insertEmoji('😎')">😎</span>
+            <span class="emoji" onclick="insertEmoji('🥳')">🥳</span>
+            <span class="emoji" onclick="insertEmoji('❤️')">❤️</span>
+            <span class="emoji" onclick="insertEmoji('👍')">👍</span>
+        </div>
+    </section>
 
-nav ul li {
-    margin: 0 15px;
-}
+    <!-- Section emploi du temps -->
+    <section id="schedule">
+        <h2>Emploi du Temps</h2>
+        <div id="scheduleGrid">
+            <div class="schedule-item">Lundi 9h-10h: Mathématiques</div>
+            <div class="schedule-item">Lundi 10h-11h: Physique</div>
+            <div class="schedule-item">Mardi 9h-10h: Chimie</div>
+            <div class="schedule-item">Mardi 10h-11h: Histoire</div>
+            <div class="schedule-item">Mercredi 9h-10h: Anglais</div>
+            <div class="schedule-item">Mercredi 10h-11h: Informatique</div>
+        </div>
+    </section>
 
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 1.1rem;
-}
+    <!-- Section des notifications -->
+    <section id="notifications">
+        <h2>Notifications</h2>
+        <div class="notification">Rendez-vous parent-professeur le vendredi à 18h.</div>
+        <div class="notification">Devoir de mathématiques à rendre lundi prochain.</div>
+        <div class="notification">Événement scolaire le mercredi prochain.</div>
+    </section>
 
-h1, h2 {
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-}
+    <!-- Section des services avec mini jeu de Tetris -->
+    <section id="services">
+        <h2>Nos Services</h2>
+        <div id="tetrisGame"></div>
+        <button onclick="startTetris()">Jouer à Tetris</button>
+    </section>
 
-p {
-    text-align: center;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
+    <!-- Section musique -->
+    <section id="music">
+        <h2>Musique de Fond</h2>
+        <button onclick="toggleMusic()">Jouer / Pause Musique</button>
+    </section>
 
-/* Formulaire de contact */
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-}
+    <script src="script.js"></script>
+</body>
 
-form input, form textarea {
-    width: 80%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 5px;
-}
-
-form button {
-    padding: 10px 20px;
-    background: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.7);
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
+</html>
