@@ -1,76 +1,91 @@
-/* ---- Styles de base ---- */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    color: #333;
-    text-align: center;
-    overflow: hidden;
-    background: #e0f7fa;
-}
-
-/* Video background */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background: url('background-video.mp4') no-repeat center center fixed;
-    background-size: cover;
-    z-index: -1;
-    opacity: 0.6;
+    background-color: #f0f0f0;
 }
 
 header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
+    background-color: #333;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
 }
 
 nav ul {
     list-style: none;
-    padding: 10px 0;
-    background: rgba(0, 0, 0, 0.7);
-    margin: 0;
-    display: flex;
-    justify-content: center;
+    padding: 0;
 }
 
 nav ul li {
-    margin: 0 15px;
+    display: inline;
+    margin-right: 20px;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
-    font-size: 1.2em;
 }
 
-/* Section styling */
-section {
-    padding: 100px 20px;
-    min-height: 100vh;
+.tabs {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    background-color: #444;
 }
 
-/* Login form */
-#loginForm input, button {
+.tablinks {
+    background-color: inherit;
+    border: none;
+    color: white;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tablinks:hover {
+    background-color: #666;
+}
+
+.tablinks.active {
+    background-color: #555;
+}
+
+.tabcontent {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+    background-color: white;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+input[type="text"],
+input[type="password"] {
     width: 100%;
-    max-width: 400px;
-    margin: 10px 0;
     padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
 }
 
-/* Tetris styling */
-#tetrisGame {
-    width: 300px;
-    height: 400px;
-    margin: 0 auto;
-    background-color: #000;
+button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+.notification {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #f5c6cb;
 }
