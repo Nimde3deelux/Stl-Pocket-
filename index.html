@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STL Pocket</title>
-    
-    <!-- Lien vers le fichier CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Lien vers le fichier CSS -->
 </head>
 
 <body>
@@ -30,76 +28,101 @@
         </nav>
     </header>
 
-    <!-- Section d'accueil -->
-    <section id="home">
-        <h1>Bienvenue sur STL Pocket</h1>
-        <p>Votre plateforme d'assistance pour étudiants.</p>
-        <button onclick="document.getElementById('login-signup').scrollIntoView()">Commencer</button>
-    </section>
-
-    <!-- Section de connexion et d'inscription -->
-    <section id="login-signup">
-        <h2>Connexion / Inscription</h2>
-        <form id="loginForm">
-            <input type="text" id="loginEmail" placeholder="Email ou Téléphone" required />
-            <input type="password" id="loginPassword" placeholder="Mot de passe" required />
-            <button type="button" onclick="login()">Se connecter</button>
-            <button type="button" onclick="signup()">S'inscrire</button>
-        </form>
-    </section>
-
-    <!-- Section de chat -->
-    <section id="chat">
-        <h2>Chat</h2>
-        <div id="messages"></div>
-        <input type="text" id="chatInput" placeholder="Votre message..." />
-        <button onclick="sendMessage()">Envoyer</button>
-        <div id="emojiContainer">
-            <span class="emoji" onclick="insertEmoji('😀')">😀</span>
-            <span class="emoji" onclick="insertEmoji('😅')">😅</span>
-            <span class="emoji" onclick="insertEmoji('😎')">😎</span>
-            <span class="emoji" onclick="insertEmoji('🥳')">🥳</span>
-            <span class="emoji" onclick="insertEmoji('❤️')">❤️</span>
-            <span class="emoji" onclick="insertEmoji('👍')">👍</span>
+    <!-- Section principale -->
+    <main>
+        <!-- Onglets -->
+        <div class="tabs">
+            <button class="tablinks" onclick="openTab(event, 'home')" id="defaultOpen">Accueil</button>
+            <button class="tablinks" onclick="openTab(event, 'login-signup')">Connexion / Inscription</button>
+            <button class="tablinks" onclick="openTab(event, 'chat')">Chat</button>
+            <button class="tablinks" onclick="openTab(event, 'schedule')">Emploi du Temps</button>
+            <button class="tablinks" onclick="openTab(event, 'notifications')">Notifications</button>
+            <button class="tablinks" onclick="openTab(event, 'services')">Services</button>
         </div>
-    </section>
 
-    <!-- Section emploi du temps -->
-    <section id="schedule">
-        <h2>Emploi du Temps</h2>
-        <div id="scheduleGrid">
-            <div class="schedule-item">Lundi 9h-10h: Mathématiques</div>
-            <div class="schedule-item">Lundi 10h-11h: Physique</div>
-            <div class="schedule-item">Mardi 9h-10h: Chimie</div>
-            <div class="schedule-item">Mardi 10h-11h: Histoire</div>
-            <div class="schedule-item">Mercredi 9h-10h: Anglais</div>
-            <div class="schedule-item">Mercredi 10h-11h: Informatique</div>
+        <!-- Contenu des onglets -->
+        <div id="home" class="tabcontent">
+            <h1>Bienvenue sur STL Pocket</h1>
+            <p>Votre plateforme d'assistance pour étudiants.</p>
+            <button onclick="document.getElementById('login-signup').scrollIntoView()">Commencer</button>
         </div>
-    </section>
 
-    <!-- Section des notifications -->
-    <section id="notifications">
-        <h2>Notifications</h2>
-        <div class="notification">Rendez-vous parent-professeur le vendredi à 18h.</div>
-        <div class="notification">Devoir de mathématiques à rendre lundi prochain.</div>
-        <div class="notification">Événement scolaire le mercredi prochain.</div>
-    </section>
+        <div id="login-signup" class="tabcontent">
+            <h2>Connexion / Inscription</h2>
+            <form id="loginForm">
+                <input type="text" id="loginEmail" placeholder="Email ou Téléphone" required />
+                <input type="password" id="loginPassword" placeholder="Mot de passe" required />
+                <button type="button" onclick="login()">Se connecter</button>
+                <button type="button" onclick="signup()">S'inscrire</button>
+            </form>
+        </div>
 
-    <!-- Section des services avec mini jeu de Tetris -->
-    <section id="services">
-        <h2>Nos Services</h2>
-        <div id="tetrisGame"></div>
-        <button onclick="startTetris()">Jouer à Tetris</button>
-    </section>
+        <div id="chat" class="tabcontent">
+            <h2>Chat</h2>
+            <div id="messages"></div>
+            <input type="text" id="chatInput" placeholder="Votre message..." />
+            <button onclick="sendMessage()">Envoyer</button>
+            <div id="emojiContainer">
+                <span class="emoji" onclick="insertEmoji('😀')">😀</span>
+                <span class="emoji" onclick="insertEmoji('😅')">😅</span>
+                <span class="emoji" onclick="insertEmoji('😎')">😎</span>
+                <span class="emoji" onclick="insertEmoji('🥳')">🥳</span>
+                <span class="emoji" onclick="insertEmoji('❤️')">❤️</span>
+                <span class="emoji" onclick="insertEmoji('👍')">👍</span>
+            </div>
+        </div>
 
-    <!-- Section musique -->
-    <section id="music">
-        <h2>Musique de Fond</h2>
-        <button onclick="toggleMusic()">Jouer / Pause Musique</button>
-    </section>
+        <div id="schedule" class="tabcontent">
+            <h2>Emploi du Temps</h2>
+            <div id="scheduleGrid">
+                <div class="schedule-item">Lundi 9h-10h: Mathématiques</div>
+                <div class="schedule-item">Lundi 10h-11h: Physique</div>
+                <div class="schedule-item">Mardi 9h-10h: Chimie</div>
+                <div class="schedule-item">Mardi 10h-11h: Histoire</div>
+                <div class="schedule-item">Mercredi 9h-10h: Anglais</div>
+                <div class="schedule-item">Mercredi 10h-11h: Informatique</div>
+            </div>
+        </div>
 
-    <!-- Lien vers le fichier JavaScript -->
-    <script src="script.js"></script>
+        <div id="notifications" class="tabcontent">
+            <h2>Notifications</h2>
+            <div class="notification">Rendez-vous parent-professeur le vendredi à 18h.</div>
+            <div class="notification">Devoir de mathématiques à rendre lundi prochain.</div>
+            <div class="notification">Événement scolaire le mercredi prochain.</div>
+        </div>
+
+        <div id="services" class="tabcontent">
+            <h2>Nos Services</h2>
+            <div id="tetrisGame"></div>
+            <button onclick="startTetris()">Jouer à Tetris</button>
+        </div>
+
+        <!-- Section musique -->
+        <section id="music" class="tabcontent">
+            <h2>Musique de Fond</h2>
+            <button onclick="toggleMusic()">Jouer / Pause Musique</button>
+        </section>
+    </main>
+
+    <script src="script.js"></script> <!-- Lien vers le fichier JavaScript -->
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";  
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";  
+            evt.currentTarget.className += " active";
+        }
+
+        // Ouvrir l'onglet par défaut
+        document.getElementById("defaultOpen").click();
+    </script>
 </body>
 
 </html>
