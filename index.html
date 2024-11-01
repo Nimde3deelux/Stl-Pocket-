@@ -1,73 +1,61 @@
-/* CSS amélioré avec une vidéo de fond et des couleurs harmonisées */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STL Pocket</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Video en arrière-plan -->
+    <video autoplay loop muted playsinline id="background-video">
+        <source src="background.mp4" type="video/mp4">
+    </video>
 
-body, html {
-    font-family: Arial, sans-serif;
-    color: white;
-    text-align: center;
-    background: rgba(0, 0, 0, 0.8);
-}
+    <!-- Contenu principal -->
+    <header>
+        <h1>Bienvenue sur STL Pocket</h1>
+        <p>Le futur de l'éducation, accessible partout, pour chaque étudiant.</p>
+    </header>
 
-#background-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -1;
-    opacity: 0.7;
-}
+    <!-- Menu de navigation -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="cours.html">Cours</a></li>
+            <li><a href="communication.html">Communication</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
 
-header {
-    background-color: rgba(0, 0, 100, 0.7);
-    padding: 1.5rem;
-}
+    <!-- Section d'accueil -->
+    <main>
+        <section id="introduction">
+            <h2>Présentation</h2>
+            <p>STL Pocket est votre meilleur allié pour la réussite scolaire, offrant une plateforme complète pour les lycéens en sciences et technologies.</p>
+        </section>
 
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-}
+        <!-- Section Cours -->
+        <section id="cours">
+            <h2>Cours</h2>
+            <p>Explorez les cours en ligne, avec des catégories comme Math, Biotechnologies, Philosophie et plus.</p>
+            <a href="cours.html" class="button">Accéder aux Cours</a>
+        </section>
 
-nav ul {
-    list-style: none;
-    padding: 1rem;
-    background-color: rgba(0, 0, 100, 0.8);
-}
+        <!-- Section Communication -->
+        <section id="communication">
+            <h2>Communication</h2>
+            <p>Échangez avec vos camarades de classe et vos professeurs.</p>
+            <a href="communication.html" class="button">Accéder à la Communication</a>
+        </section>
 
-nav ul li {
-    display: inline;
-    margin: 0 1.5rem;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.2rem;
-    transition: color 0.3s;
-}
-
-nav ul li a:hover {
-    color: #FFDF00;
-}
-
-.main-section {
-    padding: 2rem;
-}
-
-button {
-    padding: 0.7rem 1.5rem;
-    font-size: 1rem;
-    background-color: #FFDF00;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #FFD700;
-}
+        <!-- Section Contact -->
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Contactez-nous pour toute question ou assistance.</p>
+            <a href="contact.html" class="button">Nous Contacter</a>
+        </section>
+    </main>
+</body>
+</html>
