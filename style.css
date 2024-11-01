@@ -1,15 +1,16 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* ---- Styles de base ---- */
 body {
     font-family: 'Arial', sans-serif;
-    color: #333;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
 }
 
-#background-video {
+/* ---- Styles pour la vidéo d'arrière-plan ---- */
+#bg-video {
     position: fixed;
     top: 0;
     left: 0;
@@ -19,64 +20,105 @@ body {
     z-index: -1;
 }
 
-.container {
-    position: relative;
-    padding: 20px;
-    color: white;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
 nav {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
 
 nav ul {
-    list-style: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
 }
 
 nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
-
-nav a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-nav a:hover, nav a.active {
-    color: #88c1e6;
-}
-
-.main-section {
-    margin-bottom: 40px;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-}
-
-.button {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #88c1e6;
-    color: #fff;
+    margin: 0 20px;
+}
+
+nav ul li a {
     text-decoration: none;
+    color: #fff;
+    font-size: 1.2em;
+    transition: text-shadow 0.3s;
+}
+
+nav ul li a:hover {
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+}
+
+h1, h2 {
+    text-shadow: 0 0 5px #f0f, 0 0 10px #f0f;
+}
+
+section {
+    padding: 100px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#login, #signup, #chat {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    width: 80%;
+    max-width: 400px;
+}
+
+input {
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border: none;
     border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #00ffff;
+    color: #000;
+    cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.button:hover {
-    background-color: #6ba4d6;
+button:hover {
+    background-color: #00cccc;
 }
 
-footer {
-    text-align: center;
-    margin-top: 40px;
+#messages {
+    height: 200px;
+    overflow-y: scroll;
+    border: 1px solid #fff;
+    padding: 10px;
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Animation de curseur */
+.cursor-effect {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: rgba(0, 255, 255, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+/* Musique */
+audio {
+    display: none;
 }
