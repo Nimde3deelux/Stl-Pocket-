@@ -7,15 +7,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- Vidéo d'arrière-plan -->
-    <video id="bg-video" autoplay muted loop>
-        <source src="background-video.mp4" type="video/mp4">
-        Votre navigateur ne supporte pas les vidéos.
-    </video>
-
-    <!-- Musique de fond -->
-    <audio id="backgroundMusic" src="MDickies Hard Time Theme Song.mp3" loop></audio>
+    <!-- Fond d'étoiles -->
+    <div class="stars">
+        <script>
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 5 + 2; // Taille aléatoire
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.animationDuration = Math.random() * 1 + 0.5 + 's'; // Durée d'animation aléatoire
+                document.querySelector('.stars').appendChild(star);
+            }
+        </script>
+    </div>
 
     <!-- Menu de navigation -->
     <nav>
@@ -23,9 +30,6 @@
             <li><a href="#accueil">Accueil</a></li>
             <li><a href="#cours">Cours</a></li>
             <li><a href="#communication">Communication</a></li>
-            <li><a href="#login">Connexion</a></li>
-            <li><a href="#signup">Inscription</a></li>
-            <li><a href="#chat">Chat</a></li>
             <li><a href="#services">Services</a></li>
         </ul>
     </nav>
@@ -33,44 +37,19 @@
     <!-- Section d'accueil -->
     <section id="accueil">
         <h1>Bienvenue sur STL Pocket</h1>
-        <p>Votre plateforme d'apprentissage accessible partout !</p>
+        <p>Votre meilleur allié pour apprendre et réviser facilement.</p>
     </section>
 
     <!-- Section des cours -->
     <section id="cours">
         <h1>Cours</h1>
-        <p>Accédez à tous vos cours dans différentes catégories.</p>
+        <p>Accédez à tous vos cours ici.</p>
     </section>
 
     <!-- Section de communication -->
     <section id="communication">
         <h1>Communication</h1>
-        <p>Discutez avec vos enseignants et vos camarades.</p>
-    </section>
-
-    <!-- Section de connexion -->
-    <section id="login">
-        <h1>Connexion</h1>
-        <input type="text" id="loginEmail" placeholder="Email ou Téléphone" required />
-        <input type="password" id="loginPassword" placeholder="Mot de passe" required />
-        <button onclick="login()">Se connecter</button>
-    </section>
-
-    <!-- Section d'inscription -->
-    <section id="signup">
-        <h1>Inscription</h1>
-        <input type="email" id="signupEmail" placeholder="Email" required />
-        <input type="text" id="signupPhone" placeholder="Téléphone" required />
-        <input type="password" id="signupPassword" placeholder="Mot de passe" required />
-        <button onclick="signup()">S'inscrire</button>
-    </section>
-
-    <!-- Section de chat -->
-    <section id="chat">
-        <h1>Chat</h1>
-        <div id="messages"></div>
-        <input type="text" id="chatInput" placeholder="Votre message..." />
-        <button onclick="sendMessage()">Envoyer</button>
+        <p>Discutez et échangez avec vos camarades et professeurs.</p>
     </section>
 
     <!-- Section des services -->
