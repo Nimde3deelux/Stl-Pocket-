@@ -10,9 +10,18 @@ document.querySelectorAll('a').forEach(link => {
     });
 });
 
-// Fonction pour jouer un son au survol de la souris
+// Gestion des sons au mouvement de la souris
+let isPlaying = false;
+
 document.addEventListener('mousemove', () => {
-    hoverSound.play();
+    if (!isPlaying) {
+        hoverSound.play();
+        isPlaying = true;
+    }
+});
+
+document.addEventListener('mouseout', () => {
+    isPlaying = false;
 });
 
 // Simulation d'une messagerie en section Communication
