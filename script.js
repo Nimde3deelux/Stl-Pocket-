@@ -1,31 +1,33 @@
-// Sélection des éléments
-const notificationsIcon = document.querySelector('.header-right span:nth-child(1)');
-const messagesIcon = document.querySelector('.header-right span:nth-child(2)');
-const sidebarToggle = document.querySelector('.sidebar-toggle');  // Bouton de la barre latérale si besoin
+// script.js
+// Sons de navigation et de déplacement de souris
+let pageSound = new Audio('page-sound.mp3');
+let hoverSound = new Audio('hover-sound.mp3');
 
-// Gestion des notifications
-notificationsIcon.addEventListener('click', () => {
-  alert("Vous n'avez pas de nouvelles notifications pour l'instant !");
+// Fonction pour jouer un son au changement de page
+document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        pageSound.play();
+    });
 });
 
-// Gestion des messages
-messagesIcon.addEventListener('click', () => {
-  alert("Vous n'avez pas de nouveaux messages.");
+// Fonction pour jouer un son au survol de la souris
+document.addEventListener('mousemove', () => {
+    hoverSound.play();
 });
 
-// Gestion du menu mobile (pour les écrans plus petits)
-if (sidebarToggle) {
-  sidebarToggle.addEventListener('click', () => {
-    const sidebar = document.querySelector('.sidebar');
-    sidebar.classList.toggle('active');  // Affiche ou cache la barre latérale
-  });
+// Simulation d'une messagerie en section Communication
+function sendMessage() {
+    let messageBox = document.getElementById('message-box');
+    let messageInput = document.getElementById('message-input');
+    
+    if (messageInput.value) {
+        let newMessage = document.createElement('p');
+        newMessage.classList.add('user-message');
+        newMessage.textContent = messageInput.value;
+        messageBox.appendChild(newMessage);
+        
+        messageInput.value = '';
+    }
 }
 
-// Ajouter d’autres interactions ou scripts personnalisés ici
-
-// Exemples de contenu dynamique pour le tableau de bord
-document.addEventListener('DOMContentLoaded', () => {
-  const welcomeMessage = document.createElement('p');
-  welcomeMessage.textContent = "Bienvenue sur STL Pocket, votre assistant scolaire personnalisé !";
-  document.getElementById('accueil').appendChild(welcomeMessage);
-});
+document.getElementById('send-button').addEventListener('click', sendMessage);
