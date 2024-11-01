@@ -1,97 +1,51 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>STL Pocket - Accueil</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STL Pocket - Accueil</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Barre latérale de navigation -->
-  <aside class="sidebar">
-    <h2>STL Pocket</h2>
-    <nav>
-      <ul>
-        <li><a href="#accueil">Accueil</a></li>
-        <li><a href="#cours">Cours</a></li>
-        <li><a href="#messages">Messages</a></li>
-        <li><a href="#calendrier">Calendrier</a></li>
-        <li><a href="#notes">Notes</a></li>
-        <li><a href="#profil">Profil</a></li>
-      </ul>
-    </nav>
-  </aside>
-
-  <!-- Barre supérieure -->
-  <header class="header">
-    <div class="header-left">
-      <h1>Bienvenue sur STL Pocket</h1>
+    <div class="background-video">
+        <video autoplay loop muted>
+            <source src="background.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas les vidéos.
+        </video>
     </div>
-    <div class="header-right">
-      <span>🔔 Notifications</span>
-      <span>✉️ Messages</span>
-      <span>👤 Profil</span>
-    </div>
-  </header>
-
-  <!-- Contenu principal -->
-  <main class="main-content">
-    <section id="accueil">
-      <h2>Tableau de Bord</h2>
-      <p>Bienvenue, [Nom de l'utilisateur]. Consultez vos cours, messages et autres notifications.</p>
-      <div class="dashboard">
-        <div class="dashboard-item">
-          <h3>Cours</h3>
-          <p>Accédez aux dernières leçons et supports.</p>
-        </div>
-        <div class="dashboard-item">
-          <h3>Messages</h3>
-          <p>Vos messages récents apparaîtront ici.</p>
-        </div>
-        <div class="dashboard-item">
-          <h3>Calendrier</h3>
-          <p>Consultez les événements à venir.</p>
-        </div>
-        <div class="dashboard-item">
-          <h3>Notes</h3>
-          <p>Accédez à vos notes et performances.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section Cours -->
-    <section id="cours">
-      <h2>Cours</h2>
-      <p>Liste des cours par matière :</p>
-      <ul>
-        <li>Mathématiques</li>
-        <li>Biotechnologie</li>
-        <li>Philosophie</li>
-        <li>Anglais</li>
-      </ul>
-    </section>
-
-    <!-- Section Messages -->
-    <section id="messages">
-      <h2>Messages</h2>
-      <p>Historique des conversations et messages récents.</p>
-    </section>
-
-    <!-- Section Calendrier -->
-    <section id="calendrier">
-      <h2>Calendrier</h2>
-      <p>Planification et événements à venir.</p>
-    </section>
-
-    <!-- Section Notes -->
-    <section id="notes">
-      <h2>Notes</h2>
-      <p>Vos notes et performances par matière.</p>
-    </section>
-  </main>
-
-  <!-- Script JavaScript -->
-  <script src="script.js"></script>
+    
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="cours.html">Cours</a></li>
+                <li><a href="communication.html">Communication</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <h1>Bienvenue sur STL Pocket</h1>
+        <p>Votre meilleur allié pour les études !</p>
+    </header>
+    
+    <main>
+        <section>
+            <h2>À propos de nous</h2>
+            <p>STL Pocket est une plateforme conçue pour faciliter la communication entre élèves et professeurs, tout en offrant un accès facile aux cours.</p>
+        </section>
+        
+        <section>
+            <h2>Fonctionnalités</h2>
+            <ul>
+                <li>Accès à tous les cours disponibles</li>
+                <li>Système de messagerie intégré</li>
+                <li>Notifications de rappels de cours</li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 STL Pocket. Tous droits réservés.</p>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
-
