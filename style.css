@@ -1,4 +1,4 @@
-/* CSS amélioré avec une vidéo de fond et des couleurs harmonisées */
+/* CSS amélioré pour une interface moderne */
 * {
     margin: 0;
     padding: 0;
@@ -6,10 +6,11 @@
 }
 
 body, html {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     color: white;
     text-align: center;
     background: rgba(0, 0, 0, 0.8);
+    overflow: hidden; /* Évite le défilement avec la vidéo de fond */
 }
 
 #background-video {
@@ -19,23 +20,29 @@ body, html {
     min-width: 100%;
     min-height: 100%;
     z-index: -1;
-    opacity: 0.7;
+    opacity: 0.5;
+}
+
+.container {
+    position: relative;
+    z-index: 1; /* Pour que le contenu soit au-dessus de la vidéo */
 }
 
 header {
-    background-color: rgba(0, 0, 100, 0.7);
-    padding: 1.5rem;
+    background-color: rgba(0, 0, 100, 0.8);
+    padding: 2rem;
+    border-bottom: 2px solid #FFDF00;
 }
 
 header h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-bottom: 0.5rem;
 }
 
 nav ul {
     list-style: none;
     padding: 1rem;
-    background-color: rgba(0, 0, 100, 0.8);
+    background-color: rgba(0, 0, 100, 0.9);
 }
 
 nav ul li {
@@ -44,30 +51,48 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color: #FFDF00;
     text-decoration: none;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     transition: color 0.3s;
 }
 
 nav ul li a:hover {
-    color: #FFDF00;
+    color: #FFD700;
 }
 
 .main-section {
     padding: 2rem;
+    margin: 1rem auto;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    max-width: 800px;
 }
 
-button {
-    padding: 0.7rem 1.5rem;
-    font-size: 1rem;
+.main-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.button {
+    padding: 0.7rem 2rem;
+    font-size: 1.2rem;
     background-color: #FFDF00;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-decoration: none;
+    color: black; /* Texte noir pour le bouton */
 }
 
-button:hover {
+.button:hover {
     background-color: #FFD700;
+}
+
+footer {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 100, 0.8);
+    border-top: 2px solid #FFDF00;
 }
