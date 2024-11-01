@@ -7,69 +7,80 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Fond d'étoiles -->
-    <div class="stars">
-        <script>
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                const size = Math.random() * 5 + 2; // Taille aléatoire
-                star.style.width = size + 'px';
-                star.style.height = size + 'px';
-                star.style.top = Math.random() * 100 + 'vh';
-                star.style.left = Math.random() * 100 + 'vw';
-                star.style.animationDuration = Math.random() * 1 + 0.5 + 's'; // Durée d'animation aléatoire
-                document.querySelector('.stars').appendChild(star);
-            }
-        </script>
+    <div class="background-video">
+        <video autoplay loop muted>
+            <source src="video.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo.
+        </video>
     </div>
 
-    <!-- Menu de navigation -->
     <nav>
-        <img src="chemin/vers/ton-logo.png" alt="Logo STL Pocket" class="logo"> <!-- Remplacez le chemin par le bon -->
         <ul>
-            <li><a href="#accueil">Accueil</a></li>
-            <li><a href="#cours">Cours</a></li>
-            <li><a href="#communication">Communication</a></li>
+            <li><a href="#login">Connexion</a></li>
+            <li><a href="#signup">Inscription</a></li>
+            <li><a href="#chat">Chat</a></li>
             <li><a href="#services">Services</a></li>
+            <li><a href="#courses">Cours</a></li>
+            <li><a href="#creators">Créateurs</a></li>
         </ul>
+        <img src="logo.png" alt="Logo STL Pocket" class="logo">
     </nav>
 
-    <!-- Section d'accueil -->
-    <section id="accueil">
-        <h1>Bienvenue sur STL Pocket</h1>
-        <p>Votre meilleur allié pour apprendre et réviser facilement.</p>
+    <section id="login">
+        <h1>Connexion</h1>
+        <input type="text" id="loginEmail" placeholder="Email ou Téléphone" required />
+        <input type="password" id="loginPassword" placeholder="Mot de passe" required />
+        <button onclick="login()">Se connecter</button>
     </section>
 
-    <!-- Section des cours -->
-    <section id="cours">
-        <h1>Cours</h1>
-        <p>Accédez à une variété de cours adaptés à vos besoins. Que ce soit en mathématiques, biotechnologie, philosophie, anglais, et plus encore, STL Pocket vous permet de réviser de manière efficace et engageante.</p>
-        <ul>
-            <li><strong>Mathématiques :</strong> Exercices interactifs et théories pour maîtriser les concepts.</li>
-            <li><strong>Biotechnologie :</strong> Cours sur les dernières innovations et techniques.</li>
-            <li><strong>Philosophie :</strong> Discussions et ressources sur les penseurs et idées majeurs.</li>
-            <li><strong>Anglais :</strong> Pratiquez la langue à travers des leçons dynamiques et des jeux.</li>
-        </ul>
+    <section id="signup">
+        <h1>Inscription</h1>
+        <input type="email" id="signupEmail" placeholder="Email" required />
+        <input type="text" id="signupPhone" placeholder="Téléphone" required />
+        <input type="password" id="signupPassword" placeholder="Mot de passe" required />
+        <button onclick="signup()">S'inscrire</button>
     </section>
 
-    <!-- Section de communication -->
-    <section id="communication">
-        <h1>Communication</h1>
-        <p>Discutez et échangez avec vos camarades et professeurs. Utilisez notre système de messagerie pour poser des questions, partager des idées ou organiser des études de groupe. Restez connecté et collaborez facilement!</p>
+    <section id="chat">
+        <h1>Chat</h1>
+        <div id="messages"></div>
+        <input type="text" id="chatInput" placeholder="Votre message..." />
+        <button onclick="sendMessage()">Envoyer</button>
     </section>
 
-    <!-- Section des services -->
     <section id="services">
         <h1>Nos Services</h1>
-        <p>Découvrez nos services d'assistance pour étudiants. Que ce soit du tutorat, des sessions de révisions ou des conseils d'orientation, notre équipe est là pour vous aider à réussir.</p>
-        <ul>
-            <li><strong>Tutorat :</strong> Bénéficiez d'un accompagnement personnalisé.</li>
-            <li><strong>Sessions de révisions :</strong> Participez à des ateliers pour préparer vos examens.</li>
-            <li><strong>Conseils d'orientation :</strong> Recevez des conseils sur votre parcours scolaire.</li>
-        </ul>
+        <p>Découvrez nos services d'assistance pour étudiants. Nous offrons une variété de ressources et d'outils pour vous aider à réussir vos études.</p>
     </section>
 
-    <script src="script.js"></script>
+    <section id="courses">
+        <h1>Cours</h1>
+        <div class="course-container">
+            <div class="course-box" onclick="location.href='math.html';">
+                <img src="placeholder_math.png" alt="Mathématiques" class="course-image" />
+                <p>Mathématiques</p>
+            </div>
+            <div class="course-box" onclick="location.href='biotech.html';">
+                <img src="placeholder_biotech.png" alt="Biotechnologie" class="course-image" />
+                <p>Biotechnologie</p>
+            </div>
+            <div class="course-box" onclick="location.href='philo.html';">
+                <img src="placeholder_philo.png" alt="Philosophie" class="course-image" />
+                <p>Philosophie</p>
+            </div>
+            <div class="course-box" onclick="location.href='english.html';">
+                <img src="placeholder_english.png" alt="Anglais" class="course-image" />
+                <p>Anglais</p>
+            </div>
+            <!-- Ajoutez d'autres matières ici -->
+        </div>
+    </section>
+
+    <section id="creators">
+        <h1>Créateurs</h1>
+        <p>Un grand merci à Adama Bastien et Berkay pour leur contribution à STL Pocket. Vos efforts et votre créativité rendent cette plateforme possible !</p>
+    </section>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
