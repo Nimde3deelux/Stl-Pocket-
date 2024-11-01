@@ -1,128 +1,97 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STL Pocket</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Lien vers le fichier CSS -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STL Pocket - Accueil</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+  <!-- Barre latérale de navigation -->
+  <aside class="sidebar">
+    <h2>STL Pocket</h2>
+    <nav>
+      <ul>
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#cours">Cours</a></li>
+        <li><a href="#messages">Messages</a></li>
+        <li><a href="#calendrier">Calendrier</a></li>
+        <li><a href="#notes">Notes</a></li>
+        <li><a href="#profil">Profil</a></li>
+      </ul>
+    </nav>
+  </aside>
 
-    <!-- Musique de fond -->
-    <audio id="backgroundMusic" src="MDickies_Hard_Time_Theme_Song.mp3" loop autoplay></audio>
+  <!-- Barre supérieure -->
+  <header class="header">
+    <div class="header-left">
+      <h1>Bienvenue sur STL Pocket</h1>
+    </div>
+    <div class="header-right">
+      <span>🔔 Notifications</span>
+      <span>✉️ Messages</span>
+      <span>👤 Profil</span>
+    </div>
+  </header>
 
-    <!-- Menu de navigation -->
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Accueil</a></li>
-                <li><a href="#login-signup">Connexion / Inscription</a></li>
-                <li><a href="#chat">Chat</a></li>
-                <li><a href="#schedule">Emploi du temps</a></li>
-                <li><a href="#notifications">Notifications</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#music" onclick="toggleMusic()">Musique</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Section principale -->
-    <main>
-        <!-- Onglets -->
-        <div class="tabs">
-            <button class="tablinks" onclick="openTab(event, 'home')" id="defaultOpen">Accueil</button>
-            <button class="tablinks" onclick="openTab(event, 'login-signup')">Connexion / Inscription</button>
-            <button class="tablinks" onclick="openTab(event, 'chat')">Chat</button>
-            <button class="tablinks" onclick="openTab(event, 'schedule')">Emploi du Temps</button>
-            <button class="tablinks" onclick="openTab(event, 'notifications')">Notifications</button>
-            <button class="tablinks" onclick="openTab(event, 'services')">Services</button>
+  <!-- Contenu principal -->
+  <main class="main-content">
+    <section id="accueil">
+      <h2>Tableau de Bord</h2>
+      <p>Bienvenue, [Nom de l'utilisateur]. Consultez vos cours, messages et autres notifications.</p>
+      <div class="dashboard">
+        <div class="dashboard-item">
+          <h3>Cours</h3>
+          <p>Accédez aux dernières leçons et supports.</p>
         </div>
-
-        <!-- Contenu des onglets -->
-        <div id="home" class="tabcontent">
-            <h1>Bienvenue sur STL Pocket</h1>
-            <p>Votre plateforme d'assistance pour étudiants.</p>
-            <button onclick="document.getElementById('login-signup').scrollIntoView()">Commencer</button>
+        <div class="dashboard-item">
+          <h3>Messages</h3>
+          <p>Vos messages récents apparaîtront ici.</p>
         </div>
-
-        <div id="login-signup" class="tabcontent">
-            <h2>Connexion / Inscription</h2>
-            <form id="loginForm">
-                <input type="text" id="loginEmail" placeholder="Email ou Téléphone" required />
-                <input type="password" id="loginPassword" placeholder="Mot de passe" required />
-                <button type="button" onclick="login()">Se connecter</button>
-                <button type="button" onclick="signup()">S'inscrire</button>
-            </form>
+        <div class="dashboard-item">
+          <h3>Calendrier</h3>
+          <p>Consultez les événements à venir.</p>
         </div>
-
-        <div id="chat" class="tabcontent">
-            <h2>Chat</h2>
-            <div id="messages"></div>
-            <input type="text" id="chatInput" placeholder="Votre message..." />
-            <button onclick="sendMessage()">Envoyer</button>
-            <div id="emojiContainer">
-                <span class="emoji" onclick="insertEmoji('😀')">😀</span>
-                <span class="emoji" onclick="insertEmoji('😅')">😅</span>
-                <span class="emoji" onclick="insertEmoji('😎')">😎</span>
-                <span class="emoji" onclick="insertEmoji('🥳')">🥳</span>
-                <span class="emoji" onclick="insertEmoji('❤️')">❤️</span>
-                <span class="emoji" onclick="insertEmoji('👍')">👍</span>
-            </div>
+        <div class="dashboard-item">
+          <h3>Notes</h3>
+          <p>Accédez à vos notes et performances.</p>
         </div>
+      </div>
+    </section>
 
-        <div id="schedule" class="tabcontent">
-            <h2>Emploi du Temps</h2>
-            <div id="scheduleGrid">
-                <div class="schedule-item">Lundi 9h-10h: Mathématiques</div>
-                <div class="schedule-item">Lundi 10h-11h: Physique</div>
-                <div class="schedule-item">Mardi 9h-10h: Chimie</div>
-                <div class="schedule-item">Mardi 10h-11h: Histoire</div>
-                <div class="schedule-item">Mercredi 9h-10h: Anglais</div>
-                <div class="schedule-item">Mercredi 10h-11h: Informatique</div>
-            </div>
-        </div>
+    <!-- Section Cours -->
+    <section id="cours">
+      <h2>Cours</h2>
+      <p>Liste des cours par matière :</p>
+      <ul>
+        <li>Mathématiques</li>
+        <li>Biotechnologie</li>
+        <li>Philosophie</li>
+        <li>Anglais</li>
+      </ul>
+    </section>
 
-        <div id="notifications" class="tabcontent">
-            <h2>Notifications</h2>
-            <div class="notification">Rendez-vous parent-professeur le vendredi à 18h.</div>
-            <div class="notification">Devoir de mathématiques à rendre lundi prochain.</div>
-            <div class="notification">Événement scolaire le mercredi prochain.</div>
-        </div>
+    <!-- Section Messages -->
+    <section id="messages">
+      <h2>Messages</h2>
+      <p>Historique des conversations et messages récents.</p>
+    </section>
 
-        <div id="services" class="tabcontent">
-            <h2>Nos Services</h2>
-            <div id="tetrisGame"></div>
-            <button onclick="startTetris()">Jouer à Tetris</button>
-        </div>
+    <!-- Section Calendrier -->
+    <section id="calendrier">
+      <h2>Calendrier</h2>
+      <p>Planification et événements à venir.</p>
+    </section>
 
-        <!-- Section musique -->
-        <section id="music" class="tabcontent">
-            <h2>Musique de Fond</h2>
-            <button onclick="toggleMusic()">Jouer / Pause Musique</button>
-        </section>
-    </main>
+    <!-- Section Notes -->
+    <section id="notes">
+      <h2>Notes</h2>
+      <p>Vos notes et performances par matière.</p>
+    </section>
+  </main>
 
-    <script src="script.js"></script> <!-- Lien vers le fichier JavaScript -->
-    <script>
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabcontent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";  
-            }
-            tablinks = document.getElementsByClassName("tablinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";  
-            evt.currentTarget.className += " active";
-        }
-
-        // Ouvrir l'onglet par défaut
-        document.getElementById("defaultOpen").click();
-    </script>
+  <!-- Script JavaScript -->
+  <script src="script.js"></script>
 </body>
-
 </html>
+git add .
