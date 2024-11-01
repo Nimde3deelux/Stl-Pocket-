@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     color: #fff;
-    text-align: center;
+    text-align: center; /* Centre le texte */
     overflow: hidden;
     position: relative;
 }
@@ -60,58 +60,17 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; /* Centre les éléments */
     background-color: rgba(0, 0, 0, 0.5);
 }
 
 h1, h2 {
     text-shadow: 0 0 5px #f0f, 0 0 10px #f0f;
+    margin: 0; /* Enlève les marges pour un meilleur centrage */
 }
 
-input {
-    padding: 10px;
-    margin: 10px 0;
-    width: 100%;
-    border: none;
-    border-radius: 5px;
+p {
+    margin: 10px 0; /* Ajoute un peu d'espace autour des paragraphes */
 }
 
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #00ffff;
-    color: #000;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #00cccc;
-}
-
-#messages {
-    height: 200px;
-    overflow-y: scroll;
-    border: 1px solid #fff;
-    padding: 10px;
-    margin: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Animation de curseur */
-.cursor-effect {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    background: rgba(0, 255, 255, 0.6);
-    border-radius: 50%;
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    transition: transform 0.2s ease, background 0.2s ease;
-}
-
-/* Musique */
-audio {
-    display: none;
-}
+/* ... (le reste du code reste inchangé) ... */
