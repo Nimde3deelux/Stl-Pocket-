@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathématiques</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #f0f8ff; /* Couleur propre pour les Mathématiques */
+        }
+        .pdf-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .pdf-box {
+            width: 200px;
+            margin: 15px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .pdf-box:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#creators">Créateurs</a></li>
+        </ul>
+    </nav>
+    <section>
+        <h1>Mathématiques</h1>
+        <p>Bienvenue dans la section Mathématiques. Ici, vous trouverez des ressources, des exercices et des vidéos pour améliorer vos compétences en mathématiques.</p>
+        <div class="pdf-container">
+            <div class="pdf-box">
+                <a href="pdf/math_exercice1.pdf" download>Télécharger Exercice 1</a>
+            </div>
+            <div class="pdf-box">
+                <a href="pdf/math_exercice2.pdf" download>Télécharger Exercice 2</a>
+            </div>
+            <div class="pdf-box">
+                <a href="pdf/math_cours1.pdf" download>Télécharger Cours 1</a>
+            </div>
+            <!-- Ajoutez d'autres PDF ici -->
+        </div>
+    </section>
+</body>
+</html>
