@@ -20,6 +20,7 @@ body {
     z-index: -1;
 }
 
+/* ---- Styles pour le menu de navigation ---- */
 nav {
     background-color: rgba(0, 0, 0, 0.7);
     padding: 20px 0;
@@ -52,10 +53,7 @@ nav ul li a:hover {
     text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
 }
 
-h1, h2 {
-    text-shadow: 0 0 5px #f0f, 0 0 10px #f0f;
-}
-
+/* ---- Styles des sections ---- */
 section {
     padding: 100px 20px;
     min-height: 100vh;
@@ -66,13 +64,8 @@ section {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-#login, #signup, #chat {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px;
-    width: 80%;
-    max-width: 400px;
+h1, h2 {
+    text-shadow: 0 0 5px #f0f, 0 0 10px #f0f;
 }
 
 input {
