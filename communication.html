@@ -3,32 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STL Pocket - Communication</title>
+    <title>Communication - STL Pocket</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="cours.html">Cours</a></li>
-                <li><a href="communication.html">Communication</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <h1>Communication</h1>
-    </header>
-    
-    <main>
-        <section>
-            <h2>Système de messagerie</h2>
-            <p>Envoyez des messages à vos enseignants et camarades de classe.</p>
-        </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2024 STL Pocket. Tous droits réservés.</p>
-    </footer>
-    <script src="script.js"></script>
+    <div class="container">
+        <header>
+            <h1>Communication</h1>
+        </header>
+        
+        <main>
+            <section id="message-section">
+                <h2>Envoyer un message</h2>
+                <div id="message-box"></div>
+                <input type="text" id="message-input" placeholder="Écrivez votre message ici...">
+                <button id="send-button">Envoyer</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 STL Pocket. Tous droits réservés.</p>
+        </footer>
+    </div>
 </body>
 </html>
