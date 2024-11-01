@@ -1,90 +1,31 @@
-// Firebase configuration
-const firebaseConfig = {
-    apiKey: "API_KEY",
-    authDomain: "stlpocket-d8fbc.firebaseapp.com",
-    projectId: "stlpocket-d8fbc",
-    storageBucket: "stlpocket-d8fbc.appspot.com",
-    messagingSenderId: "301138774193",
-    appId: "1:301138774193:web:7b618dc6dc1aa8e587d103"
-};
+// Sélection des éléments
+const notificationsIcon = document.querySelector('.header-right span:nth-child(1)');
+const messagesIcon = document.querySelector('.header-right span:nth-child(2)');
+const sidebarToggle = document.querySelector('.sidebar-toggle');  // Bouton de la barre latérale si besoin
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
+// Gestion des notifications
+notificationsIcon.addEventListener('click', () => {
+  alert("Vous n'avez pas de nouvelles notifications pour l'instant !");
+});
 
-// Login function
-async function login() {
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-    try {
-        await auth.signInWithEmailAndPassword(email, password);
-        alert(`Connexion réussie pour ${email}`);
-    } catch (error) {
-        alert(`Erreur de connexion : ${error.message}`);
-    }
+// Gestion des messages
+messagesIcon.addEventListener('click', () => {
+  alert("Vous n'avez pas de nouveaux messages.");
+});
+
+// Gestion du menu mobile (pour les écrans plus petits)
+if (sidebarToggle) {
+  sidebarToggle.addEventListener('click', () => {
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.classList.toggle('active');  // Affiche ou cache la barre latérale
+  });
 }
 
-// Signup function
-async function signup() {
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-    try {
-        await auth.createUserWithEmailAndPassword(email, password);
-        alert(`Inscription réussie pour ${email}`);
-    } catch (error) {
-        alert(`Erreur d'inscription : ${error.message}`);
-    }
-}
+// Ajouter d’autres interactions ou scripts personnalisés ici
 
-// Tetris game functions
-let gameInterval;
-let currentBlock;
-
-function startTetris() {
-    // Initial game setup
-    clearInterval(gameInterval);
-    currentBlock = createBlock();
-    gameInterval = setInterval(updateGame, 1000);
-}
-
-function createBlock() {
-    return {
-        x: 3, y: 0,
-        shape: [[1, 1, 1], [0, 1, 0]]
-    };
-}
-
-function updateGame() {
-    currentBlock.y += 1;
-    drawBlock();
-}
-
-function drawBlock() {
-    const tetrisGame = document.getElementById('tetrisGame');
-    // Drawing logic
-}
-
-function toggleMusic() {
-    const music = document.getElementById("backgroundMusic");
-    if (music.paused) {
-        music.play();
-    } else {
-        music.pause();
-    }
-}
-
-function sendMessage() {
-    const chatInput = document.getElementById("chatInput");
-    const message = chatInput.value;
-    if (message.trim()) {
-        const messageDiv = document.createElement("div");
-        messageDiv.textContent = message;
-        document.getElementById("messages").appendChild(messageDiv);
-        chatInput.value = "";
-    }
-}
-
-function insertEmoji(emoji) {
-    document.getElementById("chatInput").value += emoji;
-}
+// Exemples de contenu dynamique pour le tableau de bord
+document.addEventListener('DOMContentLoaded', () => {
+  const welcomeMessage = document.createElement('p');
+  welcomeMessage.textContent = "Bienvenue sur STL Pocket, votre assistant scolaire personnalisé !";
+  document.getElementById('accueil').appendChild(welcomeMessage);
+});
