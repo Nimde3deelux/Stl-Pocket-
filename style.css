@@ -4,7 +4,6 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    opacity: 1; /* Opacité directement définie à 1 */
 }
 
 /* Style pour l'en-tête */
@@ -80,6 +79,11 @@ header:hover {
     text-align: center;
     position: relative;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Style pour les flèches */
