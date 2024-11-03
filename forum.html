@@ -5,49 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forum - STL Pocket</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-    <header class="navbar">
-        <a href="#home">Accueil</a>
-        <a href="#courses">Cours</a>
-        <a href="#communication">Communication</a>
-        <a href="#resources">Ressources</a>
-    </header>
-
-    <h1>Forum de Discussion</h1>
-
     <div class="forum-container">
-        <div class="forum-group" id="group1">
-            <h2>🧪 Solutions</h2>
-            <div class="messages" id="messages-group1"></div>
-            <textarea id="input-group1" placeholder="Écrire un message..."></textarea>
-            <button class="send-btn" onclick="sendMessage('group1')"><i class="fas fa-paper-plane"></i> Envoyer</button>
-        </div>
-
-        <div class="forum-group" id="group2">
-            <h2>⚗️ Réactifs</h2>
-            <div class="messages" id="messages-group2"></div>
-            <textarea id="input-group2" placeholder="Écrire un message..."></textarea>
-            <button class="send-btn" onclick="sendMessage('group2')"><i class="fas fa-paper-plane"></i> Envoyer</button>
-        </div>
-
-        <div class="forum-group" id="group3">
-            <h2>🧬 ADN</h2>
-            <div class="messages" id="messages-group3"></div>
-            <textarea id="input-group3" placeholder="Écrire un message..."></textarea>
-            <button class="send-btn" onclick="sendMessage('group3')"><i class="fas fa-paper-plane"></i> Envoyer</button>
-        </div>
-
-        <div class="forum-group" id="group4">
-            <h2>🧫 Cultures</h2>
-            <div class="messages" id="messages-group4"></div>
-            <textarea id="input-group4" placeholder="Écrire un message..."></textarea>
-            <button class="send-btn" onclick="sendMessage('group4')"><i class="fas fa-paper-plane"></i> Envoyer</button>
+        <h1>Forum de Discussion</h1>
+        <div class="forum-buttons">
+            <a href="solutions.html" class="forum-btn">🧪 Solutions</a>
+            <a href="reagents.html" class="forum-btn">⚗️ Réactifs</a>
+            <a href="equipments.html" class="forum-btn">🔬 Équipements</a>
+            <a href="protocols.html" class="forum-btn">📄 Protocoles</a>
         </div>
     </div>
 
-    <script src="script.js"></script>
 </body>
 </html>
