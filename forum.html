@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forum - STL Pocket</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="forum-style.css">
+    <script src="forum-script.js" defer></script>
 </head>
 <body>
 
     <div class="forum-container">
-        <h1>Forum de Discussion</h1>
-        <div class="forum-buttons">
-            <a href="solutions.html" class="forum-btn">🧪 Solutions</a>
-            <a href="reagents.html" class="forum-btn">⚗️ Réactifs</a>
-            <a href="equipments.html" class="forum-btn">🔬 Équipements</a>
-            <a href="protocols.html" class="forum-btn">📄 Protocoles</a>
-        </div>
+        <h1>Forum de Communication</h1>
+        <div id="messages" class="messages-container"></div>
+        <textarea id="message-input" placeholder="Écrire un message..."></textarea>
+        <button onclick="sendMessage()" class="send-btn">Envoyer</button>
+        <a href="menu.html" class="back-btn">Retour au Menu Principal</a>
     </div>
 
 </body>
