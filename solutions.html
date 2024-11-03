@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solutions - Forum</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function sendMessage() {
+            const input = document.getElementById("message-input");
+            const messageContainer = document.getElementById("messages");
+            const messageText = input.value.trim();
+
+            if (messageText) {
+                const message = document.createElement('div');
+                message.textContent = messageText;
+                messageContainer.appendChild(message);
+                input.value = ''; // Clear input field
+                messageContainer.scrollTop = messageContainer.scrollHeight; // Auto-scroll
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="forum-container">
+        <h1>Discussion : Solutions</h1>
+        <div id="messages" class="messages-container"></div>
+        <textarea id="message-input" placeholder="Écrire un message..."></textarea>
+        <button onclick="sendMessage()" class="send-btn">Envoyer</button>
+        <a href="forum.html" class="back-btn">Retour au Forum</a>
+    </div>
+
+</body>
+</html>
