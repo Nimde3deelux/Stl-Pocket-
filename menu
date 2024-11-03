@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - STL Pocket</title>
+    <link rel="stylesheet" href="menu-style.css">
+    <script src="menu-script.js" defer></script>
+</head>
+<body>
+    <div class="menu-container">
+        <h1>Menu Principal</h1>
+        <div class="site-map">
+            <h2>Schéma du Site</h2>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="forum.html">Forum de Communication</a></li>
+                <li><a href="courses.html">Cours</a></li>
+                <li><a href="resources.html">Ressources</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">À propos</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
