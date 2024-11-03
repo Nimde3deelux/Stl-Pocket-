@@ -1,16 +1,15 @@
 // Effet de fondu en entrée et sortie de page
 document.addEventListener("DOMContentLoaded", () => {
-    document.body.classList.add("fade-in"); // Ajoute la classe pour le fondu en entrée
+    // Plus besoin de la classe fade-in
 });
 
+// Suppression de la transition lors du clic sur un lien
 document.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", (event) => {
         if (link.href.includes(window.location.origin)) {
             event.preventDefault();
-            document.body.classList.remove("fade-in");
-            setTimeout(() => {
-                window.location.href = link.href;
-            }, 500); // Temps de transition en ms
+            // Aucune classe de transition n'est retirée
+            window.location.href = link.href;
         }
     });
 });
