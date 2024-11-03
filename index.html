@@ -3,148 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STL Pocket - Accueil</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Style général de la page */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #e0f2f1;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-        }
-
-        /* Conteneur principal */
-        .container {
-            max-width: 1200px;
-            padding: 20px;
-            display: grid;
-            gap: 20px;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            text-align: center;
-        }
-
-        /* Style des cartes de section */
-        .card {
-            background-color: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            transition: transform 0.2s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Icônes stylisées */
-        .icon {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 10px;
-            background-color: #b3e5fc;
-            border-radius: 10px;
-            padding: 10px;
-        }
-
-        /* Titre principal */
-        h1 {
-            font-size: 2.5em;
-            color: #00796b;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        /* Boutons stylisés */
-        .btn {
-            background-color: #4dd0e1;
-            color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 1em;
-            margin-top: 10px;
-        }
-
-        .btn:hover {
-            background-color: #26c6da;
-        }
-
-        /* En-tête de navigation */
-        .navbar {
-            width: 100%;
-            display: flex;
-            justify-content: space-around;
-            background-color: #00796b;
-            padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            color: #fff;
-        }
-
-        .navbar a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-
-        .navbar a:hover {
-            color: #b2dfdb;
-        }
-    </style>
+    <title>STL Pocket</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <!-- Barre de navigation -->
-    <div class="navbar">
-        <a href="#home">Home</a>
-        <a href="#courses">Courses</a>
-        <a href="#communication">Communication</a>
-        <a href="#resources">Resources</a>
+    <div class="background-video">
+        <video autoplay muted loop>
+            <source src="background.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo.
+        </video>
     </div>
+    
+    <header>
+        <h1>Bienvenue sur STL Pocket</h1>
+        <nav>
+            <ul>
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#cours">Cours</a></li>
+                <li><a href="#communication">Communication</a></li>
+                <li><a href="#ressources">Ressources</a></li>
+                <li><a href="#profil">Profil</a></li>
+                <li><a href="#aide">Aide</a></li>
+            </ul>
+        </nav>
+        <button id="loginBtn">Se connecter</button>
+    </header>
 
-    <!-- Titre principal -->
-    <h1>Bienvenue sur STL Pocket</h1>
+    <main>
+        <section id="accueil">
+            <h2>Accueil</h2>
+            <p>Bienvenue dans le futur de l'éducation! STL Pocket transforme votre expérience d'apprentissage.</p>
+        </section>
+        
+        <section id="cours">
+            <h2>Cours</h2>
+            <div class="course-container">
+                <div class="course">Mathématiques</div>
+                <div class="course">Biotechnologie</div>
+                <div class="course">Philosophie</div>
+                <div class="course">Anglais</div>
+                <!-- Ajoutez d'autres cours si nécessaire -->
+            </div>
+            <input type="text" id="searchBar" placeholder="Rechercher un cours...">
+        </section>
 
-    <!-- Conteneur principal avec les cartes de section -->
-    <div class="container">
-        <div class="card">
-            <div class="icon"><img src="math_icon.png" alt="Mathématiques" style="width:100%;"></div>
-            <h3>Mathématiques</h3>
-            <p>Explorez les cours et exercices de mathématiques</p>
-            <button class="btn">Accéder</button>
-        </div>
-        <div class="card">
-            <div class="icon"><img src="biotech_icon.png" alt="Biotechnologie" style="width:100%;"></div>
-            <h3>Biotechnologie</h3>
-            <p>Découvrez le monde de la biotech</p>
-            <button class="btn">Accéder</button>
-        </div>
-        <div class="card">
-            <div class="icon"><img src="philo_icon.png" alt="Philosophie" style="width:100%;"></div>
-            <h3>Philosophie</h3>
-            <p>Approfondissez votre réflexion philosophique</p>
-            <button class="btn">Accéder</button>
-        </div>
-        <div class="card">
-            <div class="icon"><img src="english_icon.png" alt="Anglais" style="width:100%;"></div>
-            <h3>Anglais</h3>
-            <p>Améliorez votre anglais avec des cours interactifs</p>
-            <button class="btn">Accéder</button>
-        </div>
-        <!-- Ajouter d'autres sections selon les matières -->
-    </div>
+        <section id="communication">
+            <h2>Communication</h2>
+            <div class="message-area">
+                <textarea placeholder="Écrivez votre message..."></textarea>
+                <button>Envoyer</button>
+            </div>
+        </section>
 
+        <section id="ressources">
+            <h2>Ressources</h2>
+            <p>Accédez à des documents, des vidéos et des outils utiles pour vos études.</p>
+            <ul>
+                <li><a href="#">Document 1</a></li>
+                <li><a href="#">Document 2</a></li>
+                <li><a href="#">Vidéo 1</a></li>
+            </ul>
+        </section>
+
+        <section id="profil">
+            <h2>Profil Utilisateur</h2>
+            <p>Voir vos cours suivis, commentaires et progrès.</p>
+            <!-- Informations du profil ici -->
+        </section>
+
+        <section id="aide">
+            <h2>Aide</h2>
+            <p>Si vous avez besoin d'aide, contactez-nous à l'adresse suivante : <a href="mailto:contact@stlpocket.com">contact@stlpocket.com</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 STL Pocket. Tous droits réservés.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
