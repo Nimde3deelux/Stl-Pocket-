@@ -1,5 +1,22 @@
 // script.js
 
+// Effet de fondu en entrée et sortie de page
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("fade-in"); // Ajoute la classe pour le fondu en entrée
+});
+
+document.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", (event) => {
+        if (link.href.includes(window.location.origin)) {
+            event.preventDefault();
+            document.body.classList.remove("fade-in");
+            setTimeout(() => {
+                window.location.href = link.href;
+            }, 500); // Temps de transition en ms
+        }
+    });
+});
+
 // Fonctionnalité 1 : Affichage des notifications
 function showNotification(message) {
     const notification = document.createElement('div');
