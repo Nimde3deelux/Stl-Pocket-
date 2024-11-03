@@ -5,79 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STL Pocket - Accueil</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Styles de base ajoutés ici */
-        /* Ajoute ici le style CSS que tu as déjà fourni */
-    </style>
+    <script src="script.js" defer></script>
 </head>
 <body>
-
-    <!-- En-tête avec le logo -->
-    <div class="header">
-        <img src="images/logo.png" alt="STL Pocket Logo" class="logo">
-    </div>
-
-    <!-- Barre de navigation -->
-    <div class="navbar">
-        <a href="index.html">Accueil</a>
-        <a href="math.html">Mathématiques</a>
-        <a href="biotech.html">Biotechnologie</a>
-        <a href="philo.html">Philosophie</a>
-        <a href="english.html">Anglais</a>
-        <a href="resources.html">Ressources</a>
-        <a href="forum.html">Forum</a>
-        <a href="contact.html">Contact</a>
-        <a href="creators.html">Créateurs</a>
-        <a href="user_profile.html">Mon Profil</a>
-    </div>
-
-    <!-- Titre principal -->
-    <h1>Bienvenue sur STL Pocket</h1>
-
-    <div class="intro">
-        <p>STL Pocket est votre plateforme d'apprentissage accessible et interactive ! Explorez nos différentes matières et améliorez vos compétences.</p>
-    </div>
-
-    <!-- Conteneur principal avec les cartes de section -->
-    <div class="container">
-        <div class="card">
-            <div class="icon"><img src="images/math_icon.png" alt="Mathématiques" style="width:100%;"></div>
-            <h3>Mathématiques</h3>
-            <p>Explorez les cours et exercices de mathématiques.</p>
-            <a href="math.html" class="btn">Accéder</a>
+    <header>
+        <div class="navbar">
+            <a href="#home">Accueil</a>
+            <a href="#courses">Cours</a>
+            <a href="#communication">Communication</a>
+            <a href="#minigames">Mini Jeux</a> <!-- Nouvel onglet -->
+            <a href="user_profile.html">Profil</a>
         </div>
-        <div class="card">
-            <div class="icon"><img src="images/biotech_icon.png" alt="Biotechnologie" style="width:100%;"></div>
-            <h3>Biotechnologie</h3>
-            <p>Découvrez le monde de la biotech.</p>
-            <a href="biotech.html" class="btn">Accéder</a>
-        </div>
-        <div class="card">
-            <div class="icon"><img src="images/philo_icon.png" alt="Philosophie" style="width:100%;"></div>
-            <h3>Philosophie</h3>
-            <p>Approfondissez votre réflexion philosophique.</p>
-            <a href="philo.html" class="btn">Accéder</a>
-        </div>
-        <div class="card">
-            <div class="icon"><img src="images/english_icon.png" alt="Anglais" style="width:100%;"></div>
-            <h3>Anglais</h3>
-            <p>Améliorez votre anglais avec des cours interactifs.</p>
-            <a href="english.html" class="btn">Accéder</a>
-        </div>
-    </div>
+        <h1>Bienvenue sur STL Pocket</h1>
+        <img src="logo.png" alt="Logo STL Pocket" class="logo">
+    </header>
 
-    <div class="features">
-        <h2>Fonctionnalités</h2>
-        <p>Nous proposons de nombreuses fonctionnalités pour améliorer votre expérience d'apprentissage :</p>
-        <ul>
-            <li><a href="quiz.html">Quiz interactifs</a></li>
-            <li><a href="resources.html">Ressources éducatives</a></li>
-            <li><a href="forum.html">Forum de discussion</a></li>
-            <li><a href="contact.html">Contactez-nous</a></li>
-            <li><a href="user_profile.html">Gestion de votre profil</a></li>
-            <!-- Ajoute d'autres fonctionnalités ici -->
-        </ul>
-    </div>
+    <main>
+        <section class="intro">
+            <h2>Présentation du site</h2>
+            <p>STL Pocket est votre compagnon d'apprentissage, offrant un accès facile à des cours variés, des outils de communication et bien plus encore. Explorez les fonctionnalités ci-dessous pour en savoir plus !</p>
+        </section>
 
+        <section class="features">
+            <h2>Fonctionnalités</h2>
+            <div class="feature-container">
+                <div class="feature-item" onmouseover="showDescription('description-cours')" onmouseout="hideDescription('description-cours')">
+                    <h3>Accès aux Cours</h3>
+                    <p class="description" id="description-cours">Explorez divers cours pour améliorer vos connaissances.</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="feature-item" onmouseover="showDescription('description-communication')" onmouseout="hideDescription('description-communication')">
+                    <h3>Communication</h3>
+                    <p class="description" id="description-communication">Discutez avec vos camarades et professeurs facilement.</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="feature-item" onmouseover="showDescription('description-resources')" onmouseout="hideDescription('description-resources')">
+                    <h3>Ressources</h3>
+                    <p class="description" id="description-resources">Accédez à des ressources utiles pour vos études.</p>
+                </div>
+                <div class="arrow">→</div>
+                <div class="feature-item" onmouseover="showDescription('description-minigames')" onmouseout="hideDescription('description-minigames')">
+                    <h3>Mini Jeux</h3>
+                    <p class="description" id="description-minigames">Profitez de jeux éducatifs pour réviser en vous amusant !</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 STL Pocket. Tous droits réservés.</p>
+    </footer>
 </body>
 </html>
