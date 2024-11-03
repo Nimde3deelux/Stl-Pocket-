@@ -1,5 +1,3 @@
-// script.js
-
 // Effet de fondu en entrée et sortie de page
 document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("fade-in"); // Ajoute la classe pour le fondu en entrée
@@ -121,4 +119,17 @@ chatForm.addEventListener('submit', function (e) {
     messageElem.textContent = message;
     chatBox.appendChild(messageElem);
     document.getElementById('chat-message').value = '';
+});
+
+// Fonctionnalité ajoutée : Affichage des flèches et navigation vers chaque bloc de cours
+document.querySelectorAll(".card").forEach(card => {
+    const arrowUp = document.createElement("div");
+    arrowUp.innerHTML = "⬆️";
+    arrowUp.style.cursor = "pointer";
+    arrowUp.style.fontSize = "1.5em";
+    arrowUp.style.marginBottom = "10px";
+    arrowUp.addEventListener("click", () => {
+        card.scrollIntoView({ behavior: "smooth" });
+    });
+    card.insertBefore(arrowUp, card.firstChild);
 });
