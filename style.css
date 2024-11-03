@@ -4,12 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    opacity: 0; /* Départ de l'opacité à 0 pour l'effet de transition */
-    transition: opacity 0.5s ease-in-out; /* Transition d'opacité */
-}
-
-body.fade-in {
-    opacity: 1; /* Opacité de la page visible */
+    opacity: 1; /* Opacité directement définie à 1 */
 }
 
 /* Style pour l'en-tête */
@@ -19,7 +14,6 @@ header {
     padding: 20px 0;
     text-align: center;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
 }
 
 header:hover {
@@ -38,7 +32,6 @@ header:hover {
     text-decoration: none;
     padding: 10px 15px;
     border-radius: 5px;
-    transition: background-color 0.3s;
 }
 
 .navbar a:hover {
@@ -59,11 +52,6 @@ header:hover {
     margin: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s;
-}
-
-.intro:hover {
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Section des fonctionnalités */
@@ -92,13 +80,6 @@ header:hover {
     text-align: center;
     position: relative;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-}
-
-.feature-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Style pour les flèches */
