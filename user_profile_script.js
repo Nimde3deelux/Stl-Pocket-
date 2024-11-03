@@ -1,35 +1,21 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const fileInput = document.getElementById('fileInput');
-    const uploadButton = document.getElementById('uploadButton');
-    const profileImg = document.getElementById('profileImg');
     const saveButton = document.getElementById('saveButton');
     const userDescription = document.getElementById('userDescription');
     const menuButton = document.getElementById('menuButton');
-
-    // Gestion de l'upload de la photo de profil
-    uploadButton.addEventListener('click', function() {
-        fileInput.click();
-    });
-
-    fileInput.addEventListener('change', function() {
-        const file = fileInput.files[0];
-        if (file) {
-            const fileNumber = parseInt(file.name.replace('photodeuser', '').replace('.png', ''));
-            if (fileNumber >= 1 && fileNumber <= 10) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    profileImg.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            } else {
-                alert("Veuillez télécharger une image nommée photodeuser1.png à photodeuser10.png.");
-            }
-        }
-    });
+    const profileImg = document.getElementById('profileImg');
 
     // Sauvegarde de la description
     saveButton.addEventListener('click', function() {
         const description = userDescription.value;
+        const selectedImage = document.querySelector('input[name="profileImage"]:checked');
+        
+        if (selectedImage) {
+            profileImg.src = selectedImage.value; // Change l'image de profil affichée
+        } else {
+            alert("Veuillez sélectionner une image de profil.");
+            return;
+        }
+
         if (description) {
             // Simuler la sauvegarde (ici, tu pourrais faire une requête AJAX pour envoyer la description au serveur)
             alert("Description sauvegardée : " + description);
