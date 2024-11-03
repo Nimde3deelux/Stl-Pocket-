@@ -1,15 +1,14 @@
-// Effet de fondu en entrée et sortie de page
+// Aucune fonctionnalité de fondu à ajouter lors du chargement de la page
 document.addEventListener("DOMContentLoaded", () => {
-    // Plus besoin de la classe fade-in
+    // Code à exécuter lorsque le DOM est complètement chargé
 });
 
-// Suppression de la transition lors du clic sur un lien
+// Suppression de l'effet de transition lors du clic sur un lien
 document.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", (event) => {
         if (link.href.includes(window.location.origin)) {
             event.preventDefault();
-            // Aucune classe de transition n'est retirée
-            window.location.href = link.href;
+            window.location.href = link.href; // Pas d'effet de transition
         }
     });
 });
