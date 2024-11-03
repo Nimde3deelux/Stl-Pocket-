@@ -1,38 +1,41 @@
-function login() {
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-    alert(`Connexion avec ${email}`);
-    // Ajouter ici la logique de connexion
-}
+// Sélectionner le fichier audio
+const audio = new Audio('sound.mp3'); // Remplacez 'sound.mp3' par le chemin de votre fichier audio
+let timer;
 
-function signup() {
-    const email = document.getElementById("signupEmail").value;
-    const phone = document.getElementById("signupPhone").value;
-    const password = document.getElementById("signupPassword").value;
-    alert(`Inscription avec ${email} et ${phone}`);
-    // Ajouter ici la logique d'inscription
-}
+// Écouteur d'événement pour le mouvement de la souris
+document.addEventListener('mousemove', () => {
+    if (audio.paused) {
+        audio.play();
+    }
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+        audio.pause();
+        audio.currentTime = 0;
+    }, 5000); // Délai de 5 secondes
+});
 
-function sendMessage() {
-    const input = document.getElementById("chatInput");
-    const message = input.value;
-    const messagesDiv = document.getElementById("messages");
-    messagesDiv.innerHTML += `<div>${message}</div>`;
-    input.value = '';
-    messagesDiv.scrollTop = messagesDiv.scrollHeight; // faire défiler vers le bas
-}
+// Écouteur d'événement pour détecter la page chargée
+window.onload = () => {
+    audio.loop = true; // Pour que la musique boucle
+};
 
-// Fonctionnalité supplémentaire : gestion des utilisateurs
-let users = [];
+// Fonctionnalité de recherche
+document.getElementById('searchBar').addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    const courses = document.querySelectorAll('.course');
 
-function addUser(email, phone) {
-    users.push({ email, phone });
-}
+    courses.forEach(course => {
+        const courseName = course.textContent.toLowerCase();
+        if (courseName.includes(query)) {
+            course.style.display = '';
+        } else {
+            course.style.display = 'none';
+        }
+    });
+});
 
-function listUsers() {
-    console.log(users);
-}
-
-// Exemple d'utilisation
-addUser("test@example.com", "0123456789");
-listUsers();
+// Fonctionnalité de connexion (exemple simple)
+document.getElementById('loginBtn').addEventListener('click', function() {
+    const username = prompt('Entrez votre nom d’utilisateur:');
+    alert(`Bienvenue, ${username}!`);
+});
