@@ -8,90 +8,95 @@
     <style>
         /* Style général de la page */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #e0f2f1;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
             color: #333;
+            margin: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
         }
+
         /* En-tête avec le logo */
         .header {
-            margin-bottom: 20px;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            background: #00796b;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         }
+
         .logo {
             width: 150px;
         }
+
         /* Barre de navigation */
         .navbar {
-            width: 100%;
             display: flex;
             justify-content: space-around;
-            background-color: #00796b;
+            width: 100%;
             padding: 15px;
-            border-radius: 15px;
-            margin-bottom: 30px;
+            background-color: #00695c;
             color: #fff;
         }
+
         .navbar a {
             color: #fff;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1.2em;
+            font-size: 1.1em;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: background-color 0.3s;
         }
+
         .navbar a:hover {
-            color: #b2dfdb;
+            background-color: #004d40;
         }
+
         /* Titre principal */
         h1 {
             font-size: 2.5em;
-            color: #00796b;
+            color: #004d40;
             text-align: center;
-            margin-bottom: 20px;
+            margin: 20px;
         }
-        /* Introduction */
-        .intro {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.2em;
-        }
+
         /* Conteneur principal */
         .container {
-            max-width: 1200px;
-            padding: 20px;
             display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
         }
+
         /* Style des cartes de section */
         .card {
             background-color: #ffffff;
             border-radius: 15px;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            transition: transform 0.2s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease;
         }
+
         .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
         }
-        /* Icônes stylisées */
-        .icon {
-            width: 50px;
-            height: 50px;
+
+        .icon img {
+            width: 60px;
+            height: 60px;
             margin-bottom: 10px;
-            background-color: #b3e5fc;
-            border-radius: 10px;
-            padding: 10px;
         }
+
         /* Boutons stylisés */
         .btn {
-            background-color: #4dd0e1;
+            background-color: #26a69a;
             color: #ffffff;
             border: none;
             padding: 10px 20px;
@@ -99,23 +104,47 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             font-size: 1em;
-            margin-top: 10px;
         }
+
         .btn:hover {
-            background-color: #26c6da;
+            background-color: #00796b;
         }
-        /* Fonctionnalités */
+
+        /* Section fonctionnalités et tags */
         .features {
             text-align: center;
-            margin-top: 50px;
+            width: 100%;
+            background-color: #e0f7fa;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 30px;
         }
-        /* Liste des fonctionnalités */
-        .features ul {
-            list-style: none;
-            padding: 0;
+
+        .features h2 {
+            font-size: 2em;
+            color: #006064;
         }
-        .features li {
-            margin: 10px 0;
+
+        .tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .tag {
+            background-color: #004d40;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .tag:hover {
+            background-color: #26a69a;
         }
     </style>
 </head>
@@ -137,8 +166,6 @@
         <a href="forum.html">Forum</a>
         <a href="contact.html">Contact</a>
         <a href="creators.html">Créateurs</a>
-        <a href="user_profile.html">Mon Profil</a>
-        <a href="mini_games.html">Mini Jeux</a>
     </div>
 
     <!-- Titre principal -->
@@ -151,44 +178,52 @@
     <!-- Conteneur principal avec les cartes de section -->
     <div class="container">
         <div class="card">
-            <div class="icon"><img src="images/math_icon.png" alt="Mathématiques" style="width:100%;"></div>
+            <div class="icon"><img src="images/math_icon.png" alt="Mathématiques"></div>
             <h3>Mathématiques</h3>
             <p>Explorez les cours et exercices de mathématiques.</p>
             <a href="math.html" class="btn">Accéder</a>
         </div>
         <div class="card">
-            <div class="icon"><img src="images/biotech_icon.png" alt="Biotechnologie" style="width:100%;"></div>
+            <div class="icon"><img src="images/biotech_icon.png" alt="Biotechnologie"></div>
             <h3>Biotechnologie</h3>
             <p>Découvrez le monde de la biotech.</p>
             <a href="biotech.html" class="btn">Accéder</a>
         </div>
         <div class="card">
-            <div class="icon"><img src="images/philo_icon.png" alt="Philosophie" style="width:100%;"></div>
+            <div class="icon"><img src="images/philo_icon.png" alt="Philosophie"></div>
             <h3>Philosophie</h3>
             <p>Approfondissez votre réflexion philosophique.</p>
             <a href="philo.html" class="btn">Accéder</a>
         </div>
         <div class="card">
-            <div class="icon"><img src="images/english_icon.png" alt="Anglais" style="width:100%;"></div>
+            <div class="icon"><img src="images/english_icon.png" alt="Anglais"></div>
             <h3>Anglais</h3>
             <p>Améliorez votre anglais avec des cours interactifs.</p>
             <a href="english.html" class="btn">Accéder</a>
         </div>
-        <!-- Ajouter d'autres sections selon les matières -->
     </div>
 
+    <!-- Section des fonctionnalités et des tags -->
     <div class="features">
         <h2>Fonctionnalités</h2>
         <p>Nous proposons de nombreuses fonctionnalités pour améliorer votre expérience d'apprentissage :</p>
         <ul>
-            <li><a href="quiz.html">Quiz interactifs</a></li>
-            <li><a href="resources.html">Ressources éducatives</a></li>
-            <li><a href="forum.html">Forum de discussion</a></li>
-            <li><a href="contact.html">Contactez-nous</a></li>
-            <li><a href="user_profile.html">Gestion de votre profil</a></li>
-            <li><a href="mini_games.html">Mini Jeux</a></li>
-            <!-- Ajoute d'autres fonctionnalités ici -->
+            <li>Quiz interactifs</li>
+            <li>Ressources éducatives</li>
+            <li>Forum de discussion</li>
+            <li>Contactez-nous</li>
+            <li>Gestion de votre profil</li>
+            <li>Mini Jeux</li>
         </ul>
+
+        <!-- Tags pour les matières -->
+        <div class="tags">
+            <span class="tag">Mathématiques</span>
+            <span class="tag">Biotechnologie</span>
+            <span class="tag">Philosophie</span>
+            <span class="tag">Anglais</span>
+            <span class="tag">Ressources</span>
+        </div>
     </div>
 
 </body>
