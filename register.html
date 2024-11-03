@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - STL Pocket</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f4f8;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #26a69a;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #00796b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Inscription à STL Pocket</h1>
+    <form id="register-form">
+        <input type="text" id="register-name" placeholder="Nom" required>
+        <input type="email" id="register-email" placeholder="Email" required>
+        <input type="password" id="register-password" placeholder="Mot de passe" required>
+        <button type="submit">S'inscrire</button>
+    </form>
+    <p>Déjà un compte ? <a href="login.html">Connectez-vous ici</a></p>
+    <script src="script.js"></script>
+</body>
+</html>
