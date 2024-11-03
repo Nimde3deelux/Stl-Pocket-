@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Utilisateur</title>
+    <link rel="stylesheet" href="user_profile_style.css">
+</head>
+<body>
+    <div class="profile-container">
+        <h1>Profil Utilisateur</h1>
+        
+        <div class="profile-picture">
+            <img id="profileImg" src="photodeuser1.png" alt="Photo de Profil" />
+            <input type="file" id="fileInput" accept="image/png" />
+            <button id="uploadButton">Télécharger une nouvelle photo</button>
+        </div>
+
+        <div class="description">
+            <h2>Description Personnelle</h2>
+            <textarea id="userDescription" rows="4" placeholder="Entrez votre description ici..."></textarea>
+            <button id="saveButton">Sauvegarder la description</button>
+        </div>
+
+        <button id="menuButton">Retour au Menu Principal</button>
+    </div>
+
+    <script src="user_profile_script.js"></script>
+</body>
+</html>
