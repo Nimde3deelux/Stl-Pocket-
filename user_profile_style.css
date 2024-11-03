@@ -22,16 +22,35 @@ body {
     margin-bottom: 20px;
 }
 
-.profile-picture img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
+.image-selection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-input[type="file"] {
-    display: none; /* Cacher l'input de fichier */
+.image-selection label {
+    margin: 10px;
+    cursor: pointer;
+}
+
+.image-selection img {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid transparent;
+}
+
+input[type="radio"]:checked + img {
+    border: 2px solid #4dd0e1; /* Couleur de la bordure lorsqu'une image est sélectionnée */
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: none;
 }
 
 button {
@@ -47,12 +66,4 @@ button {
 
 button:hover {
     background-color: #26c6da;
-}
-
-textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    resize: none;
 }
