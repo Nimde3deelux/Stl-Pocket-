@@ -3,6 +3,12 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
+    opacity: 0; /* Départ de l'opacité à 0 pour l'effet de transition */
+    transition: opacity 0.5s ease-in-out; /* Transition d'opacité */
+}
+
+body.fade-in {
+    opacity: 1; /* Opacité de la page visible */
 }
 
 header {
