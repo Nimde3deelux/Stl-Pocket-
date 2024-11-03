@@ -1,41 +1,107 @@
-// Sélectionner le fichier audio
-const audio = new Audio('sound.mp3'); // Remplacez 'sound.mp3' par le chemin de votre fichier audio
-let timer;
+// script.js
 
-// Écouteur d'événement pour le mouvement de la souris
-document.addEventListener('mousemove', () => {
-    if (audio.paused) {
-        audio.play();
-    }
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-        audio.pause();
-        audio.currentTime = 0;
-    }, 5000); // Délai de 5 secondes
-});
+// Fonctionnalité 1 : Affichage des notifications
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    notification.style.position = 'fixed';
+    notification.style.top = '10px';
+    notification.style.right = '10px';
+    notification.style.padding = '10px';
+    notification.style.backgroundColor = '#2ecc71';
+    notification.style.color = 'white';
+    notification.style.borderRadius = '5px';
+    document.body.appendChild(notification);
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
 
-// Écouteur d'événement pour détecter la page chargée
-window.onload = () => {
-    audio.loop = true; // Pour que la musique boucle
-};
-
-// Fonctionnalité de recherche
-document.getElementById('searchBar').addEventListener('input', function() {
-    const query = this.value.toLowerCase();
-    const courses = document.querySelectorAll('.course');
-
-    courses.forEach(course => {
-        const courseName = course.textContent.toLowerCase();
-        if (courseName.includes(query)) {
-            course.style.display = '';
+// Fonctionnalité 2 : Validation de formulaire
+document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const inputs = this.querySelectorAll('input[type="text"]');
+        let valid = true;
+        inputs.forEach(input => {
+            if (input.value.trim() === '') {
+                valid = false;
+                input.style.border = '2px solid red';
+            } else {
+                input.style.border = '1px solid #ccc';
+            }
+        });
+        if (valid) {
+            showNotification('Formulaire soumis avec succès !');
+            // Logique de soumission peut être ajoutée ici
         } else {
-            course.style.display = 'none';
+            showNotification('Veuillez remplir tous les champs.');
         }
     });
 });
 
-// Fonctionnalité de connexion (exemple simple)
-document.getElementById('loginBtn').addEventListener('click', function() {
-    const username = prompt('Entrez votre nom d’utilisateur:');
-    alert(`Bienvenue, ${username}!`);
+// Fonctionnalité 3 : Pagination des ressources
+const resources = [
+    'Livre de mathématiques',
+    'Article sur la biotechnologie',
+    'Guide de philosophie',
+    'Manuel d\'anglais',
+    'Cours de chimie',
+    'Article sur l\'écologie',
+    'Rapport scientifique',
+    'Thèse sur l\'éducation',
+];
+
+const resourcesPerPage = 4;
+let currentPage = 1;
+
+function displayResources(page) {
+    const resourceList = document.getElementById('resource-list');
+    resourceList.innerHTML = '';
+    const start = (page - 1) * resourcesPerPage;
+    const end = start + resourcesPerPage;
+    const paginatedResources = resources.slice(start, end);
+    paginatedResources.forEach(resource => {
+        const li = document.createElement('li');
+        li.textContent = resource;
+        resourceList.appendChild(li);
+    });
+    updatePagination();
+}
+
+function updatePagination() {
+    const pagination = document.getElementById('pagination');
+    pagination.innerHTML = '';
+    const totalPages = Math.ceil(resources.length / resourcesPerPage);
+    for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        btn.onclick = () => {
+            currentPage = i;
+            displayResources(currentPage);
+        };
+        pagination.appendChild(btn);
+    }
+}
+
+displayResources(currentPage);
+
+// Fonctionnalité 4 : Gestion de profil
+document.getElementById('profile-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const name = document.getElementById('profile-name').value;
+    const email = document.getElementById('profile-email').value;
+    showNotification(`Profil mis à jour : ${name}, ${email}`);
+});
+
+// Fonctionnalité 5 : Chat en direct
+const chatForm = document.getElementById('chat-form');
+chatForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const message = document.getElementById('chat-message').value;
+    const chatBox = document.getElementById('chat-box');
+    const messageElem = document.createElement('div');
+    messageElem.textContent = message;
+    chatBox.appendChild(messageElem);
+    document.getElementById('chat-message').value = '';
 });
