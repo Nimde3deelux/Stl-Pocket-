@@ -1,261 +1,131 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STL Pocket - Accueil</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Style général de la page */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f4f8;
-            color: #333;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+/* Style général pour le corps */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    opacity: 0; /* Départ de l'opacité à 0 pour l'effet de transition */
+    transition: opacity 0.5s ease-in-out; /* Transition d'opacité */
+}
 
-        /* En-tête avec le logo */
-        .header {
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            background: #00796b;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        }
+body.fade-in {
+    opacity: 1; /* Opacité de la page visible */
+}
 
-        .logo {
-            width: 150px;
-        }
+/* Style pour l'en-tête */
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
 
-        /* Barre de navigation */
-        .navbar {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            padding: 15px;
-            background-color: #00695c;
-            color: #fff;
-        }
+header:hover {
+    background: #2b373f;
+}
 
-        .navbar a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            padding: 8px 12px;
-            border-radius: 8px;
-            transition: background-color 0.3s;
-        }
+/* Barre de navigation */
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
 
-        .navbar a:hover {
-            background-color: #004d40;
-        }
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
 
-        /* Titre principal */
-        h1 {
-            font-size: 2.5em;
-            color: #004d40;
-            text-align: center;
-            margin: 20px;
-        }
+.navbar a:hover {
+    background-color: #2b373f;
+}
 
-        /* Conteneur principal */
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            width: 100%;
-            padding: 20px;
-        }
+/* Logo */
+.logo {
+    width: 150px;
+    margin: 20px 0;
+}
 
-        /* Style des cartes de section */
-        .card {
-            background-color: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
+/* Section d'introduction */
+.intro {
+    padding: 20px;
+    text-align: center;
+    background-color: #ffffff;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-        }
+.intro:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
 
-        .icon img {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 10px;
-        }
+/* Section des fonctionnalités */
+.features {
+    padding: 20px;
+    background-color: #e2e2e2;
+    border-radius: 8px;
+    margin: 20px;
+}
 
-        /* Boutons stylisés */
-        .btn {
-            background-color: #26a69a;
-            color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 1em;
-        }
+/* Conteneur pour les fonctionnalités */
+.feature-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-start;
+}
 
-        .btn:hover {
-            background-color: #00796b;
-        }
+/* Style pour chaque élément de fonctionnalité */
+.feature-item {
+    background: #ffffff;
+    padding: 15px;
+    width: 200px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
 
-        /* Section fonctionnalités et tags */
-        .features {
-            text-align: center;
-            width: 100%;
-            background-color: #e0f7fa;
-            padding: 40px;
-            border-radius: 15px;
-            margin-top: 30px;
-        }
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
 
-        .features h2 {
-            font-size: 2em;
-            color: #006064;
-        }
+/* Style pour les flèches */
+.arrow {
+    font-size: 2em;
+    margin: 0 10px;
+    color: #35424a;
+}
 
-        .tags {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
+/* Description de chaque fonctionnalité */
+.description {
+    display: none;
+    font-size: 0.9em;
+    color: #555;
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffffff;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    z-index: 10;
+}
 
-        .tag {
-            background-color: #004d40;
-            color: #ffffff;
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-size: 0.9em;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .tag:hover {
-            background-color: #26a69a;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- En-tête avec le logo -->
-    <div class="header">
-        <img src="images/logo.png" alt="STL Pocket Logo" class="logo">
-    </div>
-
-    <!-- Barre de navigation -->
-    <div class="navbar">
-        <a href="index.html">Accueil</a>
-        <a href="math.html">Mathématiques</a>
-        <a href="biotech.html">Biotechnologie</a>
-        <a href="philo.html">Philosophie</a>
-        <a href="english.html">Anglais</a>
-        <a href="resources.html">Ressources</a>
-        <a href="forum.html">Forum</a>
-        <a href="contact.html">Contact</a>
-        <a href="creators.html">Créateurs</a>
-    </div>
-
-    <!-- Titre principal -->
-    <h1>Bienvenue sur STL Pocket</h1>
-
-    <div class="intro">
-        <p>STL Pocket est votre plateforme d'apprentissage accessible et interactive ! Explorez nos différentes matières et améliorez vos compétences.</p>
-    </div>
-
-    <!-- Conteneur principal avec les cartes de section -->
-    <div class="container">
-        <div class="card">
-            <div class="icon"><img src="images/math_icon.png" alt="Mathématiques"></div>
-            <h3>Mathématiques</h3>
-            <p>Explorez les cours et exercices de mathématiques.</p>
-            <a href="math.html" class="btn">Accéder</a>
-        </div>
-        <div class="card">
-            <div class="icon"><img src="images/biotech_icon.png" alt="Biotechnologie"></div>
-            <h3>Biotechnologie</h3>
-            <p>Découvrez le monde de la biotech.</p>
-            <a href="biotech.html" class="btn">Accéder</a>
-        </div>
-        <div class="card">
-            <div class="icon"><img src="images/philo_icon.png" alt="Philosophie"></div>
-            <h3>Philosophie</h3>
-            <p>Approfondissez votre réflexion philosophique.</p>
-            <a href="philo.html" class="btn">Accéder</a>
-        </div>
-        <div class="card">
-            <div class="icon"><img src="images/english_icon.png" alt="Anglais"></div>
-            <h3>Anglais</h3>
-            <p>Améliorez votre anglais avec des cours interactifs.</p>
-            <a href="english.html" class="btn">Accéder</a>
-        </div>
-    </div>
-
-    <!-- Section des fonctionnalités et des tags -->
-    <div class="features">
-        <h2>Fonctionnalités</h2>
-        <p>Nous proposons de nombreuses fonctionnalités pour améliorer votre expérience d'apprentissage :</p>
-        <ul>
-            <li>Quiz interactifs</li>
-            <li>Ressources éducatives</li>
-            <li>Forum de discussion</li>
-            <li>Contactez-nous</li>
-            <li>Gestion de votre profil</li>
-            <li>Mini Jeux</li>
-        </ul>
-
-        <!-- Tags pour les matières -->
-        <div class="tags">
-            <span class="tag">Mathématiques</span>
-            <span class="tag">Biotechnologie</span>
-            <span class="tag">Philosophie</span>
-            <span class="tag">Anglais</span>
-            <span class="tag">Ressources</span>
-        </div>
-    </div>
-
-    <!-- Section du profil utilisateur -->
-    <div class="profile" id="profile-form">
-        <h2>Mon Profil</h2>
-        <form>
-            <label for="profile-name">Nom :</label>
-            <input type="text" id="profile-name" required>
-            <label for="profile-email">Email :</label>
-            <input type="email" id="profile-email" required>
-            <button type="submit" class="btn">Mettre à jour</button>
-        </form>
-    </div>
-
-    <!-- Section de chat en direct -->
-    <div class="chat">
-        <h2>Chat en direct</h2>
-        <div id="chat-box"></div>
-        <form id="chat-form">
-            <input type="text" id="chat-message" placeholder="Votre message" required>
-            <button type="submit" class="btn">Envoyer</button>
-        </form>
-    </div>
-
-    <!-- Section de pagination des ressources -->
-    <div class="resources">
-        <h2>Ressources</h2>
-        <ul id="resource-list"></ul>
-        <div id="pagination"></div>
-    </div>
-
-    <!-- Script JavaScript -->
-    <script src="script.js"></script>
-</body>
-</html>
+.feature-item:hover .description {
+    display: block;
+}
