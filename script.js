@@ -1,8 +1,3 @@
-// Aucune fonctionnalité de fondu à ajouter lors du chargement de la page
-document.addEventListener("DOMContentLoaded", () => {
-    // Code à exécuter lorsque le DOM est complètement chargé
-});
-
 // Suppression de l'effet de transition lors du clic sur un lien
 document.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", (event) => {
@@ -30,28 +25,45 @@ function showNotification(message) {
     }, 3000);
 }
 
-// Fonctionnalité 2 : Validation de formulaire
-document.querySelectorAll('form').forEach(form => {
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const inputs = this.querySelectorAll('input[type="text"]');
-        let valid = true;
-        inputs.forEach(input => {
-            if (input.value.trim() === '') {
-                valid = false;
-                input.style.border = '2px solid red';
-            } else {
-                input.style.border = '1px solid #ccc';
-            }
-        });
-        if (valid) {
-            showNotification('Formulaire soumis avec succès !');
-            // Logique de soumission peut être ajoutée ici
-        } else {
-            showNotification('Veuillez remplir tous les champs.');
-        }
-    });
+// Fonctionnalité 4 : Gestion de profil avec Supabase
+document.getElementById('profile-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const name = document.getElementById('profile-name').value;
+    const email = document.getElementById('profile-email').value;
+
+    const { data, error } = await supabase
+        .from('profiles') // Remplacez 'profiles' par le nom de votre table
+        .upsert({ name, email }); // Utilisez upsert pour insérer ou mettre à jour
+
+    if (error) {
+        showNotification('Erreur de mise à jour du profil : ' + error.message);
+    } else {
+        showNotification(`Profil mis à jour : ${name}, ${email}`);
+    }
 });
+
+// Fonctionnalité 5 : Chat en direct avec Supabase
+const chatForm = document.getElementById('chat-form');
+chatForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const message = document.getElementById('chat-message').value;
+
+    const { data, error } = await supabase
+        .from('messages') // Remplacez 'messages' par le nom de votre table
+        .insert([{ content: message }]); // Ajustez selon la structure de votre table
+
+    if (error) {
+        showNotification('Erreur lors de l\'envoi du message : ' + error.message);
+    } else {
+        const chatBox = document.getElementById('chat-box');
+        const messageElem = document.createElement('div');
+        messageElem.textContent = message;
+        chatBox.appendChild(messageElem);
+        document.getElementById('chat-message').value = '';
+    }
+});
+
+// Les autres fonctionnalités restent inchangées...
 
 // Fonctionnalité 3 : Pagination des ressources
 const resources = [
@@ -98,26 +110,6 @@ function updatePagination() {
 }
 
 displayResources(currentPage);
-
-// Fonctionnalité 4 : Gestion de profil
-document.getElementById('profile-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const name = document.getElementById('profile-name').value;
-    const email = document.getElementById('profile-email').value;
-    showNotification(`Profil mis à jour : ${name}, ${email}`);
-});
-
-// Fonctionnalité 5 : Chat en direct
-const chatForm = document.getElementById('chat-form');
-chatForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    const message = document.getElementById('chat-message').value;
-    const chatBox = document.getElementById('chat-box');
-    const messageElem = document.createElement('div');
-    messageElem.textContent = message;
-    chatBox.appendChild(messageElem);
-    document.getElementById('chat-message').value = '';
-});
 
 // Fonctionnalité ajoutée : Affichage des flèches et navigation vers chaque bloc de cours
 document.querySelectorAll(".card").forEach(card => {
