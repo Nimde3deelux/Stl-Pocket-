@@ -1,11 +1,54 @@
-body {
-    font-family: 'Arial', sans-serif;
+/* Global styles */
+body, html {
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #2C3E50;
+    color: #ecf0f1;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar .logo {
+    font-size: 24px;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #3498db;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #fff;
     text-align: center;
-    overflow: hidden;
-    position: relative;
 }
 
 .background-video {
@@ -14,114 +57,83 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    object-fit: cover;
     z-index: -1;
 }
 
-.background-video video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-nav {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 20px 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-
-nav ul {
-    list-style-type: none;
+.hero-content h1 {
+    font-size: 3em;
     margin: 0;
-    padding: 0;
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+/* Courses Section */
+.course-section {
+    padding: 20px;
+    background-color: #f8f9fa;
     text-align: center;
 }
 
-nav ul li {
-    display: inline-block;
-    margin: 0 20px;
+.course-section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
 }
 
-nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.2em;
-    transition: text-shadow 0.3s;
-}
-
-nav ul li a:hover {
-    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
-}
-
-.logo {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    width: 100px; /* Ajustez la taille selon vos besoins */
-}
-
-section {
-    padding: 100px 20px;
-    min-height: 100vh;
+.course-cards {
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.course-card {
+    width: 150px;
+    height: 150px;
+    display: flex;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    font-size: 1.2em;
+    color: #fff;
+    border-radius: 10px;
 }
 
-input, button {
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
+/* Communication Section */
+.communication-section {
+    padding: 20px;
+    background-color: #e9f7ef;
+    text-align: center;
+}
+
+.chat-box {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+/* Resources Section */
+.resources-section {
+    padding: 20px;
+    background-color: #f0f8ff;
+    text-align: center;
+}
+
+/* Button */
+.btn-primary {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
     border-radius: 5px;
-}
-
-button {
-    background-color: #00ffff;
-    color: #000;
-    cursor: pointer;
     transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #00cccc;
-}
-
-#messages {
-    height: 200px;
-    overflow-y: scroll;
-    border: 1px solid #fff;
-    padding: 10px;
-    margin: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.course-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.course-box {
-    width: 150px; /* Ajustez la taille selon vos besoins */
-    margin: 15px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-.course-box:hover {
-    transform: scale(1.05);
-}
-
-.course-image {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
+.btn-primary:hover {
+    background-color: #2980b9;
 }
