@@ -82,7 +82,6 @@
         }
 
         .card:hover {
-            /* Suppression de l'effet de transition */
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
         }
 
@@ -140,6 +139,39 @@
 
         .tag:hover {
             background-color: #26a69a;
+        }
+
+        /* Section profil et chat */
+        .profile, .chat {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile h2, .chat h2 {
+            color: #004d40;
+        }
+
+        .profile form, .chat form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile form label, .chat form input {
+            margin: 10px 0;
+        }
+
+        .chat #chat-box {
+            background-color: #f1f1f1;
+            height: 200px;
+            overflow-y: auto;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -234,11 +266,25 @@
         <h2>Chat en direct</h2>
         <div id="chat-box"></div>
         <form id="chat-form">
-            <input type="text" id="chat-message" placeholder="Votre message" required>
+            <input type="text" id="chat-input" placeholder="Écrivez votre message...">
             <button type="submit" class="btn">Envoyer</button>
         </form>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Script pour afficher le chat
+        const chatForm = document.getElementById("chat-form");
+        const chatBox = document.getElementById("chat-box");
+
+        chatForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+            const message = document.getElementById("chat-input").value;
+            const messageNode = document.createElement("p");
+            messageNode.textContent = "Moi : " + message;
+            chatBox.appendChild(messageNode);
+            document.getElementById("chat-input").value = "";
+        });
+    </script>
+
 </body>
 </html>
