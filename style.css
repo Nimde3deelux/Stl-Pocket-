@@ -114,3 +114,89 @@ header:hover {
 .feature-item:hover .description {
     display: block;
 }
+
+/* Style pour le profil utilisateur */
+.user-profile {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 90%;
+    max-width: 300px;
+}
+
+/* Style pour l'image de profil */
+.user-profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+/* Style pour le nom de l'utilisateur */
+.user-profile h2 {
+    font-size: 1.5em;
+    color: #35424a;
+    margin: 10px 0;
+}
+
+/* Style pour le bouton de message */
+.user-profile .message-btn {
+    background-color: #35424a;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.user-profile .message-btn:hover {
+    background-color: #2b373f;
+}
+
+/* Style pour le conteneur de chat */
+.chat-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Style pour la zone de chat */
+.chat-box {
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+/* Style pour le formulaire de chat */
+.chat-form input[type="text"] {
+    width: 75%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.chat-form button {
+    width: 20%;
+    padding: 10px;
+    background-color: #35424a;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.chat-form button:hover {
+    background-color: #2b373f;
+}
