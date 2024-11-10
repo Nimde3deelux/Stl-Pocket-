@@ -34,6 +34,7 @@
             width: 150px;
         }
 
+        /* Barre de navigation */
         .navbar {
             display: flex;
             justify-content: space-around;
@@ -67,7 +68,7 @@
             margin-top: 100px;
         }
 
-        /* Frise chronologique */
+        /* Frise chronologique et barre de navigation fusionnées */
         .timeline {
             display: flex;
             justify-content: center;
@@ -77,12 +78,12 @@
             width: 80%;
             overflow-x: auto;
             white-space: nowrap;
+            margin-bottom: 80px;
         }
 
         .timeline .chapter {
             width: 150px;
             height: 150px;
-            background-color: #eeeeee;
             border-radius: 15px;
             margin: 0 15px;
             display: inline-block;
@@ -91,6 +92,7 @@
             position: relative;
             cursor: pointer;
             transition: all 0.3s ease;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,121,107,0.6) 100%);
         }
 
         .timeline .chapter.selected {
@@ -101,16 +103,6 @@
         .timeline .chapter p {
             font-size: 1.1em;
             color: #333;
-        }
-
-        .timeline .chapter .ending-soon {
-            font-size: 1.5em;
-            color: #f44336;
-            font-weight: bold;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
 
         /* Cartes des chapitres alignées */
@@ -201,40 +193,31 @@
         <div class="chapter" onclick="selectChapter(3)">
             <p>Chapitre 3</p>
         </div>
-        <div class="chapter ending-soon">
-            <p>Ending Soon</p>
+        <div class="chapter" onclick="selectChapter(4)">
             <p>Chapitre 4</p>
         </div>
-        <div class="chapter ending-soon">
-            <p>Ending Soon</p>
+        <div class="chapter" onclick="selectChapter(5)">
             <p>Chapitre 5</p>
         </div>
-        <div class="chapter ending-soon">
-            <p>Ending Soon</p>
+        <div class="chapter" onclick="selectChapter(6)">
             <p>Chapitre 6</p>
         </div>
-        <div class="chapter ending-soon">
-            <p>Ending Soon</p>
+        <div class="chapter" onclick="selectChapter(7)">
             <p>Chapitre 7</p>
         </div>
-        <div class="chapter ending-soon">
-            <p>Ending Soon</p>
+        <div class="chapter" onclick="selectChapter(8)">
             <p>Chapitre 8</p>
         </div>
-        <div class="chapter ending-soon">
-            <p>Ending Soon</p>
+        <div class="chapter" onclick="selectChapter(9)">
             <p>Chapitre 9</p>
         </div>
-        <div class="chapter ending-soon">
-            <p>Ending Soon</p>
+        <div class="chapter" onclick="selectChapter(10)">
             <p>Chapitre 10</p>
         </div>
     </div>
 
     <!-- Conteneur des cartes -->
     <div class="container">
-
-        <!-- Exemple de carte de chapitre -->
         <div class="card">
             <h3>Chapitre 1 : Les lois de Newton</h3>
             <p>Comprendre les forces et les mouvements</p>
