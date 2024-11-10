@@ -4,10 +4,9 @@ const cards = document.querySelectorAll('.card');
 function changeCard(direction) {
     // Cache la carte actuelle
     cards[currentCardIndex].style.display = 'none';
-
     // Change l'index de la carte actuelle
     currentCardIndex += direction;
-
+    
     // Si on atteint la fin des cartes, on revient au début
     if (currentCardIndex >= cards.length) {
         currentCardIndex = 0;
