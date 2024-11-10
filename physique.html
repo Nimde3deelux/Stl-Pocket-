@@ -5,166 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STL Pocket - Physique-Chimie</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #f0f4f8;
-        }
-
-        /* Barre de navigation fixe en haut */
-        .header {
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            background: #00796b;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 10;
-        }
-
-        .logo {
-            width: 150px;
-        }
-
-        /* Barre de navigation */
-        .navbar {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            padding: 15px;
-            background-color: #00695c;
-            color: #fff;
-            position: fixed;
-            top: 50px;
-            width: 100%;
-            z-index: 9;
-        }
-
-        .navbar a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            padding: 8px 12px;
-            border-radius: 8px;
-        }
-
-        .navbar a:hover {
-            background-color: #004d40;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            color: #004d40;
-            text-align: center;
-            margin-top: 100px;
-        }
-
-        /* Frise chronologique et barre de navigation fusionnées */
-        .timeline {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 50px;
-            position: relative;
-            width: 80%;
-            overflow-x: auto;
-            white-space: nowrap;
-            margin-bottom: 80px;
-        }
-
-        .timeline .chapter {
-            width: 150px;
-            height: 150px;
-            border-radius: 15px;
-            margin: 0 15px;
-            display: inline-block;
-            text-align: center;
-            padding: 15px;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(0,121,107,0.6) 100%);
-        }
-
-        .timeline .chapter.selected {
-            box-shadow: 0 0 15px 5px #f57c00;
-            background-color: #ffeb3b;
-        }
-
-        .timeline .chapter p {
-            font-size: 1.1em;
-            color: #333;
-        }
-
-        /* Cartes des chapitres alignées */
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            max-width: 1200px;
-            width: 100%;
-            padding: 100px 20px 20px;
-            margin-top: 50px;
-        }
-
-        .card {
-            background-color: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-            text-align: center;
-            transition: transform 0.3s ease-in-out;
-            cursor: pointer;
-            position: relative;
-            width: 280px;
-        }
-
-        .card:hover {
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-            transform: scale(1.05);
-        }
-
-        .card h3 {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            color: #00796b;
-        }
-
-        .card p {
-            font-size: 1.2em;
-            color: #333;
-        }
-
-        .btn-download {
-            background-color: #fff;
-            color: #00796b;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .btn-download:hover {
-            background-color: #004d40;
-            color: #fff;
-        }
-
-    </style>
 </head>
 <body>
-
     <!-- En-tête avec le logo -->
     <div class="header">
         <img src="images/logo.png" alt="STL Pocket Logo" class="logo">
@@ -184,73 +26,47 @@
 
     <!-- Frise chronologique -->
     <div class="timeline">
-        <div class="chapter selected" onclick="selectChapter(1)">
+        <div class="chapter" onclick="selectChapter(1)">
             <p>Chapitre 1</p>
         </div>
         <div class="chapter" onclick="selectChapter(2)">
             <p>Chapitre 2</p>
         </div>
-        <div class="chapter" onclick="selectChapter(3)">
-            <p>Chapitre 3</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(4)">
-            <p>Chapitre 4</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(5)">
-            <p>Chapitre 5</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(6)">
-            <p>Chapitre 6</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(7)">
-            <p>Chapitre 7</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(8)">
-            <p>Chapitre 8</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(9)">
-            <p>Chapitre 9</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(10)">
-            <p>Chapitre 10</p>
-        </div>
+        <!-- Ajouter d'autres chapitres ici -->
+    </div>
+
+    <!-- Description du chapitre sélectionné -->
+    <div id="chapter-description" class="chapter-description">
+        <p>Sélectionnez un chapitre pour voir la description ici.</p>
     </div>
 
     <!-- Conteneur des cartes -->
     <div class="container">
-        <div class="card">
-            <h3>Chapitre 1 : Les lois de Newton</h3>
-            <p>Comprendre les forces et les mouvements</p>
-            <button class="btn-download" onclick="window.location.href='chapitre1.pdf'">Télécharger PDF</button>
+        <div class="card" onclick="flipCard(1)">
+            <div class="front">
+                <h3>Chapitre 1 : Les lois de Newton</h3>
+                <p>Comprendre les forces et les mouvements</p>
+            </div>
+            <div class="back">
+                <p>Carte mentale : Les lois de Newton expliquées</p>
+            </div>
+            <button class="btn-download" onclick="downloadPDF('chapitre1.pdf')">Télécharger PDF</button>
         </div>
 
-        <div class="card">
-            <h3>Chapitre 2 : La gravitation</h3>
-            <p>Les bases de la gravité</p>
-            <button class="btn-download" onclick="window.location.href='chapitre2.pdf'">Télécharger PDF</button>
+        <div class="card" onclick="flipCard(2)">
+            <div class="front">
+                <h3>Chapitre 2 : La gravitation</h3>
+                <p>Les bases de la gravité</p>
+            </div>
+            <div class="back">
+                <p>Carte mentale : La gravité en détail</p>
+            </div>
+            <button class="btn-download" onclick="downloadPDF('chapitre2.pdf')">Télécharger PDF</button>
         </div>
 
-        <div class="card">
-            <h3>Chapitre 3 : L'électricité</h3>
-            <p>Les circuits et les composants</p>
-            <button class="btn-download" onclick="window.location.href='chapitre3.pdf'">Télécharger PDF</button>
-        </div>
-
+        <!-- Ajouter d'autres cartes ici -->
     </div>
 
-    <script>
-        let currentChapter = 1;
-
-        function selectChapter(chapterNumber) {
-            const chapters = document.querySelectorAll('.chapter');
-            chapters.forEach(chapter => chapter.classList.remove('selected'));
-
-            // Mettez en surbrillance le chapitre sélectionné
-            const selectedChapter = document.querySelector(`.timeline .chapter:nth-child(${chapterNumber})`);
-            selectedChapter.classList.add('selected');
-
-            currentChapter = chapterNumber;
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
