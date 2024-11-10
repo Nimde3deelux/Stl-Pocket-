@@ -69,6 +69,23 @@
             background-color: #3b3b3b;
         }
 
+        /* Retour au bouton */
+        .back-button {
+            background-color: #00ff00;
+            color: black;
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #009900;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             h1 {
@@ -86,6 +103,11 @@
 
             .icon-text {
                 font-size: 1rem;
+            }
+
+            .back-button {
+                font-size: 1.2rem;
+                padding: 8px 16px;
             }
         }
     </style>
@@ -121,6 +143,9 @@
                 <div class="icon-text">Modifications ✅</div>
             </div>
         </div>
+
+        <!-- Bouton Retour à la page d'accueil -->
+        <button class="back-button" onclick="window.location.href='index.html'">Retour à l'accueil</button>
     </div>
 </body>
 </html>
