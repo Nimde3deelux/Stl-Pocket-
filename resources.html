@@ -17,7 +17,7 @@
             align-items: center;
             height: 100vh;
             text-align: center;
-            background-image: url('minecraft-background.jpg'); /* Optional background image */
+            background-image: url('images/minecraft-background.jpg'); /* Fond Minecraft */
             background-size: cover;
         }
 
@@ -91,27 +91,33 @@
     </style>
 </head>
 <body>
+    <!-- Music Background -->
+    <audio autoplay loop>
+        <source src="audio/music-background.mp3" type="audio/mp3">
+        Votre navigateur ne supporte pas l'audio.
+    </audio>
+
     <div>
         <h1>Bienvenue dans la section Ressources</h1>
         <div class="icon-container">
             <div class="icon" onclick="window.location.href='exercices.html'">
-                <img src="exercice-icon.png" alt="Exercice">
+                <img src="images/exercice-icon.png" alt="Exercice">
                 <div class="icon-text">Exercices 📚</div>
             </div>
             <div class="icon" onclick="window.location.href='jeuxmarrant.html'">
-                <img src="mini-jeux-icon.png" alt="Jeux">
+                <img src="images/mini-jeux-icon.png" alt="Jeux">
                 <div class="icon-text">Mini-jeux 🎮</div>
             </div>
             <div class="icon" onclick="window.location.href='reseaux-sociaux.html'">
-                <img src="reseaux-sociaux-icon.png" alt="Réseaux Sociaux">
+                <img src="images/reseaux-sociaux-icon.png" alt="Réseaux Sociaux">
                 <div class="icon-text">Réseaux Sociaux 🌐</div>
             </div>
             <div class="icon" onclick="window.location.href='suggestions.html'">
-                <img src="suggestions-icon.png" alt="Suggestions">
+                <img src="images/suggestions-icon.png" alt="Suggestions">
                 <div class="icon-text">Suggestions 📝</div>
             </div>
             <div class="icon" onclick="window.location.href='modifications.html'">
-                <img src="modifications-icon.png" alt="Modifications">
+                <img src="images/modifications-icon.png" alt="Modifications">
                 <div class="icon-text">Modifications ✅</div>
             </div>
         </div>
