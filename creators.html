@@ -16,6 +16,7 @@
             margin: 0;
             padding: 0;
             position: relative;
+            overflow: hidden;
         }
 
         h1 {
@@ -71,15 +72,15 @@
 
         /* Positionnement des GIFs */
         .gif1 { top: 10%; left: 5%; }
-        .gif2 { top: 20%; left: 10%; }
-        .gif3 { top: 40%; left: 15%; }
-        .gif4 { top: 60%; left: 20%; }
-        .gif5 { top: 75%; left: 25%; }
-        .gif6 { top: 10%; right: 5%; }
-        .gif7 { top: 25%; right: 10%; }
-        .gif8 { top: 45%; right: 15%; }
-        .gif9 { top: 65%; right: 20%; }
-        .gif10 { top: 80%; right: 25%; }
+        .gif2 { top: 30%; left: 5%; }
+        .gif3 { top: 50%; left: 5%; }
+        .gif4 { top: 70%; left: 5%; }
+        .gif5 { top: 10%; right: 5%; }
+        .gif6 { top: 30%; right: 5%; }
+        .gif7 { top: 50%; right: 5%; }
+        .gif8 { top: 70%; right: 5%; }
+        .gif9 { top: 10%; left: 35%; }
+        .gif10 { top: 30%; left: 35%; }
 
         /* Position des images de zombies */
         .zombie-left {
@@ -103,6 +104,14 @@
         /* Style de la musique d'ambiance */
         audio {
             display: none;
+        }
+
+        /* Le gifbonus qui suit la souris */
+        #gifbonus {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            transition: transform 0.1s ease-in-out;
         }
     </style>
 </head>
@@ -148,6 +157,22 @@
     <img src="images/dance8.gif" alt="Dance GIF 8" class="gif gif8">
     <img src="images/dance9.gif" alt="Dance GIF 9" class="gif gif9">
     <img src="images/dance10.gif" alt="Dance GIF 10" class="gif gif10">
+
+    <!-- Le GIF qui suit la souris -->
+    <img src="images/gifbonus.gif" alt="Bonus GIF" id="gifbonus">
+
+    <!-- Script pour le gifbonus qui suit la souris -->
+    <script>
+        const gifbonus = document.getElementById('gifbonus');
+
+        document.addEventListener('mousemove', function(event) {
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+
+            // Ajout d'un léger délai pour l'effet de latence
+            gifbonus.style.transform = `translate(${mouseX + 15}px, ${mouseY + 15}px)`;
+        });
+    </script>
 </body>
 
 </html>
