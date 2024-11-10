@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STL Pocket - Physique-Chimie</title>
-    <link rel="stylesheet" href="physique-style.css"> <!-- Fichier CSS spécifique -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <!-- En-tête avec le logo -->
     <div class="header">
         <img src="images/logo.png" alt="STL Pocket Logo" class="logo">
@@ -25,63 +24,31 @@
     <!-- Titre principal -->
     <h1>Physique-Chimie</h1>
 
-    <!-- Frise chronologique -->
-    <div class="timeline">
-        <div class="chapter selected" onclick="selectChapter(1)">
-            <p>Chapitre 1</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(2)">
-            <p>Chapitre 2</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(3)">
-            <p>Chapitre 3</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(4)">
-            <p>Chapitre 4</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(5)">
-            <p>Chapitre 5</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(6)">
-            <p>Chapitre 6</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(7)">
-            <p>Chapitre 7</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(8)">
-            <p>Chapitre 8</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(9)">
-            <p>Chapitre 9</p>
-        </div>
-        <div class="chapter" onclick="selectChapter(10)">
-            <p>Chapitre 10</p>
-        </div>
-    </div>
-
-    <!-- Conteneur des cartes -->
+    <!-- Conteneur principal des cartes -->
     <div class="container">
-        <div class="card">
+        <!-- Exemple de carte de chapitre (bleu) -->
+        <div class="card chapter card-3d">
             <h3>Chapitre 1 : Les lois de Newton</h3>
             <p>Comprendre les forces et les mouvements</p>
             <button class="btn-download" onclick="window.location.href='chapitre1.pdf'">Télécharger PDF</button>
         </div>
 
-        <div class="card">
-            <h3>Chapitre 2 : La gravitation</h3>
-            <p>Les bases de la gravité</p>
-            <button class="btn-download" onclick="window.location.href='chapitre2.pdf'">Télécharger PDF</button>
+        <!-- Exemple de carte de carte mentale (verte) -->
+        <div class="card mindmap card-3d">
+            <h3>Carte Mentale : La gravitation</h3>
+            <p>Visualisation des concepts clés de la gravité</p>
+            <button class="btn-download" onclick="window.location.href='carte-mentale-gravitation.pdf'">Télécharger PDF</button>
         </div>
 
-        <div class="card">
-            <h3>Chapitre 3 : L'électricité</h3>
-            <p>Les circuits et les composants</p>
-            <button class="btn-download" onclick="window.location.href='chapitre3.pdf'">Télécharger PDF</button>
-        </div>
-
+        <!-- Ajouter plus de cartes ici pour d'autres chapitres et cartes mentales -->
     </div>
 
-    <script src="physique.js"></script> <!-- Fichier JavaScript spécifique -->
+    <!-- Navigation entre les cartes -->
+    <div class="navigation-buttons">
+        <button onclick="changeCard(-1)">Précédent</button>
+        <button onclick="changeCard(1)">Suivant</button>
+    </div>
 
+    <script src="physique.js"></script>
 </body>
 </html>
