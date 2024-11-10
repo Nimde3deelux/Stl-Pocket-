@@ -35,13 +35,15 @@
             100% { background-position: 100% 100%; }
         }
 
+        /* Header with creator logo */
         .header {
             text-align: center;
             padding: 20px;
+            margin-top: 20px;
         }
 
-        .logo {
-            max-width: 200px;
+        .creator-logo {
+            max-width: 300px;
             filter: brightness(0) invert(1);
         }
 
@@ -87,16 +89,20 @@
             background-color: #ff5722;
         }
 
-        /* Dance gifs on the sides */
+        /* Dance gifs all over the page */
         .gif-container {
+            position: absolute;
             display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            top: 10%;
         }
 
         .gif-container img {
-            width: 200px;
-            height: 200px;
+            width: 150px; /* Adjusted size */
+            height: 150px; /* Adjusted size */
+            margin: 15px;
             animation: danceAnimation 2s ease-in-out infinite;
         }
 
@@ -109,22 +115,49 @@
         /* Side images */
         .side-image {
             position: absolute;
-            top: 20%;
-            left: 5%;
             z-index: -1;
             opacity: 0.5;
+            width: 200px;
+        }
+
+        .side-image.left {
+            top: 25%;
+            left: 5%;
         }
 
         .side-image.right {
+            top: 55%;
             right: 5%;
-            left: auto;
-            top: 60%;
         }
+
+        /* Positioning gifs at random places */
+        .random-gifs img {
+            position: absolute;
+            animation: randomGifAnimation 4s linear infinite;
+        }
+
+        /* Animation for random gifs */
+        @keyframes randomGifAnimation {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(100px, -100px); }
+        }
+
+        .random-gifs .gif1 { top: 5%; left: 20%; animation-duration: 5s; }
+        .random-gifs .gif2 { top: 15%; left: 40%; animation-duration: 3s; }
+        .random-gifs .gif3 { top: 30%; left: 10%; animation-duration: 6s; }
+        .random-gifs .gif4 { top: 40%; left: 60%; animation-duration: 7s; }
+        .random-gifs .gif5 { top: 50%; left: 25%; animation-duration: 4s; }
+        .random-gifs .gif6 { top: 60%; left: 50%; animation-duration: 8s; }
+        .random-gifs .gif7 { top: 70%; left: 75%; animation-duration: 5s; }
+        .random-gifs .gif8 { top: 80%; left: 20%; animation-duration: 9s; }
+        .random-gifs .gif9 { top: 90%; left: 30%; animation-duration: 6s; }
+        .random-gifs .gif10 { top: 10%; left: 70%; animation-duration: 5s; }
+
     </style>
 </head>
 <body>
     <div class="header">
-        <img src="images/logo.png" alt="STL Pocket Logo" class="logo">
+        <img src="images/creator_logo.png" alt="Logo des créateurs" class="creator-logo">
     </div>
 
     <h1>Remerciements aux Créateurs</h1>
@@ -139,17 +172,41 @@
     
     <p>Merci pour votre soutien et votre engagement à rendre l'apprentissage accessible à tous !</p>
 
+    <!-- Main gifs scattered around -->
     <div class="gif-container">
         <img src="images/dance1.gif" alt="Personnage dansant">
         <img src="images/dance2.gif" alt="Personnage dansant">
+        <img src="images/dance3.gif" alt="Personnage dansant">
+        <img src="images/dance4.gif" alt="Personnage dansant">
+        <img src="images/dance5.gif" alt="Personnage dansant">
+        <img src="images/dance6.gif" alt="Personnage dansant">
+        <img src="images/dance7.gif" alt="Personnage dansant">
+        <img src="images/dance8.gif" alt="Personnage dansant">
+        <img src="images/dance9.gif" alt="Personnage dansant">
+        <img src="images/dance10.gif" alt="Personnage dansant">
     </div>
 
-    <!-- Side images -->
-    <img src="images/zombie_left.png" alt="Zombie Left" class="side-image">
+    <!-- Side images (zombies) -->
+    <img src="images/zombie_left.png" alt="Zombie Left" class="side-image left">
     <img src="images/zombie_right.png" alt="Zombie Right" class="side-image right">
 
+    <!-- Random gifs floating around -->
+    <div class="random-gifs">
+        <img src="images/dance1.gif" class="gif1" alt="Danse1">
+        <img src="images/dance2.gif" class="gif2" alt="Danse2">
+        <img src="images/dance3.gif" class="gif3" alt="Danse3">
+        <img src="images/dance4.gif" class="gif4" alt="Danse4">
+        <img src="images/dance5.gif" class="gif5" alt="Danse5">
+        <img src="images/dance6.gif" class="gif6" alt="Danse6">
+        <img src="images/dance7.gif" class="gif7" alt="Danse7">
+        <img src="images/dance8.gif" class="gif8" alt="Danse8">
+        <img src="images/dance9.gif" class="gif9" alt="Danse9">
+        <img src="images/dance10.gif" class="gif10" alt="Danse10">
+    </div>
+
+    <!-- Background music -->
     <audio autoplay loop>
-        <source src="123.mp3" type="audio/mp3">
+        <source src="audio/123.mp3" type="audio/mp3">
         Votre navigateur ne prend pas en charge la lecture audio.
     </audio>
 
