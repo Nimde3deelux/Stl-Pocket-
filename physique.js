@@ -1,28 +1,27 @@
 // physique.js
-let currentCardIndex = 0;
-const cards = document.querySelectorAll('.card');
 
-function changeCard(direction) {
-    // Cache la carte actuelle
-    cards[currentCardIndex].style.display = 'none';
+let currentChapter = 0;
+const chapters = document.querySelectorAll('.timeline-item');
 
-    // Change l'index de la carte actuelle
-    currentCardIndex += direction;
-
-    // Si on atteint la fin des cartes, on revient au début
-    if (currentCardIndex >= cards.length) {
-        currentCardIndex = 0;
-    } else if (currentCardIndex < 0) {
-        currentCardIndex = cards.length - 1;
-    }
-
-    // Affiche la nouvelle carte
-    cards[currentCardIndex].style.display = 'block';
+function showChapter(index) {
+    chapters.forEach((chapter, i) => {
+        chapter.style.display = (i === index) ? 'block' : 'none';
+    });
 }
 
-// Initialisation: cacher toutes les cartes sauf la première
-window.onload = () => {
-    for (let i = 1; i < cards.length; i++) {
-        cards[i].style.display = 'none';
+function previousChapter() {
+    if (currentChapter > 0) {
+        currentChapter--;
+        showChapter(currentChapter);
     }
-};
+}
+
+function nextChapter() {
+    if (currentChapter < chapters.length - 1) {
+        currentChapter++;
+        showChapter(currentChapter);
+    }
+}
+
+// Initialisation
+showChapter(currentChapter);
