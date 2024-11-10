@@ -113,10 +113,11 @@
             transform: translate(-50%, -50%);
         }
 
-        /* Carte du chapitre */
+        /* Cartes des chapitres alignées */
         .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 20px;
             max-width: 1200px;
             width: 100%;
@@ -133,6 +134,7 @@
             transition: transform 0.3s ease-in-out;
             cursor: pointer;
             position: relative;
+            width: 280px;
         }
 
         .card:hover {
@@ -233,19 +235,19 @@
     <div class="container">
 
         <!-- Exemple de carte de chapitre -->
-        <div class="card chapter">
+        <div class="card">
             <h3>Chapitre 1 : Les lois de Newton</h3>
             <p>Comprendre les forces et les mouvements</p>
             <button class="btn-download" onclick="window.location.href='chapitre1.pdf'">Télécharger PDF</button>
         </div>
 
-        <div class="card chapter">
+        <div class="card">
             <h3>Chapitre 2 : La gravitation</h3>
             <p>Les bases de la gravité</p>
             <button class="btn-download" onclick="window.location.href='chapitre2.pdf'">Télécharger PDF</button>
         </div>
 
-        <div class="card chapter">
+        <div class="card">
             <h3>Chapitre 3 : L'électricité</h3>
             <p>Les circuits et les composants</p>
             <button class="btn-download" onclick="window.location.href='chapitre3.pdf'">Télécharger PDF</button>
