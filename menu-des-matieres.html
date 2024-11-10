@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STL Pocket - Menu des Matières</title>
+    <link rel="stylesheet" href="menu-style.css">
+</head>
+<body>
+    <!-- En-tête avec le logo -->
+    <div class="header">
+        <img src="images/logo.png" alt="STL Pocket Logo" class="logo">
+    </div>
+
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <a href="index.html">Accueil</a>
+        <a href="resources.html">Ressources</a>
+        <a href="forum.html">Forum</a>
+        <a href="contact.html">Contact</a>
+        <a href="creators.html">Créateurs</a>
+    </div>
+
+    <!-- Titre principal pour le menu -->
+    <h1>Menu des Matières</h1>
+
+    <!-- Conteneur pour les matières -->
+    <div class="subjects-container">
+        <div class="subject-card">
+            <h3>Physique-Chimie</h3>
+            <p>Explorez les lois de la physique et de la chimie.</p>
+            <button onclick="navigateTo('physique.html')">Accéder</button>
+        </div>
+        <div class="subject-card">
+            <h3>Biotechnologie</h3>
+            <p>Transformez la biologie en technologie appliquée.</p>
+            <button onclick="navigateTo('biotech.html')">Accéder</button>
+        </div>
+        <div class="subject-card">
+            <h3>Mathématiques</h3>
+            <p>Renforcez vos compétences mathématiques.</p>
+            <button onclick="navigateTo('math.html')">Accéder</button>
+        </div>
+        <div class="subject-card">
+            <h3>Sciences de Laboratoire</h3>
+            <p>Apprenez les techniques essentielles de laboratoire.</p>
+            <button onclick="navigateTo('sciencelab.html')">Accéder</button>
+        </div>
+    </div>
+
+    <script src="menu-script.js"></script>
+</body>
+</html>
