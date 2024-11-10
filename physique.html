@@ -16,6 +16,7 @@
             background-color: #f0f4f8;
         }
 
+        /* Barre de navigation fixe en haut */
         .header {
             padding: 10px;
             display: flex;
@@ -23,6 +24,10 @@
             width: 100%;
             background: #00796b;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
         }
 
         .logo {
@@ -36,6 +41,10 @@
             padding: 15px;
             background-color: #00695c;
             color: #fff;
+            position: fixed;
+            top: 50px;
+            width: 100%;
+            z-index: 9;
         }
 
         .navbar a {
@@ -55,24 +64,71 @@
             font-size: 2.5em;
             color: #004d40;
             text-align: center;
-            margin: 20px;
+            margin-top: 100px;
         }
 
-        /* Container principal pour les cartes */
+        /* Frise chronologique */
+        .timeline {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+            position: relative;
+            width: 80%;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .timeline .chapter {
+            width: 150px;
+            height: 150px;
+            background-color: #eeeeee;
+            border-radius: 15px;
+            margin: 0 15px;
+            display: inline-block;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .timeline .chapter.selected {
+            box-shadow: 0 0 15px 5px #f57c00;
+            background-color: #ffeb3b;
+        }
+
+        .timeline .chapter p {
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        .timeline .chapter .ending-soon {
+            font-size: 1.5em;
+            color: #f44336;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Carte du chapitre */
         .container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 20px;
             max-width: 1200px;
             width: 100%;
-            padding: 20px;
+            padding: 100px 20px 20px;
+            margin-top: 50px;
         }
 
         .card {
             background-color: #ffffff;
             border-radius: 15px;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            padding: 30px;
             text-align: center;
             transition: transform 0.3s ease-in-out;
             cursor: pointer;
@@ -84,28 +140,17 @@
             transform: scale(1.05);
         }
 
-        /* Styles pour les cartes de chapitre (bleu) */
-        .card.chapter {
-            background-color: #2196f3;
-        }
-
-        /* Styles pour les cartes de carte mentale (verte) */
-        .card.mindmap {
-            background-color: #4caf50;
-        }
-
         .card h3 {
-            color: #fff;
-            font-size: 1.3em;
-            margin-bottom: 10px;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #00796b;
         }
 
         .card p {
-            color: #fff;
-            font-size: 1em;
+            font-size: 1.2em;
+            color: #333;
         }
 
-        /* Bouton pour télécharger le chapitre */
         .btn-download {
             background-color: #fff;
             color: #00796b;
@@ -120,37 +165,6 @@
         .btn-download:hover {
             background-color: #004d40;
             color: #fff;
-        }
-
-        /* Navigation 3D - boutons */
-        .navigation-buttons {
-            display: flex;
-            justify-content: center;
-            margin-top: 40px;
-        }
-
-        .navigation-buttons button {
-            padding: 10px 20px;
-            background-color: #00796b;
-            color: white;
-            font-weight: bold;
-            border-radius: 25px;
-            margin: 0 15px;
-            cursor: pointer;
-        }
-
-        .navigation-buttons button:hover {
-            background-color: #004d40;
-        }
-
-        /* Section 3D (Exemple de mise en place simple d’un effet 3D) */
-        .card-3d {
-            transform: perspective(500px) rotateY(15deg);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .card-3d:hover {
-            transform: perspective(500px) rotateY(0deg);
         }
 
     </style>
@@ -174,62 +188,84 @@
     <!-- Titre principal -->
     <h1>Physique-Chimie</h1>
 
-    <!-- Conteneur principal des cartes -->
+    <!-- Frise chronologique -->
+    <div class="timeline">
+        <div class="chapter selected" onclick="selectChapter(1)">
+            <p>Chapitre 1</p>
+        </div>
+        <div class="chapter" onclick="selectChapter(2)">
+            <p>Chapitre 2</p>
+        </div>
+        <div class="chapter" onclick="selectChapter(3)">
+            <p>Chapitre 3</p>
+        </div>
+        <div class="chapter ending-soon">
+            <p>Ending Soon</p>
+            <p>Chapitre 4</p>
+        </div>
+        <div class="chapter ending-soon">
+            <p>Ending Soon</p>
+            <p>Chapitre 5</p>
+        </div>
+        <div class="chapter ending-soon">
+            <p>Ending Soon</p>
+            <p>Chapitre 6</p>
+        </div>
+        <div class="chapter ending-soon">
+            <p>Ending Soon</p>
+            <p>Chapitre 7</p>
+        </div>
+        <div class="chapter ending-soon">
+            <p>Ending Soon</p>
+            <p>Chapitre 8</p>
+        </div>
+        <div class="chapter ending-soon">
+            <p>Ending Soon</p>
+            <p>Chapitre 9</p>
+        </div>
+        <div class="chapter ending-soon">
+            <p>Ending Soon</p>
+            <p>Chapitre 10</p>
+        </div>
+    </div>
+
+    <!-- Conteneur des cartes -->
     <div class="container">
 
-        <!-- Exemple de carte de chapitre (bleu) -->
-        <div class="card chapter card-3d">
+        <!-- Exemple de carte de chapitre -->
+        <div class="card chapter">
             <h3>Chapitre 1 : Les lois de Newton</h3>
             <p>Comprendre les forces et les mouvements</p>
             <button class="btn-download" onclick="window.location.href='chapitre1.pdf'">Télécharger PDF</button>
         </div>
 
-        <!-- Exemple de carte de carte mentale (verte) -->
-        <div class="card mindmap card-3d">
-            <h3>Carte Mentale : La gravitation</h3>
-            <p>Visualisation des concepts clés de la gravité</p>
-            <button class="btn-download" onclick="window.location.href='carte-mentale-gravitation.pdf'">Télécharger PDF</button>
+        <div class="card chapter">
+            <h3>Chapitre 2 : La gravitation</h3>
+            <p>Les bases de la gravité</p>
+            <button class="btn-download" onclick="window.location.href='chapitre2.pdf'">Télécharger PDF</button>
         </div>
 
-        <!-- Ajout d'autres cartes selon les chapitres et cartes mentales -->
-        <!-- Vous pouvez ajouter ici plus de cartes pour chaque chapitre et carte mentale -->
-        
-    </div>
+        <div class="card chapter">
+            <h3>Chapitre 3 : L'électricité</h3>
+            <p>Les circuits et les composants</p>
+            <button class="btn-download" onclick="window.location.href='chapitre3.pdf'">Télécharger PDF</button>
+        </div>
 
-    <!-- Navigation entre les cartes -->
-    <div class="navigation-buttons">
-        <button onclick="changeCard(-1)">Précédent</button>
-        <button onclick="changeCard(1)">Suivant</button>
     </div>
 
     <script>
-        let currentCardIndex = 0;
-        const cards = document.querySelectorAll('.card');
-        
-        function changeCard(direction) {
-            // Cache la carte actuelle
-            cards[currentCardIndex].style.display = 'none';
-            // Change l'index de la carte actuelle
-            currentCardIndex += direction;
-            
-            // Si on atteint la fin des cartes, on revient au début
-            if (currentCardIndex >= cards.length) {
-                currentCardIndex = 0;
-            } else if (currentCardIndex < 0) {
-                currentCardIndex = cards.length - 1;
-            }
+        let currentChapter = 1;
 
-            // Affiche la nouvelle carte
-            cards[currentCardIndex].style.display = 'block';
+        function selectChapter(chapterNumber) {
+            const chapters = document.querySelectorAll('.chapter');
+            chapters.forEach(chapter => chapter.classList.remove('selected'));
+
+            // Mettez en surbrillance le chapitre sélectionné
+            const selectedChapter = document.querySelector(`.timeline .chapter:nth-child(${chapterNumber})`);
+            selectedChapter.classList.add('selected');
+
+            currentChapter = chapterNumber;
         }
-
-        // Initialisation: cacher toutes les cartes sauf la première
-        window.onload = () => {
-            for (let i = 1; i < cards.length; i++) {
-                cards[i].style.display = 'none';
-            }
-        };
     </script>
-
 </body>
 </html>
