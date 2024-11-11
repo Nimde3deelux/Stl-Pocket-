@@ -166,6 +166,25 @@
             border-radius: 8px;
             margin-bottom: 10px;
         }
+
+        /* Nouveau style pour la section introduction avec un fond personnalisé */
+        .intro {
+            padding: 30px;
+            background-image: url('images/feature_background.jpg');
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 800px;
+            margin: 30px auto;
+        }
+        .intro p {
+            font-size: 1.5em;
+            color: #ffffff;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -187,6 +206,7 @@
     <!-- Titre principal -->
     <h1>Bienvenue sur STL Pocket</h1>
 
+    <!-- Section introduction avec fond personnalisé -->
     <div class="intro">
         <p>STL Pocket est votre plateforme d'apprentissage accessible et interactive ! Explorez nos différentes matières et améliorez vos compétences.</p>
     </div>
@@ -208,49 +228,39 @@
         <div class="card">
             <div class="icon"><img src="images/math_icon.png" alt="Mathématiques"></div>
             <h3>Mathématiques</h3>
-            <p>Renforcez vos compétences en mathématiques avec des exercices et des cours adaptés.</p>
+            <p>Renforcez vos bases en mathématiques et résolvez des problèmes complexes.</p>
             <a href="math.html" class="btn">Accéder</a>
         </div>
-        <div class="card">
-            <div class="icon"><img src="images/sciencelab_icon.png" alt="Laboratoire"></div>
-            <h3>Laboratoire</h3>
-            <p>Testez vos connaissances avec nos simulations et TP interactifs.</p>
-            <a href="laboratoire.html" class="btn">Accéder</a>
-        </div>
     </div>
 
-    <!-- Section des fonctionnalités -->
+    <!-- Section fonctionnalités -->
     <div class="features">
         <h2>Fonctionnalités</h2>
+        <p>STL Pocket offre des outils puissants pour faciliter votre apprentissage à tout moment.</p>
         <div class="tags">
-            <div class="tag">Apprentissage interactif</div>
-            <div class="tag">Cours accessibles partout</div>
-            <div class="tag">Forum pour échanger</div>
-            <div class="tag">Exercices pratiques</div>
+            <span class="tag">Accessibilité 24/7</span>
+            <span class="tag">Système de messagerie</span>
+            <span class="tag">IA d'assistance</span>
         </div>
     </div>
 
-    <!-- Section Profil -->
+    <!-- Section profil et chat -->
     <div class="profile">
-        <h2>Profil</h2>
-        <form action="profile.html">
-            <label for="username">Nom d'utilisateur :</label>
-            <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur">
-            <label for="email">E-mail :</label>
-            <input type="email" id="email" name="email" placeholder="Entrez votre email">
-            <input type="submit" class="btn" value="Mettre à jour">
+        <h2>Mon Profil</h2>
+        <form>
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" id="username" name="username" required>
+            <input type="submit" value="Mettre à jour">
         </form>
     </div>
 
-    <!-- Section Chat -->
     <div class="chat">
-        <h2>Discussion</h2>
-        <div id="chat-box">
-            <!-- Messages apparaîtront ici -->
-        </div>
-        <form action="chat.html">
-            <input type="text" placeholder="Écrire un message" required>
-            <button type="submit" class="btn">Envoyer</button>
+        <h2>Chat</h2>
+        <div id="chat-box"></div>
+        <form>
+            <label for="message">Message</label>
+            <input type="text" id="message" name="message" required>
+            <input type="submit" value="Envoyer">
         </form>
     </div>
 
