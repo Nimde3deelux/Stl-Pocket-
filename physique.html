@@ -198,6 +198,7 @@
     <div class="navbar">
         <a href="index.html">Accueil</a>
         <a href="resources.html">Ressources</a>
+        <a href="forum.html">Forum</a>
         <a href="contact.html">Contact</a>
         <a href="creators.html">Créateurs</a>
     </div>
@@ -212,74 +213,77 @@
         <div class="timeline-item" id="chapitre1">
             <h3>Chapitre 1 : Les lois de Newton</h3>
             <p>Comprendre les forces et les mouvements</p>
-            <button class="btn-access" onclick="window.location.href='chapitre1.html'">Accéder à la carte mentale</button>
-            <button class="btn-access" onclick="window.location.href='fiche1.pdf'">Fiche de révision</button>
-            <button class="install-button" onclick="window.location.href='installer/chapitre1.zip'">Installer le cours</button>
+            <button class="btn-access" onclick="playClickSound(); window.location.href='chapitre1.html'">Accéder à la carte mentale</button>
+            <button class="btn-access" onclick="playClickSound(); window.location.href='fiche1.pdf'">Fiche de révision</button>
+            <button class="install-button" onclick="playClickSound(); window.location.href='installer/chapitre1.zip'">Installer le cours</button>
         </div>
 
         <!-- Chapitre 2 -->
         <div class="timeline-item" id="chapitre2">
             <h3>Chapitre 2 : La gravitation universelle</h3>
             <p>Les forces gravitationnelles entre les corps célestes</p>
-            <button class="btn-access" onclick="window.location.href='chapitre2.html'">Accéder à la carte mentale</button>
-            <button class="btn-access" onclick="window.location.href='fiche2.pdf'">Fiche de révision</button>
-            <button class="install-button" onclick="window.location.href='installer/chapitre2.zip'">Installer le cours</button>
+            <button class="btn-access" onclick="playClickSound(); window.location.href='chapitre2.html'">Accéder à la carte mentale</button>
+            <button class="btn-access" onclick="playClickSound(); window.location.href='fiche2.pdf'">Fiche de révision</button>
+            <button class="install-button" onclick="playClickSound(); window.location.href='installer/chapitre2.zip'">Installer le cours</button>
         </div>
 
         <!-- Chapitre 3 -->
         <div class="timeline-item" id="chapitre3">
             <h3>Chapitre 3 : L'énergie cinétique</h3>
             <p>Comprendre l'énergie associée aux mouvements</p>
-            <button class="btn-access" onclick="window.location.href='chapitre3.html'">Accéder à la carte mentale</button>
-            <button class="btn-access" onclick="window.location.href='fiche3.pdf'">Fiche de révision</button>
-            <button class="install-button" onclick="window.location.href='installer/chapitre3.zip'">Installer le cours</button>
+            <button class="btn-access" onclick="playClickSound(); window.location.href='chapitre3.html'">Accéder à la carte mentale</button>
+            <button class="btn-access" onclick="playClickSound(); window.location.href='fiche3.pdf'">Fiche de révision</button>
+            <button class="install-button" onclick="playClickSound(); window.location.href='installer/chapitre3.zip'">Installer le cours</button>
         </div>
 
         <!-- Chapitre 4 -->
         <div class="timeline-item" id="chapitre4">
             <h3>Chapitre 4 : L'énergie potentielle</h3>
             <p>L'énergie stockée en fonction de la position</p>
-            <button class="btn-access" onclick="window.location.href='chapitre4.html'">Accéder à la carte mentale</button>
-            <button class="btn-access" onclick="window.location.href='fiche4.pdf'">Fiche de révision</button>
-            <button class="install-button" onclick="window.location.href='installer/chapitre4.zip'">Installer le cours</button>
-        </div>
-
-        <!-- Chapitre 5 -->
-        <div class="timeline-item" id="chapitre5">
-            <h3>Chapitre 5 : L'énergie mécanique</h3>
-            <p>L'énergie associée à un objet en mouvement et à sa position</p>
-            <button class="btn-access" onclick="window.location.href='chapitre5.html'">Accéder à la carte mentale</button>
-            <button class="btn-access" onclick="window.location.href='fiche5.pdf'">Fiche de révision</button>
-            <button class="install-button" onclick="window.location.href='installer/chapitre5.zip'">Installer le cours</button>
+            <button class="btn-access" onclick="playClickSound(); window.location.href='chapitre4.html'">Accéder à la carte mentale</button>
+            <button class="btn-access" onclick="playClickSound(); window.location.href='fiche4.pdf'">Fiche de révision</button>
+            <button class="install-button" onclick="playClickSound(); window.location.href='installer/chapitre4.zip'">Installer le cours</button>
         </div>
     </div>
 
-    <!-- Navigation -->
+    <!-- Navigation Chapitres -->
     <div class="navigation-buttons">
-        <button onclick="playSound('audio/789.mp3'); goToPreviousChapter()">Chapitre Précédent</button>
-        <button onclick="playSound('audio/789.mp3'); goToNextChapter()">Chapitre Suivant</button>
+        <button id="prev-button" onclick="changeChapter('prev')">Chapitre Précédent</button>
+        <button id="next-button" onclick="changeChapter('next')">Chapitre Suivant</button>
     </div>
 
-    <!-- Script -->
+    <!-- Son pour les boutons -->
+    <audio id="click-sound" src="click-sound.mp3" preload="auto"></audio>
+
     <script>
-        // Fonction pour jouer le son
-        function playSound(src) {
-            const audio = new Audio(src);
-            audio.play();
+        let currentChapter = 1;
+        const totalChapters = 4;
+
+        function playClickSound() {
+            const clickSound = document.getElementById('click-sound');
+            clickSound.play();
         }
 
-        // Fonction pour aller au chapitre précédent
-        function goToPreviousChapter() {
-            // Implémenter la logique pour naviguer au chapitre précédent
-            console.log("Chapitre Précédent");
+        function updateChapter() {
+            // Masquer tous les chapitres
+            for (let i = 1; i <= totalChapters; i++) {
+                document.getElementById('chapitre' + i).style.display = 'none';
+            }
+            // Afficher le chapitre actuel
+            document.getElementById('chapitre' + currentChapter).style.display = 'block';
         }
 
-        // Fonction pour aller au chapitre suivant
-        function goToNextChapter() {
-            // Implémenter la logique pour naviguer au chapitre suivant
-            console.log("Chapitre Suivant");
+        function changeChapter(direction) {
+            if (direction === 'next' && currentChapter < totalChapters) {
+                currentChapter++;
+            } else if (direction === 'prev' && currentChapter > 1) {
+                currentChapter--;
+            }
+            updateChapter();
         }
+
+        // Initialisation de l'affichage du chapitre
+        updateChapter();
     </script>
-
 </body>
 </html>
