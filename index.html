@@ -6,7 +6,7 @@
     <title>STL Pocket - Accueil</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Style général de la page avec un thème pixelisé */
+        /* Style général de la page avec un fond noir et des points brillants */
         body {
             font-family: 'Minecraft', sans-serif;
             background-color: #000000;
@@ -15,7 +15,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-image: url('images/minecraft_background.png');
+            background-image: url('images/space_background.png');
             background-size: cover;
             background-position: center;
         }
@@ -234,50 +234,23 @@
             <a href="math.html" class="btn">Accéder</a>
         </div>
         <div class="card">
-            <div class="icon"><img src="images/sciencelab_icon.png" alt="Sciences de Laboratoire"></div>
-            <h3>Sciences de Laboratoire</h3>
-            <p>Maîtrisez les techniques de laboratoire essentielles à la biotechnologie et à l'analyse.</p>
-            <a href="sciencelab.html" class="btn">Accéder</a>
+            <div class="icon"><img src="images/sciencelab_icon.png" alt="Laboratoire"></div>
+            <h3>Laboratoire</h3>
+            <p>Testez vos connaissances avec nos simulations et TP interactifs.</p>
+            <a href="laboratoire.html" class="btn">Accéder</a>
         </div>
     </div>
 
-    <!-- Section des fonctionnalités et des tags -->
+    <!-- Section des fonctionnalités -->
     <div class="features">
         <h2>Fonctionnalités</h2>
-        <p>Nous proposons de nombreuses fonctionnalités pour améliorer votre expérience d'apprentissage :</p>
-        <ul>
-            <li>Quiz interactifs</li>
-            <li>Ressources éducatives</li>
-            <li>Suivi des progrès</li>
-        </ul>
         <div class="tags">
-            <span class="tag">Interactif</span>
-            <span class="tag">Pratique</span>
-            <span class="tag">Flexible</span>
+            <div class="tag">Apprentissage interactif</div>
+            <div class="tag">Cours accessibles partout</div>
+            <div class="tag">Forum pour échanger</div>
+            <div class="tag">Exercices pratiques</div>
         </div>
     </div>
 
-    <!-- Section profil et chat -->
-    <div class="profile">
-        <h2>Mon Profil</h2>
-        <form action="profile.html" method="POST">
-            <label for="username">Nom d'utilisateur :</label>
-            <input type="text" id="username" name="username" required>
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="email" required>
-            <button type="submit" class="btn">Mettre à jour</button>
-        </form>
-    </div>
-
-    <div class="chat">
-        <h2>Chat en Direct</h2>
-        <div id="chat-box">
-            <!-- Messages du chat -->
-        </div>
-        <form action="chat.html" method="POST">
-            <input type="text" id="chat-message" name="message" placeholder="Entrez un message..." required>
-            <button type="submit" class="btn">Envoyer</button>
-        </form>
-    </div>
 </body>
 </html>
