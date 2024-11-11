@@ -4,8 +4,188 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STL Pocket - Physique-Chimie</title>
-    <link rel="stylesheet" href="physique-style.css">
     <script src="physique.js" defer></script>
+    <style>
+        /* Body */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            background-image: url('images/background.jpg'); /* Fond sombre dynamique */
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* En-tête */
+        .header {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 2.8em;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            color: #ff4d4d; /* Rouge vif */
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Barre de navigation */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.8);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+        }
+
+        .navbar a {
+            color: #ff4d4d; /* Rouge vif */
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 1.3em;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #fff;
+        }
+
+        /* Titre principal */
+        h1 {
+            margin-top: 50px;
+            font-size: 3.5em;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            text-align: center;
+        }
+
+        /* Frise chronologique */
+        .timeline {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
+        }
+
+        .timeline-item {
+            background-color: #333;
+            border: 1px solid #ff4d4d;
+            margin: 25px 0;
+            padding: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: scale(1.05);
+            background-color: #444;
+        }
+
+        .timeline-item h3 {
+            margin: 0;
+            font-size: 2em;
+            color: #ff4d4d;
+        }
+
+        .timeline-item p {
+            font-size: 1.3em;
+            color: #d1d1d1;
+        }
+
+        /* Boutons */
+        .btn-access, .install-button {
+            background-color: #ff4d4d;
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            font-size: 1.3em;
+            margin: 10px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-access:hover, .install-button:hover {
+            background-color: #e60000;
+        }
+
+        /* Navigation */
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .navigation-buttons button {
+            background-color: #ff4d4d;
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.5em;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .navigation-buttons button:hover {
+            background-color: #e60000;
+        }
+
+        /* Effets visuels (animation et couleur) */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/space_particles.gif') repeat center center;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .timeline-item h3 {
+                font-size: 1.8em;
+            }
+
+            .navbar a {
+                font-size: 1.1em;
+                margin: 0 15px;
+            }
+
+            .navigation-buttons button {
+                font-size: 1.2em;
+                padding: 10px 25px;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -68,20 +248,18 @@
         <!-- Chapitre 5 -->
         <div class="timeline-item" id="chapitre5">
             <h3>Chapitre 5 : Les lois de la thermodynamique</h3>
-            <p>Étudier les échanges de chaleur et l'entropie</p>
+            <p>Étudier les échanges de chaleur et de travail</p>
             <button class="btn-access" onclick="window.location.href='chapitre5.html'">Accéder à la carte mentale</button>
             <button class="btn-access" onclick="window.location.href='fiche5.pdf'">Fiche de révision</button>
             <button class="install-button" onclick="window.location.href='installer/chapitre5.zip'">Installer le cours</button>
         </div>
 
-        <!-- Ajoute les autres chapitres ici avec les mêmes boutons -->
-
     </div>
 
-    <!-- Navigation entre les chapitres -->
+    <!-- Boutons de navigation -->
     <div class="navigation-buttons">
-        <button onclick="previousChapter()">Précédent</button>
-        <button onclick="nextChapter()">Suivant</button>
+        <button onclick="window.location.href='index.html'">Retour à l'accueil</button>
+        <button onclick="window.location.href='forum.html'">Forum</button>
     </div>
 
 </body>
