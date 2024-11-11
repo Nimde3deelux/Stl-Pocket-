@@ -120,7 +120,7 @@
 
         /* Section contenant le texte de présentation de STL Pocket avec image de fond */
         .intro {
-            background-image: url('images/feature_background.jpg'); /* Image de fond */
+            background-image: url('images/feature_background.jpg'); /* Nouvelle image de fond */
             background-size: cover;
             background-position: center;
             padding: 40px;
@@ -259,31 +259,33 @@
     <div class="features">
         <h2>Fonctionnalités</h2>
         <div class="tags">
-            <div class="tag">Cours interactifs</div>
+            <div class="tag">Accessibilité</div>
+            <div class="tag">Révisions en ligne</div>
+            <div class="tag">Interactivité</div>
             <div class="tag">Suivi des progrès</div>
-            <div class="tag">Communauté</div>
-            <div class="tag">Assistance via IA</div>
         </div>
     </div>
 
-    <!-- Section profil -->
+    <!-- Section profil utilisateur -->
     <div class="profile">
         <h2>Profil Utilisateur</h2>
         <form>
-            <label for="username">Nom d'utilisateur</label>
+            <label for="username">Nom d'utilisateur:</label>
             <input type="text" id="username" name="username" required>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-            <button type="submit" class="btn">Mettre à jour</button>
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit" class="btn">Se connecter</button>
         </form>
     </div>
 
-    <!-- Section chat -->
+    <!-- Section de chat -->
     <div class="chat">
-        <h2>Chat</h2>
-        <div id="chat-box"></div>
+        <h2>Chat en Direct</h2>
+        <div id="chat-box">
+            <!-- Messages du chat ici -->
+        </div>
         <form>
-            <input type="text" placeholder="Envoyer un message..." required>
+            <input type="text" placeholder="Écrivez un message..." />
             <button type="submit" class="btn">Envoyer</button>
         </form>
     </div>
