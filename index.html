@@ -19,7 +19,6 @@
             background-size: cover;
             background-position: center;
         }
-
         /* En-tête avec le logo */
         .header {
             padding: 15px;
@@ -29,12 +28,10 @@
             background: rgba(0, 0, 0, 0.6);
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
         }
-
         .logo {
             width: 200px;
             height: auto;
         }
-
         /* Barre de navigation */
         .navbar {
             display: flex;
@@ -46,7 +43,6 @@
             font-family: 'Minecraft', sans-serif;
             font-size: 1.2em;
         }
-
         .navbar a {
             color: #fff;
             text-decoration: none;
@@ -56,11 +52,9 @@
             border-radius: 8px;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
-
         .navbar a:hover {
             background-color: #00796b;
         }
-
         /* Titre principal avec un effet style Minecraft */
         h1 {
             font-size: 3em;
@@ -69,7 +63,6 @@
             text-shadow: 3px 3px 8px #000;
             margin: 30px;
         }
-
         /* Conteneur principal avec les cartes de section */
         .container {
             display: grid;
@@ -79,7 +72,6 @@
             width: 100%;
             padding: 20px;
         }
-
         /* Style des cartes de section */
         .card {
             background-color: rgba(0, 0, 0, 0.7);
@@ -89,18 +81,15 @@
             text-align: center;
             border: 2px solid #00b33c;
         }
-
         .card:hover {
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
             transform: scale(1.05);
         }
-
         .icon img {
             width: 60px;
             height: 60px;
             margin-bottom: 10px;
         }
-
         /* Boutons stylisés */
         .btn {
             background-color: #00b33c;
@@ -112,31 +101,10 @@
             font-family: 'Minecraft', sans-serif;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
-
         .btn:hover {
             background-color: #00796b;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
         }
-
-        /* Section contenant le texte de présentation de STL Pocket avec image de fond */
-        .intro {
-            background-image: url('images/feature_background.jpg'); /* Nouvelle image de fond */
-            background-size: cover;
-            background-position: center;
-            padding: 40px;
-            border-radius: 15px;
-            margin-top: 30px;
-            width: 80%;
-            text-align: center;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .intro p {
-            font-size: 1.5em;
-            color: #00b33c;
-            text-shadow: 2px 2px 6px #000;
-        }
-
         /* Section des fonctionnalités et des tags */
         .features {
             text-align: center;
@@ -147,13 +115,11 @@
             margin-top: 30px;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
         }
-
         .features h2 {
             font-size: 2.5em;
             color: #00b33c;
             text-shadow: 3px 3px 8px #000;
         }
-
         .tags {
             display: flex;
             justify-content: center;
@@ -161,7 +127,6 @@
             gap: 10px;
             margin-top: 10px;
         }
-
         .tag {
             background-color: #004d40;
             color: #ffffff;
@@ -170,11 +135,9 @@
             font-size: 0.9em;
             cursor: pointer;
         }
-
         .tag:hover {
             background-color: #26a69a;
         }
-
         /* Section profil et chat */
         .profile, .chat {
             width: 100%;
@@ -185,20 +148,16 @@
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
         }
-
         .profile h2, .chat h2 {
             color: #00b33c;
         }
-
         .profile form, .chat form {
             display: flex;
             flex-direction: column;
         }
-
         .profile form label, .chat form input {
             margin: 10px 0;
         }
-
         .chat #chat-box {
             background-color: #333;
             height: 200px;
@@ -228,7 +187,6 @@
     <!-- Titre principal -->
     <h1>Bienvenue sur STL Pocket</h1>
 
-    <!-- Section d'introduction avec un fond d'image -->
     <div class="intro">
         <p>STL Pocket est votre plateforme d'apprentissage accessible et interactive ! Explorez nos différentes matières et améliorez vos compétences.</p>
     </div>
@@ -250,45 +208,29 @@
         <div class="card">
             <div class="icon"><img src="images/math_icon.png" alt="Mathématiques"></div>
             <h3>Mathématiques</h3>
-            <p>Maîtrisez les concepts clés des mathématiques pour réussir vos examens.</p>
+            <p>Renforcez vos compétences en mathématiques avec des exercices et des cours adaptés.</p>
             <a href="math.html" class="btn">Accéder</a>
+        </div>
+        <div class="card">
+            <div class="icon"><img src="images/sciencelab_icon.png" alt="Laboratoire"></div>
+            <h3>Laboratoire</h3>
+            <p>Testez vos connaissances avec nos simulations et TP interactifs.</p>
+            <a href="laboratoire.html" class="btn">Accéder</a>
         </div>
     </div>
 
-    <!-- Section fonctionnalités -->
+    <!-- Section des fonctionnalités -->
     <div class="features">
         <h2>Fonctionnalités</h2>
         <div class="tags">
-            <div class="tag">Accessibilité</div>
-            <div class="tag">Révisions en ligne</div>
-            <div class="tag">Interactivité</div>
-            <div class="tag">Suivi des progrès</div>
+            <div class="tag">Apprentissage interactif</div>
+            <div class="tag">Cours accessibles partout</div>
+            <div class="tag">Forum pour échanger</div>
+            <div class="tag">Exercices pratiques</div>
         </div>
     </div>
 
-    <!-- Section profil utilisateur -->
-    <div class="profile">
-        <h2>Profil Utilisateur</h2>
-        <form>
-            <label for="username">Nom d'utilisateur:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Mot de passe:</label>
-            <input type="password" id="password" name="password" required>
-            <button type="submit" class="btn">Se connecter</button>
-        </form>
-    </div>
-
-    <!-- Section de chat -->
-    <div class="chat">
-        <h2>Chat en Direct</h2>
-        <div id="chat-box">
-            <!-- Messages du chat ici -->
-        </div>
-        <form>
-            <input type="text" placeholder="Écrivez un message..." />
-            <button type="submit" class="btn">Envoyer</button>
-        </form>
-    </div>
-
+    <!-- Lien vers le fichier JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
