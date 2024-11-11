@@ -246,27 +246,38 @@
 
         <!-- Chapitre 5 -->
         <div class="timeline-item" id="chapitre5">
-            <h3>Chapitre 5 : Les lois de la thermodynamique</h3>
-            <p>Étudier les échanges de chaleur et de travail</p>
+            <h3>Chapitre 5 : L'énergie mécanique</h3>
+            <p>L'énergie associée à un objet en mouvement et à sa position</p>
             <button class="btn-access" onclick="window.location.href='chapitre5.html'">Accéder à la carte mentale</button>
             <button class="btn-access" onclick="window.location.href='fiche5.pdf'">Fiche de révision</button>
             <button class="install-button" onclick="window.location.href='installer/chapitre5.zip'">Installer le cours</button>
         </div>
     </div>
 
-    <!-- Bouton Suivant -->
+    <!-- Navigation -->
     <div class="navigation-buttons">
-        <button id="suivantBtn" onclick="nextChapter()">Suivant</button>
+        <button onclick="playSound('audio/789.mp3'); goToPreviousChapter()">Chapitre Précédent</button>
+        <button onclick="playSound('audio/789.mp3'); goToNextChapter()">Chapitre Suivant</button>
     </div>
 
+    <!-- Script -->
     <script>
-        // Fonction pour changer de chapitre
-        function nextChapter() {
-            const audio = new Audio('changedemenu.mp3'); // Charger la musique
-            audio.play(); // Jouer la musique
+        // Fonction pour jouer le son
+        function playSound(src) {
+            const audio = new Audio(src);
+            audio.play();
+        }
 
-            // Logique pour afficher un autre chapitre ou page
-            window.location.href = 'next-chapter.html'; // Remplacer par l'URL du chapitre suivant
+        // Fonction pour aller au chapitre précédent
+        function goToPreviousChapter() {
+            // Implémenter la logique pour naviguer au chapitre précédent
+            console.log("Chapitre Précédent");
+        }
+
+        // Fonction pour aller au chapitre suivant
+        function goToNextChapter() {
+            // Implémenter la logique pour naviguer au chapitre suivant
+            console.log("Chapitre Suivant");
         }
     </script>
 
