@@ -198,7 +198,6 @@
     <div class="navbar">
         <a href="index.html">Accueil</a>
         <a href="resources.html">Ressources</a>
-        <a href="forum.html">Forum</a>
         <a href="contact.html">Contact</a>
         <a href="creators.html">Créateurs</a>
     </div>
@@ -253,14 +252,23 @@
             <button class="btn-access" onclick="window.location.href='fiche5.pdf'">Fiche de révision</button>
             <button class="install-button" onclick="window.location.href='installer/chapitre5.zip'">Installer le cours</button>
         </div>
-
     </div>
 
-    <!-- Boutons de navigation -->
+    <!-- Bouton Suivant -->
     <div class="navigation-buttons">
-        <button onclick="window.location.href='index.html'">Retour à l'accueil</button>
-        <button onclick="window.location.href='forum.html'">Forum</button>
+        <button id="suivantBtn" onclick="nextChapter()">Suivant</button>
     </div>
+
+    <script>
+        // Fonction pour changer de chapitre
+        function nextChapter() {
+            const audio = new Audio('changedemenu.mp3'); // Charger la musique
+            audio.play(); // Jouer la musique
+
+            // Logique pour afficher un autre chapitre ou page
+            window.location.href = 'next-chapter.html'; // Remplacer par l'URL du chapitre suivant
+        }
+    </script>
 
 </body>
 </html>
