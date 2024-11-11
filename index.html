@@ -230,7 +230,29 @@
         </div>
     </div>
 
-    <!-- Lien vers le fichier JavaScript -->
-    <script src="script.js"></script>
+    <!-- Section Profil -->
+    <div class="profile">
+        <h2>Profil</h2>
+        <form action="profile.html">
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" placeholder="Entrez votre nom d'utilisateur">
+            <label for="email">E-mail :</label>
+            <input type="email" id="email" name="email" placeholder="Entrez votre email">
+            <input type="submit" class="btn" value="Mettre à jour">
+        </form>
+    </div>
+
+    <!-- Section Chat -->
+    <div class="chat">
+        <h2>Discussion</h2>
+        <div id="chat-box">
+            <!-- Messages apparaîtront ici -->
+        </div>
+        <form action="chat.html">
+            <input type="text" placeholder="Écrire un message" required>
+            <button type="submit" class="btn">Envoyer</button>
+        </form>
+    </div>
+
 </body>
 </html>
