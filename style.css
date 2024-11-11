@@ -61,6 +61,17 @@ header:hover {
     background-image: url('grass_block_texture.jpg'); /* Texture qui rappelle les blocs de terrain */
 }
 
+/* Nouveau style pour le rectangle avec le texte */
+.intro-text {
+    background-image: url('imgo1.jpg'); /* Ajout de l'image de fond */
+    background-size: cover; /* L'image recouvre toute la surface */
+    background-position: center; /* L'image est centrée */
+    color: #ffffff; /* Texte en blanc pour contraster avec l'image */
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
 /* Section des fonctionnalités */
 .features {
     padding: 20px;
