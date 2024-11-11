@@ -1,64 +1,75 @@
 /* Style général pour le corps */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Minecraft', Arial, sans-serif; /* Utilisation d'une police pixelisée inspirée de Minecraft */
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #9b9b9b; /* Couleur de fond évoquant le terrain minéral de Minecraft */
+    background-image: url('minecraft_texture.jpg'); /* Texture de fond inspirée des blocs de Minecraft */
+    background-size: cover;
 }
 
 /* Style pour l'en-tête */
 header {
-    background: #35424a;
+    background: #4e4e4e; /* Gris sombre avec effet de "blocs" */
     color: #ffffff;
     padding: 20px 0;
     text-align: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-bottom: 3px solid #2f2f2f; /* Bordure qui rappelle un bloc de pierre */
 }
 
 header:hover {
-    background: #2b373f;
+    background: #3b3b3b;
 }
 
 /* Barre de navigation */
 .navbar {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
 }
 
 .navbar a {
     color: #ffffff;
     text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 5px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    background: #7b7b7b; /* Apparence de bloc */
+    font-weight: bold;
 }
 
 .navbar a:hover {
-    background-color: #2b373f;
+    background-color: #9b9b9b;
 }
 
 /* Logo */
 .logo {
-    width: 150px;
+    width: 180px;
     margin: 20px 0;
+    transform: rotate(15deg); /* Légère inclinaison pour un effet "pixelisé" Minecraft */
 }
 
 /* Section d'introduction */
 .intro {
-    padding: 20px;
+    padding: 25px;
     text-align: center;
-    background-color: #ffffff;
+    background-color: #dcdcdc; /* Teinte terreuse */
     margin: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border: 2px solid #8b8b8b;
+    background-image: url('grass_block_texture.jpg'); /* Texture qui rappelle les blocs de terrain */
 }
 
 /* Section des fonctionnalités */
 .features {
     padding: 20px;
     background-color: #e2e2e2;
-    border-radius: 8px;
+    border-radius: 12px;
     margin: 20px;
+    border: 2px solid #8b8b8b;
+    background-image: url('stone_block_texture.jpg'); /* Apparence de pierre comme dans Minecraft */
+    background-size: 100px 100px;
 }
 
 /* Conteneur pour les fonctionnalités */
@@ -72,13 +83,16 @@ header:hover {
 
 /* Style pour chaque élément de fonctionnalité */
 .feature-item {
-    background: #ffffff;
-    padding: 15px;
+    background: #f4f4f4;
+    padding: 20px;
     width: 200px;
     border-radius: 8px;
     text-align: center;
     position: relative;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    background-color: #7b7b7b; /* Gris béton inspiré des blocs */
+    background-image: url('dirt_block_texture.jpg'); /* Bloc de terre pour l'aspect Minecraft */
+    background-size: 100px 100px;
 }
 
 .feature-item:hover {
@@ -90,7 +104,7 @@ header:hover {
 .arrow {
     font-size: 2em;
     margin: 0 10px;
-    color: #35424a;
+    color: #4e4e4e;
 }
 
 /* Description de chaque fonctionnalité */
@@ -118,35 +132,36 @@ header:hover {
 /* Style pour le profil utilisateur */
 .user-profile {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 25px;
+    border-radius: 12px;
     text-align: center;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     margin: 20px auto;
     width: 90%;
-    max-width: 300px;
+    max-width: 320px;
+    background-image: url('wood_plank_texture.jpg'); /* Texture bois pour rappeler Minecraft */
 }
 
 /* Style pour l'image de profil */
 .user-profile img {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     margin-bottom: 10px;
 }
 
 /* Style pour le nom de l'utilisateur */
 .user-profile h2 {
-    font-size: 1.5em;
-    color: #35424a;
+    font-size: 1.6em;
+    color: #4e4e4e;
     margin: 10px 0;
 }
 
 /* Style pour le bouton de message */
 .user-profile .message-btn {
-    background-color: #35424a;
+    background-color: #4e4e4e;
     color: #ffffff;
-    padding: 10px 15px;
+    padding: 12px 18px;
     border-radius: 5px;
     text-decoration: none;
     display: inline-block;
@@ -154,7 +169,7 @@ header:hover {
 }
 
 .user-profile .message-btn:hover {
-    background-color: #2b373f;
+    background-color: #2b2b2b;
 }
 
 /* Style pour le conteneur de chat */
@@ -163,9 +178,11 @@ header:hover {
     max-width: 600px;
     margin: 20px auto;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    background-image: url('stone_block_texture.jpg');
+    background-size: 100px 100px;
 }
 
 /* Style pour la zone de chat */
@@ -174,7 +191,7 @@ header:hover {
     overflow-y: auto;
     margin-bottom: 10px;
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 12px;
     border-radius: 5px;
     background-color: #f9f9f9;
 }
@@ -182,15 +199,15 @@ header:hover {
 /* Style pour le formulaire de chat */
 .chat-form input[type="text"] {
     width: 75%;
-    padding: 10px;
+    padding: 12px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
 
 .chat-form button {
     width: 20%;
-    padding: 10px;
-    background-color: #35424a;
+    padding: 12px;
+    background-color: #4e4e4e;
     color: #fff;
     border-radius: 5px;
     border: none;
@@ -198,5 +215,5 @@ header:hover {
 }
 
 .chat-form button:hover {
-    background-color: #2b373f;
+    background-color: #2b2b2b;
 }
