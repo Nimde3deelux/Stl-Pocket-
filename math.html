@@ -24,6 +24,25 @@
             text-align: center;
         }
 
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
         .container {
             width: 90%;
             margin: auto;
@@ -179,6 +198,12 @@
             color: white;
         }
 
+        /* Réduire la taille de la calculatrice */
+        .interactive-box canvas {
+            width: 100%;
+            height: 250px;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .course-card,
@@ -209,6 +234,15 @@
         <h1>STL Pocket - Mathématiques</h1>
         <p>Explorez des concepts mathématiques fascinants et améliorez vos compétences en toute simplicité</p>
     </header>
+
+    <!-- Menu de navigation -->
+    <nav>
+        <a href="#">Accueil</a>
+        <a href="#">Mathématiques</a>
+        <a href="#">Biotechnologie</a>
+        <a href="#">Philosophie</a>
+        <a href="#">Anglais</a>
+    </nav>
 
     <div class="container">
         <!-- Introduction Section -->
@@ -254,74 +288,73 @@
         <section class="interactive-elements">
             <div class="interactive-box">
                 <h3>Calculatrice Graphique</h3>
-                <p>Utilisez cette calculatrice graphique interactive pour explorer des équations en temps réel et comprendre mieux les courbes et fonctions.</p>
-                <canvas id="graphingCalculator" width="500" height="500"></canvas>
-                <script>
-                    // Dessiner une fonction sur le canvas
-                    var canvas = document.getElementById("graphingCalculator");
-                    var ctx = canvas.getContext("2d");
-
-                    function drawGraph() {
-                        ctx.clearRect(0, 0, canvas.width, canvas.height); // Effacer le précédent dessin
-                        ctx.beginPath();
-                        ctx.moveTo(0, 250);
-                        for (let x = 0; x < canvas.width; x++) {
-                            let y = Math.sin(x * 0.01) * 100 + 250; // Exemple : sin(x)
-                            ctx.lineTo(x, y);
-                        }
-                        ctx.stroke();
-                    }
-
-                    drawGraph();
-                </script>
+                <p>Utilisez cette calculatrice graphique interactive pour explorer des équations en temps réel et comprendre mieux leur graphique.</p>
+                <canvas id="graph"></canvas>
             </div>
 
             <div class="interactive-box">
-                <h3>Résolveur d'Équations</h3>
-                <p>Entrez une équation pour obtenir une solution instantanée.</p>
-                <input type="text" id="equationInput" placeholder="Ex: 2x + 3 = 5">
-                <button onclick="solveEquation()">Résoudre</button>
-                <div id="solution"></div>
-                <script>
-                    function solveEquation() {
-                        var equation = document.getElementById("equationInput").value;
-                        // Implémentation simple pour résoudre une équation de type ax + b = c
-                        var solution = eval(equation.replace('x', '*1'));
-                        document.getElementById("solution").innerText = "Solution : " + solution;
-                    }
-                </script>
+                <h3>Progression d'Apprentissage</h3>
+                <p>Suivez votre progression d'apprentissage avec notre barre de progression interactive.</p>
+                <div class="progress-bar-container">
+                    <div class="progress-bar"><span style="width: 60%;">60%</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq">
+            <h2 class="section-header">Questions Fréquentes</h2>
+            <div class="faq-item">
+                <h4>Comment utiliser STL Pocket ?</h4>
+                <p>STL Pocket est conçu pour vous fournir un accès rapide à des ressources d'apprentissage, avec des cours, des vidéos et des exercices interactifs. Inscrivez-vous et explorez les différentes sections disponibles.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Quels sont les prérequis pour commencer ?</h4>
+                <p>Il n'y a pas de prérequis spécifiques, mais avoir des bases en mathématiques est recommandé pour tirer pleinement profit des cours avancés.</p>
             </div>
         </section>
 
         <!-- Quiz Section -->
         <section class="quiz">
-            <h4>Quiz de Mathématiques</h4>
-            <div id="quiz-container">
-                <div class="quiz-option" onclick="checkAnswer(1)">1. Qu'est-ce qu'un nombre premier ?</div>
-                <div class="quiz-option" onclick="checkAnswer(2)">2. Quelle est la formule de l'aire d'un cercle ?</div>
-            </div>
-            <div class="quiz-result" id="quiz-result"></div>
-        </section>
-
-        <!-- Progress Bar Section -->
-        <section class="progress-bar-container">
-            <h3>Suivi de vos Progrès</h3>
-            <div class="progress-bar">
-                <span style="width: 60%">60% Complété</span>
-            </div>
+            <h4>Testez vos connaissances : Mathématiques</h4>
+            <div class="quiz-option">Quelle est la formule de l'aire d'un cercle ?</div>
+            <div class="quiz-option">Quel est le théorème de Pythagore ?</div>
+            <div class="quiz-result">Réponse correcte : 1/2</div>
         </section>
     </div>
 
     <script>
-        function checkAnswer(answer) {
-            var result = '';
-            if (answer === 1) {
-                result = 'Correct! Un nombre premier est un nombre entier naturel supérieur à 1 qui n’a pas d’autres diviseurs que 1 et lui-même.';
-            } else if (answer === 2) {
-                result = 'Correct! La formule de l’aire d’un cercle est A = πr².';
+        // Calculatrice graphique
+        var ctx = document.getElementById('graph').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [0, 1, 2, 3, 4, 5],
+                datasets: [{
+                    label: 'y = x^2',
+                    data: [0, 1, 4, 9, 16, 25],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        ticks: {
+                            autoSkip: true
+                        }
+                    }
+                }
             }
-            document.getElementById('quiz-result').innerText = result;
-        }
+        });
+
+        // Gestion des FAQ
+        $(document).ready(function () {
+            $(".faq-item h4").click(function () {
+                $(this).next("p").slideToggle();
+            });
+        });
     </script>
 
 </body>
