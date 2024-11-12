@@ -228,34 +228,44 @@
             <div id="revision1" class="revision-sheet">
                 <h3>Fiche de révision</h3>
                 <ul>
-                    <li>Les différentes branches de la biotechnologie</li>
-                    <li>Les méthodes d’analyse utilisées en biotechnologie</li>
+                    <li>Définir la biotechnologie</li>
+                    <li>Comprendre les domaines d'application</li>
+                    <li>Exemples clés dans les industries modernes</li>
                 </ul>
                 <a href="downloads/revision1.pdf" class="download-link" download>Télécharger la fiche de révision</a>
             </div>
 
-            <div class="chapter-btns">
-                <button onclick="downloadMindMap(1)">Télécharger la carte mentale</button>
-                <button onclick="downloadCourse(1)">Télécharger le cours</button>
-                <button onclick="downloadRevision(1)">Télécharger la fiche de révision</button>
+            <!-- Vidéo -->
+            <div class="video-section">
+                <h3>Vidéo explicative</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/example-video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
 
-        <!-- Chapitre suivant -->
-        <div id="content2" class="chapter-content">
-            <h2>Chapitre 2 - Méthodes en Biotechnologie</h2>
-            <!-- Contenu similaire pour chaque chapitre suivant -->
-        </div>
+        <!-- Ajouter un bouton "retour à la frise" ici -->
     </section>
 
     <script>
-        function showChapter(chapter) {
-            const allContents = document.querySelectorAll('.chapter-content');
-            allContents.forEach(content => content.style.display = 'none');
+        function showChapter(chapterNumber) {
+            // Masquer tous les contenus de chapitre
+            var allChapters = document.querySelectorAll('.chapter-content');
+            allChapters.forEach(function (chapter) {
+                chapter.style.display = 'none';
+            });
 
-            document.getElementById(`content${chapter}`).style.display = 'block';
+            // Afficher le contenu du chapitre sélectionné
+            document.getElementById('content' + chapterNumber).style.display = 'block';
+
+            // Activer le bouton de chaque chapitre
+            var timelineItems = document.querySelectorAll('.timeline div');
+            timelineItems.forEach(function (item) {
+                item.classList.remove('selected');
+            });
+
+            document.getElementById('chapter' + chapterNumber).classList.add('selected');
         }
     </script>
+
 </body>
 
 </html>
