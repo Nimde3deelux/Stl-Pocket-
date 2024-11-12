@@ -86,6 +86,17 @@
             transform: scale(1.1);
         }
 
+        .timeline .chapter1 { background-color: #1E90FF; } /* Bleu */
+        .timeline .chapter2 { background-color: #32CD32; } /* Vert */
+        .timeline .chapter3 { background-color: #FF6347; } /* Tomate */
+        .timeline .chapter4 { background-color: #FFD700; } /* Jaune */
+        .timeline .chapter5 { background-color: #8A2BE2; } /* Violet */
+        .timeline .chapter6 { background-color: #FF4500; } /* Orange */
+        .timeline .chapter7 { background-color: #ADFF2F; } /* Vert clair */
+        .timeline .chapter8 { background-color: #00CED1; } /* Turquoise */
+        .timeline .chapter9 { background-color: #D2691E; } /* Chocolat */
+        .timeline .chapter10 { background-color: #B22222; } /* Rouge foncé */
+
         .chapter-btns {
             display: none;
             margin-top: 20px;
@@ -108,6 +119,46 @@
             background-color: #ff9900;
         }
 
+        /* Cartes mentales */
+        .mind-map {
+            display: none;
+            margin-top: 20px;
+            background-color: #2E2E2E;
+            color: #FFFFFF;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .mind-map ul {
+            list-style: none;
+        }
+
+        .mind-map li {
+            margin: 10px 0;
+        }
+
+        /* Fiches de révision */
+        .revision-sheet {
+            display: none;
+            background-color: #2E2E2E;
+            color: #FFFFFF;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .revision-sheet h3 {
+            color: #ff9900;
+        }
+
+        .revision-sheet ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .revision-sheet li {
+            margin: 10px 0;
+        }
     </style>
 </head>
 
@@ -121,82 +172,115 @@
     </nav>
 
     <section>
-        <h1>Biotechnologie</h1>
+        <h1>Biotechnologie 📚</h1>
         <p>Bienvenue dans la section Biotechnologie. Découvrez des ressources, exercices et vidéos pour approfondir vos connaissances.</p>
 
         <!-- Frise chronologique -->
         <div class="timeline">
-            <div onclick="showChapter(3)" id="chapter3">Chapitre 3</div>
-            <div onclick="showChapter(4)" id="chapter4">Chapitre 4</div>
-            <div onclick="showChapter(5)" id="chapter5">Chapitre 5</div>
-            <div onclick="showChapter(6)" id="chapter6">Chapitre 6</div>
-            <div onclick="showChapter(7)" id="chapter7">Chapitre 7</div>
-            <div onclick="showChapter(8)" id="chapter8">Chapitre 8</div>
-            <div onclick="showChapter(9)" id="chapter9">Chapitre 9</div>
-            <div onclick="showChapter(10)" id="chapter10">Chapitre 10</div>
+            <div onclick="showChapter(1)" id="chapter1" class="chapter1">Chapitre 1 - Introduction 📖</div>
+            <div onclick="showChapter(2)" id="chapter2" class="chapter2">Chapitre 2 - Méthodes 🧪</div>
+            <div onclick="showChapter(3)" id="chapter3" class="chapter3">Chapitre 3 - Applications 🌱</div>
+            <div onclick="showChapter(4)" id="chapter4" class="chapter4">Chapitre 4 - Études de cas 🔬</div>
+            <div onclick="showChapter(5)" id="chapter5" class="chapter5">Chapitre 5 - Recherche 🧬</div>
+            <div onclick="showChapter(6)" id="chapter6" class="chapter6">Chapitre 6 - Innovations 🚀</div>
+            <div onclick="showChapter(7)" id="chapter7" class="chapter7">Chapitre 7 - Impact 💡</div>
+            <div onclick="showChapter(8)" id="chapter8" class="chapter8">Chapitre 8 - Applications pratiques 🏃</div>
+            <div onclick="showChapter(9)" id="chapter9" class="chapter9">Chapitre 9 - Conclusion 📊</div>
+            <div onclick="showChapter(10)" id="chapter10" class="chapter10">Chapitre 10 - Perspectives 🌍</div>
         </div>
 
+        <!-- Cartes mentales -->
+        <div id="mindMap1" class="mind-map">
+            <h3>Carte mentale - Chapitre 1 🧠</h3>
+            <ul>
+                <li>Introduction à la biotechnologie</li>
+                <li>Concepts de base</li>
+                <li>Applications principales</li>
+            </ul>
+        </div>
+        <div id="mindMap2" class="mind-map">
+            <h3>Carte mentale - Chapitre 2 🧠</h3>
+            <ul>
+                <li>Techniques et méthodes</li>
+                <li>Laboratoire et expérimentations</li>
+                <li>Analyse des données</li>
+            </ul>
+        </div>
+        <div id="mindMap3" class="mind-map">
+            <h3>Carte mentale - Chapitre 3 🧠</h3>
+            <ul>
+                <li>Applications dans l'agriculture</li>
+                <li>Applications en santé</li>
+                <li>Biotechnologie industrielle</li>
+            </ul>
+        </div>
+        <!-- Ajoute les autres cartes mentales pour chaque chapitre -->
+
         <!-- Système d'affichage des chapitres -->
-        <div id="chapter3Btns" class="chapter-btns">
+        <div id="chapter1Btns" class="chapter-btns">
             <button>Installer le cours complet</button>
-            <button>Carte mentale</button>
-            <button>Fiche de révision</button>
+            <button onclick="toggleMindMap(1)">Carte mentale</button>
+            <button onclick="toggleRevisionSheet(1)">Fiche de révision</button>
         </div>
-        <div id="chapter4Btns" class="chapter-btns">
+        <div id="chapter2Btns" class="chapter-btns">
             <button>Installer le cours complet</button>
-            <button>Carte mentale</button>
-            <button>Fiche de révision</button>
+            <button onclick="toggleMindMap(2)">Carte mentale</button>
+            <button onclick="toggleRevisionSheet(2)">Fiche de révision</button>
         </div>
-        <div id="chapter5Btns" class="chapter-btns">
-            <button>Installer le cours complet</button>
-            <button>Carte mentale</button>
-            <button>Fiche de révision</button>
+        <!-- Ajoute des boutons pour les autres chapitres -->
+
+        <!-- Fiches de révision -->
+        <div id="revisionSheet1" class="revision-sheet">
+            <h3>Fiche de révision - Chapitre 1</h3>
+            <ul>
+                <li>Définition de la biotechnologie</li>
+                <li>Historique de la biotechnologie</li>
+                <li>Principaux domaines d'application</li>
+            </ul>
         </div>
-        <div id="chapter6Btns" class="chapter-btns">
-            <button>Installer le cours complet</button>
-            <button>Carte mentale</button>
-            <button>Fiche de révision</button>
+        <div id="revisionSheet2" class="revision-sheet">
+            <h3>Fiche de révision - Chapitre 2</h3>
+            <ul>
+                <li>Méthodes de culture cellulaire</li>
+                <li>Techniques de génie génétique</li>
+                <li>Applications des méthodes en laboratoire</li>
+            </ul>
         </div>
-        <div id="chapter7Btns" class="chapter-btns">
-            <button>Installer le cours complet</button>
-            <button>Carte mentale</button>
-            <button>Fiche de révision</button>
-        </div>
-        <div id="chapter8Btns" class="chapter-btns">
-            <button>Installer le cours complet</button>
-            <button>Carte mentale</button>
-            <button>Fiche de révision</button>
-        </div>
-        <div id="chapter9Btns" class="chapter-btns">
-            <button>Installer le cours complet</button>
-            <button>Carte mentale</button>
-            <button>Fiche de révision</button>
-        </div>
-        <div id="chapter10Btns" class="chapter-btns">
-            <button>Installer le cours complet</button>
-            <button>Carte mentale</button>
-            <button>Fiche de révision</button>
-        </div>
+        <!-- Ajoute les autres fiches de révision pour chaque chapitre -->
     </section>
 
     <script>
-        // Fonction pour afficher les options de chaque chapitre
-        function showChapter(chapterNumber) {
-            // Masquer toutes les options de chapitre
-            const buttons = document.querySelectorAll('.chapter-btns');
-            buttons.forEach(btn => {
-                btn.style.display = 'none';
-            });
+        function showChapter(chapter) {
+            // Masquer tous les boutons de chapitre
+            let buttons = document.querySelectorAll('.chapter-btns');
+            buttons.forEach(button => button.style.display = 'none');
 
-            // Retirer la classe 'selected' de tous les chapitres
-            const timelineChapters = document.querySelectorAll('.timeline div');
-            timelineChapters.forEach(chap => {
-                chap.classList.remove('selected');
-            });
+            // Afficher les boutons du chapitre sélectionné
+            document.getElementById('chapter' + chapter + 'Btns').style.display = 'block';
 
-            // Afficher les options du chapitre sélectionné
-            document.getElementById('chapter' + chapterNumber + 'Btns').style.display = 'block';
-            document.getElementById('chapter' + chapterNumber).classList.add('selected');
+            // Masquer toutes les cartes mentales et fiches de révision
+            let mindMaps = document.querySelectorAll('.mind-map');
+            let revisionSheets = document.querySelectorAll('.revision-sheet');
+            mindMaps.forEach(map => map.style.display = 'none');
+            revisionSheets.forEach(sheet => sheet.style.display = 'none');
+        }
+
+        function toggleMindMap(chapter) {
+            let mindMap = document.getElementById('mindMap' + chapter);
+            if (mindMap.style.display === 'none' || mindMap.style.display === '') {
+                mindMap.style.display = 'block';
+            } else {
+                mindMap.style.display = 'none';
+            }
+        }
+
+        function toggleRevisionSheet(chapter) {
+            let revisionSheet = document.getElementById('revisionSheet' + chapter);
+            if (revisionSheet.style.display === 'none' || revisionSheet.style.display === '') {
+                revisionSheet.style.display = 'block';
+            } else {
+                revisionSheet.style.display = 'none';
+            }
         }
     </script>
 </body>
