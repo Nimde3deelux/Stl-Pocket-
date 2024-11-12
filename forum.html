@@ -3,19 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forum - STL Pocket</title>
-    <link rel="stylesheet" href="forum-style.css">
-    <script src="forum-script.js" defer></script>
+    <title>Mini Jeu 2D - Aventure</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #87CEEB; }
+        canvas { display: block; margin: auto; }
+    </style>
 </head>
 <body>
+    <canvas id="gameCanvas"></canvas>
 
-    <div class="forum-container">
-        <h1>Forum de Communication</h1>
-        <div id="messages" class="messages-container"></div>
-        <textarea id="message-input" placeholder="Écrire un message..."></textarea>
-        <button onclick="sendMessage()" class="send-btn">Envoyer</button>
-        <a href="menu.html" class="back-btn">Retour au Menu Principal</a>
-    </div>
+    <script>
+        // Initialisation du jeu
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = 800;
+        canvas.height = 400;
 
+        // Variables du jeu
+        let player, enemies = [], points = {x: 750, y: 350}; // Position de la sortie
+        let lives = 3, gameOver = false;
+        let bgImage = new Image();
+        let playerImage = new Image();
+        let enemyImage = new Image();
+        let music = new Audio();
+        let hit = false;
+
+        // Chargement des ressources
+        bgImage.src = 'https://github.com/ton-github/images/jeuxbackground.jpg';
+        playerImage.src = 'https://github.com/ton-github/images/gif.jeux.gif';
+        enemyImage.src = 'https://github.com/ton-github/images/enemie.jpg';
+        music.src = 'https://github.com/ton-github/audio/musicjeux.mp3';
+        music.loop = true;
+        music.play();
+
+        // Classe du joueur
+        class Player {
+            constructor(x, y, width, height) {
+                this.x = x;
+                this.y = y;
+                this.width = width;
+                this.height = height;
+                this.speed = 5;
+                this.image = playerImage;
+            }
+
+            move(keys) {
+                if (keys.left && this.x > 0) this.x -= this.speed;
+                if (keys.right && this.x + this.width < canvas.width) this.x += this.speed;
+                if (keys.up && this.y > 0) this.y -= this.speed;
+                if (keys.down && this.y + this.height < canvas.height) this.y += this.speed;
+            }
+
+            draw() {
+                ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+            }
+        }
+
+        // Classe des ennemis
+        class Enemy {
+            constructor(x, y, width, height) {
+                this.x = x;
+                this.y = y;
+                this.width = width;
+                this.height = height;
+            }
+
+            draw() {
+                ctx.drawImage(enemyImage, this.x, this.y, this.width, this.height);
+            }
+        }
+
+        // Initialisation du joueur et des ennemis
+        player = new Player(50, 300, 50, 50);
+        enemies.push(new Enemy(300, 300, 50, 50));
+        enemies.push(new Enemy(500, 250, 50, 50));
+        enemies.push(new Enemy(600, 150, 50, 50));
+
+        // Gérer les entrées clavier
+        let keys = { left: false, right: false, up: false, down: false };
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') keys.left = true;
+            if (e.key === 'ArrowRight') keys.right = true;
+            if (e.key === 'ArrowUp') keys.up = true;
+            if (e.key === 'ArrowDown') keys.down = true;
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowLeft') keys.left = false;
+            if (e.key === 'ArrowRight') keys.right = false;
+            if (e.key === 'ArrowUp') keys.up = false;
+            if (e.key === 'ArrowDown') keys.down = false;
+        });
+
+        // Fonction pour vérifier si le joueur touche un ennemi
+        function checkCollisions() {
+            for (let enemy of enemies) {
+                if (player.x < enemy.x + enemy.width && player.x + player.width > enemy.x &&
+                    player.y < enemy.y + enemy.height && player.y + player.height > enemy.y) {
+                    lives--;
+                    player.x = 50; // Reset player position
+                    player.y = 300;
+                    if (lives <= 0) {
+                        gameOver = true;
+                        music.pause();
+                    }
+                }
+            }
+        }
+
+        // Fonction de mise à jour du jeu
+        function updateGame() {
+            if (gameOver) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "red";
+                ctx.font = "30px Arial";
+                ctx.fillText("Game Over!", canvas.width / 2 - 90, canvas.height / 2);
+                ctx.fillText("Lives left: " + lives, canvas.width / 2 - 90, canvas.height / 2 + 40);
+                return;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+
+            player.move(keys);
+            player.draw();
+            checkCollisions();
+
+            for (let enemy of enemies) {
+                enemy.draw();
+            }
+
+            // Vérifier si le joueur atteint la sortie
+            if (player.x < points.x + 50 && player.x + player.width > points.x && player.y < points.y + 50 && player.y + player.height > points.y) {
+                gameOver = true;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "green";
+                ctx.font = "30px Arial";
+                ctx.fillText("You Win!", canvas.width / 2 - 60, canvas.height / 2);
+                music.pause();
+            }
+
+            // Afficher les vies restantes
+            ctx.fillStyle = "black";
+            ctx.font = "20px Arial";
+            ctx.fillText("Lives: " + lives, 20, 30);
+
+            requestAnimationFrame(updateGame);
+        }
+
+        // Démarrer le jeu
+        updateGame();
+
+    </script>
 </body>
 </html>
