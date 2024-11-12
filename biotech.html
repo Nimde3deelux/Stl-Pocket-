@@ -14,12 +14,14 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            transition: background-color 0.5s ease-in-out;
         }
 
         nav {
             background-color: #333;
             padding: 15px;
             text-align: center;
+            transition: background-color 0.3s ease;
         }
 
         nav ul {
@@ -38,6 +40,7 @@
             text-decoration: none;
             font-weight: bold;
             text-transform: uppercase;
+            transition: color 0.3s ease;
         }
 
         nav ul li a:hover {
@@ -49,6 +52,7 @@
             font-size: 3em;
             color: #ff9900; /* Couleur vive pour l'intitulé */
             margin-top: 50px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         p {
@@ -66,24 +70,28 @@
             margin-top: 40px;
             padding: 20px;
             flex-wrap: wrap;
+            transition: all 0.3s ease;
         }
 
         .timeline div {
             background-color: #ff6600;
-            padding: 20px;
+            padding: 25px 35px;
             color: white;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             text-align: center;
             transition: background-color 0.3s ease-in-out, transform 0.3s;
-            width: 120px;
-            margin: 10px;
+            width: 150px;
+            margin: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            font-size: 1.2em;
         }
 
         .timeline div:hover,
         .timeline .selected {
             background-color: #ff9900;
             transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
         }
 
         .timeline .chapter1 { background-color: #1E90FF; } /* Bleu */
@@ -103,6 +111,7 @@
             text-align: center;
         }
 
+        /* Boutons de chaque chapitre */
         .chapter-btns button {
             background-color: #ff6600;
             border: none;
@@ -112,11 +121,12 @@
             cursor: pointer;
             text-transform: uppercase;
             border-radius: 5px;
-            transition: background-color 0.3s ease-in-out;
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease;
         }
 
         .chapter-btns button:hover {
             background-color: #ff9900;
+            transform: scale(1.05);
         }
 
         /* Cartes mentales */
@@ -127,6 +137,7 @@
             color: #FFFFFF;
             padding: 20px;
             border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .mind-map ul {
@@ -145,6 +156,7 @@
             padding: 20px;
             border-radius: 8px;
             margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .revision-sheet h3 {
@@ -158,6 +170,18 @@
 
         .revision-sheet li {
             margin: 10px 0;
+        }
+
+        /* Liens de téléchargement */
+        .download-link {
+            color: #ff9900;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .download-link:hover {
+            color: #e6e6e6;
         }
     </style>
 </head>
@@ -197,90 +221,46 @@
                 <li>Concepts de base</li>
                 <li>Applications principales</li>
             </ul>
+            <a href="downloads/mindmap1.pdf" class="download-link" download>Télécharger la carte mentale</a>
         </div>
-        <div id="mindMap2" class="mind-map">
-            <h3>Carte mentale - Chapitre 2 🧠</h3>
-            <ul>
-                <li>Techniques et méthodes</li>
-                <li>Laboratoire et expérimentations</li>
-                <li>Analyse des données</li>
-            </ul>
-        </div>
-        <div id="mindMap3" class="mind-map">
-            <h3>Carte mentale - Chapitre 3 🧠</h3>
-            <ul>
-                <li>Applications dans l'agriculture</li>
-                <li>Applications en santé</li>
-                <li>Biotechnologie industrielle</li>
-            </ul>
-        </div>
-        <!-- Ajoute les autres cartes mentales pour chaque chapitre -->
 
-        <!-- Système d'affichage des chapitres -->
-        <div id="chapter1Btns" class="chapter-btns">
-            <button>Installer le cours complet</button>
-            <button onclick="toggleMindMap(1)">Carte mentale</button>
-            <button onclick="toggleRevisionSheet(1)">Fiche de révision</button>
-        </div>
-        <div id="chapter2Btns" class="chapter-btns">
-            <button>Installer le cours complet</button>
-            <button onclick="toggleMindMap(2)">Carte mentale</button>
-            <button onclick="toggleRevisionSheet(2)">Fiche de révision</button>
-        </div>
-        <!-- Ajoute des boutons pour les autres chapitres -->
-
-        <!-- Fiches de révision -->
-        <div id="revisionSheet1" class="revision-sheet">
+        <!-- Révision Fiche -->
+        <div id="revision1" class="revision-sheet">
             <h3>Fiche de révision - Chapitre 1</h3>
             <ul>
                 <li>Définition de la biotechnologie</li>
-                <li>Historique de la biotechnologie</li>
-                <li>Principaux domaines d'application</li>
+                <li>Les différents types de biotechnologie</li>
+                <li>Historique des découvertes clés</li>
             </ul>
+            <a href="downloads/revision1.pdf" class="download-link" download>Télécharger la fiche de révision</a>
         </div>
-        <div id="revisionSheet2" class="revision-sheet">
-            <h3>Fiche de révision - Chapitre 2</h3>
-            <ul>
-                <li>Méthodes de culture cellulaire</li>
-                <li>Techniques de génie génétique</li>
-                <li>Applications des méthodes en laboratoire</li>
-            </ul>
+
+        <div class="chapter-btns">
+            <button onclick="showMindMap(1)">Voir la carte mentale</button>
+            <button onclick="showRevisionSheet(1)">Voir la fiche de révision</button>
         </div>
-        <!-- Ajoute les autres fiches de révision pour chaque chapitre -->
     </section>
 
     <script>
+        // Fonction pour afficher le contenu des chapitres
         function showChapter(chapter) {
-            // Masquer tous les boutons de chapitre
-            let buttons = document.querySelectorAll('.chapter-btns');
-            buttons.forEach(button => button.style.display = 'none');
+            // Cacher tous les éléments de chapitre
+            document.querySelectorAll('.chapter-btns').forEach(function (btn) {
+                btn.style.display = 'none';
+            });
 
-            // Afficher les boutons du chapitre sélectionné
-            document.getElementById('chapter' + chapter + 'Btns').style.display = 'block';
-
-            // Masquer toutes les cartes mentales et fiches de révision
-            let mindMaps = document.querySelectorAll('.mind-map');
-            let revisionSheets = document.querySelectorAll('.revision-sheet');
-            mindMaps.forEach(map => map.style.display = 'none');
-            revisionSheets.forEach(sheet => sheet.style.display = 'none');
+            document.querySelector(`#chapter${chapter}`).classList.add('selected');
+            document.querySelector(`#mindMap${chapter}`).style.display = 'block';
+            document.querySelector(`#revision${chapter}`).style.display = 'block';
         }
 
-        function toggleMindMap(chapter) {
-            let mindMap = document.getElementById('mindMap' + chapter);
-            if (mindMap.style.display === 'none' || mindMap.style.display === '') {
-                mindMap.style.display = 'block';
-            } else {
-                mindMap.style.display = 'none';
-            }
+        // Fonction pour afficher les cartes mentales et fiches de révision
+        function showMindMap(chapter) {
+            document.querySelector(`#mindMap${chapter}`).style.display = 'block';
         }
 
-        function toggleRevisionSheet(chapter) {
-            let revisionSheet = document.getElementById('revisionSheet' + chapter);
-            if (revisionSheet.style.display === 'none' || revisionSheet.style.display === '') {
-                revisionSheet.style.display = 'block';
-            } else {
-                revisionSheet.style.display = 'none';
-            }
+        function showRevisionSheet(chapter) {
+            document.querySelector(`#revision${chapter}`).style.display = 'block';
         }
     </script>
 </body>
