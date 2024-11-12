@@ -229,28 +229,31 @@
                 <h3>Fiche de révision</h3>
                 <ul>
                     <li>Les différentes branches de la biotechnologie</li>
-                    <li>Les méthodes d’analyse génétique</li>
-                    <li>Les enjeux environnementaux</li>
+                    <li>Les méthodes d’analyse utilisées en biotechnologie</li>
                 </ul>
                 <a href="downloads/revision1.pdf" class="download-link" download>Télécharger la fiche de révision</a>
             </div>
+
+            <div class="chapter-btns">
+                <button onclick="downloadMindMap(1)">Télécharger la carte mentale</button>
+                <button onclick="downloadCourse(1)">Télécharger le cours</button>
+                <button onclick="downloadRevision(1)">Télécharger la fiche de révision</button>
+            </div>
         </div>
 
-        <!-- Code pour les autres chapitres à ajouter ici... -->
+        <!-- Chapitre suivant -->
+        <div id="content2" class="chapter-content">
+            <h2>Chapitre 2 - Méthodes en Biotechnologie</h2>
+            <!-- Contenu similaire pour chaque chapitre suivant -->
+        </div>
     </section>
 
     <script>
-        function showChapter(chapterNumber) {
-            // Cacher tous les chapitres
-            for (let i = 1; i <= 10; i++) {
-                document.getElementById('content' + i).style.display = 'none';
-            }
-            // Afficher le chapitre sélectionné
-            document.getElementById('content' + chapterNumber).style.display = 'block';
-            // Mettre en surbrillance le chapitre sélectionné
-            const chapters = document.querySelectorAll('.timeline div');
-            chapters.forEach(chapter => chapter.classList.remove('selected'));
-            document.getElementById('chapter' + chapterNumber).classList.add('selected');
+        function showChapter(chapter) {
+            const allContents = document.querySelectorAll('.chapter-content');
+            allContents.forEach(content => content.style.display = 'none');
+
+            document.getElementById(`content${chapter}`).style.display = 'block';
         }
     </script>
 </body>
