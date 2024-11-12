@@ -213,54 +213,59 @@
             <div onclick="showChapter(10)" id="chapter10" class="chapter10">Chapitre 10 - Perspectives 🌍</div>
         </div>
 
-        <!-- Cartes mentales -->
-        <div id="mindMap1" class="mind-map">
-            <h3>Carte mentale - Chapitre 1 🧠</h3>
-            <ul>
-                <li>Introduction à la biotechnologie</li>
-                <li>Concepts de base</li>
-                <li>Applications principales</li>
-            </ul>
-            <a href="downloads/mindmap1.pdf" class="download-link" download>Télécharger la carte mentale</a>
+        <!-- Chapitre 1 -->
+        <div id="content1" class="chapter-content">
+            <h2>Chapitre 1 - Introduction à la Biotechnologie</h2>
+            <div id="mindMap1" class="mind-map">
+                <h3>Carte mentale</h3>
+                <ul>
+                    <li>Introduction à la biotechnologie</li>
+                    <li>Concepts de base</li>
+                    <li>Applications principales</li>
+                </ul>
+                <a href="downloads/mindmap1.pdf" class="download-link" download>Télécharger la carte mentale</a>
+            </div>
+
+            <div id="revision1" class="revision-sheet">
+                <h3>Fiche de révision</h3>
+                <ul>
+                    <li>Définition de la biotechnologie</li>
+                    <li>Différentes approches en biotechnologie</li>
+                    <li>Exemples de biotechnologie dans la médecine</li>
+                </ul>
+                <a href="downloads/revision1.pdf" class="download-link" download>Télécharger la fiche de révision</a>
+            </div>
         </div>
 
-        <!-- Révision Fiche -->
-        <div id="revision1" class="revision-sheet">
-            <h3>Fiche de révision - Chapitre 1</h3>
-            <ul>
-                <li>Définition de la biotechnologie</li>
-                <li>Les différents types de biotechnologie</li>
-                <li>Historique des découvertes clés</li>
-            </ul>
-            <a href="downloads/revision1.pdf" class="download-link" download>Télécharger la fiche de révision</a>
-        </div>
-
-        <div class="chapter-btns">
-            <button onclick="showMindMap(1)">Voir la carte mentale</button>
-            <button onclick="showRevisionSheet(1)">Voir la fiche de révision</button>
-        </div>
+        <!-- Répéter pour chaque chapitre -->
     </section>
 
     <script>
-        // Fonction pour afficher le contenu des chapitres
         function showChapter(chapter) {
-            // Cacher tous les éléments de chapitre
-            document.querySelectorAll('.chapter-btns').forEach(function (btn) {
-                btn.style.display = 'none';
-            });
+            const content = document.querySelector(`#content${chapter}`);
+            const mindMap = document.querySelector(`#mindMap${chapter}`);
+            const revision = document.querySelector(`#revision${chapter}`);
+            content.style.display = 'block';
+            mindMap.style.display = 'block';
+            revision.style.display = 'block';
 
-            document.querySelector(`#chapter${chapter}`).classList.add('selected');
-            document.querySelector(`#mindMap${chapter}`).style.display = 'block';
-            document.querySelector(`#revision${chapter}`).style.display = 'block';
-        }
+            // Masquer les autres chapitres
+            for (let i = 1; i <= 10; i++) {
+                if (i !== chapter) {
+                    document.querySelector(`#content${i}`).style.display = 'none';
+                    document.querySelector(`#mindMap${i}`).style.display = 'none';
+                    document.querySelector(`#revision${i}`).style.display = 'none';
+                }
+            }
 
-        // Fonction pour afficher les cartes mentales et fiches de révision
-        function showMindMap(chapter) {
-            document.querySelector(`#mindMap${chapter}`).style.display = 'block';
-        }
-
-        function showRevisionSheet(chapter) {
-            document.querySelector(`#revision${chapter}`).style.display = 'block';
+            // Marquer le chapitre sélectionné
+            for (let i = 1; i <= 10; i++) {
+                if (i === chapter) {
+                    document.querySelector(`#chapter${i}`).classList.add('selected');
+                } else {
+                    document.querySelector(`#chapter${i}`).classList.remove('selected');
+                }
+            }
         }
     </script>
 </body>
