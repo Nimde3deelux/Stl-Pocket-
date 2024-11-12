@@ -156,6 +156,29 @@
             margin-top: 10px;
         }
 
+        .progress-bar-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 5px;
+            height: 20px;
+            position: relative;
+        }
+
+        .progress-bar span {
+            display: block;
+            height: 100%;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
             .course-card,
@@ -255,56 +278,51 @@
 
             <div class="interactive-box">
                 <h3>Résolveur d'Équations</h3>
-                <p>Entrez une équation et obtenez sa solution instantanément.</p>
-                <input type="text" id="equationInput" placeholder="Exemple: x^2 - 4 = 0" />
+                <p>Entrez une équation pour obtenir une solution instantanée.</p>
+                <input type="text" id="equationInput" placeholder="Ex: 2x + 3 = 5">
                 <button onclick="solveEquation()">Résoudre</button>
-                <p id="equationResult"></p>
-
+                <div id="solution"></div>
                 <script>
                     function solveEquation() {
-                        let equation = document.getElementById("equationInput").value;
-                        // Implémentation basique d'un résolveur (ce code est un modèle simplifié)
-                        let result;
-                        try {
-                            result = math.evaluate(equation);
-                        } catch (error) {
-                            result = "Erreur dans l'équation";
-                        }
-                        document.getElementById("equationResult").innerText = "Solution: " + result;
+                        var equation = document.getElementById("equationInput").value;
+                        // Implémentation simple pour résoudre une équation de type ax + b = c
+                        var solution = eval(equation.replace('x', '*1'));
+                        document.getElementById("solution").innerText = "Solution : " + solution;
                     }
                 </script>
             </div>
         </section>
 
-        <!-- FAQ Section -->
-        <section class="faq">
-            <h2 class="section-header">Questions Fréquemment Posées (FAQ)</h2>
-            <div class="faq-item">
-                <h4 onclick="toggleFAQ(1)">Quels sont les prérequis pour suivre les cours ?</h4>
-                <p id="faq-1">Il est recommandé d'avoir une bonne maîtrise des concepts de base en mathématiques, comme les opérations de base, avant de commencer les cours avancés.</p>
+        <!-- Quiz Section -->
+        <section class="quiz">
+            <h4>Quiz de Mathématiques</h4>
+            <div id="quiz-container">
+                <div class="quiz-option" onclick="checkAnswer(1)">1. Qu'est-ce qu'un nombre premier ?</div>
+                <div class="quiz-option" onclick="checkAnswer(2)">2. Quelle est la formule de l'aire d'un cercle ?</div>
             </div>
-            <div class="faq-item">
-                <h4 onclick="toggleFAQ(2)">Comment puis-je poser des questions pendant les cours ?</h4>
-                <p id="faq-2">Vous pouvez poser des questions via le système de chat intégré à la plateforme, où les enseignants répondent en temps réel.</p>
-            </div>
-            <div class="faq-item">
-                <h4 onclick="toggleFAQ(3)">Puis-je obtenir des certificats après avoir terminé les cours ?</h4>
-                <p id="faq-3">Oui, après avoir complété chaque cours avec succès, vous recevrez un certificat de compétence que vous pouvez ajouter à votre profil.</p>
-            </div>
+            <div class="quiz-result" id="quiz-result"></div>
         </section>
 
-        <!-- JavaScript for FAQ toggle -->
-        <script>
-            function toggleFAQ(id) {
-                var faqContent = document.getElementById("faq-" + id);
-                if (faqContent.style.display === "none" || faqContent.style.display === "") {
-                    faqContent.style.display = "block";
-                } else {
-                    faqContent.style.display = "none";
-                }
-            }
-        </script>
+        <!-- Progress Bar Section -->
+        <section class="progress-bar-container">
+            <h3>Suivi de vos Progrès</h3>
+            <div class="progress-bar">
+                <span style="width: 60%">60% Complété</span>
+            </div>
+        </section>
     </div>
+
+    <script>
+        function checkAnswer(answer) {
+            var result = '';
+            if (answer === 1) {
+                result = 'Correct! Un nombre premier est un nombre entier naturel supérieur à 1 qui n’a pas d’autres diviseurs que 1 et lui-même.';
+            } else if (answer === 2) {
+                result = 'Correct! La formule de l’aire d’un cercle est A = πr².';
+            }
+            document.getElementById('quiz-result').innerText = result;
+        }
+    </script>
 
 </body>
 
