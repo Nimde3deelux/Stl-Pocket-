@@ -1,57 +1,311 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mathématiques</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Mathématiques | STL Pocket</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
-            background-color: #f0f8ff; /* Couleur propre pour les Mathématiques */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
         }
-        .pdf-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 20px 0;
-        }
-        .pdf-box {
-            width: 200px;
-            margin: 15px;
-            padding: 10px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
             text-align: center;
-            transition: transform 0.3s;
         }
-        .pdf-box:hover {
-            transform: scale(1.05);
+
+        .container {
+            width: 90%;
+            margin: auto;
+        }
+
+        .section-header {
+            font-size: 24px;
+            margin-top: 20px;
+            color: #4CAF50;
+        }
+
+        .section-content {
+            margin: 15px 0;
+        }
+
+        .course-card {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-card h3 {
+            color: #333;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 400px;
+            margin-top: 30px;
+        }
+
+        .video-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .video-container iframe {
+            width: 80%;
+            height: 500px;
+        }
+
+        .download-links a {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .download-links a:hover {
+            background-color: #45a049;
+        }
+
+        .faq {
+            margin-top: 50px;
+        }
+
+        .faq-item {
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-item h4 {
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+        }
+
+        .faq-item p {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .quiz {
+            background-color: #f8f8f8;
+            padding: 20px;
+            margin-top: 40px;
+            border-radius: 8px;
+        }
+
+        .quiz h4 {
+            font-size: 20px;
+        }
+
+        .quiz-option {
+            padding: 10px;
+            background-color: #fff;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .quiz-option:hover {
+            background-color: #f4f4f4;
+        }
+
+        .quiz-result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .interactive-elements {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+
+        .interactive-box {
+            width: 48%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .interactive-box h3 {
+            color: #4CAF50;
+        }
+
+        .interactive-box p {
+            margin-top: 10px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .course-card,
+            .faq-item {
+                margin: 10px 0;
+            }
+
+            .video-container iframe {
+                width: 100%;
+                height: 300px;
+            }
+
+            .interactive-elements {
+                flex-direction: column;
+            }
+
+            .interactive-box {
+                width: 100%;
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
+
 <body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#creators">Créateurs</a></li>
-        </ul>
-    </nav>
-    <section>
-        <h1>Mathématiques</h1>
-        <p>Bienvenue dans la section Mathématiques. Ici, vous trouverez des ressources, des exercices et des vidéos pour améliorer vos compétences en mathématiques.</p>
-        <div class="pdf-container">
-            <div class="pdf-box">
-                <a href="pdf/math_exercice1.pdf" download>Télécharger Exercice 1</a>
+
+    <header>
+        <h1>STL Pocket - Mathématiques</h1>
+        <p>Explorez des concepts mathématiques fascinants et améliorez vos compétences en toute simplicité</p>
+    </header>
+
+    <div class="container">
+        <!-- Introduction Section -->
+        <section id="intro">
+            <h2 class="section-header">Introduction aux Mathématiques</h2>
+            <div class="section-content">
+                <p>Les mathématiques sont un outil fondamental pour comprendre le monde qui nous entoure. Que ce soit pour résoudre des problèmes quotidiens ou pour aborder des concepts plus avancés comme l'algèbre, la géométrie, ou les probabilités, les mathématiques jouent un rôle clé. Explorez ci-dessous différentes ressources pour améliorer vos compétences en mathématiques !</p>
             </div>
-            <div class="pdf-box">
-                <a href="pdf/math_exercice2.pdf" download>Télécharger Exercice 2</a>
+        </section>
+
+        <!-- Courses Section -->
+        <section id="courses">
+            <h2 class="section-header">Cours Disponibles</h2>
+            <div class="course-card">
+                <h3>Algèbre : Résolution d'Équations</h3>
+                <p>Ce cours vous guide à travers les techniques de base pour résoudre des équations algébriques simples à complexes. Apprenez à maîtriser les manipulations algébriques et à résoudre des équations de premier et second degré.</p>
+                <div class="download-links">
+                    <a href="downloads/algebra.pdf">Télécharger le Cours</a>
+                    <a href="videos/algebra_intro.mp4">Visionner la Vidéo</a>
+                </div>
             </div>
-            <div class="pdf-box">
-                <a href="pdf/math_cours1.pdf" download>Télécharger Cours 1</a>
+
+            <div class="course-card">
+                <h3>Géométrie : Théorème de Pythagore</h3>
+                <p>Dans ce cours, nous abordons le théorème de Pythagore et son application dans la résolution de problèmes géométriques. Apprenez à utiliser ce théorème pour calculer la longueur des côtés d'un triangle rectangle.</p>
+                <div class="download-links">
+                    <a href="downloads/pythagore.pdf">Télécharger le Cours</a>
+                    <a href="videos/pythagore_intro.mp4">Visionner la Vidéo</a>
+                </div>
             </div>
-            <!-- Ajoutez d'autres PDF ici -->
-        </div>
-    </section>
+
+            <div class="course-card">
+                <h3>Calcul des Probabilités</h3>
+                <p>Le cours sur les probabilités vous permet d'apprendre les bases du calcul des probabilités. Nous couvrons les concepts comme les événements indépendants, les variables aléatoires, et les distributions de probabilité.</p>
+                <div class="download-links">
+                    <a href="downloads/probabilites.pdf">Télécharger le Cours</a>
+                    <a href="videos/probabilites_intro.mp4">Visionner la Vidéo</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Elements -->
+        <section class="interactive-elements">
+            <div class="interactive-box">
+                <h3>Calculatrice Graphique</h3>
+                <p>Utilisez cette calculatrice graphique interactive pour explorer des équations en temps réel et comprendre mieux les courbes et fonctions.</p>
+                <canvas id="graphingCalculator" width="500" height="500"></canvas>
+                <script>
+                    // Dessiner une fonction sur le canvas
+                    var canvas = document.getElementById("graphingCalculator");
+                    var ctx = canvas.getContext("2d");
+
+                    function drawGraph() {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height); // Effacer le précédent dessin
+                        ctx.beginPath();
+                        ctx.moveTo(0, 250);
+                        for (let x = 0; x < canvas.width; x++) {
+                            let y = Math.sin(x * 0.01) * 100 + 250; // Exemple : sin(x)
+                            ctx.lineTo(x, y);
+                        }
+                        ctx.stroke();
+                    }
+
+                    drawGraph();
+                </script>
+            </div>
+
+            <div class="interactive-box">
+                <h3>Résolveur d'Équations</h3>
+                <p>Entrez une équation et obtenez sa solution instantanément.</p>
+                <input type="text" id="equationInput" placeholder="Exemple: x^2 - 4 = 0" />
+                <button onclick="solveEquation()">Résoudre</button>
+                <p id="equationResult"></p>
+
+                <script>
+                    function solveEquation() {
+                        let equation = document.getElementById("equationInput").value;
+                        // Implémentation basique d'un résolveur (ce code est un modèle simplifié)
+                        let result;
+                        try {
+                            result = math.evaluate(equation);
+                        } catch (error) {
+                            result = "Erreur dans l'équation";
+                        }
+                        document.getElementById("equationResult").innerText = "Solution: " + result;
+                    }
+                </script>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq">
+            <h2 class="section-header">Questions Fréquemment Posées (FAQ)</h2>
+            <div class="faq-item">
+                <h4 onclick="toggleFAQ(1)">Quels sont les prérequis pour suivre les cours ?</h4>
+                <p id="faq-1">Il est recommandé d'avoir une bonne maîtrise des concepts de base en mathématiques, comme les opérations de base, avant de commencer les cours avancés.</p>
+            </div>
+            <div class="faq-item">
+                <h4 onclick="toggleFAQ(2)">Comment puis-je poser des questions pendant les cours ?</h4>
+                <p id="faq-2">Vous pouvez poser des questions via le système de chat intégré à la plateforme, où les enseignants répondent en temps réel.</p>
+            </div>
+            <div class="faq-item">
+                <h4 onclick="toggleFAQ(3)">Puis-je obtenir des certificats après avoir terminé les cours ?</h4>
+                <p id="faq-3">Oui, après avoir complété chaque cours avec succès, vous recevrez un certificat de compétence que vous pouvez ajouter à votre profil.</p>
+            </div>
+        </section>
+
+        <!-- JavaScript for FAQ toggle -->
+        <script>
+            function toggleFAQ(id) {
+                var faqContent = document.getElementById("faq-" + id);
+                if (faqContent.style.display === "none" || faqContent.style.display === "") {
+                    faqContent.style.display = "block";
+                } else {
+                    faqContent.style.display = "none";
+                }
+            }
+        </script>
+    </div>
+
 </body>
+
 </html>
