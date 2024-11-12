@@ -1,16 +1,118 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biotechnologie</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Couleurs inspirées de Manhunt 2 pour un design sombre et intense */
         body {
-            background-color: #e6ffe6; /* Couleur propre pour la Biotechnologie */
+            background-color: #1a1a1a; /* Fond sombre */
+            color: #e6e6e6; /* Texte clair */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #e6e6e6;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        nav ul li a:hover {
+            color: #ff9900;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            color: #ff9900; /* Couleur vive pour l'intitulé */
+            margin-top: 50px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1.2em;
+            color: #d9d9d9;
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        /* Style des chapitres et des boutons */
+        .chapter-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .chapter-btn {
+            background-color: #ff6600;
+            border: none;
+            padding: 15px 30px;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            text-transform: uppercase;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .chapter-btn:hover {
+            background-color: #ff9900;
+        }
+
+        .pdf-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .pdf-box {
+            background-color: #333;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 200px;
+        }
+
+        .pdf-box a {
+            color: #ff6600;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .pdf-box a:hover {
+            color: #ff9900;
         }
     </style>
 </head>
+
 <body>
     <nav>
         <ul>
@@ -19,9 +121,34 @@
             <li><a href="#creators">Créateurs</a></li>
         </ul>
     </nav>
+
     <section>
         <h1>Biotechnologie</h1>
-        <p>Bienvenue dans la section Biotechnologie. Ici, vous trouverez des ressources, des exercices et des vidéos pour améliorer vos compétences en biotechnologie.</p>
+        <p>Bienvenue dans la section Biotechnologie. Découvrez des ressources, exercices et vidéos pour approfondir vos connaissances.</p>
+
+        <!-- Système de chapitres -->
+        <div class="chapter-container">
+            <button class="chapter-btn" onclick="location.href='#chapter1'">Chapitre 1</button>
+            <button class="chapter-btn" onclick="location.href='#chapter2'">Chapitre 2</button>
+            <button class="chapter-btn" onclick="location.href='#chapter3'">Chapitre 3</button>
+        </div>
+
+        <div id="chapter1">
+            <h2>Chapitre 1 : Introduction à la Biotechnologie</h2>
+            <p>Dans ce chapitre, nous allons explorer les bases de la biotechnologie et ses applications.</p>
+        </div>
+
+        <div id="chapter2">
+            <h2>Chapitre 2 : Les Microorganismes et leurs Applications</h2>
+            <p>Ce chapitre couvre l'utilisation des microorganismes dans la biotechnologie moderne.</p>
+        </div>
+
+        <div id="chapter3">
+            <h2>Chapitre 3 : La Biotechnologie dans l'Industrie</h2>
+            <p>Découvrez comment la biotechnologie est utilisée dans des secteurs industriels comme la santé et l'agriculture.</p>
+        </div>
+
+        <!-- Liens vers les PDF -->
         <div class="pdf-container">
             <div class="pdf-box">
                 <a href="pdf/biotech_exercice1.pdf" download>Télécharger Exercice 1</a>
@@ -32,8 +159,9 @@
             <div class="pdf-box">
                 <a href="pdf/biotech_cours1.pdf" download>Télécharger Cours 1</a>
             </div>
-            <!-- Ajoutez d'autres PDF ici -->
+            <!-- Ajoute d'autres PDF ici si nécessaire -->
         </div>
     </section>
 </body>
+
 </html>
