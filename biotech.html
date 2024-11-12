@@ -129,8 +129,14 @@
             transform: scale(1.05);
         }
 
-        /* Cartes mentales */
-        .mind-map {
+        /* Cartes mentales, cours et fiches de révision */
+        .chapter-content {
+            display: none;
+        }
+
+        .mind-map,
+        .revision-sheet,
+        .course {
             display: none;
             margin-top: 20px;
             background-color: #2E2E2E;
@@ -140,35 +146,15 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
-        .mind-map ul {
+        .mind-map ul,
+        .revision-sheet ul,
+        .course ul {
             list-style: none;
         }
 
-        .mind-map li {
-            margin: 10px 0;
-        }
-
-        /* Fiches de révision */
-        .revision-sheet {
-            display: none;
-            background-color: #2E2E2E;
-            color: #FFFFFF;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .revision-sheet h3 {
-            color: #ff9900;
-        }
-
-        .revision-sheet ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .revision-sheet li {
+        .mind-map li,
+        .revision-sheet li,
+        .course li {
             margin: 10px 0;
         }
 
@@ -216,6 +202,8 @@
         <!-- Chapitre 1 -->
         <div id="content1" class="chapter-content">
             <h2>Chapitre 1 - Introduction à la Biotechnologie</h2>
+
+            <!-- Carte mentale -->
             <div id="mindMap1" class="mind-map">
                 <h3>Carte mentale</h3>
                 <ul>
@@ -226,46 +214,43 @@
                 <a href="downloads/mindmap1.pdf" class="download-link" download>Télécharger la carte mentale</a>
             </div>
 
+            <!-- Cours -->
+            <div id="course1" class="course">
+                <h3>Cours complet</h3>
+                <ul>
+                    <li>Introduction générale à la biotechnologie</li>
+                    <li>Historique et évolution</li>
+                    <li>Applications en agriculture et en médecine</li>
+                </ul>
+            </div>
+
+            <!-- Fiche de révision -->
             <div id="revision1" class="revision-sheet">
                 <h3>Fiche de révision</h3>
                 <ul>
-                    <li>Définition de la biotechnologie</li>
-                    <li>Différentes approches en biotechnologie</li>
-                    <li>Exemples de biotechnologie dans la médecine</li>
+                    <li>Les différentes branches de la biotechnologie</li>
+                    <li>Les méthodes d’analyse génétique</li>
+                    <li>Les enjeux environnementaux</li>
                 </ul>
                 <a href="downloads/revision1.pdf" class="download-link" download>Télécharger la fiche de révision</a>
             </div>
         </div>
 
-        <!-- Répéter pour chaque chapitre -->
+        <!-- Code pour les autres chapitres à ajouter ici... -->
     </section>
 
     <script>
-        function showChapter(chapter) {
-            const content = document.querySelector(`#content${chapter}`);
-            const mindMap = document.querySelector(`#mindMap${chapter}`);
-            const revision = document.querySelector(`#revision${chapter}`);
-            content.style.display = 'block';
-            mindMap.style.display = 'block';
-            revision.style.display = 'block';
-
-            // Masquer les autres chapitres
+        function showChapter(chapterNumber) {
+            // Cacher tous les chapitres
             for (let i = 1; i <= 10; i++) {
-                if (i !== chapter) {
-                    document.querySelector(`#content${i}`).style.display = 'none';
-                    document.querySelector(`#mindMap${i}`).style.display = 'none';
-                    document.querySelector(`#revision${i}`).style.display = 'none';
-                }
+                document.getElementById('content' + i).style.display = 'none';
             }
-
-            // Marquer le chapitre sélectionné
-            for (let i = 1; i <= 10; i++) {
-                if (i === chapter) {
-                    document.querySelector(`#chapter${i}`).classList.add('selected');
-                } else {
-                    document.querySelector(`#chapter${i}`).classList.remove('selected');
-                }
-            }
+            // Afficher le chapitre sélectionné
+            document.getElementById('content' + chapterNumber).style.display = 'block';
+            // Mettre en surbrillance le chapitre sélectionné
+            const chapters = document.querySelectorAll('.timeline div');
+            chapters.forEach(chapter => chapter.classList.remove('selected'));
+            document.getElementById('chapter' + chapterNumber).classList.add('selected');
         }
     </script>
 </body>
