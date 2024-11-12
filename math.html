@@ -198,7 +198,6 @@
             color: white;
         }
 
-        /* Réduire la taille de la calculatrice */
         .interactive-box canvas {
             width: 100%;
             height: 250px;
@@ -235,7 +234,6 @@
         <p>Explorez des concepts mathématiques fascinants et améliorez vos compétences en toute simplicité</p>
     </header>
 
-    <!-- Menu de navigation -->
     <nav>
         <a href="#">Accueil</a>
         <a href="#">Mathématiques</a>
@@ -245,7 +243,6 @@
     </nav>
 
     <div class="container">
-        <!-- Introduction Section -->
         <section id="intro">
             <h2 class="section-header">Introduction aux Mathématiques</h2>
             <div class="section-content">
@@ -253,7 +250,6 @@
             </div>
         </section>
 
-        <!-- Courses Section -->
         <section id="courses">
             <h2 class="section-header">Cours Disponibles</h2>
             <div class="course-card">
@@ -284,7 +280,6 @@
             </div>
         </section>
 
-        <!-- Interactive Elements -->
         <section class="interactive-elements">
             <div class="interactive-box">
                 <h3>Calculatrice Graphique</h3>
@@ -301,59 +296,51 @@
             </div>
         </section>
 
-        <!-- FAQ Section -->
         <section class="faq">
-            <h2 class="section-header">Questions Fréquentes</h2>
-            <div class="faq-item">
-                <h4>Comment utiliser STL Pocket ?</h4>
-                <p>STL Pocket est conçu pour vous fournir un accès rapide à des ressources d'apprentissage, avec des cours, des vidéos et des exercices interactifs. Inscrivez-vous et explorez les différentes sections disponibles.</p>
-            </div>
-            <div class="faq-item">
-                <h4>Quels sont les prérequis pour commencer ?</h4>
-                <p>Il n'y a pas de prérequis spécifiques, mais avoir des bases en mathématiques est recommandé pour tirer pleinement profit des cours avancés.</p>
-            </div>
-        </section>
+            <h2 class="section-header">FAQ - Questions Fréquemment Posées</h2>
 
-        <!-- Quiz Section -->
-        <section class="quiz">
-            <h4>Testez vos connaissances : Mathématiques</h4>
-            <div class="quiz-option">Quelle est la formule de l'aire d'un cercle ?</div>
-            <div class="quiz-option">Quel est le théorème de Pythagore ?</div>
-            <div class="quiz-result">Réponse correcte : 1/2</div>
+            <div class="faq-item">
+                <h4>Comment puis-je télécharger les cours de mathématiques ?</h4>
+                <p>Les cours sont disponibles en PDF et en vidéo. Cliquez sur le bouton de téléchargement ou de visionnage pour accéder aux ressources.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Quelles ressources sont disponibles dans STL Pocket ?</h4>
+                <p>STL Pocket fournit des cours, des vidéos explicatives, des quiz interactifs et des exercices pour améliorer vos compétences dans diverses matières.</p>
+            </div>
         </section>
     </div>
 
     <script>
-        // Calculatrice graphique
-        var ctx = document.getElementById('graph').getContext('2d');
-        var chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [0, 1, 2, 3, 4, 5],
-                datasets: [{
-                    label: 'y = x^2',
-                    data: [0, 1, 4, 9, 16, 25],
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    fill: false
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        ticks: {
-                            autoSkip: true
-                        }
-                    }
-                }
-            }
-        });
-
-        // Gestion des FAQ
         $(document).ready(function () {
             $(".faq-item h4").click(function () {
                 $(this).next("p").slideToggle();
             });
+        });
+
+        const ctx = document.getElementById('graph').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                datasets: [{
+                    label: 'Exemple de Données',
+                    data: [10, 20, 15, 30, 25, 40],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
         });
     </script>
 
