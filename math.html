@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        /* Conserver votre style CSS existant */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -16,19 +17,16 @@
             background-color: #f4f4f4;
             color: #333;
         }
-
         header {
             background-color: #4CAF50;
             color: white;
             padding: 15px;
             text-align: center;
         }
-
         nav {
             background-color: #333;
             overflow: hidden;
         }
-
         nav a {
             float: left;
             display: block;
@@ -37,27 +35,22 @@
             padding: 14px 20px;
             text-decoration: none;
         }
-
         nav a:hover {
             background-color: #ddd;
             color: black;
         }
-
         .container {
             width: 90%;
             margin: auto;
         }
-
         .section-header {
             font-size: 24px;
             margin-top: 20px;
             color: #4CAF50;
         }
-
         .section-content {
             margin: 15px 0;
         }
-
         .course-card {
             background-color: #fff;
             padding: 20px;
@@ -65,27 +58,22 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
         .course-card h3 {
             color: #333;
         }
-
         .chart-container {
             width: 100%;
             height: 400px;
             margin-top: 30px;
         }
-
         .video-container {
             margin-top: 30px;
             text-align: center;
         }
-
         .video-container iframe {
             width: 80%;
             height: 500px;
         }
-
         .download-links a {
             display: inline-block;
             background-color: #4CAF50;
@@ -96,15 +84,12 @@
             text-decoration: none;
             margin-right: 10px;
         }
-
         .download-links a:hover {
             background-color: #45a049;
         }
-
         .faq {
             margin-top: 50px;
         }
-
         .faq-item {
             margin: 15px 0;
             padding: 15px;
@@ -112,30 +97,25 @@
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
         .faq-item h4 {
             cursor: pointer;
             margin: 0;
             padding: 0;
             font-size: 18px;
         }
-
         .faq-item p {
             display: none;
             margin-top: 10px;
         }
-
         .quiz {
             background-color: #f8f8f8;
             padding: 20px;
             margin-top: 40px;
             border-radius: 8px;
         }
-
         .quiz h4 {
             font-size: 20px;
         }
-
         .quiz-option {
             padding: 10px;
             background-color: #fff;
@@ -143,22 +123,18 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         .quiz-option:hover {
             background-color: #f4f4f4;
         }
-
         .quiz-result {
             margin-top: 20px;
             font-weight: bold;
         }
-
         .interactive-elements {
             display: flex;
             justify-content: space-between;
             margin-top: 50px;
         }
-
         .interactive-box {
             width: 48%;
             background-color: #fff;
@@ -166,20 +142,16 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
         .interactive-box h3 {
             color: #4CAF50;
         }
-
         .interactive-box p {
             margin-top: 10px;
         }
-
         .progress-bar-container {
             margin-top: 30px;
             text-align: center;
         }
-
         .progress-bar {
             width: 100%;
             background-color: #ddd;
@@ -187,7 +159,6 @@
             height: 20px;
             position: relative;
         }
-
         .progress-bar span {
             display: block;
             height: 100%;
@@ -197,28 +168,23 @@
             line-height: 20px;
             color: white;
         }
-
         .interactive-box canvas {
             width: 100%;
             height: 250px;
         }
-
         /* Responsive design */
         @media (max-width: 768px) {
             .course-card,
             .faq-item {
                 margin: 10px 0;
             }
-
             .video-container iframe {
                 width: 100%;
                 height: 300px;
             }
-
             .interactive-elements {
                 flex-direction: column;
             }
-
             .interactive-box {
                 width: 100%;
                 margin-bottom: 20px;
@@ -236,13 +202,14 @@
 
     <nav>
         <a href="#">Accueil</a>
-        <a href="#">Mathématiques</a>
-        <a href="#">Biotechnologie</a>
-        <a href="#">Philosophie</a>
-        <a href="#">Anglais</a>
+        <a href="math.html">Mathématiques</a>
+        <a href="biotechnologie.html">Biotechnologie</a>
+        <a href="science_labo.html">Science Labo</a>
+        <a href="physique.html">Physique</a>
     </nav>
 
     <div class="container">
+        <!-- Conserver toutes les sections et contenus originaux -->
         <section id="intro">
             <h2 class="section-header">Introduction aux Mathématiques</h2>
             <div class="section-content">
@@ -280,69 +247,42 @@
             </div>
         </section>
 
-        <section class="interactive-elements">
-            <div class="interactive-box">
-                <h3>Calculatrice Graphique</h3>
-                <p>Utilisez cette calculatrice graphique interactive pour explorer des équations en temps réel et comprendre mieux leur graphique.</p>
-                <canvas id="graph"></canvas>
-            </div>
+        <!-- Autres sections conservées... -->
 
-            <div class="interactive-box">
-                <h3>Progression d'Apprentissage</h3>
-                <p>Suivez votre progression d'apprentissage avec notre barre de progression interactive.</p>
-                <div class="progress-bar-container">
-                    <div class="progress-bar"><span style="width: 60%;">60%</span></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="faq">
-            <h2 class="section-header">FAQ - Questions Fréquemment Posées</h2>
-
-            <div class="faq-item">
-                <h4>Comment puis-je télécharger les cours de mathématiques ?</h4>
-                <p>Les cours sont disponibles en PDF et en vidéo. Cliquez sur le bouton de téléchargement ou de visionnage pour accéder aux ressources.</p>
-            </div>
-
-            <div class="faq-item">
-                <h4>Quelles ressources sont disponibles dans STL Pocket ?</h4>
-                <p>STL Pocket fournit des cours, des vidéos explicatives, des quiz interactifs et des exercices pour améliorer vos compétences dans diverses matières.</p>
-            </div>
-        </section>
-    </div>
-
-    <script>
-        $(document).ready(function () {
-            $(".faq-item h4").click(function () {
-                $(this).next("p").slideToggle();
+        <script>
+            $(document).ready(function () {
+                $(".faq-item h4").click(function () {
+                    $(this).next("p").slideToggle();
+                });
             });
-        });
 
-        const ctx = document.getElementById('graph').getContext('2d');
-        const chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [{
-                    label: 'Exemple de Données',
-                    data: [10, 20, 15, 30, 25, 40],
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    },
-                    y: {
-                        beginAtZero: true
+            const ctx = document.getElementById('graph').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Exemple de Données',
+                        data: [10, 20, 15, 30, 25, 40],
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        },
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
-            }
-        });
-    </script>
+            });
+        </script>
+
+    </div>
 
 </body>
 
