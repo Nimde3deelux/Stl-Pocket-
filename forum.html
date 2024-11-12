@@ -26,15 +26,24 @@
         let playerImage = new Image();
         let enemyImage = new Image();
         let music = new Audio();
-        let hit = false;
 
         // Chargement des ressources
-        bgImage.src = 'https://github.com/ton-github/images/jeuxbackground.jpg';
-        playerImage.src = 'https://github.com/ton-github/images/gif.jeux.gif';
-        enemyImage.src = 'https://github.com/ton-github/images/enemie.jpg';
-        music.src = 'https://github.com/ton-github/audio/musicjeux.mp3';
-        music.loop = true;
-        music.play();
+        bgImage.src = 'https://example.com/jeuxbackground.jpg';  // Remplacez par une URL valide
+        playerImage.src = 'https://example.com/gif.jeux.gif';   // Remplacez par une URL valide
+        enemyImage.src = 'https://example.com/enemie.jpg';       // Remplacez par une URL valide
+        music.src = 'https://example.com/musicjeux.mp3';          // Remplacez par une URL valide
+
+        // Attendre que toutes les images et la musique soient chargées
+        Promise.all([
+            new Promise((resolve) => { bgImage.onload = resolve; }),
+            new Promise((resolve) => { playerImage.onload = resolve; }),
+            new Promise((resolve) => { enemyImage.onload = resolve; }),
+            new Promise((resolve) => { music.onload = resolve; })
+        ]).then(() => {
+            music.loop = true;
+            music.play();
+            updateGame();  // Lancer le jeu après le chargement des ressources
+        });
 
         // Classe du joueur
         class Player {
@@ -151,10 +160,6 @@
 
             requestAnimationFrame(updateGame);
         }
-
-        // Démarrer le jeu
-        updateGame();
-
     </script>
 </body>
 </html>
