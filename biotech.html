@@ -65,6 +65,7 @@
             justify-content: space-evenly;
             margin-top: 40px;
             padding: 20px;
+            flex-wrap: wrap;
         }
 
         .timeline div {
@@ -74,12 +75,15 @@
             border-radius: 5px;
             cursor: pointer;
             text-align: center;
-            transition: background-color 0.3s ease-in-out;
+            transition: background-color 0.3s ease-in-out, transform 0.3s;
             width: 120px;
+            margin: 10px;
         }
 
-        .timeline div:hover {
+        .timeline div:hover,
+        .timeline .selected {
             background-color: #ff9900;
+            transform: scale(1.1);
         }
 
         .chapter-btns {
@@ -104,33 +108,6 @@
             background-color: #ff9900;
         }
 
-        .pdf-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .pdf-box {
-            background-color: #333;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            width: 200px;
-        }
-
-        .pdf-box a {
-            color: #ff6600;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-
-        .pdf-box a:hover {
-            color: #ff9900;
-        }
     </style>
 </head>
 
@@ -149,39 +126,56 @@
 
         <!-- Frise chronologique -->
         <div class="timeline">
-            <div onclick="showChapter(1)">Chapitre 1</div>
-            <div onclick="showChapter(2)">Chapitre 2</div>
-            <div onclick="showChapter(3)">Chapitre 3</div>
+            <div onclick="showChapter(3)" id="chapter3">Chapitre 3</div>
+            <div onclick="showChapter(4)" id="chapter4">Chapitre 4</div>
+            <div onclick="showChapter(5)" id="chapter5">Chapitre 5</div>
+            <div onclick="showChapter(6)" id="chapter6">Chapitre 6</div>
+            <div onclick="showChapter(7)" id="chapter7">Chapitre 7</div>
+            <div onclick="showChapter(8)" id="chapter8">Chapitre 8</div>
+            <div onclick="showChapter(9)" id="chapter9">Chapitre 9</div>
+            <div onclick="showChapter(10)" id="chapter10">Chapitre 10</div>
         </div>
 
         <!-- Système d'affichage des chapitres -->
-        <div id="chapter1" class="chapter-btns">
-            <button onclick="installCourse('chapitre1')">Installer le cours complet</button>
-            <button onclick="installMindMap('chapitre1')">Carte mentale</button>
-            <button onclick="installRevisionSheet('chapitre1')">Fiche de révision</button>
+        <div id="chapter3Btns" class="chapter-btns">
+            <button>Installer le cours complet</button>
+            <button>Carte mentale</button>
+            <button>Fiche de révision</button>
         </div>
-        <div id="chapter2" class="chapter-btns">
-            <button onclick="installCourse('chapitre2')">Installer le cours complet</button>
-            <button onclick="installMindMap('chapitre2')">Carte mentale</button>
-            <button onclick="installRevisionSheet('chapitre2')">Fiche de révision</button>
+        <div id="chapter4Btns" class="chapter-btns">
+            <button>Installer le cours complet</button>
+            <button>Carte mentale</button>
+            <button>Fiche de révision</button>
         </div>
-        <div id="chapter3" class="chapter-btns">
-            <button onclick="installCourse('chapitre3')">Installer le cours complet</button>
-            <button onclick="installMindMap('chapitre3')">Carte mentale</button>
-            <button onclick="installRevisionSheet('chapitre3')">Fiche de révision</button>
+        <div id="chapter5Btns" class="chapter-btns">
+            <button>Installer le cours complet</button>
+            <button>Carte mentale</button>
+            <button>Fiche de révision</button>
         </div>
-
-        <!-- Liens vers les PDF -->
-        <div class="pdf-container">
-            <div class="pdf-box">
-                <a href="pdf/biotech_exercice1.pdf" download>Télécharger Exercice 1</a>
-            </div>
-            <div class="pdf-box">
-                <a href="pdf/biotech_exercice2.pdf" download>Télécharger Exercice 2</a>
-            </div>
-            <div class="pdf-box">
-                <a href="pdf/biotech_cours1.pdf" download>Télécharger Cours 1</a>
-            </div>
+        <div id="chapter6Btns" class="chapter-btns">
+            <button>Installer le cours complet</button>
+            <button>Carte mentale</button>
+            <button>Fiche de révision</button>
+        </div>
+        <div id="chapter7Btns" class="chapter-btns">
+            <button>Installer le cours complet</button>
+            <button>Carte mentale</button>
+            <button>Fiche de révision</button>
+        </div>
+        <div id="chapter8Btns" class="chapter-btns">
+            <button>Installer le cours complet</button>
+            <button>Carte mentale</button>
+            <button>Fiche de révision</button>
+        </div>
+        <div id="chapter9Btns" class="chapter-btns">
+            <button>Installer le cours complet</button>
+            <button>Carte mentale</button>
+            <button>Fiche de révision</button>
+        </div>
+        <div id="chapter10Btns" class="chapter-btns">
+            <button>Installer le cours complet</button>
+            <button>Carte mentale</button>
+            <button>Fiche de révision</button>
         </div>
     </section>
 
@@ -194,23 +188,15 @@
                 btn.style.display = 'none';
             });
 
+            // Retirer la classe 'selected' de tous les chapitres
+            const timelineChapters = document.querySelectorAll('.timeline div');
+            timelineChapters.forEach(chap => {
+                chap.classList.remove('selected');
+            });
+
             // Afficher les options du chapitre sélectionné
-            document.getElementById('chapter' + chapterNumber).style.display = 'block';
-        }
-
-        // Fonction pour installer le cours complet
-        function installCourse(chapter) {
-            alert("Le cours complet du " + chapter + " a été installé.");
-        }
-
-        // Fonction pour installer la carte mentale
-        function installMindMap(chapter) {
-            alert("La carte mentale du " + chapter + " a été installée.");
-        }
-
-        // Fonction pour installer la fiche de révision
-        function installRevisionSheet(chapter) {
-            alert("La fiche de révision du " + chapter + " a été installée.");
+            document.getElementById('chapter' + chapterNumber + 'Btns').style.display = 'block';
+            document.getElementById('chapter' + chapterNumber).classList.add('selected');
         }
     </script>
 </body>
