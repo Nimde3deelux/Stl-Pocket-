@@ -7,10 +7,10 @@
     <title>Biotechnologie</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Couleurs inspirées de Manhunt 2 pour un design sombre et intense */
+        /* Design amélioré et optimisation des transitions */
         body {
-            background-color: #1a1a1a; /* Fond sombre */
-            color: #e6e6e6; /* Texte clair */
+            background-color: #1a1a1a;
+            color: #e6e6e6;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -50,7 +50,7 @@
         h1 {
             text-align: center;
             font-size: 3em;
-            color: #ff9900; /* Couleur vive pour l'intitulé */
+            color: #ff9900;
             margin-top: 50px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
@@ -63,7 +63,7 @@
             width: 80%;
         }
 
-        /* Frise chronologique */
+        /* Frise chronologique améliorée */
         .timeline {
             display: flex;
             justify-content: space-evenly;
@@ -94,16 +94,16 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
         }
 
-        .timeline .chapter1 { background-color: #1E90FF; } /* Bleu */
-        .timeline .chapter2 { background-color: #32CD32; } /* Vert */
-        .timeline .chapter3 { background-color: #FF6347; } /* Tomate */
-        .timeline .chapter4 { background-color: #FFD700; } /* Jaune */
-        .timeline .chapter5 { background-color: #8A2BE2; } /* Violet */
-        .timeline .chapter6 { background-color: #FF4500; } /* Orange */
-        .timeline .chapter7 { background-color: #ADFF2F; } /* Vert clair */
-        .timeline .chapter8 { background-color: #00CED1; } /* Turquoise */
-        .timeline .chapter9 { background-color: #D2691E; } /* Chocolat */
-        .timeline .chapter10 { background-color: #B22222; } /* Rouge foncé */
+        .timeline .chapter1 { background-color: #1E90FF; }
+        .timeline .chapter2 { background-color: #32CD32; }
+        .timeline .chapter3 { background-color: #FF6347; }
+        .timeline .chapter4 { background-color: #FFD700; }
+        .timeline .chapter5 { background-color: #8A2BE2; }
+        .timeline .chapter6 { background-color: #FF4500; }
+        .timeline .chapter7 { background-color: #ADFF2F; }
+        .timeline .chapter8 { background-color: #00CED1; }
+        .timeline .chapter9 { background-color: #D2691E; }
+        .timeline .chapter10 { background-color: #B22222; }
 
         .chapter-btns {
             display: none;
@@ -111,7 +111,7 @@
             text-align: center;
         }
 
-        /* Boutons de chaque chapitre */
+        /* Boutons interactifs */
         .chapter-btns button {
             background-color: #ff6600;
             border: none;
@@ -129,33 +129,23 @@
             transform: scale(1.05);
         }
 
-        /* Cartes mentales, cours et fiches de révision */
+        /* Sections supplémentaires : Cartes mentales, fiches de révision */
         .chapter-content {
             display: none;
+            background-color: #2E2E2E;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
         }
 
-        .mind-map,
-        .revision-sheet,
-        .course {
+        .mind-map, .revision-sheet, .course {
             display: none;
             margin-top: 20px;
-            background-color: #2E2E2E;
             color: #FFFFFF;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .mind-map ul,
-        .revision-sheet ul,
-        .course ul {
-            list-style: none;
-        }
-
-        .mind-map li,
-        .revision-sheet li,
-        .course li {
-            margin: 10px 0;
         }
 
         /* Liens de téléchargement */
@@ -168,6 +158,42 @@
 
         .download-link:hover {
             color: #e6e6e6;
+        }
+
+        /* Animation de transition lors du changement de chapitre */
+        .chapter-content {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .chapter-content.show {
+            opacity: 1;
+        }
+
+        /* Ajout d'un système de notification */
+        .notification {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: #FF4500;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: none;
+            transition: all 0.3s ease;
+        }
+
+        .notification.show {
+            display: block;
+        }
+
+        /* Mise en page pour mobile */
+        @media (max-width: 768px) {
+            .timeline div {
+                width: 100%;
+                margin: 10px 0;
+            }
         }
     </style>
 </head>
@@ -202,7 +228,6 @@
         <!-- Chapitre 1 -->
         <div id="content1" class="chapter-content">
             <h2>Chapitre 1 - Introduction à la Biotechnologie</h2>
-
             <!-- Carte mentale -->
             <div id="mindMap1" class="mind-map">
                 <h3>Carte mentale</h3>
@@ -211,61 +236,69 @@
                     <li>Concepts de base</li>
                     <li>Applications principales</li>
                 </ul>
-                <a href="downloads/mindmap1.pdf" class="download-link" download>Télécharger la carte mentale</a>
+                <a href="downloads/mindmap1.pdf" class="download-link">Télécharger la carte mentale</a>
             </div>
-
-            <!-- Cours -->
-            <div id="course1" class="course">
-                <h3>Cours complet</h3>
-                <ul>
-                    <li>Introduction générale à la biotechnologie</li>
-                    <li>Historique et évolution</li>
-                    <li>Applications en agriculture et en médecine</li>
-                </ul>
-            </div>
-
             <!-- Fiche de révision -->
             <div id="revision1" class="revision-sheet">
                 <h3>Fiche de révision</h3>
                 <ul>
-                    <li>Définir la biotechnologie</li>
-                    <li>Comprendre les domaines d'application</li>
-                    <li>Exemples clés dans les industries modernes</li>
+                    <li>Définition de la biotechnologie</li>
+                    <li>Principaux domaines d'application</li>
+                    <li>Histoire et évolution</li>
                 </ul>
-                <a href="downloads/revision1.pdf" class="download-link" download>Télécharger la fiche de révision</a>
+                <a href="downloads/revision1.pdf" class="download-link">Télécharger la fiche de révision</a>
             </div>
-
             <!-- Vidéo -->
-            <div class="video-section">
+            <div id="video1" class="course">
                 <h3>Vidéo explicative</h3>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/example-video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <video controls>
+                    <source src="videos/biotech_intro.mp4" type="video/mp4">
+                    Votre navigateur ne prend pas en charge la balise vidéo.
+                </video>
             </div>
         </div>
 
-        <!-- Ajouter un bouton "retour à la frise" ici -->
+        <!-- Notification -->
+        <div id="notification" class="notification">
+            <p>Un nouveau chapitre a été ajouté !</p>
+        </div>
+
     </section>
 
     <script>
+        let currentChapter = null;
+
+        // Fonction pour afficher le chapitre sélectionné
         function showChapter(chapterNumber) {
-            // Masquer tous les contenus de chapitre
-            var allChapters = document.querySelectorAll('.chapter-content');
-            allChapters.forEach(function (chapter) {
-                chapter.style.display = 'none';
-            });
+            if (currentChapter !== null) {
+                document.getElementById('content' + currentChapter).classList.remove('show');
+                document.getElementById('chapter' + currentChapter).classList.remove('selected');
+            }
 
-            // Afficher le contenu du chapitre sélectionné
-            document.getElementById('content' + chapterNumber).style.display = 'block';
-
-            // Activer le bouton de chaque chapitre
-            var timelineItems = document.querySelectorAll('.timeline div');
-            timelineItems.forEach(function (item) {
-                item.classList.remove('selected');
-            });
-
+            document.getElementById('content' + chapterNumber).classList.add('show');
             document.getElementById('chapter' + chapterNumber).classList.add('selected');
+            currentChapter = chapterNumber;
         }
-    </script>
 
+        // Afficher la notification
+        function showNotification() {
+            let notification = document.getElementById('notification');
+            notification.classList.add('show');
+            setTimeout(function () {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Déclencher la notification lors du changement de chapitre
+        document.querySelectorAll('.timeline div').forEach((element) => {
+            element.addEventListener('click', function () {
+                showNotification();
+            });
+        });
+
+        // Initialiser la première section
+        showChapter(1);
+    </script>
 </body>
 
 </html>
