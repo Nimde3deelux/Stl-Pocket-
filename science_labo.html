@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science et Laboratoire</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Style général de la page */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1a1a1a;
+            color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Barre d'onglets */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            text-align: center;
+            font-size: 18px;
+            margin: 0 15px;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        /* Logo */
+        .logo {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logo img {
+            width: 150px;
+            height: auto;
+        }
+
+        /* Section de contenu */
+        .content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 40px;
+        }
+
+        .card {
+            background-color: #222;
+            border-radius: 8px;
+            width: 250px;
+            height: 350px;
+            margin: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-description {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card-description h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: #fff;
+        }
+
+        .card-description p {
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barre d'onglets -->
+    <div class="navbar">
+        <a href="science_labo.html">Accueil</a>
+        <a href="biotech.html">Biotechnologie</a>
+        <a href="pictogramme.html">Pictogrammes</a>
+        <a href="equipement.html">Équipement</a>
+        <a href="manipexpo.html">Manipulations</a>
+    </div>
+
+    <!-- Logo -->
+    <div class="logo">
+        <img src="images/logo.png" alt="Logo STL Pocket">
+    </div>
+
+    <!-- Contenu principal -->
+    <div class="content">
+
+        <!-- Pictogramme -->
+        <div class="card" onclick="window.location.href='pictogramme.html'">
+            <img src="images/pictogramme.jpg" alt="Pictogramme">
+            <div class="card-description">
+                <h3>Pictogrammes 🖼️</h3>
+                <p>Accédez à la page des pictogrammes pour une présentation visuelle des symboles utilisés en laboratoire 🧪.</p>
+            </div>
+        </div>
+
+        <!-- Équipement de laboratoire -->
+        <div class="card" onclick="window.location.href='equipement.html'">
+            <img src="images/equipement.jpg" alt="Équipement de laboratoire">
+            <div class="card-description">
+                <h3>Équipement de laboratoire 🛠️</h3>
+                <p>Découvrez les outils et équipements utilisés pour les différentes manipulations en laboratoire 🧬.</p>
+            </div>
+        </div>
+
+        <!-- Manipulations et exploitation des résultats -->
+        <div class="card" onclick="window.location.href='manipexpo.html'">
+            <img src="images/manipexpo.jpg" alt="Manipulations et exploitation des résultats">
+            <div class="card-description">
+                <h3>Manipulations + Exploitation des résultats 🔬📊</h3>
+                <p>Explorez les différentes manipulations réalisées en laboratoire et l'analyse des résultats obtenus 🔍.</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
