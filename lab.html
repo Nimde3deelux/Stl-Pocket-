@@ -23,19 +23,7 @@
             height: 3px;
             background-color: #ffffff;
             opacity: 0.8;
-            animation: moveParticles 10s linear infinite;
-        }
-
-        /* Traînée de particules qui suit la souris */
-        .particle-trail {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background-color: #ffffff;
-            border-radius: 50%;
-            opacity: 0.6;
-            pointer-events: none;
-            animation: moveParticles 1s linear infinite;
+            animation: moveParticles 6s linear infinite, float 3s ease-in-out infinite;
         }
 
         @keyframes moveParticles {
@@ -43,7 +31,19 @@
                 transform: translate(0, 0);
             }
             to {
-                transform: translate(0, 500px);
+                transform: translate(500px, 500px);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+            100% {
+                transform: translateY(0);
             }
         }
 
@@ -124,6 +124,28 @@
         .card-description p {
             color: #ccc;
         }
+
+        /* Effet du trail qui suit la souris */
+        .trail {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: trailAnimation 0.3s ease-in-out;
+        }
+
+        @keyframes trailAnimation {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
     </style>
 </head>
 <body>
@@ -178,9 +200,9 @@
     </div>
 
     <script>
-        // Générer des particules animées (200 fois plus)
+        // Générer des particules animées
         function generateParticles() {
-            for (let i = 0; i < 20000; i++) { // Multiplier le nombre de particules par 200
+            for (let i = 0; i < 500; i++) {  // 5 fois plus de particules
                 let particle = document.createElement('div');
                 particle.classList.add('particle');
                 particle.style.top = `${Math.random() * window.innerHeight}px`;
@@ -189,24 +211,22 @@
             }
         }
 
-        // Fonction pour créer une traînée de particules suivant la souris
-        function followMouse(event) {
+        // Suivre la souris avec un "trainer"
+        document.addEventListener('mousemove', function(e) {
             let trail = document.createElement('div');
-            trail.classList.add('particle-trail');
-            trail.style.top = `${event.clientY}px`;
-            trail.style.left = `${event.clientX}px`;
+            trail.classList.add('trail');
+            trail.style.top = `${e.clientY - 4}px`;
+            trail.style.left = `${e.clientX - 4}px`;
             document.body.appendChild(trail);
 
+            // Enlever la trail après l'animation
             setTimeout(() => {
                 trail.remove();
-            }, 1000); // Suppression de la traînée après 1 seconde
-        }
+            }, 300);
+        });
 
         // Initialiser les particules
         generateParticles();
-
-        // Écouter l'événement du mouvement de la souris
-        document.addEventListener('mousemove', followMouse);
     </script>
 
 </body>
