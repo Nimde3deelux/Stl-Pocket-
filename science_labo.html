@@ -23,7 +23,19 @@
             height: 3px;
             background-color: #ffffff;
             opacity: 0.8;
-            animation: moveParticles 3s linear infinite;
+            animation: moveParticles 10s linear infinite;
+        }
+
+        /* Traînée de particules qui suit la souris */
+        .particle-trail {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            opacity: 0.6;
+            pointer-events: none;
+            animation: moveParticles 1s linear infinite;
         }
 
         @keyframes moveParticles {
@@ -31,7 +43,7 @@
                 transform: translate(0, 0);
             }
             to {
-                transform: translate(500px, 500px);
+                transform: translate(0, 500px);
             }
         }
 
@@ -166,9 +178,9 @@
     </div>
 
     <script>
-        // Générer des particules animées
+        // Générer des particules animées (200 fois plus)
         function generateParticles() {
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 20000; i++) { // Multiplier le nombre de particules par 200
                 let particle = document.createElement('div');
                 particle.classList.add('particle');
                 particle.style.top = `${Math.random() * window.innerHeight}px`;
@@ -177,8 +189,24 @@
             }
         }
 
+        // Fonction pour créer une traînée de particules suivant la souris
+        function followMouse(event) {
+            let trail = document.createElement('div');
+            trail.classList.add('particle-trail');
+            trail.style.top = `${event.clientY}px`;
+            trail.style.left = `${event.clientX}px`;
+            document.body.appendChild(trail);
+
+            setTimeout(() => {
+                trail.remove();
+            }, 1000); // Suppression de la traînée après 1 seconde
+        }
+
         // Initialiser les particules
         generateParticles();
+
+        // Écouter l'événement du mouvement de la souris
+        document.addEventListener('mousemove', followMouse);
     </script>
 
 </body>
