@@ -13,6 +13,26 @@
             color: #f2f2f2;
             margin: 0;
             padding: 0;
+            overflow: hidden; /* Empêche la barre de défilement avec l'effet de particules */
+        }
+
+        /* Effet de particules */
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: #ffffff;
+            opacity: 0.8;
+            animation: moveParticles 3s linear infinite;
+        }
+
+        @keyframes moveParticles {
+            from {
+                transform: translate(0, 0);
+            }
+            to {
+                transform: translate(500px, 500px);
+            }
         }
 
         /* Barre d'onglets */
@@ -21,6 +41,7 @@
             justify-content: center;
             background-color: #333;
             padding: 10px;
+            z-index: 10; /* Pour que la barre d'onglets soit au-dessus de l'effet de particules */
         }
 
         .navbar a {
@@ -95,6 +116,9 @@
 </head>
 <body>
 
+    <!-- Particles Background (JavaScript will generate particles here) -->
+    <div id="particles"></div>
+
     <!-- Barre d'onglets -->
     <div class="navbar">
         <a href="science_labo.html">Accueil</a>
@@ -140,6 +164,22 @@
         </div>
 
     </div>
+
+    <script>
+        // Générer des particules animées
+        function generateParticles() {
+            for (let i = 0; i < 100; i++) {
+                let particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.top = `${Math.random() * window.innerHeight}px`;
+                particle.style.left = `${Math.random() * window.innerWidth}px`;
+                document.body.appendChild(particle);
+            }
+        }
+
+        // Initialiser les particules
+        generateParticles();
+    </script>
 
 </body>
 </html>
