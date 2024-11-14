@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suggestions | STL Pocket</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Style Dying Light : sombre, lumineux, détails orange */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1b1b1b;
+            color: #f4f4f4;
+        }
+        
+        header {
+            background-color: #262626;
+            color: #ff4500;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        header img {
+            height: 60px;
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+        
+        nav {
+            background-color: #333;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        nav a {
+            display: inline-block;
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        nav a:hover {
+            background-color: #444;
+            color: #ff4500;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+        }
+
+        .chatbox {
+            width: 100%;
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #2e2e2e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .chatbox h3 {
+            color: #ff4500;
+        }
+
+        .chat-messages {
+            max-height: 400px;
+            overflow-y: auto;
+            background-color: #1b1b1b;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .chat-message {
+            margin-bottom: 10px;
+        }
+
+        .user-message {
+            text-align: right;
+            color: #4CAF50;
+        }
+
+        .bot-message {
+            text-align: left;
+            color: #f4f4f4;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input[type="text"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .chat-input button {
+            padding: 10px 15px;
+            background-color: #ff4500;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .chat-input button:hover {
+            background-color: #ff5733;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="logo.png" alt="Logo STL Pocket"> <!-- Remplacer par l'URL de votre logo -->
+        <h1>STL Pocket - Suggestions</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="math.html">Mathématiques</a>
+        <a href="biotech.html">Biotechnologie</a>
+        <a href="science_labo.html">Science Labo</a>
+        <a href="physique.html">Physique</a>
+    </nav>
+
+    <div class="container">
+        <section class="chatbox">
+            <h3>Chat de Discussion</h3>
+            <div class="chat-messages" id="chatMessages">
+                <div class="bot-message">Bonjour ! Je suis ici pour répondre à vos questions. N'hésitez pas à me demander !</div>
+            </div>
+
+            <div class="chat-input">
+                <input type="text" id="userMessage" placeholder="Entrez votre message ici...">
+                <button onclick="sendMessage()">Envoyer</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const messageInput = document.getElementById("userMessage");
+            const message = messageInput.value.trim();
+
+            if (message) {
+                const userMessageHTML = `<div class="chat-message user-message">${message}</div>`;
+                $("#chatMessages").append(userMessageHTML);
+
+                // Simulation de réponse IA
+                setTimeout(() => {
+                    const botResponseHTML = `<div class="chat-message bot-message">Réponse de l'IA : ${
+                        simulateAIResponse(message)
+                    }</div>`;
+                    $("#chatMessages").append(botResponseHTML);
+                    $("#chatMessages").scrollTop($("#chatMessages")[0].scrollHeight);
+                }, 1000);
+
+                messageInput.value = "";
+            }
+        }
+
+        // Simulation d'une réponse d'IA simple
+        function simulateAIResponse(message) {
+            if (message.toLowerCase().includes("cours")) {
+                return "Pour accéder aux cours, vous pouvez consulter les pages Mathématiques, Biotechnologie, Science Labo, et Physique depuis le menu !";
+            } else if (message.toLowerCase().includes("biotech")) {
+                return "La biotechnologie est un domaine fascinant qui utilise des organismes vivants pour des applications industrielles ! Vous pouvez en apprendre plus sur la page Biotechnologie.";
+            } else if (message.toLowerCase().includes("physique")) {
+                return "La physique permet de comprendre le monde à l'échelle de l'infiniment petit comme de l'infiniment grand. Rendez-vous sur la page Physique pour plus de détails !";
+            } else {
+                return "Je suis ici pour vous aider avec vos questions sur STL Pocket. Posez-moi une question plus spécifique pour en savoir plus.";
+            }
+        }
+    </script>
+</body>
+
+</html>
