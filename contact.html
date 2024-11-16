@@ -9,12 +9,12 @@
         /* Style général de la page */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #222; /* Fond sombre pour l'ambiance Fight Club */
-            color: #ddd; /* Texte clair sur fond sombre */
+            background-color: #222; /* Fond sombre */
+            color: #ddd; /* Texte clair */
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             height: 100vh;
             overflow: hidden;
@@ -22,13 +22,59 @@
             text-align: center;
         }
 
+        /* Menu de navigation */
+        nav {
+            width: 100%;
+            background-color: #333;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ff3e00;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #fff;
+        }
+
+        /* Contenu principal */
+        .content {
+            margin-top: 60px; /* Espacement pour le menu fixe */
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
         /* Effet de lumière (souligné et brillance) */
         .light-effect {
             color: white;
-            font-size: 2em;
+            font-size: 2.5em;
             letter-spacing: 2px;
             text-transform: uppercase;
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 0, 0, 0.5);
+            margin-bottom: 40px;
         }
 
         .light-effect span {
@@ -45,23 +91,21 @@
         /* Formulaire de contact */
         .contact-form {
             background-color: rgba(0, 0, 0, 0.8);
-            padding: 40px;
+            padding: 30px;
             border-radius: 10px;
             width: 100%;
             max-width: 500px;
-            margin: 20px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
         }
 
         .contact-form h2 {
-            font-size: 2em;
+            font-size: 1.8em;
             margin-bottom: 20px;
             color: #ff3e00;
-            text-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
         }
 
         .contact-form p {
-            font-size: 1.2em;
+            font-size: 1em;
             color: #bbb;
             margin-bottom: 15px;
         }
@@ -71,7 +115,7 @@
         .contact-form select,
         .contact-form button {
             width: 100%;
-            padding: 15px;
+            padding: 12px;
             margin: 10px 0;
             border: 1px solid #444;
             border-radius: 5px;
@@ -90,33 +134,26 @@
             cursor: pointer;
         }
 
-        .contact-form input::placeholder,
-        .contact-form textarea::placeholder {
-            color: #bbb;
-        }
-
-        .contact-form button {
-            background-color: #ff3e00;
+        /* Message de confirmation */
+        .confirmation-message {
+            background-color: #28a745;
             color: white;
-            font-weight: bold;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            display: none;
         }
 
+        /* Informations de contact */
         .contact-info {
             margin-top: 30px;
-            font-size: 1.1em;
+            font-size: 1em;
             color: #bbb;
-            text-align: center;
         }
 
         .contact-info a {
             color: #ff3e00;
             text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        .contact-info a:hover {
-            color: #ffffff;
         }
 
         /* Animation du fond */
@@ -137,68 +174,61 @@
             100% { opacity: 1; }
         }
 
-        /* Style pour la notification de confirmation */
-        .confirmation-message {
-            background-color: #28a745;
-            color: white;
-            padding: 15px;
-            margin-top: 20px;
-            border-radius: 5px;
-            display: none;
-            font-size: 1.1em;
-        }
-
     </style>
 </head>
 <body>
 
+    <!-- Menu de navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Accueil</a></li>
+            <li><a href="#courses">Cours</a></li>
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
     <!-- Effet de lumière de fond -->
     <div class="background-light"></div>
 
-    <!-- Titre avec effet lumineux -->
-    <div class="light-effect">
-        <span>Contactez-moi</span>
-    </div>
+    <!-- Contenu principal -->
+    <div class="content">
 
-    <!-- Formulaire de contact -->
-    <div class="contact-form">
-        <h2>Demandez-moi quelque chose</h2>
-        <p>Vous avez des questions ou des demandes spécifiques ? Utilisez le formulaire ci-dessous pour entrer en contact avec moi.</p>
-        <p>Nous nous efforçons de répondre à toutes les demandes dans un délai de 24 heures. Si vous avez une question urgente, n'hésitez pas à nous indiquer l'urgence dans votre message.</p>
-        <p>Assurez-vous que votre demande soit aussi détaillée que possible afin que nous puissions y répondre avec la meilleure précision possible.</p>
-        <p>Si votre demande nécessite un suivi ou un échange détaillé, nous ferons tout notre possible pour vous répondre de manière complète et efficace.</p>
-
-        <form id="contact-form" action="https://formspree.io/f/mvgoqppb" method="POST">
-            <!-- Choisir un sujet -->
-            <label for="sujet">Choisissez un sujet :</label>
-            <select name="sujet" id="sujet" required>
-                <option value="technique">Problème technique</option>
-                <option value="general">Questions générales</option>
-                <option value="suggestions">Suggestions</option>
-            </select>
-
-            <!-- Champs du formulaire -->
-            <input type="text" name="name" placeholder="Votre nom" required>
-            <input type="email" name="email" placeholder="Votre email" required>
-            <textarea name="message" placeholder="Votre message" required></textarea>
-
-            <!-- Bouton d'envoi -->
-            <button type="submit">Envoyer votre message</button>
-        </form>
-
-        <!-- Message de confirmation -->
-        <div class="confirmation-message" id="confirmation-message">
-            Votre message a bien été envoyé. Vous recevrez une réponse dans les 24 heures.
+        <!-- Titre avec effet lumineux -->
+        <div class="light-effect">
+            <span>Contactez-moi</span>
         </div>
-    </div>
 
-    <!-- Informations de contact -->
-    <div class="contact-info">
-        <p>Vous pouvez également me contacter directement :</p>
-        <p>Email: <a href="mailto:adamsehili28@gmail.com">adamsehili28@gmail.com</a></p>
-        <p>Téléphone: <a href="tel:+33651670164">0651670164</a></p>
-        <p>Pour des demandes urgentes, nous nous efforcerons de vous répondre dans les plus brefs délais.</p>
-        <p>Notez que tous les messages sont traités avec la plus haute priorité, et nous faisons en sorte de vous fournir une réponse claire et détaillée selon vos besoins.</p>
+        <!-- Formulaire de contact -->
+        <div class="contact-form">
+            <h2>Demandez-moi quelque chose</h2>
+            <p>Vous avez des questions ou des demandes spécifiques ? Utilisez le formulaire ci-dessous pour entrer en contact avec moi.</p>
+            <form id="contact-form" action="https://formspree.io/f/mvgoqppb" method="POST">
+                <label for="sujet">Choisissez un sujet :</label>
+                <select name="sujet" id="sujet" required>
+                    <option value="technique">Problème technique</option>
+                    <option value="general">Questions générales</option>
+                    <option value="suggestions">Suggestions</option>
+                </select>
+
+                <input type="text" name="name" placeholder="Votre nom" required>
+                <input type="email" name="email" placeholder="Votre email" required>
+                <textarea name="message" placeholder="Votre message" required></textarea>
+
+                <button type="submit">Envoyer votre message</button>
+            </form>
+
+            <!-- Message de confirmation -->
+            <div class="confirmation-message" id="confirmation-message">
+                Votre message a bien été envoyé. Vous recevrez une réponse dans les 24 heures.
+            </div>
+        </div>
+
+        <!-- Informations de contact -->
+        <div class="contact-info">
+            <p>Email: <a href="mailto:adamsehili28@gmail.com">adamsehili28@gmail.com</a></p>
+            <p>Téléphone: <a href="tel:+33651670164">0651670164</a></p>
+        </div>
     </div>
 
     <script>
@@ -208,14 +238,8 @@
 
         form.addEventListener('submit', function(event) {
             event.preventDefault(); // Empêche la soumission par défaut pour afficher la confirmation
-
-            // Afficher le message de confirmation
             confirmationMessage.style.display = 'block';
-
-            // Réinitialiser le formulaire après la soumission
             form.reset();
-
-            // Cacher le message de confirmation après quelques secondes
             setTimeout(function() {
                 confirmationMessage.style.display = 'none';
             }, 5000);
