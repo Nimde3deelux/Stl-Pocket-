@@ -17,9 +17,7 @@
             align-items: center;
             background-image: url('images/space_background.png');
             background-size: cover;
-            background-attachment: fixed; /* Effet de parallaxe */
             background-position: center;
-            overflow-x: hidden;
         }
         /* En-tête avec le logo */
         .header {
@@ -44,9 +42,6 @@
             color: #fff;
             font-family: 'Minecraft', sans-serif;
             font-size: 1.2em;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
         }
         .navbar a {
             color: #fff;
@@ -67,12 +62,6 @@
             text-align: center;
             text-shadow: 3px 3px 8px #000;
             margin: 30px;
-            animation: fadeIn 2s ease-out;
-        }
-        /* Animation d'apparition du titre */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
         /* Conteneur principal avec les cartes de section */
         .container {
@@ -82,7 +71,6 @@
             max-width: 1200px;
             width: 100%;
             padding: 20px;
-            margin-bottom: 50px;
         }
         /* Style des cartes de section */
         .card {
@@ -92,7 +80,6 @@
             padding: 20px;
             text-align: center;
             border: 2px solid #00b33c;
-            transition: all 0.3s ease-in-out;
         }
         .card:hover {
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
@@ -113,7 +100,6 @@
             cursor: pointer;
             font-family: 'Minecraft', sans-serif;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease;
         }
         .btn:hover {
             background-color: #00796b;
@@ -148,7 +134,6 @@
             border-radius: 12px;
             font-size: 0.9em;
             cursor: pointer;
-            transition: background-color 0.3s ease;
         }
         .tag:hover {
             background-color: #26a69a;
@@ -214,22 +199,36 @@
         <div class="card">
             <div class="icon"><img src="images/math_icon.png" alt="Mathématiques"></div>
             <h3>Mathématiques ➗</h3>
-            <p>Révisez et approfondissez vos connaissances en mathématiques pour exceller 📊.</p>
-            <a href="maths.html" class="btn">Accéder 🔝</a>
+            <p>Renforcez vos bases en mathématiques et résolvez des problèmes complexes 📊.</p>
+            <a href="math.html" class="btn">Accéder 🔝</a>
+        </div>
+        <!-- Section Science de Laboratoire avec emoji -->
+        <div class="card">
+            <div class="icon"><img src="images/lab_icon.png" alt="Science de Laboratoire"></div>
+            <h3>Science de Laboratoire 🧪🔬</h3>
+            <p>Plongez dans le monde fascinant des expériences en laboratoire 🔎🧑‍🔬 !</p>
+            <a href="laboratoire.html" class="btn">Accéder 🔝</a>
+            <a href="lab.html" class="btn">Accéder 🔝</a>
         </div>
     </div>
 
     <!-- Section des fonctionnalités -->
     <div class="features">
-        <h2>Fonctionnalités 🌟</h2>
-        <p>Une plateforme qui rend l'apprentissage simple et accessible.</p>
+        <h2>Fonctionnalités de STL Pocket ⚙️</h2>
+        <p>Nous vous proposons une plateforme simple et complète pour réviser et échanger avec vos professeurs.</p>
         <div class="tags">
-            <div class="tag">Révisions</div>
-            <div class="tag">Mises à jour</div>
-            <div class="tag">Forum de discussion</div>
-            <div class="tag">Suivi des progrès</div>
+            <div class="tag">Apprentissage interactif 🧑‍💻</div>
+            <div class="tag">Messagerie instantanée 📲</div>
+            <div class="tag">Rappels de cours 📅</div>
+            <div class="tag">Communauté d'entraide 👫</div>
         </div>
     </div>
-    
+
+    <!-- Musique de fond -->
+    <audio id="background-music" loop autoplay>
+        <source src="music/background.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas les balises audio.
+    </audio>
+
 </body>
 </html>
