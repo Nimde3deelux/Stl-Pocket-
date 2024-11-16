@@ -19,8 +19,7 @@
             font-family: Arial, sans-serif;
             line-height: 1.6;
             color: #fff;
-            background: url('images/oaia.jpg') no-repeat center center fixed;
-            background-size: cover;
+            background: #000; /* Fond noir */
             overflow-x: hidden;
             margin: 0;
         }
@@ -96,59 +95,36 @@
         }
 
         /* ==========================================
-        GIFS ANIMÉS
+        PROFESSEURS BIOTECHNOLOGIE
         ========================================== */
-        .gifs {
+        .professors {
             display: flex;
             justify-content: space-between;
-            margin-top: 40px;
-            width: 100%;
+            flex-wrap: wrap;
             gap: 20px;
+            margin-top: 30px;
         }
 
-        .gif-container {
-            width: 45%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .gif-container img {
-            max-width: 100%;
-            height: auto;
+        .professor {
+            text-align: center;
+            width: calc(50% - 20px);
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 2px solid #fff;
             border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
         }
 
-        /* ==========================================
-        BOUTON THÈME
-        ========================================== */
-        /* Retiré l'option du thème sombre/clair */
-
-        /* ==========================================
-        FOND LÉGER (mode clair)
-        ========================================== */
-        .light-theme {
-            background-color: #fff;
-            color: #333;
-        }
-
-        .light-theme header h1 {
-            color: #333;
-        }
-
-        .light-theme .logo img {
-            filter: invert(1);
-        }
-
-        .light-theme .creators .creator img {
-            border: 2px solid #333;
+        .professor p {
+            font-size: 1.1rem;
+            color: #ffcc00;
         }
 
         /* ==========================================
         MEDIA QUERIES (Responsivité)
         ========================================== */
         @media (max-width: 768px) {
-            .creator img {
+            .creator img, .professor img {
                 width: 80px;
                 height: 80px;
             }
@@ -157,55 +133,19 @@
                 font-size: 2.5rem;
             }
 
-            .creators {
+            .creators, .professors {
                 flex-direction: column;
                 align-items: center;
             }
-
-            .gifs {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .gif-container {
-                width: 100%;
-            }
-
-            #theme-toggle {
-                font-size: 0.9rem;
-            }
         }
 
-        /* ==========================================
-        ANIMATIONS
-        ========================================== */
-        .background-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -1;
-            opacity: 0.4;
-            animation: fadeIn 10s infinite alternate;
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0.4;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
     </style>
 </head>
 <body>
 
     <!-- Conteneur principal -->
     <div class="main-container">
-        <div class="background-image"></div>
-        
+
         <!-- Contenu de la page -->
         <header>
             <div class="logo">
@@ -214,6 +154,7 @@
             <h1>Bienvenue dans STL Pocket</h1>
         </header>
 
+        <!-- Section Créateurs -->
         <section class="creators">
             <h2>Nos Créateurs</h2>
             <div class="creator">
@@ -224,25 +165,24 @@
                 <img src="images/berkay.jpg" alt="Berkay - Designer">
                 <p>Berkay - Designer et créateur visuel</p>
             </div>
+            <div class="creator">
+                <img src="images/bastien.jpg" alt="Bastien - Contributeur">
+                <p>Bastien - A contribué en envoyant les cours et les PDF</p>
+            </div>
         </section>
 
-        <!-- GIFs animés -->
-        <section class="gifs">
-            <div class="gif-container">
-                <img src="images/gif1.gif" alt="GIF 1">
+        <!-- Section Professeurs de Biotechnologie -->
+        <section class="professors">
+            <h2>Professeurs de Biotechnologie</h2>
+            <div class="professor">
+                <p>Professeur X - A inspiré l'idée principale du projet</p>
             </div>
-            <div class="gif-container">
-                <img src="images/gif2.gif" alt="GIF 2">
+            <div class="professor">
+                <p>Professeur Y - A soutenu la démarche scientifique du projet</p>
             </div>
         </section>
 
     </div>
-
-    <!-- Musique en arrière-plan -->
-    <audio autoplay loop>
-        <source src="audio/musique.mp3" type="audio/mp3">
-        Votre navigateur ne prend pas en charge l'élément audio.
-    </audio>
 
 </body>
 </html>
