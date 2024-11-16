@@ -19,7 +19,7 @@
             font-family: Arial, sans-serif;
             line-height: 1.6;
             color: #fff;
-            background: url('oaia.jpg') no-repeat center center fixed;
+            background: url('images/oaia.jpg') no-repeat center center fixed;
             background-size: cover;
             overflow-x: hidden;
             margin: 0;
@@ -110,14 +110,47 @@
         }
 
         /* ==========================================
-        AUDIO
+        BOUTON THÈME
         ========================================== */
-        #audio {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            display: inline-block;
-            width: 300px;
+        #theme-toggle {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            text-transform: uppercase;
+            transition: background-color 0.3s;
+        }
+
+        #theme-toggle:hover {
+            background-color: #444;
+        }
+
+        /* ==========================================
+        FOND LÉGER (mode clair)
+        ========================================== */
+        .light-theme {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .light-theme header h1 {
+            color: #333;
+        }
+
+        .light-theme .logo img {
+            filter: invert(1);
+        }
+
+        .light-theme .creators .creator img {
+            border: 2px solid #333;
+        }
+
+        .light-theme #theme-toggle {
+            background-color: #f0f0f0;
+            color: #333;
         }
 
         /* ==========================================
@@ -146,17 +179,37 @@
             .gif-container {
                 width: 100%;
             }
+
+            #theme-toggle {
+                font-size: 0.9rem;
+            }
         }
 
+        /* ==========================================
+        ANIMATIONS
+        ========================================== */
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            opacity: 0.4;
+            animation: fadeIn 10s infinite alternate;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0.4;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
-
-    <!-- Musique d'ambiance -->
-    <audio id="audio" controls>
-        <source src="audio/ambient_music.mp3" type="audio/mp3">
-        Votre navigateur ne supporte pas l'élément audio.
-    </audio>
 
     <!-- Conteneur principal -->
     <div class="main-container">
@@ -191,7 +244,25 @@
                 <img src="images/gif2.gif" alt="GIF 2">
             </div>
         </section>
+
+        <!-- Thème sombre/clair -->
+        <button id="theme-toggle" onclick="toggleTheme()">Passer en mode clair</button>
     </div>
 
+    <script>
+        // Fonction pour basculer entre le mode clair et sombre
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('light-theme');
+            body.classList.toggle('accessible');
+
+            const button = document.getElementById('theme-toggle');
+            if (body.classList.contains('light-theme')) {
+                button.textContent = 'Passer en mode sombre';
+            } else {
+                button.textContent = 'Passer en mode clair';
+            }
+        }
+    </script>
 </body>
 </html>
