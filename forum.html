@@ -3,280 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Jeu 2D - Aventure</title>
+    <title>STL Pocket - Forum</title>
     <style>
-        body { margin: 0; overflow: hidden; background-color: #87CEEB; font-family: Arial, sans-serif; }
-        canvas { display: block; margin: auto; }
-        #loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            color: #000;
-        }
-        #menu {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        /* Style général de la page */
+        body {
+            font-family: 'Minecraft', sans-serif;
+            background-color: #000000;
+            color: #e1e1e1;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
             text-align: center;
-            font-size: 24px;
         }
-        #menu button {
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
+
+        h1 {
+            font-size: 2em;
+            color: #e60000;
+            text-shadow: 3px 3px 8px #000;
         }
-        #pauseMenu {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            display: none;
-        }
-        #pauseMenu button {
+
+        p {
+            font-size: 1.2em;
+            color: #ffffff;
             margin-top: 20px;
+        }
+
+        .btn {
+            background-color: #e60000;
+            color: #ffffff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #a30000;
         }
     </style>
 </head>
 <body>
-    <div id="loading">Chargement... 0%</div>
-    <div id="menu" style="display:none;">
-        <button id="startButton">Lancer le jeu</button>
-        <button id="pauseButton">Pause</button>
-        <button id="backButton">Retour</button>
-    </div>
-    <div id="pauseMenu">
-        <button id="resumeButton">Reprendre</button>
-        <button id="restartButton">Redémarrer</button>
-        <button id="quitButton">Quitter</button>
-    </div>
-    <canvas id="gameCanvas" style="display:none;"></canvas>
+    <h1>Bienvenue sur le Forum STL Pocket</h1>
+    <p>Vous allez être redirigé vers notre forum pour discuter, poser vos questions et échanger avec la communauté.</p>
+    <button class="btn" onclick="window.location.href='https://forumstlpocket.flarum.cloud/'">Accéder au Forum</button>
 
     <script>
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
-        canvas.width = 800;
-        canvas.height = 400;
-
-        const loadingDiv = document.getElementById("loading");
-        const menuDiv = document.getElementById("menu");
-        const pauseMenuDiv = document.getElementById("pauseMenu");
-        const startButton = document.getElementById("startButton");
-        const pauseButton = document.getElementById("pauseButton");
-        const resumeButton = document.getElementById("resumeButton");
-        const restartButton = document.getElementById("restartButton");
-        const quitButton = document.getElementById("quitButton");
-        const backButton = document.getElementById("backButton");
-
-        let player, enemies = [], points = {x: 750, y: 350}; 
-        let lives = 3, gameOver = false, gamePaused = false;
-        let bgImage = new Image();
-        let playerImage = new Image();
-        let enemyImage = new Image();
-        let music = new Audio();
-        let resourcesLoaded = 0;
-        const totalResources = 4;
-
-        bgImage.src = 'images/jeuxbackground.jpg'; 
-        playerImage.src = 'images/gif.jeux.gif';  
-        enemyImage.src = 'images/enemie.jpg';     
-        music.src = 'audio/musicjeux.mp3';        
-
-        function updateLoadingProgress() {
-            resourcesLoaded++;
-            loadingDiv.textContent = `Chargement... ${(resourcesLoaded / totalResources * 100).toFixed(0)}%`;
-            if (resourcesLoaded === totalResources) {
-                loadingDiv.style.display = "none";
-                menuDiv.style.display = "block";
-            }
-        }
-
-        bgImage.onload = updateLoadingProgress;
-        playerImage.onload = updateLoadingProgress;
-        enemyImage.onload = updateLoadingProgress;
-        music.onload = updateLoadingProgress;
-
-        class Player {
-            constructor(x, y, width, height) {
-                this.x = x;
-                this.y = y;
-                this.width = width;
-                this.height = height;
-                this.speed = 5;
-                this.image = playerImage;
-            }
-
-            move(keys) {
-                if (keys.left && this.x > 0) this.x -= this.speed;
-                if (keys.right && this.x + this.width < canvas.width) this.x += this.speed;
-                if (keys.up && this.y > 0) this.y -= this.speed;
-                if (keys.down && this.y + this.height < canvas.height) this.y += this.speed;
-            }
-
-            draw() {
-                ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-            }
-        }
-
-        class Enemy {
-            constructor(x, y, width, height) {
-                this.x = x;
-                this.y = y;
-                this.width = width;
-                this.height = height;
-                this.speed = 2;
-            }
-
-            move() {
-                this.x -= this.speed;
-                if (this.x + this.width < 0) this.x = canvas.width;
-            }
-
-            draw() {
-                ctx.drawImage(enemyImage, this.x, this.y, this.width, this.height);
-            }
-        }
-
-        function initGame() {
-            player = new Player(50, 300, 50, 50);
-            enemies.push(new Enemy(300, 300, 50, 50));
-            enemies.push(new Enemy(500, 250, 50, 50));
-            enemies.push(new Enemy(600, 150, 50, 50));
-
-            music.loop = true;
-            music.play();
-            updateGame();
-        }
-
-        let keys = { left: false, right: false, up: false, down: false };
-
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') keys.left = true;
-            if (e.key === 'ArrowRight') keys.right = true;
-            if (e.key === 'ArrowUp') keys.up = true;
-            if (e.key === 'ArrowDown') keys.down = true;
-            if (e.key === 'Escape') togglePause();  // Pause on Escape key
-        });
-
-        window.addEventListener('keyup', (e) => {
-            if (e.key === 'ArrowLeft') keys.left = false;
-            if (e.key === 'ArrowRight') keys.right = false;
-            if (e.key === 'ArrowUp') keys.up = false;
-            if (e.key === 'ArrowDown') keys.down = false;
-        });
-
-        function checkCollisions() {
-            for (let enemy of enemies) {
-                if (player.x < enemy.x + enemy.width && player.x + player.width > enemy.x &&
-                    player.y < enemy.y + enemy.height && player.y + player.height > enemy.y) {
-                    lives--;
-                    player.x = 50;
-                    player.y = 300;
-                    if (lives <= 0) {
-                        gameOver = true;
-                        music.pause();
-                    }
-                }
-            }
-        }
-
-        function updateGame() {
-            if (gameOver) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = "red";
-                ctx.font = "30px Arial";
-                ctx.fillText("Game Over!", canvas.width / 2 - 90, canvas.height / 2);
-                ctx.fillText("Lives left: " + lives, canvas.width / 2 - 90, canvas.height / 2 + 40);
-                return;
-            }
-
-            if (gamePaused) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = "yellow";
-                ctx.font = "30px Arial";
-                ctx.fillText("Paused", canvas.width / 2 - 50, canvas.height / 2);
-                return;
-            }
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
-
-            player.move(keys);
-            player.draw();
-            checkCollisions();
-
-            for (let enemy of enemies) {
-                enemy.move();
-                enemy.draw();
-            }
-
-            if (player.x < points.x + 50 && player.x + player.width > points.x && player.y < points.y + 50 && player.y + player.height > points.y) {
-                gameOver = true;
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = "green";
-                ctx.font = "30px Arial";
-                ctx.fillText("You Win!", canvas.width / 2 - 60, canvas.height / 2);
-                music.pause();
-            }
-
-            ctx.fillStyle = "black";
-            ctx.font = "20px Arial";
-            ctx.fillText("Lives: " + lives, 20, 30);
-
-            requestAnimationFrame(updateGame);
-        }
-
-        function togglePause() {
-            gamePaused = !gamePaused;
-            pauseMenuDiv.style.display = gamePaused ? "block" : "none";
-        }
-
-        startButton.addEventListener('click', () => {
-            menuDiv.style.display = "none";
-            canvas.style.display = "block";
-            initGame();
-        });
-
-        pauseButton.addEventListener('click', () => {
-            togglePause();
-        });
-
-        resumeButton.addEventListener('click', () => {
-            togglePause();
-        });
-
-        restartButton.addEventListener('click', () => {
-            lives = 3;
-            gameOver = false;
-            player.x = 50;
-            player.y = 300;
-            enemies = [];
-            enemies.push(new Enemy(300, 300, 50, 50));
-            enemies.push(new Enemy(500, 250, 50, 50));
-            enemies.push(new Enemy(600, 150, 50, 50));
-            gamePaused = false;
-            updateGame();
-        });
-
-        quitButton.addEventListener('click', () => {
-            gameOver = true;
-            music.pause();
-            canvas.style.display = "none";
-            menuDiv.style.display = "block";
-        });
-
-        backButton.addEventListener('click', () => {
-            canvas.style.display = "none";
-            menuDiv.style.display = "block";
-        });
+        // Redirection automatique après 3 secondes
+        setTimeout(function() {
+            window.location.href = "https://forumstlpocket.flarum.cloud/";
+        }, 3000); // Délai de 3 secondes avant la redirection
     </script>
 </body>
 </html>
