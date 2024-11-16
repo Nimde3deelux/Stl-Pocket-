@@ -1,263 +1,207 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STL Pocket</title>
+    <title>Créateurs - STL Pocket</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        /* ==========================================
-        RESET ET STYLES GLOBAUX
-        ========================================== */
-        * {
+        /* Style de la page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1d1f21;
+            color: white;
+            text-align: center;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
         }
 
-        body, html {
-            height: 100%;
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #fff;
-            background: url('images/imagedefondboss.jpg') no-repeat center center fixed;
-            background-size: cover;
-            overflow-x: hidden;
-            margin: 0;
+        h1 {
+            margin-top: 20px;
+            font-size: 3em;
         }
 
-        /* ==========================================
-        LAYOUT PRINCIPAL
-        ========================================== */
-        .main-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        .header {
             text-align: center;
-            height: 100%;
-            padding: 20px;
+            margin-top: 30px;
         }
 
-        /* ==========================================
-        HEADER
-        ========================================== */
-        header {
-            margin-bottom: 30px;
+        .logo {
+            width: 200px;
+            height: auto;
         }
 
-        header h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
+        .content {
+            margin: 20px;
         }
 
-        .logo img {
+        ul {
+            list-style-type: none;
+            padding: 0;
+            font-size: 1.2em;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #5f5e5e;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #434343;
+        }
+
+        /* Animation du fond avec des points lumineux */
+        @keyframes glowingBackground {
+            0% {
+                background-color: #1d1f21;
+            }
+            50% {
+                background-color: #2d2f31;
+            }
+            100% {
+                background-color: #1d1f21;
+            }
+        }
+
+        body {
+            animation: glowingBackground 10s infinite alternate;
+        }
+
+        /* Position des GIFs */
+        .gif {
+            position: fixed;
+            width: 120px;
+            height: 120px;
+            animation: gifMovement 4s infinite alternate;
+        }
+
+        /* Animation des GIFs */
+        @keyframes gifMovement {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .gif1 { top: 10%; left: 5%; }
+        .gif2 { top: 30%; left: 5%; }
+        .gif3 { top: 50%; left: 5%; }
+        .gif4 { top: 70%; left: 5%; }
+        .gif5 { top: 10%; right: 5%; }
+        .gif6 { top: 30%; right: 5%; }
+        .gif7 { top: 50%; right: 5%; }
+        .gif8 { top: 70%; right: 5%; }
+        .gif9 { top: 10%; left: 35%; }
+        .gif10 { top: 30%; left: 35%; }
+
+        /* Position des images de zombies */
+        .zombie-left, .zombie-right {
+            position: fixed;
+            top: 50%;
             width: 150px;
             height: auto;
         }
 
-        /* ==========================================
-        SECTION CRÉATEURS
-        ========================================== */
-        .creators {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .creator {
-            margin: 0 15px;
-            text-align: center;
-        }
-
-        .creator img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 10px;
-        }
-
-        .creator p {
-            font-size: 1.1rem;
-        }
-
-        /* ==========================================
-        BOUTON THÈME
-        ========================================== */
-        #theme-toggle {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            text-transform: uppercase;
-            transition: background-color 0.3s;
-        }
-
-        #theme-toggle:hover {
-            background-color: #444;
-        }
-
-        /* ==========================================
-        FOND LÉGER (mode clair)
-        ========================================== */
-        .light-theme {
-            background-color: #fff;
-            color: #333;
-        }
-
-        .light-theme header h1 {
-            color: #333;
-        }
-
-        .light-theme .logo img {
-            filter: invert(1);
-        }
-
-        .light-theme .creators .creator img {
-            border: 2px solid #333;
-        }
-
-        .light-theme #theme-toggle {
-            background-color: #f0f0f0;
-            color: #333;
-        }
-
-        /* ==========================================
-        MEDIA QUERIES (Responsivité)
-        ========================================== */
-        @media (max-width: 768px) {
-            .creator img {
-                width: 80px;
-                height: 80px;
-            }
-
-            header h1 {
-                font-size: 2.5rem;
-            }
-
-            .creators {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            #theme-toggle {
-                font-size: 0.9rem;
-            }
-        }
-
-        /* ==========================================
-        ANIMATIONS
-        ========================================== */
-        .background-image {
-            position: absolute;
-            top: 0;
+        .zombie-left {
             left: 0;
+            transform: translateY(-50%);
+        }
+
+        .zombie-right {
             right: 0;
-            bottom: 0;
-            z-index: -1;
-            opacity: 0.4;
-            animation: fadeIn 10s infinite alternate;
+            transform: translateY(-50%);
         }
 
-        @keyframes fadeIn {
-            0% {
-                opacity: 0.4;
-            }
-            100% {
-                opacity: 1;
-            }
+        /* Style de la musique d'ambiance */
+        audio {
+            display: none;
         }
 
-        /* ==========================================
-        AUDIO
-        ========================================== */
-        #audio {
+        /* Le gifbonus qui suit la souris */
+        #gifbonus {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
-            display: inline-block;
-            width: 300px;
-        }
-
-        /* ==========================================
-        ACCESSIBILITÉ (Couleurs et contraste)
-        ========================================== */
-        .accessible {
-            color: #000;
-            background-color: #fff;
-        }
-
-        .accessible header h1 {
-            color: #000;
-        }
-
-        .accessible .logo img {
-            filter: none;
-        }
-
-        .accessible .creator p {
-            color: #000;
+            width: 100px;
+            height: 100px;
+            transition: transform 0.1s ease-in-out;
         }
     </style>
 </head>
-<body>
 
+<body>
     <!-- Musique d'ambiance -->
-    <audio id="audio" controls>
-        <source src="audio/ambient_music.mp3" type="audio/mp3">
-        Votre navigateur ne supporte pas l'élément audio.
+    <audio autoplay loop>
+        <source src="audio/123.mp3" type="audio/mp3">
+        Votre navigateur ne supporte pas la lecture audio.
     </audio>
 
-    <!-- Conteneur principal -->
-    <div class="main-container">
-        <div class="background-image"></div>
-        
-        <!-- Contenu de la page -->
-        <header>
-            <div class="logo">
-                <img src="images/logo.png" alt="Logo représentant les créateurs de STL Pocket">
-            </div>
-            <h1>Bienvenue dans STL Pocket</h1>
-        </header>
-
-        <section class="creators">
-            <h2>Nos Créateurs</h2>
-            <div class="creator">
-                <img src="images/adam-sehili.jpg" alt="Adam Sehili - Créateur">
-                <p>Adam Sehili - Le développeur principal</p>
-            </div>
-            <div class="creator">
-                <img src="images/berkay.jpg" alt="Berkay - Designer">
-                <p>Berkay - Designer et créateur visuel</p>
-            </div>
-        </section>
-
-        <!-- Thème sombre/clair -->
-        <button id="theme-toggle" onclick="toggleTheme()">Passer en mode clair</button>
+    <!-- Header avec le logo des créateurs -->
+    <div class="header">
+        <img src="images/creator_logo.png" alt="Logo des créateurs" class="logo">
     </div>
 
+    <!-- Contenu principal -->
+    <div class="content">
+        <h1>Remerciements aux Créateurs</h1>
+        <p>Nous tenons à remercier les créateurs de STL Pocket :</p>
+        <ul>
+            <li>Adam Sehili</li>
+            <li>Bastien Robin</li>
+            <li>Berkay Gaot</li>
+            <li>ChatGPT</li>
+        </ul>
+        <p>Merci pour votre soutien et votre engagement à rendre l'apprentissage accessible à tous !</p>
+        <a href="index.html" class="btn">Retour à l'accueil</a>
+    </div>
+
+    <!-- Images des zombies -->
+    <img src="images/zombie_left.png" alt="Zombie Left" class="zombie-left">
+    <img src="images/zombie_right.png" alt="Zombie Right" class="zombie-right">
+
+    <!-- GIFs fixes sur les côtés -->
+    <img src="images/dance1.gif" alt="Dance GIF 1" class="gif gif1">
+    <img src="images/dance2.gif" alt="Dance GIF 2" class="gif gif2">
+    <img src="images/dance3.gif" alt="Dance GIF 3" class="gif gif3">
+    <img src="images/dance4.gif" alt="Dance GIF 4" class="gif gif4">
+    <img src="images/dance5.gif" alt="Dance GIF 5" class="gif gif5">
+    <img src="images/dance6.gif" alt="Dance GIF 6" class="gif gif6">
+    <img src="images/dance7.gif" alt="Dance GIF 7" class="gif gif7">
+    <img src="images/dance8.gif" alt="Dance GIF 8" class="gif gif8">
+    <img src="images/dance9.gif" alt="Dance GIF 9" class="gif gif9">
+    <img src="images/dance10.gif" alt="Dance GIF 10" class="gif gif10">
+
+    <!-- Le GIF qui suit la souris -->
+    <img src="images/gifbonus.gif" alt="Bonus GIF" id="gifbonus">
+
+    <!-- Script pour le gifbonus qui suit la souris -->
     <script>
-        // Fonction pour basculer entre le mode clair et sombre
-        function toggleTheme() {
-            const body = document.body;
-            body.classList.toggle('light-theme');
-            body.classList.toggle('accessible');
+        const gifbonus = document.getElementById('gifbonus');
 
-            const button = document.getElementById('theme-toggle');
-            if (body.classList.contains('light-theme')) {
-                button.textContent = 'Passer en mode sombre';
-            } else {
-                button.textContent = 'Passer en mode clair';
-            }
-        }
+        document.addEventListener('mousemove', function(event) {
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
 
-        // Contrôle audio
-        const audio = document.getElementById('audio');
-        audio.volume = 0.2;  // Baisse le volume par défaut
+            // Ajout d'un léger délai pour l'effet de latence
+            gifbonus.style.transform = `translate(${mouseX + 15}px, ${mouseY + 15}px)`;
+        });
     </script>
 </body>
+
 </html>
