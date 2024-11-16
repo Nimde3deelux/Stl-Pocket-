@@ -79,13 +79,6 @@
 
         .light-effect span {
             color: rgba(255, 255, 255, 0.7);
-            animation: glow 1.5s ease-in-out infinite alternate;
-        }
-
-        /* Animation de l'effet lumineux */
-        @keyframes glow {
-            0% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 0, 0, 0.5); }
-            100% { text-shadow: 0 0 40px rgba(255, 255, 255, 1), 0 0 50px rgba(255, 0, 0, 1); }
         }
 
         /* Formulaire de contact */
@@ -155,25 +148,6 @@
             color: #ff3e00;
             text-decoration: none;
         }
-
-        /* Animation du fond */
-        .background-light {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://via.placeholder.com/1920x1080') center center/cover no-repeat;
-            filter: blur(8px);
-            z-index: -1;
-            animation: lightPulse 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes lightPulse {
-            0% { opacity: 0.4; }
-            100% { opacity: 1; }
-        }
-
     </style>
 </head>
 <body>
@@ -182,13 +156,10 @@
     <nav>
         <ul>
             <li><a href="index.html">🏠 Accueil</a></li> <!-- Lien vers la page index.html avec emoji maison -->
-            <li><a href="createurs.html">👨‍💻 Créateurs</a></li> <!-- Lien vers la page createurs.html avec emoji -->
-            <li><a href="ressources.html">📚 Ressources</a></li> <!-- Lien vers la page ressources.html avec emoji -->
+            <li><a href="creators.html">👨‍💻 Créateurs</a></li> <!-- Lien vers la page creators.html avec emoji -->
+            <li><a href="resources.html">📚 Ressources</a></li> <!-- Lien vers la page resources.html avec emoji -->
         </ul>
     </nav>
-
-    <!-- Effet de lumière de fond -->
-    <div class="background-light"></div>
 
     <!-- Contenu principal -->
     <div class="content">
