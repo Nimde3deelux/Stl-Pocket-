@@ -3,40 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STL Pocket - Contact</title>
+    <title>Contact - STL Pocket</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Style général de la page */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #222; /* Fond sombre pour l'ambiance Fight Club */
+            color: #ddd; /* Texte clair sur fond sombre */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+        }
+
+        /* Effet de lumière (souligné et brillance) */
+        .light-effect {
+            color: white;
+            font-size: 2em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 0, 0, 0.5);
+        }
+
+        .light-effect span {
+            color: rgba(255, 255, 255, 0.7);
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        /* Animation de l'effet lumineux */
+        @keyframes glow {
+            0% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 0, 0, 0.5); }
+            100% { text-shadow: 0 0 40px rgba(255, 255, 255, 1), 0 0 50px rgba(255, 0, 0, 1); }
+        }
+
+        /* Formulaire de contact */
+        .contact-form {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            margin: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
+        }
+
+        .contact-form h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #ff3e00;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+        }
+
+        .contact-form p {
+            font-size: 1.2em;
+            color: #bbb;
+            margin-bottom: 15px;
+        }
+
+        .contact-form input,
+        .contact-form button {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            font-size: 1em;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form input:hover,
+        .contact-form button:hover {
+            background-color: #ff3e00;
+            cursor: pointer;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form button::placeholder {
+            color: #bbb;
+        }
+
+        .contact-form button {
+            background-color: #ff3e00;
+            color: white;
+            font-weight: bold;
+        }
+
+        .contact-info {
+            margin-top: 30px;
+            font-size: 1.1em;
+            color: #bbb;
+            text-align: center;
+        }
+
+        .contact-info a {
+            color: #ff3e00;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #ffffff;
+        }
+
+        /* Animation du fond */
+        .background-light {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://via.placeholder.com/1920x1080') center center/cover no-repeat;
+            filter: blur(8px);
+            z-index: -1;
+            animation: lightPulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes lightPulse {
+            0% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="cours.html">Cours</a></li>
-                <li><a href="communication.html">Communication</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <h1>Contactez-nous</h1>
-    </header>
-    
-    <main>
-        <section>
-            <h2>Formulaire de contact</h2>
-            <form>
-                <label for="name">Nom :</label>
-                <input type="text" id="name" name="name" required>
-                <label for="email">Email :</label>
-                <input type="email" id="email" name="email" required>
-                <label for="message">Message :</label>
-                <textarea id="message" name="message" required></textarea>
-                <button type="submit">Envoyer</button>
-            </form>
-        </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2024 STL Pocket. Tous droits réservés.</p>
-    </footer>
-    <script src="script.js"></script>
+
+    <!-- Effet de lumière de fond -->
+    <div class="background-light"></div>
+
+    <!-- Titre avec effet lumineux -->
+    <div class="light-effect">
+        <span>Contactez-moi</span>
+    </div>
+
+    <!-- Formulaire de contact -->
+    <div class="contact-form">
+        <h2>Demandez-moi quelque chose</h2>
+        <p>Vous avez des questions ou des demandes spécifiques ? Utilisez le formulaire ci-dessous pour entrer en contact avec moi.</p>
+
+        <form action="mailto:adamsehili28@gmail.com" method="get">
+            <input type="text" name="name" placeholder="Votre nom" required>
+            <input type="email" name="email" placeholder="Votre email" required>
+            <input type="text" name="message" placeholder="Votre message" required>
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+
+    <!-- Informations de contact -->
+    <div class="contact-info">
+        <p>Vous pouvez également me contacter directement :</p>
+        <p>Email: <a href="mailto:adamsehili28@gmail.com">adamsehili28@gmail.com</a></p>
+        <p>Téléphone: <a href="tel:+33651670164">0651670164</a></p>
+    </div>
+
 </body>
 </html>
