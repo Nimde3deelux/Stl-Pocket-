@@ -41,7 +41,7 @@
             justify-content: space-around;
             width: 100%;
             padding: 15px;
-            background-color: #2e8b57;
+            background-color: #e60000; /* Rouge vif */
             color: #fff;
             font-size: 1.2em;
         }
@@ -51,14 +51,15 @@
             text-decoration: none;
             font-weight: bold;
             padding: 10px;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.7); /* Fond noir translucide pour les liens */
             border-radius: 8px;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         .navbar a:hover {
-            background-color: #00796b;
+            background-color: #a30000; /* Rouge plus foncé au survol */
+            transform: scale(1.1); /* Zoom léger au survol */
         }
 
         /* Titre principal */
@@ -231,7 +232,8 @@
             <div class="tag">Cours interactifs</div>
             <div class="tag">Messagerie instantanée</div>
             <div class="tag">Rappels de révisions</div>
-            <div class="tag">IA intelligente</div>
+            <div class="tag">IA intégrée 🤖</div>
+            <div class="tag">Accessible sur tous les appareils</div>
         </div>
     </div>
 </body>
