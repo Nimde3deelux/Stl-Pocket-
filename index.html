@@ -6,7 +6,7 @@
     <title>STL Pocket - Accueil</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Style général de la page avec un fond noir et des points brillants */
+        /* Style général de la page */
         body {
             font-family: 'Minecraft', sans-serif;
             background-color: #000000;
@@ -19,7 +19,8 @@
             background-size: cover;
             background-position: center;
         }
-        /* En-tête avec le logo */
+
+        /* En-tête */
         .header {
             padding: 15px;
             display: flex;
@@ -28,10 +29,12 @@
             background: rgba(0, 0, 0, 0.6);
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
         }
+
         .logo {
             width: 200px;
             height: auto;
         }
+
         /* Barre de navigation */
         .navbar {
             display: flex;
@@ -40,9 +43,9 @@
             padding: 15px;
             background-color: #2e8b57;
             color: #fff;
-            font-family: 'Minecraft', sans-serif;
             font-size: 1.2em;
         }
+
         .navbar a {
             color: #fff;
             text-decoration: none;
@@ -51,11 +54,14 @@
             background-color: rgba(0, 0, 0, 0.7);
             border-radius: 8px;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
         }
+
         .navbar a:hover {
             background-color: #00796b;
         }
-        /* Titre principal avec un effet style Minecraft */
+
+        /* Titre principal */
         h1 {
             font-size: 3em;
             color: #00b33c;
@@ -63,7 +69,8 @@
             text-shadow: 3px 3px 8px #000;
             margin: 30px;
         }
-        /* Conteneur principal avec les cartes de section */
+
+        /* Conteneur principal */
         .container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -72,27 +79,32 @@
             width: 100%;
             padding: 20px;
         }
-        /* Style des cartes de section */
+
+        /* Style des cartes */
         .card {
             background-color: rgba(0, 0, 0, 0.7);
             border-radius: 15px;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
             padding: 20px;
             text-align: center;
-            border: 2px solid #e60000; /* Rouge sombre, rappelant Dragon Ball Z */
+            border: 2px solid #e60000;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .card:hover {
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
             transform: scale(1.05);
         }
+
         .icon img {
             width: 60px;
             height: 60px;
             margin-bottom: 10px;
         }
-        /* Boutons stylisés */
+
+        /* Boutons */
         .btn {
-            background-color: #e60000; /* Rouge sombre */
+            background-color: #e60000;
             color: #ffffff;
             border: none;
             padding: 10px 20px;
@@ -100,45 +112,15 @@
             cursor: pointer;
             font-family: 'Minecraft', sans-serif;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
+
         .btn:hover {
-            background-color: #a30000; /* Rouge plus foncé */
+            background-color: #a30000;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
         }
-        /* Section des fonctionnalités et des tags */
-        .features {
-            text-align: center;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 40px;
-            border-radius: 15px;
-            margin-top: 30px;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-        }
-        .features h2 {
-            font-size: 2.5em;
-            color: #00b33c;
-            text-shadow: 3px 3px 8px #000;
-        }
-        .tags {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .tag {
-            background-color: #004d40;
-            color: #ffffff;
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-size: 0.9em;
-            cursor: pointer;
-        }
-        .tag:hover {
-            background-color: #26a69a;
-        }
-        /* Nouveau style pour la section introduction avec un fond personnalisé */
+
+        /* Section introduction */
         .intro {
             padding: 30px;
             background-image: url('images/feature_background.jpg');
@@ -150,28 +132,58 @@
             max-width: 800px;
             margin: 30px auto;
         }
+
         .intro p {
             font-size: 1.5em;
             color: #ffffff;
             font-weight: bold;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
         }
+
+        /* Fonctionnalités */
+        .features {
+            text-align: center;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .features h2 {
+            font-size: 2.5em;
+            color: #00b33c;
+            text-shadow: 3px 3px 8px #000;
+        }
+
+        .tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .tag {
+            background-color: #004d40;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+
+        .tag:hover {
+            background-color: #26a69a;
+        }
     </style>
 </head>
 <body>
-
-    <!-- Ajout de la musique qui se lance en boucle à faible volume -->
-    <audio autoplay loop>
-        <source src="kiko.mp3" type="audio/mp3">
-        Votre navigateur ne supporte pas la lecture audio.
-    </audio>
-
-    <!-- En-tête avec le logo -->
     <div class="header">
         <img src="images/logo.png" alt="STL Pocket Logo" class="logo">
     </div>
 
-    <!-- Barre de navigation -->
     <div class="navbar">
         <a href="index.html">Accueil 🏠</a>
         <a href="resources.html">Ressources 📚</a>
@@ -180,15 +192,12 @@
         <a href="creators.html">Créateurs 👨‍💻👩‍💻</a>
     </div>
 
-    <!-- Titre principal -->
     <h1>Bienvenue sur STL Pocket 🌟</h1>
 
-    <!-- Section introduction avec fond personnalisé -->
     <div class="intro">
         <p>STL Pocket est votre plateforme d'apprentissage accessible et interactive ! Explorez nos différentes matières et améliorez vos compétences 🎓🚀.</p>
     </div>
 
-    <!-- Conteneur principal avec les cartes de section -->
     <div class="container">
         <div class="card">
             <div class="icon"><img src="images/physique_icon.png" alt="Physique-Chimie"></div>
@@ -208,7 +217,6 @@
             <p>Renforcez vos bases en mathématiques et résolvez des problèmes complexes 📊.</p>
             <a href="math.html" class="btn">Accéder 🔝</a>
         </div>
-        <!-- Section Science de Laboratoire avec bouton vers lab.html -->
         <div class="card">
             <div class="icon"><img src="images/lab_icon.png" alt="Science de Laboratoire"></div>
             <h3>Science de Laboratoire 🔬</h3>
@@ -217,7 +225,6 @@
         </div>
     </div>
 
-    <!-- Section fonctionnalités -->
     <div class="features">
         <h2>Fonctionnalités ⭐</h2>
         <div class="tags">
@@ -227,6 +234,5 @@
             <div class="tag">IA intelligente</div>
         </div>
     </div>
-
 </body>
 </html>
