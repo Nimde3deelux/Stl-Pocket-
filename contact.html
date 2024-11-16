@@ -137,6 +137,15 @@
             display: none;
         }
 
+        .error-message {
+            background-color: #dc3545;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+
         /* Informations de contact */
         .contact-info {
             margin-top: 30px;
@@ -155,9 +164,9 @@
     <!-- Menu de navigation -->
     <nav>
         <ul>
-            <li><a href="index.html">🏠 Accueil</a></li> <!-- Lien vers la page index.html avec emoji maison -->
-            <li><a href="creators.html">👨‍💻 Créateurs</a></li> <!-- Lien vers la page creators.html avec emoji -->
-            <li><a href="resources.html">📚 Ressources</a></li> <!-- Lien vers la page resources.html avec emoji -->
+            <li><a href="index.html">🏠 Accueil</a></li>
+            <li><a href="creators.html">👨‍💻 Créateurs</a></li>
+            <li><a href="resources.html">📚 Ressources</a></li>
         </ul>
     </nav>
 
@@ -188,9 +197,12 @@
                 <button type="submit">Envoyer votre message ✉️</button>
             </form>
 
-            <!-- Message de confirmation -->
+            <!-- Messages de confirmation ou d'erreur -->
             <div class="confirmation-message" id="confirmation-message">
                 Votre message a bien été envoyé ✅. Vous recevrez une réponse dans les 24 heures.
+            </div>
+            <div class="error-message" id="error-message">
+                Une erreur est survenue lors de l'envoi de votre message. Veuillez réessayer plus tard.
             </div>
         </div>
 
@@ -205,14 +217,37 @@
         // Ajouter un écouteur d'événements pour la soumission du formulaire
         const form = document.getElementById('contact-form');
         const confirmationMessage = document.getElementById('confirmation-message');
+        const errorMessage = document.getElementById('error-message');
 
         form.addEventListener('submit', function(event) {
             event.preventDefault(); // Empêche la soumission par défaut pour afficher la confirmation
-            confirmationMessage.style.display = 'block';
-            form.reset();
-            setTimeout(function() {
-                confirmationMessage.style.display = 'none';
-            }, 5000);
+
+            // Envoie les données à Formspree
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+            })
+            .then(response => {
+                if (response.ok) {
+                    confirmationMessage.style.display = 'block';
+                    form.reset();
+                    setTimeout(function() {
+                        confirmationMessage.style.display = 'none';
+                    }, 5000);
+                } else {
+                    errorMessage.style.display = 'block';
+                    setTimeout(function() {
+                        errorMessage.style.display = 'none';
+                    }, 5000);
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                errorMessage.style.display = 'block';
+                setTimeout(function() {
+                    errorMessage.style.display = 'none';
+                }, 5000);
+            });
         });
     </script>
 </body>
