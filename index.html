@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,9 +7,10 @@
     <title>STL Pocket - Accueil</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Style général de la page avec un fond d'image prenant toute la page */
+        /* Style général de la page avec un fond noir et des points brillants */
         body {
             font-family: 'Minecraft', sans-serif;
+            background-color: #000000;
             color: #e1e1e1;
             margin: 0;
             display: flex;
@@ -17,7 +19,6 @@
             background-image: url('images/space_background.png');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Fixe l'image de fond */
         }
         /* En-tête avec le logo */
         .header {
@@ -215,11 +216,22 @@
     <div class="features">
         <h2>Fonctionnalités 🚀</h2>
         <div class="tags">
-            <div class="tag">Accessibilité</div>
-            <div class="tag">Matières variées</div>
-            <div class="tag">Apprentissage ludique</div>
+            <span class="tag">Suivi des Cours 📚</span>
+            <span class="tag">Révisions à la Demande ⏰</span>
+            <span class="tag">Messagerie Instantanée 💬</span>
+            <span class="tag">Forum de Discussion 📝</span>
         </div>
     </div>
 
+    <!-- Musique de fond -->
+    <audio id="background-music" autoplay loop>
+        <source src="index.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const music = document.getElementById('background-music');
+        music.volume = 0.5;  // Régler le volume à 50%
+    </script>
 </body>
 </html>
