@@ -63,14 +63,44 @@
             background-color: #434343;
         }
 
+        /* Animation du fond avec des points lumineux */
+        @keyframes glowingBackground {
+            0% {
+                background-color: #1d1f21;
+            }
+            50% {
+                background-color: #2d2f31;
+            }
+            100% {
+                background-color: #1d1f21;
+            }
+        }
+
+        body {
+            animation: glowingBackground 10s infinite alternate;
+        }
+
         /* Position des GIFs */
         .gif {
             position: fixed;
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
+            animation: gifMovement 4s infinite alternate;
         }
 
-        /* Positionnement des GIFs */
+        /* Animation des GIFs */
+        @keyframes gifMovement {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
         .gif1 { top: 10%; left: 5%; }
         .gif2 { top: 30%; left: 5%; }
         .gif3 { top: 50%; left: 5%; }
@@ -83,22 +113,21 @@
         .gif10 { top: 30%; left: 35%; }
 
         /* Position des images de zombies */
-        .zombie-left {
+        .zombie-left, .zombie-right {
             position: fixed;
-            left: 0;
             top: 50%;
-            transform: translateY(-50%);
             width: 150px;
             height: auto;
         }
 
-        .zombie-right {
-            position: fixed;
-            right: 0;
-            top: 50%;
+        .zombie-left {
+            left: 0;
             transform: translateY(-50%);
-            width: 150px;
-            height: auto;
+        }
+
+        .zombie-right {
+            right: 0;
+            transform: translateY(-50%);
         }
 
         /* Style de la musique d'ambiance */
