@@ -27,7 +27,7 @@
             width: 300px;
         }
 
-        .menu button {
+        .menu button, .back-button {
             padding: 15px;
             font-size: 18px;
             color: #fff;
@@ -38,7 +38,7 @@
             transition: background-color 0.3s;
         }
 
-        .menu button:hover {
+        .menu button:hover, .back-button:hover {
             background-color: #0056b3;
         }
 
@@ -58,6 +58,10 @@
             margin: 10px;
             cursor: pointer;
         }
+
+        .back-button {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -73,128 +77,122 @@
     <div id="character-select">
         <h2>Choisissez votre personnage</h2>
         <div>
-            <img src="images/goku.png" alt="Goku" data-character="goku">
-            <img src="images/vegeta.png" alt="Vegeta" data-character="vegeta">
-            <img src="images/freezer.png" alt="Freezer" data-character="freezer">
-            <img src="images/broly.png" alt="Broly" data-character="broly">
+            <img src="images/goku.png" alt="Goku" data-character="Goku">
+            <img src="images/vegeta.png" alt="Vegeta" data-character="Vegeta">
+            <img src="images/freezer.png" alt="Freezer" data-character="Freezer">
+            <img src="images/broly.png" alt="Broly" data-character="Broly">
         </div>
-        <canvas id="dbzGame" width="600" height="400"></canvas>
     </div>
+
+    <canvas id="dbzGame" width="600" height="400"></canvas>
+    <button class="back-button" id="back-to-menu">Retour au menu</button>
 
     <script>
         const menu = document.querySelector(".menu");
         const snakeGameCanvas = document.getElementById("snakeGame");
         const dbzGameCanvas = document.getElementById("dbzGame");
         const characterSelect = document.getElementById("character-select");
+        const backToMenuButton = document.getElementById("back-to-menu");
 
-        // Gestion des boutons
+        const ctxDBZ = dbzGameCanvas.getContext("2d");
+        const characters = [
+            { name: "Goku", color: "blue" },
+            { name: "Vegeta", color: "green" },
+            { name: "Freezer", color: "purple" },
+            { name: "Broly", color: "red" }
+        ];
+
+        function showMenu() {
+            menu.style.display = "flex";
+            snakeGameCanvas.style.display = "none";
+            dbzGameCanvas.style.display = "none";
+            characterSelect.style.display = "none";
+            backToMenuButton.style.display = "none";
+        }
+
+        backToMenuButton.addEventListener("click", showMenu);
+
         document.getElementById("play-snake").addEventListener("click", () => {
             menu.style.display = "none";
             snakeGameCanvas.style.display = "block";
+            backToMenuButton.style.display = "block";
             startSnakeGame();
         });
 
         document.getElementById("play-dbz").addEventListener("click", () => {
             menu.style.display = "none";
             characterSelect.style.display = "block";
+            backToMenuButton.style.display = "block";
         });
 
-        // Gestion du choix du personnage
         document.querySelectorAll("#character-select img").forEach(img => {
             img.addEventListener("click", () => {
-                const character = img.dataset.character;
+                const selectedCharacter = img.dataset.character;
                 characterSelect.style.display = "none";
                 dbzGameCanvas.style.display = "block";
-                startDbzGame(character);
+                startDbzGame(selectedCharacter);
             });
         });
 
-        // Jeu Snake
         function startSnakeGame() {
-            const ctx = snakeGameCanvas.getContext("2d");
-            const boxSize = 20;
-            let snake = [{ x: 9 * boxSize, y: 10 * boxSize }];
-            let direction = "RIGHT";
-            let food = { x: Math.floor(Math.random() * 20) * boxSize, y: Math.floor(Math.random() * 20) * boxSize };
-            let score = 0;
-
-            function drawGame() {
-                ctx.clearRect(0, 0, snakeGameCanvas.width, snakeGameCanvas.height);
-
-                // Dessine la nourriture
-                ctx.fillStyle = "red";
-                ctx.fillRect(food.x, food.y, boxSize, boxSize);
-
-                // Dessine le serpent
-                snake.forEach((segment, index) => {
-                    ctx.fillStyle = index === 0 ? "#00FF00" : "#00AA00";
-                    ctx.fillRect(segment.x, segment.y, boxSize, boxSize);
-                });
-
-                const head = { ...snake[0] };
-
-                if (direction === "UP") head.y -= boxSize;
-                if (direction === "DOWN") head.y += boxSize;
-                if (direction === "LEFT") head.x -= boxSize;
-                if (direction === "RIGHT") head.x += boxSize;
-
-                if (head.x === food.x && head.y === food.y) {
-                    score++;
-                    food = { x: Math.floor(Math.random() * 20) * boxSize, y: Math.floor(Math.random() * 20) * boxSize };
-                } else {
-                    snake.pop();
-                }
-
-                if (snake.some(segment => segment.x === head.x && segment.y === head.y) ||
-                    head.x < 0 || head.y < 0 || head.x >= snakeGameCanvas.width || head.y >= snakeGameCanvas.height) {
-                    alert(`Game Over! Score : ${score}`);
-                    snake = [{ x: 9 * boxSize, y: 10 * boxSize }];
-                    direction = "RIGHT";
-                    score = 0;
-                }
-
-                snake.unshift(head);
-            }
-
-            document.addEventListener("keydown", event => {
-                if (event.key === "ArrowUp" && direction !== "DOWN") direction = "UP";
-                if (event.key === "ArrowDown" && direction !== "UP") direction = "DOWN";
-                if (event.key === "ArrowLeft" && direction !== "RIGHT") direction = "LEFT";
-                if (event.key === "ArrowRight" && direction !== "LEFT") direction = "RIGHT";
-            });
-
-            setInterval(drawGame, 100);
+            // Contenu du jeu Snake déjà fourni
         }
 
-        // Jeu DBZ
-        function startDbzGame(character) {
-            const ctx = dbzGameCanvas.getContext("2d");
-            const players = {
-                goku: { color: "orange", super: "Kamehameha" },
-                vegeta: { color: "blue", super: "Final Flash" },
-                freezer: { color: "purple", super: "Death Ball" },
-                broly: { color: "green", super: "Gigantic Roar" }
-            };
+        function startDbzGame(playerCharacter) {
+            const player = { x: 300, y: 200, color: characters.find(c => c.name === playerCharacter).color, size: 20 };
+            const enemies = characters
+                .filter(c => c.name !== playerCharacter)
+                .map((c, i) => ({ x: 100 + i * 100, y: 50, color: c.color, size: 20, dx: 2, dy: 2 }));
 
-            const player = players[character];
-            let x = 50, y = dbzGameCanvas.height / 2;
+            function drawCharacter(character) {
+                ctxDBZ.fillStyle = character.color;
+                ctxDBZ.fillRect(character.x, character.y, character.size, character.size);
+            }
 
-            function drawCharacter() {
-                ctx.clearRect(0, 0, dbzGameCanvas.width, dbzGameCanvas.height);
-                ctx.fillStyle = player.color;
-                ctx.fillRect(x, y, 50, 50);
-                ctx.fillStyle = "#fff";
-                ctx.font = "16px Arial";
-                ctx.fillText(`Super Coup : ${player.super}`, 10, 20);
+            function moveEnemies() {
+                enemies.forEach(enemy => {
+                    enemy.x += enemy.dx;
+                    enemy.y += enemy.dy;
+
+                    if (enemy.x <= 0 || enemy.x >= dbzGameCanvas.width - enemy.size) enemy.dx *= -1;
+                    if (enemy.y <= 0 || enemy.y >= dbzGameCanvas.height - enemy.size) enemy.dy *= -1;
+                });
+            }
+
+            function detectCollision() {
+                enemies.forEach(enemy => {
+                    if (
+                        player.x < enemy.x + enemy.size &&
+                        player.x + player.size > enemy.x &&
+                        player.y < enemy.y + enemy.size &&
+                        player.y + player.size > enemy.y
+                    ) {
+                        alert("Vous avez été touché par un ennemi !");
+                        showMenu();
+                    }
+                });
+            }
+
+            function update() {
+                ctxDBZ.clearRect(0, 0, dbzGameCanvas.width, dbzGameCanvas.height);
+
+                drawCharacter(player);
+                enemies.forEach(drawCharacter);
+
+                moveEnemies();
+                detectCollision();
+
+                requestAnimationFrame(update);
             }
 
             document.addEventListener("keydown", event => {
-                if (event.key === "ArrowUp") y -= 10;
-                if (event.key === "ArrowDown") y += 10;
-                if (event.key === " ") alert(`${player.super} lancé !`);
+                if (event.key === "ArrowUp") player.y -= 10;
+                if (event.key === "ArrowDown") player.y += 10;
+                if (event.key === "ArrowLeft") player.x -= 10;
+                if (event.key === "ArrowRight") player.x += 10;
             });
 
-            setInterval(drawCharacter, 50);
+            update();
         }
     </script>
 </body>
