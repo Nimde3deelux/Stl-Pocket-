@@ -26,6 +26,38 @@
         }
 
         /* ==========================================
+        BARRE D'ONGLETS
+        ========================================== */
+        .navbar {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid #ffcc00;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #ffcc00;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* ==========================================
         LAYOUT PRINCIPAL
         ========================================== */
         .main-container {
@@ -123,10 +155,7 @@
             margin-top: 5px;
         }
 
-        /* ==========================================
-        BASTIEN'S ENCLOSED BOX
-        ========================================== */
-        .bastien-box {
+        .bastien-box, .anis-box {
             background-image: url('images/fondcadre.jpg');
             background-size: cover;
             padding: 20px;
@@ -155,46 +184,25 @@
                 align-items: center;
             }
 
-            .additional-creators {
-                align-items: center;
-            }
-
-            .bastien-box {
+            .bastien-box, .anis-box {
                 width: 90%;
-            }
-        }
-
-        /* ==========================================
-        ANIMATIONS
-        ========================================== */
-        .background-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -1;
-            opacity: 0.4;
-            animation: fadeIn 10s infinite alternate;
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0.4;
-            }
-            100% {
-                opacity: 1;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Barre d'onglets -->
+    <div class="navbar">
+        <div class="logo">STL Pocket</div>
+        <div>
+            <a href="index.html">Accueil</a>
+            <a href="creators.html">Créateurs</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
 
     <!-- Conteneur principal -->
     <div class="main-container">
-        <div class="background-image"></div>
-        
-        <!-- Contenu de la page -->
         <header>
             <div class="logo">
                 <img src="images/logo.png" alt="Logo représentant les créateurs de STL Pocket">
@@ -219,16 +227,12 @@
             <div class="bastien-box">
                 <p class="additional">Bastien - A contribué en envoyant les cours et les PDF pour soutenir le projet.</p>
             </div>
+            <h3>Anis Saidi</h3>
+            <div class="anis-box">
+                <p class="additional">Anis Saidi - A contribué au financement de toutes les dépenses du projet.</p>
+            </div>
             <p class="additional">Les professeurs de biotechnologie - Qui ont inspiré l'idée principale du projet.</p>
         </section>
-
     </div>
-
-    <!-- Musique en arrière-plan -->
-    <audio autoplay loop>
-        <source src="audio/musiquefondcreators.mp3" type="audio/mp3">
-        Votre navigateur ne prend pas en charge l'élément audio.
-    </audio>
-
 </body>
 </html>
