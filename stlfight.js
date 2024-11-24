@@ -169,8 +169,12 @@ function detectCollisions() {
             if (bullet.x > enemy.x && bullet.x < enemy.x + enemy.width &&
                 bullet.y > enemy.y && bullet.y < enemy.y + enemy.height) {
                 enemy.takeDamage();
-                bullets.splice(j, 1); // Supprime la balle
+                bullets.splice(j, 1); // Supprime la balle après collision
                 displayExplosion(enemy.x, enemy.y); // Affiche l'explosion
+                if (enemy.isDead) {
+                    enemies.splice(i, 1); // Supprime l'ennemi après qu'il soit mort
+                    i--; // Ajuster l'indice après la suppression
+                }
                 break;
             }
         }
