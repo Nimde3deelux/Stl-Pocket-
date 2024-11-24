@@ -1,25 +1,4 @@
-met a jours ce code sans rien supprimer augmente le temps dapparition des enemie de 10 second comme ça la memoire ne se fait pas depasser 
- je veux excatement le meme codes sauf que je veux que tu ajoute des  Boule Rouge - "Explosion de Puissance"
-Effet sur le joueur : Augmente la force d'attaque du joueur.
-Description : La boule rouge, en s'impactant sur le joueur, libère une vague d'énergie explosive, augmentant temporairement la puissance de ses attaques. Pendant une durée limitée, toutes les attaques du joueur infligeront des dégâts accrus. Elle pourrait aussi avoir un effet visuel où les attaques deviennent plus spectaculaires, avec des éclats rouges qui se forment autour du personnage lorsqu’il frappe ses ennemis.
-Durée : 10 secondes de puissance accrue.
-2. Boule Bleue - "Bouclier de Glace"
-Effet sur le joueur : Crée un bouclier protecteur autour du joueur.
-Description : Cette boule bleue génère un bouclier de glace autour du joueur, réduisant les dégâts reçus pendant une période déterminée. Lors de la collecte de la boule, un effet visuel de glace se forme autour du personnage, avec des cristaux lumineux éclatant en douceur. Cette boule pourrait aussi ralentir les ennemis qui entrent en contact avec le bouclier, donnant au joueur un léger avantage stratégique.
-Durée : 7 à 10 secondes de protection.
-3. Boule Jaune - "Vitesse Éclair"
-Effet sur le joueur : Augmente temporairement la vitesse de déplacement du joueur.
-Description : La boule jaune enveloppe le joueur d'une lueur dorée, augmentant sa vitesse de déplacement et d’attaque. Le personnage devient plus agile et plus rapide dans ses mouvements, ce qui permet de communiquer une sensation de fluidité. Il pourra esquiver plus facilement les ennemis et se déplacer à une vitesse éclair, mais cela ne dure que pour un laps de temps restreint.
-Durée : 5 à 8 secondes de vitesse accrue.
-4. Boule Verte - "Régénération"
-Effet sur le joueur : Restaure une partie de la santé du joueur.
-Description : En frappant cette boule verte, le joueur voit une lueur verte guérisseuse l'envelopper et récupérer une portion de sa santé perdue. L’effet est visuellement marqué par des particules lumineuses vertes qui flottent autour du joueur pendant la régénération. Cela permet au joueur de se maintenir en vie plus longtemps, surtout pendant les combats difficiles contre des vagues d'ennemis.
-Quantité de santé récupérée : 20-30% de la santé totale.
-5. Boule Noire - "Malédiction"
-Effet sur le joueur : Pénalité temporaire sur les capacités du joueur.
-Description : La boule noire est une malédiction qui affaiblit temporairement le joueur. Lorsqu'elle touche le joueur, une aura sombre l'entoure, diminuant sa vitesse et son attaque pendant un temps donné. Les ennemis pourraient devenir plus difficiles à esquiver, et ses attaques infligeront moins de dégâts. Ce type de boule pourrait aussi avoir des effets visuels sinistres, comme des ombres qui tournent autour du joueur.
-Durée : 5-10 secondes de pénalité.
- je veux excatement le meme code sauf quil faut lajout de ces boulles dailleur cree une collision psecifique pour ses boulles qui sont lacher a lamort d'un boss ou n gros ennemie un enmmei sur 4 doit povoir lacher des boules voicit le code ou tu dois faire les ajjotrs  sans rien supprimer dautre : // Variables globales
+// Variables globales
 let canvas = document.getElementById("gameCanvas");
 let ctx = canvas.getContext("2d");
 
