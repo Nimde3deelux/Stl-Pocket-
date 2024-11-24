@@ -1,39 +1,61 @@
-/* stlfight.css */
-
-/* Réinitialisation des marges et du padding */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Style global du body */
 body {
     font-family: Arial, sans-serif;
-    background-color: #1a1a1a;  /* Fond sombre */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#home-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: black;
     color: white;
     text-align: center;
+    animation: starfield 60s linear infinite;
 }
 
-/* Style du titre */
-h1 {
-    margin-top: 20px;
-    font-size: 2.5em;
-    color: #00ff00; /* Couleur verte pour le titre */
+@keyframes starfield {
+    from { background: black; }
+    to { background: url('space.gif') repeat; }
 }
 
-/* Style du canvas */
-#gameCanvas {
-    border: 2px solid #fff;  /* Bordure blanche autour du canvas */
-    background-color: #333;   /* Fond de l'arène sombre */
-    display: block;
-    margin: 20px auto;
+.mode-btn {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 1.5em;
+    transition: all 0.3s ease;
 }
 
-/* Style des contrôles */
-p {
+.mode-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 15px 5px rgba(0, 255, 255, 0.7);
+}
+
+#game-screen {
+    display: none;
+    position: relative;
+}
+
+.hidden {
+    display: none;
+}
+
+#score-board {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
     font-size: 1.2em;
-    color: #f0f0f0;
-    margin-top: 20px;
-    line-height: 1.5;
+}
+
+#game-canvas {
+    width: 100%;
+    height: 100%;
+    background: black;
 }
