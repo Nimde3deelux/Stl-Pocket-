@@ -1,83 +1,152 @@
-// stlfight.js
+// Variables globales
+let isGameRunning = false;
+let score = 0;
+let timeElapsed = 0;
+let gameInterval;
+let spawnInterval;
+let enemies = [];
+let canvas = document.getElementById('game-canvas');
+let ctx = canvas.getContext('2d');
+let player;
+let playerSpeed = 5;
 
-// Récupérer le canvas et son contexte
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
+// Initialisation du jeu
+document.getElementById('single-player-btn').addEventListener('click', startSinglePlayer);
+document.getElementById('two-player-btn').addEventListener('click', startTwoPlayer);
 
-// Variables pour les personnages
-let player1 = {
-    x: 50,
-    y: 400,
-    width: 50,
-    height: 100,
-    color: "blue",
-    speed: 5,
-    dx: 0,  // Déplacement horizontal
-    dy: 0   // Déplacement vertical
-};
-
-let player2 = {
-    x: 900,
-    y: 400,
-    width: 50,
-    height: 100,
-    color: "red",
-    speed: 5,
-    dx: 0,  // Déplacement horizontal
-    dy: 0   // Déplacement vertical
-};
-
-// Charger les images des personnages
-let player1Image = new Image();
-player1Image.src = "images/player1_sprite.png";  // Image du joueur 1
-
-let player2Image = new Image();
-player2Image.src = "images/player2_sprite.png";  // Image du joueur 2
-
-// Fonction de dessin des personnages
-function drawPlayer(player) {
-    ctx.drawImage(player === player1 ? player1Image : player2Image, player.x, player.y, player.width, player.height);
+function startSinglePlayer() {
+    document.getElementById('home-screen').classList.add('hidden');
+    document.getElementById('game-screen').classList.remove('hidden');
+    isGameRunning = true;
+    startGame();
 }
 
-// Fonction pour gérer les déplacements
-function movePlayer(player) {
-    player.x += player.dx;
-    player.y += player.dy;
+function startGame() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    player = new Player(canvas.width / 2, canvas.height - 50);
+    spawnEnemies();
+    gameInterval = setInterval(updateGame, 1000 / 60); // 60 FPS
+    spawnInterval = setInterval(spawnEnemy, 2000);
+    playBackgroundMusic();
 }
 
-// Fonction pour gérer l'animation du jeu
 function updateGame() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);  // Effacer le canvas avant de redessiner
-    movePlayer(player1);
-    movePlayer(player2);
-    drawPlayer(player1);
-    drawPlayer(player2);
-    requestAnimationFrame(updateGame);  // Recalcule l’animation
+    if (!isGameRunning) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Mise à jour du joueur
+    player.update();
+
+    // Mise à jour des ennemis
+    for (let enemy of enemies) {
+        enemy.update();
+    }
+
+    // Vérification des collisions
+    checkCollisions();
+
+    // Mise à jour du score et du temps
+    document.getElementById('score').textContent = score;
+    timeElapsed++;
+    document.getElementById('time').textContent = formatTime(timeElapsed);
 }
 
-// Contrôles du clavier pour le joueur 1
-document.addEventListener("keydown", function(e) {
-    if (e.key === "w") player1.dy = -player1.speed;  // Saut
-    if (e.key === "a") player1.dx = -player1.speed;  // Gauche
-    if (e.key === "d") player1.dx = player1.speed;   // Droite
-    if (e.key === "j") console.log("Attaque Joueur 1");  // Attaque
-});
-document.addEventListener("keyup", function(e) {
-    if (e.key === "w") player1.dy = 0;  // Arrêter le saut
-    if (e.key === "a" || e.key === "d") player1.dx = 0;  // Arrêter le mouvement horizontal
-});
+function spawnEnemy() {
+    let size = Math.random() * 30 + 20;
+    let speed = Math.random() * 2 + 1;
+    let enemy = new Enemy(Math.random() * canvas.width, -size, size, speed);
+    enemies.push(enemy);
+}
 
-// Contrôles du clavier pour le joueur 2
-document.addEventListener("keydown", function(e) {
-    if (e.key === "ArrowUp") player2.dy = -player2.speed;  // Saut
-    if (e.key === "ArrowLeft") player2.dx = -player2.speed;  // Gauche
-    if (e.key === "ArrowRight") player2.dx = player2.speed;  // Droite
-    if (e.key === "/") console.log("Attaque Joueur 2");  // Attaque
-});
-document.addEventListener("keyup", function(e) {
-    if (e.key === "ArrowUp") player2.dy = 0;  // Arrêter le saut
-    if (e.key === "ArrowLeft" || e.key === "ArrowRight") player2.dx = 0;  // Arrêter le mouvement horizontal
-});
+function checkCollisions() {
+    for (let enemy of enemies) {
+        if (player.collidesWith(enemy)) {
+            score += 10; // Score pour chaque ennemi touché
+            enemies = enemies.filter(e => e !== enemy);
+            playCollisionSound();
+        }
+    }
+}
 
-// Démarrer le jeu
-updateGame();
+function formatTime(seconds) {
+    let minutes = Math.floor(seconds / 60);
+    let secs = seconds % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
+
+// Classe Player
+class Player {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = 40;
+        this.color = 'blue';  // Cosmorael (blue & purple)
+    }
+
+    update() {
+        if (isKeyPressed['ArrowLeft'] || isKeyPressed['a']) this.x -= playerSpeed;
+        if (isKeyPressed['ArrowRight'] || isKeyPressed['d']) this.x += playerSpeed;
+        if (isKeyPressed['ArrowUp'] || isKeyPressed['w']) this.y -= playerSpeed;
+        if (isKeyPressed['ArrowDown'] || isKeyPressed['s']) this.y += playerSpeed;
+
+        // Empêcher le joueur de sortir de l'écran
+        this.x = Math.max(0, Math.min(this.x, canvas.width - this.size));
+        this.y = Math.max(0, Math.min(this.y, canvas.height - this.size));
+
+        // Dessiner le joueur
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x - this.size / 2, this.y - this.size / 2, this.size, this.size);
+    }
+
+    collidesWith(enemy) {
+        let dx = this.x - enemy.x;
+        let dy = this.y - enemy.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        return distance < this.size / 2 + enemy.size / 2;
+    }
+}
+
+// Classe Enemy
+class Enemy {
+    constructor(x, y, size, speed) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.speed = speed;
+    }
+
+    update() {
+        this.y += this.speed;
+        ctx.fillStyle = 'red';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        if (this.y > canvas.height) {
+            enemies = enemies.filter(e => e !== this); // Supprimer les ennemis sortis de l'écran
+        }
+    }
+}
+
+// Sons
+function playBackgroundMusic() {
+    let audio = new Audio('background-music.mp3');
+    audio.loop = true;
+    audio.play();
+}
+
+function playCollisionSound() {
+    let audio = new Audio('collision-sound.mp3');
+    audio.play();
+}
+
+// Détection des touches
+let isKeyPressed = {};
+window.addEventListener('keydown', (e) => {
+    isKeyPressed[e.key] = true;
+});
+window.addEventListener('keyup', (e) => {
+    isKeyPressed[e.key] = false;
+});
