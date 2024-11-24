@@ -6,25 +6,62 @@
     <title>STL Fight</title>
     <link rel="stylesheet" href="stlfight.css">
     <style>
-        /* Style pour le jeu et la mise en page */
+        /* Style général de la page */
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            height: 100vh;
+            background-color: #f4f4f4;
             margin: 0;
-        }
-
-        #jeu {
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
         }
 
+        /* Ecran d'accueil */
+        #accueil {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background-color: #333;
+            color: white;
+        }
+
+        #accueil h1 {
+            margin-bottom: 20px;
+            font-size: 3em;
+        }
+
+        #accueil button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #accueil button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Zone de jeu */
+        #jeu {
+            display: none;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        /* Canvas du jeu */
         #gameCanvas {
             border: 2px solid black;
+            background-color: #f1f1f1;
         }
 
         #healthBar {
@@ -43,52 +80,77 @@
             border-radius: 5px;
         }
 
+        /* Description à droite */
         #description {
             width: 30%;
+            background-color: white;
             padding: 20px;
-            background-color: #f1f1f1;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
+            margin-top: 20px;
+            color: #333;
         }
 
+        #description h2 {
+            margin-bottom: 10px;
+        }
+
+        /* Guide des commandes */
         #guide {
             width: 25%;
+            background-color: white;
             padding: 20px;
-            background-color: #f1f1f1;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
+            margin-top: 20px;
+            color: #333;
         }
 
-        #accueil {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
+        #guide h3 {
+            margin-bottom: 10px;
         }
 
-        h1 {
-            margin-bottom: 20px;
+        #guide ul {
+            list-style-type: none;
+            padding: 0;
         }
 
-        button {
+        #guide li {
+            margin-bottom: 10px;
+        }
+
+        /* Game Over */
+        #gameOver {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            border-radius: 10px;
+            width: 300px;
+            margin: auto;
+        }
+
+        #gameOver h2 {
+            font-size: 2em;
+        }
+
+        #gameOver button {
             padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
             background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
+            cursor: pointer;
         }
 
-        button:hover {
+        #gameOver button:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
 <body>
+
     <!-- Page d'accueil -->
     <div id="accueil">
         <h1>STL Fight</h1>
@@ -98,19 +160,17 @@
 
     <!-- Zone de jeu -->
     <div id="jeu" style="display:none;">
-        <canvas id="gameCanvas" width="800" height="600"></canvas>
-        <div id="healthBar">
-            <p>Vie: <span id="healthText">100</span>%</p>
-            <div id="health" style="width: 100%; background-color: green; height: 20px;"></div>
+        <div style="flex-grow: 1; display: flex; justify-content: center; align-items: center;">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
         </div>
-        
+
         <!-- Description du jeu à droite -->
         <div id="description">
             <h2>Histoire du Jeu</h2>
             <p>Vous êtes un scientifique 🧑‍🔬 qui doit protéger son laboratoire contre des virus 🦠, des bactéries 🦠 et des cellules cancéreuses 🧬. Votre mission est de défendre la science et de survivre dans un environnement de plus en plus hostile. Utilisez vos armes et vos compétences pour éliminer les menaces et sauver l'humanité ! 💪</p>
         </div>
-        
-        <!-- Guide des touches -->
+
+        <!-- Guide des commandes -->
         <div id="guide">
             <h3>Commandes</h3>
             <ul>
@@ -142,5 +202,6 @@
             location.reload(); // Recharger la page pour recommencer le jeu
         });
     </script>
+
 </body>
 </html>
