@@ -1,152 +1,150 @@
-// Variables globales
-let isGameRunning = false;
+// Variables de jeu
+let canvas = document.getElementById("gameCanvas");
+let ctx = canvas.getContext("2d");
+let gameArea = document.getElementById("jeu");
+let gameOverScreen = document.getElementById("gameOver");
+let scoreDisplay = document.getElementById("score");
 let score = 0;
-let timeElapsed = 0;
-let gameInterval;
-let spawnInterval;
-let enemies = [];
-let canvas = document.getElementById('game-canvas');
-let ctx = canvas.getContext('2d');
+let isGameOver = false;
 let player;
+let enemies = [];
+let enemySpeed = 2;
 let playerSpeed = 5;
+let bullets = [];
+let backgroundMusic = new Audio("background-music.mp3"); // Musique de fond
+let collisionSound = new Audio("collision-sound.mp3"); // Bruit de collision
 
-// Initialisation du jeu
-document.getElementById('single-player-btn').addEventListener('click', startSinglePlayer);
-document.getElementById('two-player-btn').addEventListener('click', startTwoPlayer);
+// Dimensions du canvas
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-function startSinglePlayer() {
-    document.getElementById('home-screen').classList.add('hidden');
-    document.getElementById('game-screen').classList.remove('hidden');
-    isGameRunning = true;
-    startGame();
-}
-
-function startGame() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    player = new Player(canvas.width / 2, canvas.height - 50);
-    spawnEnemies();
-    gameInterval = setInterval(updateGame, 1000 / 60); // 60 FPS
-    spawnInterval = setInterval(spawnEnemy, 2000);
-    playBackgroundMusic();
-}
-
-function updateGame() {
-    if (!isGameRunning) return;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Mise à jour du joueur
-    player.update();
-
-    // Mise à jour des ennemis
-    for (let enemy of enemies) {
-        enemy.update();
-    }
-
-    // Vérification des collisions
-    checkCollisions();
-
-    // Mise à jour du score et du temps
-    document.getElementById('score').textContent = score;
-    timeElapsed++;
-    document.getElementById('time').textContent = formatTime(timeElapsed);
-}
-
-function spawnEnemy() {
-    let size = Math.random() * 30 + 20;
-    let speed = Math.random() * 2 + 1;
-    let enemy = new Enemy(Math.random() * canvas.width, -size, size, speed);
-    enemies.push(enemy);
-}
-
-function checkCollisions() {
-    for (let enemy of enemies) {
-        if (player.collidesWith(enemy)) {
-            score += 10; // Score pour chaque ennemi touché
-            enemies = enemies.filter(e => e !== enemy);
-            playCollisionSound();
-        }
-    }
-}
-
-function formatTime(seconds) {
-    let minutes = Math.floor(seconds / 60);
-    let secs = seconds % 60;
-    return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-}
-
-// Classe Player
+// Classe pour le joueur
 class Player {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.size = 40;
-        this.color = 'blue';  // Cosmorael (blue & purple)
+    constructor() {
+        this.x = canvas.width / 2;
+        this.y = canvas.height - 30;
+        this.radius = 20;
+        this.color = "#00baff";  // Cosmorael's color
     }
 
-    update() {
-        if (isKeyPressed['ArrowLeft'] || isKeyPressed['a']) this.x -= playerSpeed;
-        if (isKeyPressed['ArrowRight'] || isKeyPressed['d']) this.x += playerSpeed;
-        if (isKeyPressed['ArrowUp'] || isKeyPressed['w']) this.y -= playerSpeed;
-        if (isKeyPressed['ArrowDown'] || isKeyPressed['s']) this.y += playerSpeed;
-
-        // Empêcher le joueur de sortir de l'écran
-        this.x = Math.max(0, Math.min(this.x, canvas.width - this.size));
-        this.y = Math.max(0, Math.min(this.y, canvas.height - this.size));
-
-        // Dessiner le joueur
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.x - this.size / 2, this.y - this.size / 2, this.size, this.size);
+        ctx.fill();
+        ctx.closePath();
     }
 
-    collidesWith(enemy) {
-        let dx = this.x - enemy.x;
-        let dy = this.y - enemy.y;
-        let distance = Math.sqrt(dx * dx + dy * dy);
-        return distance < this.size / 2 + enemy.size / 2;
+    move(direction) {
+        if (direction === "left" && this.x - this.radius > 0) this.x -= playerSpeed;
+        if (direction === "right" && this.x + this.radius < canvas.width) this.x += playerSpeed;
+        if (direction === "up" && this.y - this.radius > 0) this.y -= playerSpeed;
+        if (direction === "down" && this.y + this.radius < canvas.height) this.y += playerSpeed;
     }
 }
 
-// Classe Enemy
+// Classe pour les ennemis
 class Enemy {
-    constructor(x, y, size, speed) {
-        this.x = x;
-        this.y = y;
-        this.size = size;
-        this.speed = speed;
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = 0;
+        this.radius = Math.random() * 20 + 10;
+        this.speed = enemySpeed;
+        this.color = "#ff5555"; // Red enemy color
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.closePath();
     }
 
     update() {
         this.y += this.speed;
-        ctx.fillStyle = 'red';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-
-        if (this.y > canvas.height) {
-            enemies = enemies.filter(e => e !== this); // Supprimer les ennemis sortis de l'écran
-        }
     }
 }
 
-// Sons
-function playBackgroundMusic() {
-    let audio = new Audio('background-music.mp3');
-    audio.loop = true;
-    audio.play();
+// Fonction pour démarrer le jeu
+function startGame() {
+    score = 0;
+    enemies = [];
+    bullets = [];
+    isGameOver = false;
+    player = new Player();
+    backgroundMusic.play();
+    gameArea.style.display = "block";
+    gameOverScreen.style.display = "none";
+    requestAnimationFrame(updateGame);
 }
 
-function playCollisionSound() {
-    let audio = new Audio('collision-sound.mp3');
-    audio.play();
+// Fonction de mise à jour du jeu
+function updateGame() {
+    if (isGameOver) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Effacer le canvas
+    player.draw();
+
+    // Mettre à jour les ennemis
+    if (Math.random() < 0.02) {
+        enemies.push(new Enemy());
+    }
+
+    enemies.forEach((enemy, index) => {
+        enemy.update();
+        enemy.draw();
+        if (enemy.y > canvas.height) {
+            enemies.splice(index, 1);
+        }
+
+        // Vérifier les collisions
+        if (Math.hypot(player.x - enemy.x, player.y - enemy.y) < player.radius + enemy.radius) {
+            collisionSound.play();
+            gameOver();
+        }
+    });
+
+    // Afficher le score
+    scoreDisplay.textContent = "Score: " + score;
+
+    requestAnimationFrame(updateGame);
 }
 
-// Détection des touches
-let isKeyPressed = {};
-window.addEventListener('keydown', (e) => {
-    isKeyPressed[e.key] = true;
+// Fonction pour la fin de jeu
+function gameOver() {
+    isGameOver = true;
+    backgroundMusic.pause();
+    gameArea.style.display = "none";
+    gameOverScreen.style.display = "block";
+}
+
+// Gérer les événements de déplacement du joueur
+document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft" || e.key === "a") {
+        player.move("left");
+    }
+    if (e.key === "ArrowRight" || e.key === "d") {
+        player.move("right");
+    }
+    if (e.key === "ArrowUp" || e.key === "w") {
+        player.move("up");
+    }
+    if (e.key === "ArrowDown" || e.key === "s") {
+        player.move("down");
+    }
 });
-window.addEventListener('keyup', (e) => {
-    isKeyPressed[e.key] = false;
+
+// Gérer le bouton de redémarrage
+document.getElementById("replay").addEventListener("click", () => {
+    startGame();
+});
+
+// Gérer les boutons de mode de jeu
+document.getElementById("mode1").addEventListener("click", () => {
+    startGame();
+});
+
+document.getElementById("mode2").addEventListener("click", () => {
+    startGame();
 });
