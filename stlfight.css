@@ -8,7 +8,7 @@
     <style>
         /* Style général */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #111;  /* Fond sombre pour un style laboratoire */
             color: #fff;
             text-align: center;
@@ -16,6 +16,13 @@
             padding: 0;
             overflow: hidden;
             height: 100%;
+            animation: fadeIn 1s ease-in-out;  /* Animation d'entrée du site */
+        }
+
+        /* Animation fade-in pour le texte */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         h1 {
@@ -24,6 +31,14 @@
             font-size: 4em;
             margin: 0;
             padding: 0;
+            animation: pulse 2s infinite; /* Animation de pulsation */
+        }
+
+        /* Animation de pulsation pour le titre */
+        @keyframes pulse {
+            0% { text-shadow: 0 0 15px rgba(0, 186, 255, 0.8); }
+            50% { text-shadow: 0 0 30px rgba(0, 186, 255, 1); }
+            100% { text-shadow: 0 0 15px rgba(0, 186, 255, 0.8); }
         }
 
         /* Page d'accueil */
@@ -47,12 +62,15 @@
             color: #fff;
             border-radius: 5px;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
         }
 
         button:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 186, 255, 0.8);  /* Effet de survol lumineux */
+            box-shadow: 0 0 30px rgba(0, 186, 255, 0.8);  /* Effet de survol lumineux */
+            background-color: #0288d1;  /* Couleur plus sombre au survol */
         }
 
         /* Zone de jeu */
@@ -64,6 +82,13 @@
             height: 100vh;
             background: url('images/space-background.jpg') no-repeat center center fixed;
             background-size: cover;
+            animation: backgroundMove 10s linear infinite; /* Animation du fond */
+        }
+
+        /* Animation pour faire défiler le fond */
+        @keyframes backgroundMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 100%; }
         }
 
         /* Health Bar */
@@ -98,6 +123,17 @@
             padding: 20px;
             border-radius: 10px;
             border: 3px solid #ff5555;  /* Bordure rouge pour l'effet d'alerte */
+            box-shadow: 0 0 25px rgba(255, 85, 85, 1); /* Ombre rouge pour accentuer l'alerte */
+            animation: shake 0.5s ease-in-out infinite;  /* Animation de secousse */
+        }
+
+        /* Animation de secousse pour Game Over */
+        @keyframes shake {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            25% { transform: translate(-50%, -50%) rotate(5deg); }
+            50% { transform: translate(-50%, -50%) rotate(-5deg); }
+            75% { transform: translate(-50%, -50%) rotate(5deg); }
+            100% { transform: translate(-50%, -50%) rotate(0deg); }
         }
 
         #gameOver h2 {
@@ -113,6 +149,7 @@
             border: none;
             color: white;
             font-size: 18px;
+            transition: background-color 0.3s;
         }
 
         #gameOver button:hover {
