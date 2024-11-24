@@ -16,7 +16,7 @@
 
     <!-- Zone de jeu -->
     <div id="jeu" style="display:none;">
-        <canvas id="gameCanvas"></canvas>
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
         <div id="healthBar">
             <p>Vie: <span id="healthText">100</span>%</p>
             <div id="health" style="width: 100%; background-color: green; height: 20px;"></div>
@@ -31,5 +31,18 @@
     </div>
 
     <script src="stlfight.js"></script>
+    <script>
+        // Lier le bouton au démarrage du jeu
+        document.getElementById("startGame").addEventListener("click", function() {
+            document.getElementById("accueil").style.display = "none";  // Masquer l'écran d'accueil
+            document.getElementById("jeu").style.display = "block";    // Afficher la zone de jeu
+            startGame(); // Fonction pour démarrer le jeu (ajouter le démarrage du jeu ici)
+        });
+
+        // Lier le bouton de rejouer à la fin du jeu
+        document.getElementById("replay").addEventListener("click", function() {
+            location.reload(); // Recharger la page pour recommencer le jeu
+        });
+    </script>
 </body>
 </html>
