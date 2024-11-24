@@ -1,4 +1,25 @@
-// Variables globales
+met a jours ce code sans rien supprimer augmente le temps dapparition des enemie de 10 second comme ça la memoire ne se fait pas depasser 
+ je veux excatement le meme codes sauf que je veux que tu ajoute des  Boule Rouge - "Explosion de Puissance"
+Effet sur le joueur : Augmente la force d'attaque du joueur.
+Description : La boule rouge, en s'impactant sur le joueur, libère une vague d'énergie explosive, augmentant temporairement la puissance de ses attaques. Pendant une durée limitée, toutes les attaques du joueur infligeront des dégâts accrus. Elle pourrait aussi avoir un effet visuel où les attaques deviennent plus spectaculaires, avec des éclats rouges qui se forment autour du personnage lorsqu’il frappe ses ennemis.
+Durée : 10 secondes de puissance accrue.
+2. Boule Bleue - "Bouclier de Glace"
+Effet sur le joueur : Crée un bouclier protecteur autour du joueur.
+Description : Cette boule bleue génère un bouclier de glace autour du joueur, réduisant les dégâts reçus pendant une période déterminée. Lors de la collecte de la boule, un effet visuel de glace se forme autour du personnage, avec des cristaux lumineux éclatant en douceur. Cette boule pourrait aussi ralentir les ennemis qui entrent en contact avec le bouclier, donnant au joueur un léger avantage stratégique.
+Durée : 7 à 10 secondes de protection.
+3. Boule Jaune - "Vitesse Éclair"
+Effet sur le joueur : Augmente temporairement la vitesse de déplacement du joueur.
+Description : La boule jaune enveloppe le joueur d'une lueur dorée, augmentant sa vitesse de déplacement et d’attaque. Le personnage devient plus agile et plus rapide dans ses mouvements, ce qui permet de communiquer une sensation de fluidité. Il pourra esquiver plus facilement les ennemis et se déplacer à une vitesse éclair, mais cela ne dure que pour un laps de temps restreint.
+Durée : 5 à 8 secondes de vitesse accrue.
+4. Boule Verte - "Régénération"
+Effet sur le joueur : Restaure une partie de la santé du joueur.
+Description : En frappant cette boule verte, le joueur voit une lueur verte guérisseuse l'envelopper et récupérer une portion de sa santé perdue. L’effet est visuellement marqué par des particules lumineuses vertes qui flottent autour du joueur pendant la régénération. Cela permet au joueur de se maintenir en vie plus longtemps, surtout pendant les combats difficiles contre des vagues d'ennemis.
+Quantité de santé récupérée : 20-30% de la santé totale.
+5. Boule Noire - "Malédiction"
+Effet sur le joueur : Pénalité temporaire sur les capacités du joueur.
+Description : La boule noire est une malédiction qui affaiblit temporairement le joueur. Lorsqu'elle touche le joueur, une aura sombre l'entoure, diminuant sa vitesse et son attaque pendant un temps donné. Les ennemis pourraient devenir plus difficiles à esquiver, et ses attaques infligeront moins de dégâts. Ce type de boule pourrait aussi avoir des effets visuels sinistres, comme des ombres qui tournent autour du joueur.
+Durée : 5-10 secondes de pénalité.
+ je veux excatement le meme code sauf quil faut lajout de ces boulles dailleur cree une collision psecifique pour ses boulles qui sont lacher a lamort d'un boss ou n gros ennemie un enmmei sur 4 doit povoir lacher des boules voicit le code ou tu dois faire les ajjotrs  sans rien supprimer dautre : // Variables globales
 let canvas = document.getElementById("gameCanvas");
 let ctx = canvas.getContext("2d");
 
@@ -40,14 +61,6 @@ class Player {
         this.speed = 5;
         this.health = 100;
         this.image = playerImg;
-        this.powerUpEffects = {
-            "Explosion de Puissance": false,
-            "Bouclier de Glace": false,
-            "Vitesse Éclair": false,
-            "Régénération": false,
-            "Malédiction": false
-        };
-        this.powerUpDuration = 0;
     }
 
     move(direction) {
@@ -65,48 +78,6 @@ class Player {
 
     draw() {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        // Afficher les effets actifs
-        if (this.powerUpEffects["Explosion de Puissance"]) {
-            ctx.fillStyle = "red";
-            ctx.strokeStyle = "red";
-            ctx.lineWidth = 2;
-            ctx.strokeRect(this.x - 10, this.y - 10, this.width + 20, this.height + 20);
-        }
-        if (this.powerUpEffects["Bouclier de Glace"]) {
-            ctx.fillStyle = "rgba(0, 0, 255, 0.3)";
-            ctx.fillRect(this.x - 5, this.y - 5, this.width + 10, this.height + 10);
-        }
-    }
-
-    applyPowerUp(type) {
-        if (type === "Explosion de Puissance") {
-            this.powerUpEffects["Explosion de Puissance"] = true;
-            this.powerUpDuration = 10;
-        } else if (type === "Bouclier de Glace") {
-            this.powerUpEffects["Bouclier de Glace"] = true;
-            this.powerUpDuration = 7;
-        } else if (type === "Vitesse Éclair") {
-            this.speed = 10; // Augmentation de la vitesse
-            this.powerUpDuration = 5;
-        } else if (type === "Régénération") {
-            this.health = Math.min(100, this.health + 30);
-            this.powerUpDuration = 3;
-        } else if (type === "Malédiction") {
-            this.powerUpEffects["Malédiction"] = true;
-            this.powerUpDuration = 5;
-        }
-    }
-
-    updatePowerUps() {
-        if (this.powerUpDuration > 0) {
-            this.powerUpDuration--;
-        } else {
-            for (let effect in this.powerUpEffects) {
-                this.powerUpEffects[effect] = false;
-            }
-            if (this.powerUpEffects["Vitesse Éclair"]) this.speed = 5;
-            if (this.powerUpEffects["Malédiction"]) this.powerUpEffects["Malédiction"] = false;
-        }
     }
 }
 
@@ -143,16 +114,6 @@ class Enemy {
             this.isDead = true;
             score += 10;
             explosionSound.play(); // Jouer le son d'explosion
-            this.dropPowerUp();
-        }
-    }
-
-    // Lâcher une boule aléatoire
-    dropPowerUp() {
-        if (Math.random() < 0.25) { // 1 ennemi sur 4
-            let powerUpType = ["Explosion de Puissance", "Bouclier de Glace", "Vitesse Éclair", "Régénération", "Malédiction"][Math.floor(Math.random() * 5)];
-            let powerUp = new PowerUp(this.x + this.width / 2, this.y + this.height / 2, powerUpType);
-            powerUps.push(powerUp);
         }
     }
 }
@@ -174,47 +135,6 @@ class Bullet {
     draw() {
         ctx.fillStyle = "yellow";
         ctx.fillRect(this.x - this.width / 2, this.y, this.width, this.height);
-    }
-}
-
-// Classe des boules de power-up
-class PowerUp {
-    constructor(x, y, type) {
-        this.x = x;
-        this.y = y;
-        this.type = type;
-        this.width = 20;
-        this.height = 20;
-    }
-
-    draw() {
-        if (this.type === "Explosion de Puissance") {
-            ctx.fillStyle = "red";
-        } else if (this.type === "Bouclier de Glace") {
-            ctx.fillStyle = "blue";
-        } else if (this.type === "Vitesse Éclair") {
-            ctx.fillStyle = "yellow";
-        } else if (this.type === "Régénération") {
-            ctx.fillStyle = "green";
-        } else if (this.type === "Malédiction") {
-            ctx.fillStyle = "black";
-        }
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.width / 2, 0, Math.PI * 2);
-        ctx.fill();
-    }
-
-    // Vérifier si le joueur a récupéré la boule
-    collect() {
-        if (
-            player.x < this.x + this.width / 2 &&
-            player.x + player.width > this.x - this.width / 2 &&
-            player.y < this.y + this.height / 2 &&
-            player.y + player.height > this.y - this.height / 2
-        ) {
-            player.applyPowerUp(this.type);
-            powerUps.splice(powerUps.indexOf(this), 1); // Supprime la boule après collecte
-        }
     }
 }
 
@@ -243,71 +163,77 @@ function detectPlayerEnemyCollisions() {
             player.y < enemy.y + enemy.height &&
             player.y + player.height > enemy.y
         ) {
-            player.health -= 10;
-            enemy.isDead = true;
-            if (player.health <= 0) {
-                gameRunning = false;
-            }
+            gameRunning = false;
+            alert("Game Over!"); // Fin du jeu
+            return;
         }
     }
 }
 
-// Fonction de mise à jour du jeu
+// Génération d'ennemis aléatoires
+function generateEnemies() {
+    let enemyType = ['small', 'medium', 'large', 'boss'][Math.floor(Math.random() * 4)];
+    let x = Math.random() * (canvas.width - 50);
+    let y = -50; // Commence au-dessus de l'écran
+    let enemy = new Enemy(x, y, enemyType);
+    enemies.push(enemy);
+}
+
+// Mettre à jour l'état du jeu
 function update() {
+    if (!gameRunning) return;
+
+    // Effacer l'écran
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    if (!gameRunning) {
-        alert("Game Over! Score: " + score);
-        return;
-    }
+    // Générer les ennemis
+    if (Math.random() < 0.02) generateEnemies();
 
-    // Déplacer et dessiner le joueur
-    player.updatePowerUps();
-    player.draw();
-
-    // Déplacer et dessiner les ennemis
+    // Déplacer les ennemis
+    enemies = enemies.filter(enemy => !enemy.isDead); // Supprime les ennemis morts
     for (let enemy of enemies) {
         enemy.move();
         enemy.draw();
     }
 
-    // Déplacer et dessiner les balles
+    // Déplacer les balles
+    bullets = bullets.filter(bullet => bullet.y > 0); // Supprime les balles hors écran
     for (let bullet of bullets) {
         bullet.move();
         bullet.draw();
     }
 
-    // Déplacer et dessiner les power-ups
-    for (let powerUp of powerUps) {
-        powerUp.draw();
-        powerUp.collect();
+    // Détecter les collisions
+    detectCollisions();
+    detectPlayerEnemyCollisions(); // Nouvelle fonction ajoutée
+
+    // Dessiner le joueur
+    player.draw();
+
+    // Mettre à jour le score
+    ctx.fillStyle = "white";
+    ctx.font = "20px Arial";
+    ctx.fillText("Score: " + score, 10, 30);
+
+    // Vérifier la fin du jeu
+    if (player.health <= 0) {
+        gameRunning = false;
+        alert("Game Over!");
     }
 
-    // Détection de collisions
-    detectCollisions();
-    detectPlayerEnemyCollisions();
-
-    // Demander une nouvelle animation
     requestAnimationFrame(update);
 }
 
-// Démarrer le jeu
-let player = new Player();
+// Initialisation du joueur
+player = new Player();
 
-// Génération d'ennemis
-setInterval(() => {
-    let enemyType = Math.random() < 0.5 ? "small" : Math.random() < 0.75 ? "medium" : "large";
-    let x = Math.random() * (canvas.width - 50);
-    enemies.push(new Enemy(x, 0, enemyType));
-}, 2000);
-
-// Contrôles
-document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") player.move("left");
-    if (e.key === "ArrowRight") player.move("right");
-    if (e.key === "ArrowUp") player.move("up");
-    if (e.key === "ArrowDown") player.move("down");
-    if (e.key === " ") player.shoot(); // Tirer avec la barre d'espace
+// Événements du clavier
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'ArrowLeft') player.move('left');
+    if (event.key === 'ArrowRight') player.move('right');
+    if (event.key === 'ArrowUp') player.move('up');
+    if (event.key === 'ArrowDown') player.move('down');
+    if (event.key === 'j') player.shoot();
 });
 
 // Démarrer le jeu
