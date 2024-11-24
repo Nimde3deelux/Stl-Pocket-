@@ -1,107 +1,83 @@
-// Initialisation du canvas
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
+// stlfight.js
 
-// Dimensions
-const canvasWidth = canvas.width;
-const canvasHeight = canvas.height;
+// Récupérer le canvas et son contexte
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
 
-// Joueurs
-const player1 = {
-    x: 100,
+// Variables pour les personnages
+let player1 = {
+    x: 50,
     y: 400,
     width: 50,
-    height: 50,
-    color: 'red',
+    height: 100,
+    color: "blue",
     speed: 5,
-    dx: 0,
-    dy: 0,
-    onGround: false,
-    damage: 0,
-    isAttacking: false,
+    dx: 0,  // Déplacement horizontal
+    dy: 0   // Déplacement vertical
 };
-const player2 = {
-    x: 800,
+
+let player2 = {
+    x: 900,
     y: 400,
     width: 50,
-    height: 50,
-    color: 'blue',
+    height: 100,
+    color: "red",
     speed: 5,
-    dx: 0,
-    dy: 0,
-    onGround: false,
-    damage: 0,
-    isAttacking: false,
+    dx: 0,  // Déplacement horizontal
+    dy: 0   // Déplacement vertical
 };
 
-// Gravité et sol
-const gravity = 0.5;
-const groundLevel = 500;
+// Charger les images des personnages
+let player1Image = new Image();
+player1Image.src = "images/player1_sprite.png";  // Image du joueur 1
 
-// Contrôles
-const keys = {};
+let player2Image = new Image();
+player2Image.src = "images/player2_sprite.png";  // Image du joueur 2
 
-// Gestion des contrôles
-window.addEventListener('keydown', (e) => (keys[e.key] = true));
-window.addEventListener('keyup', (e) => (keys[e.key] = false));
+// Fonction de dessin des personnages
+function drawPlayer(player) {
+    ctx.drawImage(player === player1 ? player1Image : player2Image, player.x, player.y, player.width, player.height);
+}
 
-// Mise à jour des joueurs
-function updatePlayer(player, controls) {
-    if (keys[controls.left]) player.dx = -player.speed;
-    else if (keys[controls.right]) player.dx = player.speed;
-    else player.dx = 0;
-
-    if (keys[controls.jump] && player.onGround) {
-        player.dy = -15;
-        player.onGround = false;
-    }
-
-    // Appliquer la gravité
-    player.dy += gravity;
-
-    // Mouvement horizontal
+// Fonction pour gérer les déplacements
+function movePlayer(player) {
     player.x += player.dx;
     player.y += player.dy;
-
-    // Limiter les bords
-    if (player.x < 0) player.x = 0;
-    if (player.x + player.width > canvasWidth) player.x = canvasWidth - player.width;
-
-    // Vérifier le sol
-    if (player.y + player.height > groundLevel) {
-        player.y = groundLevel - player.height;
-        player.dy = 0;
-        player.onGround = true;
-    }
-
-    // Attaque
-    if (keys[controls.attack]) player.isAttacking = true;
-    else player.isAttacking = false;
 }
 
-// Dessin des joueurs
-function drawPlayer(player) {
-    ctx.fillStyle = player.color;
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-
-    if (player.isAttacking) {
-        ctx.fillStyle = 'yellow';
-        ctx.fillRect(player.x + player.width, player.y, 10, 10); // Zone d'attaque
-    }
-}
-
-// Boucle du jeu
-function gameLoop() {
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-
-    // Mettre à jour et dessiner les joueurs
-    updatePlayer(player1, { left: 'a', right: 'd', jump: 'w', attack: 'j' });
-    updatePlayer(player2, { left: 'ArrowLeft', right: 'ArrowRight', jump: 'ArrowUp', attack: '/' });
+// Fonction pour gérer l'animation du jeu
+function updateGame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);  // Effacer le canvas avant de redessiner
+    movePlayer(player1);
+    movePlayer(player2);
     drawPlayer(player1);
     drawPlayer(player2);
-
-    requestAnimationFrame(gameLoop);
+    requestAnimationFrame(updateGame);  // Recalcule l’animation
 }
 
-// Lancer le jeu
-gameLoop();
+// Contrôles du clavier pour le joueur 1
+document.addEventListener("keydown", function(e) {
+    if (e.key === "w") player1.dy = -player1.speed;  // Saut
+    if (e.key === "a") player1.dx = -player1.speed;  // Gauche
+    if (e.key === "d") player1.dx = player1.speed;   // Droite
+    if (e.key === "j") console.log("Attaque Joueur 1");  // Attaque
+});
+document.addEventListener("keyup", function(e) {
+    if (e.key === "w") player1.dy = 0;  // Arrêter le saut
+    if (e.key === "a" || e.key === "d") player1.dx = 0;  // Arrêter le mouvement horizontal
+});
+
+// Contrôles du clavier pour le joueur 2
+document.addEventListener("keydown", function(e) {
+    if (e.key === "ArrowUp") player2.dy = -player2.speed;  // Saut
+    if (e.key === "ArrowLeft") player2.dx = -player2.speed;  // Gauche
+    if (e.key === "ArrowRight") player2.dx = player2.speed;  // Droite
+    if (e.key === "/") console.log("Attaque Joueur 2");  // Attaque
+});
+document.addEventListener("keyup", function(e) {
+    if (e.key === "ArrowUp") player2.dy = 0;  // Arrêter le saut
+    if (e.key === "ArrowLeft" || e.key === "ArrowRight") player2.dx = 0;  // Arrêter le mouvement horizontal
+});
+
+// Démarrer le jeu
+updateGame();
