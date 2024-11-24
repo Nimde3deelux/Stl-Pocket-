@@ -3,25 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chronicles of the Forgotten Energy</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="game.js" defer></script>
+    <title>STL Fight</title>
+    <link rel="stylesheet" href="stlfight.css">
 </head>
 <body>
-    <div id="home-screen">
-        <h1>Chronicles of the Forgotten Energy</h1>
-        <div class="mode-selection">
-            <button id="single-player-btn" class="mode-btn">Mode 1 Joueur</button>
-            <button id="two-player-btn" class="mode-btn">Mode 2 Joueurs</button>
-        </div>
+    <!-- Page d'accueil -->
+    <div id="accueil">
+        <h1>STL Fight</h1>
+        <p>Bienvenue dans le jeu ! Choisissez votre mode de jeu :</p>
+        <button id="mode1">Mode 1 Joueur</button>
+        <button id="mode2">Mode 2 Joueurs</button>
     </div>
 
-    <div id="game-screen" class="hidden">
-        <canvas id="game-canvas"></canvas>
-        <div id="score-board">
-            <p>Score: <span id="score">0</span></p>
-            <p>Time: <span id="time">00:00</span></p>
-        </div>
+    <!-- Zone de jeu -->
+    <div id="jeu" style="display:none;">
+        <canvas id="gameCanvas"></canvas>
     </div>
+
+    <!-- Game Over -->
+    <div id="gameOver" style="display:none;">
+        <h2>Game Over</h2>
+        <p id="score">Score: 0</p>
+        <button id="replay">Rejouer</button>
+    </div>
+
+    <script src="stlfight.js"></script>
 </body>
 </html>
