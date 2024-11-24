@@ -6,7 +6,7 @@ let gameOverScreen = document.getElementById("gameOver");
 let scoreDisplay = document.getElementById("score");
 let score = 0;
 let isGameOver = false;
-let player;
+let player1, player2;
 let enemies = [];
 let enemySpeed = 2;
 let playerSpeed = 5;
@@ -20,11 +20,13 @@ canvas.height = window.innerHeight;
 
 // Classe pour le joueur
 class Player {
-    constructor() {
-        this.x = canvas.width / 2;
-        this.y = canvas.height - 30;
+    constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
         this.radius = 20;
-        this.color = "#00baff";  // Cosmorael's color
+        this.color = color;
+        this.speed = playerSpeed;
+        this.bullets = [];
     }
 
     draw() {
@@ -36,10 +38,15 @@ class Player {
     }
 
     move(direction) {
-        if (direction === "left" && this.x - this.radius > 0) this.x -= playerSpeed;
-        if (direction === "right" && this.x + this.radius < canvas.width) this.x += playerSpeed;
-        if (direction === "up" && this.y - this.radius > 0) this.y -= playerSpeed;
-        if (direction === "down" && this.y + this.radius < canvas.height) this.y += playerSpeed;
+        if (direction === "left" && this.x - this.radius > 0) this.x -= this.speed;
+        if (direction === "right" && this.x + this.radius < canvas.width) this.x += this.speed;
+        if (direction === "up" && this.y - this.radius > 0) this.y -= this.speed;
+        if (direction === "down" && this.y + this.radius < canvas.height) this.y += this.speed;
+    }
+
+    shoot() {
+        let bullet = new Bullet(this.x, this.y);
+        this.bullets.push(bullet);
     }
 }
 
@@ -66,13 +73,37 @@ class Enemy {
     }
 }
 
+// Classe pour les flèches tirées par les joueurs
+class Bullet {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.radius = 5;
+        this.speed = 7;
+        this.color = "#00ff00"; // Flèches vertes
+    }
+
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.closePath();
+    }
+
+    update() {
+        this.y -= this.speed; // Les flèches montent vers les ennemis
+    }
+}
+
 // Fonction pour démarrer le jeu
 function startGame() {
     score = 0;
     enemies = [];
     bullets = [];
     isGameOver = false;
-    player = new Player();
+    player1 = new Player(canvas.width / 4, canvas.height - 30, "#00baff"); // Joueur 1
+    player2 = new Player(3 * canvas.width / 4, canvas.height - 30, "#ff00ff"); // Joueur 2
     backgroundMusic.play();
     gameArea.style.display = "block";
     gameOverScreen.style.display = "none";
@@ -84,7 +115,26 @@ function updateGame() {
     if (isGameOver) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height); // Effacer le canvas
-    player.draw();
+    player1.draw();
+    player2.draw();
+
+    // Mettre à jour les flèches
+    player1.bullets.forEach((bullet, index) => {
+        bullet.update();
+        bullet.draw();
+
+        // Vérifier la collision avec les ennemis
+        enemies.forEach((enemy, enemyIndex) => {
+            if (Math.hypot(bullet.x - enemy.x, bullet.y - enemy.y) < bullet.radius + enemy.radius) {
+                collisionSound.play();
+                enemies.splice(enemyIndex, 1); // Supprimer l'ennemi
+                player1.bullets.splice(index, 1); // Supprimer la flèche
+                score++; // Ajouter des points
+                // Générer un nouvel ennemi
+                enemies.push(new Enemy());
+            }
+        });
+    });
 
     // Mettre à jour les ennemis
     if (Math.random() < 0.02) {
@@ -94,57 +144,33 @@ function updateGame() {
     enemies.forEach((enemy, index) => {
         enemy.update();
         enemy.draw();
-        if (enemy.y > canvas.height) {
-            enemies.splice(index, 1);
-        }
 
-        // Vérifier les collisions
-        if (Math.hypot(player.x - enemy.x, player.y - enemy.y) < player.radius + enemy.radius) {
-            collisionSound.play();
-            gameOver();
+        // Vérifier la collision avec les joueurs
+        if (Math.hypot(enemy.x - player1.x, enemy.y - player1.y) < player1.radius + enemy.radius ||
+            Math.hypot(enemy.x - player2.x, enemy.y - player2.y) < player2.radius + enemy.radius) {
+            isGameOver = true;
+            gameOverScreen.style.display = "block";
+            scoreDisplay.textContent = "Score: " + score;
         }
     });
 
     // Afficher le score
     scoreDisplay.textContent = "Score: " + score;
-
     requestAnimationFrame(updateGame);
 }
 
-// Fonction pour la fin de jeu
-function gameOver() {
-    isGameOver = true;
-    backgroundMusic.pause();
-    gameArea.style.display = "none";
-    gameOverScreen.style.display = "block";
-}
+// Commandes de jeu
+document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") player1.move("left");
+    if (event.key === "ArrowRight") player1.move("right");
+    if (event.key === "ArrowUp") player1.move("up");
+    if (event.key === "ArrowDown") player1.move("down");
 
-// Gérer les événements de déplacement du joueur
-document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft" || e.key === "a") {
-        player.move("left");
-    }
-    if (e.key === "ArrowRight" || e.key === "d") {
-        player.move("right");
-    }
-    if (e.key === "ArrowUp" || e.key === "w") {
-        player.move("up");
-    }
-    if (e.key === "ArrowDown" || e.key === "s") {
-        player.move("down");
-    }
+    if (event.key === "j") player1.shoot(); // Joueur 1 attaque
+
+    if (event.key === "/") player2.shoot(); // Joueur 2 attaque
 });
 
-// Gérer le bouton de redémarrage
-document.getElementById("replay").addEventListener("click", () => {
-    startGame();
-});
-
-// Gérer les boutons de mode de jeu
-document.getElementById("mode1").addEventListener("click", () => {
-    startGame();
-});
-
-document.getElementById("mode2").addEventListener("click", () => {
-    startGame();
-});
+// Recommencer après la fin du jeu
+document.getElementById("replay").addEventListener("click", startGame);
+document.getElementById("mode1").addEventListener("click", startGame);
