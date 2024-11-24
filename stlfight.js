@@ -1,252 +1,262 @@
-// Variables de jeu
+// Variables globales
 let canvas = document.getElementById("gameCanvas");
 let ctx = canvas.getContext("2d");
-let gameArea = document.getElementById("jeu");
-let gameOverScreen = document.getElementById("gameOver");
-let scoreDisplay = document.getElementById("score");
-let score = 0;
-let health = 100;
-let isGameOver = false;
+
+// Paramètres du jeu
+let gameRunning = true;
 let player;
 let enemies = [];
 let bullets = [];
-let enemySpeed = 2;
-let playerSpeed = 8;
-let backgroundMusic = new Audio("audio/background-music.mp3"); // Musique de fond
-let collisionSound = new Audio("audio/explosion-sound.mp3"); // Bruit de collision
+let score = 0;
 
-// Images
-let playerImage = new Image();
-playerImage.src = "images/personnage.png"; // Image du joueur
-let explosionImage = new Image();
-explosionImage.src = "images/explosion.png"; // Image d'explosion
-
-// Images des ennemis
-let enemyImages = {
-    small: "images/petit.png",
-    medium: "images/moyen.png",
-    large: "images/gros.png",
-    boss: "images/boss.png"
+// Ajout des images et sons
+let explosionImg = new Image();
+explosionImg.src = "images/explosion.png";
+let playerImg = new Image();
+playerImg.src = "images/personnage.png";
+let enemyImgs = {
+    small: new Image(),
+    medium: new Image(),
+    large: new Image(),
+    boss: new Image()
 };
+enemyImgs.small.src = "images/petit.png";
+enemyImgs.medium.src = "images/moyen.png";
+enemyImgs.large.src = "images/gros.png";
+enemyImgs.boss.src = "images/boss.png";
 
-// Dimensions du canvas
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// Sons
+let explosionSound = new Audio("audio/explosion.mp3");
+let shootSound = new Audio("audio/shoot.mp3");
 
-// Classe pour le joueur
+// Classe du joueur
 class Player {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
+    constructor() {
+        this.x = canvas.width / 2;
+        this.y = canvas.height - 50;
         this.width = 50;
         this.height = 50;
-        this.image = playerImage;
-        this.speed = playerSpeed;
-    }
-
-    draw() {
-        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        this.speed = 5;
+        this.health = 100;
+        this.image = playerImg;
     }
 
     move(direction) {
-        if (direction === "left" && this.x > 0) this.x -= this.speed;
-        if (direction === "right" && this.x + this.width < canvas.width) this.x += this.speed;
-        if (direction === "up" && this.y > 0) this.y -= this.speed;
-        if (direction === "down" && this.y + this.height < canvas.height) this.y += this.speed;
+        if (direction === 'left' && this.x > 0) this.x -= this.speed;
+        if (direction === 'right' && this.x < canvas.width - this.width) this.x += this.speed;
+        if (direction === 'up' && this.y > 0) this.y -= this.speed;
+        if (direction === 'down' && this.y < canvas.height - this.height) this.y += this.speed;
     }
 
     shoot() {
         let bullet = new Bullet(this.x + this.width / 2, this.y);
         bullets.push(bullet);
+        shootSound.play();
+    }
+
+    draw() {
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 }
 
-// Classe pour les ennemis
+// Classe des ennemis
 class Enemy {
-    constructor(type) {
-        this.type = type;
-        this.image = new Image();
-        this.image.src = enemyImages[type];
-        this.x = Math.random() * canvas.width;
-        this.y = -50;
+    constructor(x, y, type) {
+        this.x = x;
+        this.y = y;
         this.width = 50;
         this.height = 50;
-        this.speed = enemySpeed;
-        this.health = type === "boss" ? 200 : 100; // Boss a plus de vie
-        this.isShooting = type === "medium" || type === "boss"; // Seuls les ennemis moyens et boss tirent
+        this.type = type;
+        this.speed = Math.random() * 2 + 1; // Vitesse aléatoire
+        this.image = enemyImgs[type];
+        this.health = type === 'small' ? 1 : type === 'medium' ? 2 : type === 'large' ? 3 : 5;
+        this.isDead = false;
+    }
+
+    move() {
+        this.y += this.speed;
+        if (this.type === 'medium' && Math.random() < 0.02) {
+            this.shoot();
+        }
+    }
+
+    shoot() {
+        let bullet = new Bullet(this.x + this.width / 2, this.y + this.height);
+        bullets.push(bullet);
     }
 
     draw() {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 
-    update() {
-        this.y += this.speed;
+    takeDamage() {
+        this.health--;
+        if (this.health <= 0) {
+            this.isDead = true;
+            score += 10;
+            explosionSound.play();
+            this.dropBonus();
+        }
     }
 
-    shoot() {
-        if (Math.random() < 0.01) { // Les ennemis tirent aléatoirement
-            let bullet = new EnemyBullet(this.x + this.width / 2, this.y + this.height);
-            bullets.push(bullet);
+    dropBonus() {
+        if (this.type === 'medium' || this.type === 'boss') {
+            let bonusType = Math.random() < 0.5 ? 'speed' : 'shield';  // Exemple de bonus
+            let bonus = new Bonus(this.x, this.y, bonusType);
+            bonuses.push(bonus);
         }
     }
 }
 
-// Classe pour les flèches tirées par les joueurs
+// Classe des balles
 class Bullet {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.radius = 5;
-        this.speed = 7;
-        this.color = "#00ff00"; // Flèches vertes
+        this.width = 10;
+        this.height = 20;
+        this.speed = 5;
+    }
+
+    move() {
+        this.y -= this.speed;
     }
 
     draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-        ctx.closePath();
-    }
-
-    update() {
-        this.y -= this.speed; // Les flèches montent vers les ennemis
+        ctx.fillStyle = "yellow";
+        ctx.fillRect(this.x - this.width / 2, this.y, this.width, this.height);
     }
 }
 
-// Classe pour les flèches tirées par les ennemis
-class EnemyBullet {
-    constructor(x, y) {
+// Classe des bonus
+class Bonus {
+    constructor(x, y, type) {
         this.x = x;
         this.y = y;
-        this.radius = 5;
-        this.speed = 5;
-        this.color = "#ff0000"; // Flèches rouges
+        this.type = type;
+        this.width = 30;
+        this.height = 30;
+        this.image = new Image();
+        this.image.src = "images/" + type + ".png"; // Assurez-vous que l'image du bonus existe dans le dossier 'images'
     }
 
     draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-        ctx.closePath();
-    }
-
-    update() {
-        this.y += this.speed; // Les flèches descendent
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 }
 
-// Fonction pour démarrer le jeu
-function startGame() {
-    score = 0;
-    health = 100;
-    isGameOver = false;
-    player = new Player(canvas.width / 2 - 25, canvas.height - 60);
-    enemies = [];
-    bullets = [];
-    gameArea.style.display = "block";
-    gameOverScreen.style.display = "none";
-    document.getElementById("accueil").style.display = "none";
+// Fonction pour afficher l'explosion pendant 1 seconde
+function displayExplosion(x, y) {
+    let explosion = { x: x, y: y, image: explosionImg };
+    explosions.push(explosion);
 
-    // Lance la musique de fond
-    backgroundMusic.play();
-    backgroundMusic.loop = true;
-
-    gameLoop();
+    // Retirer l'explosion après 1 seconde
+    setTimeout(() => {
+        explosions = explosions.filter(explosion => explosion.x !== x && explosion.y !== y);
+    }, 1000);
 }
 
-// Fonction de mise à jour du jeu
-function gameLoop() {
-    if (isGameOver) {
-        gameOver();
-        return;
-    }
+// Liste des explosions
+let explosions = [];
+let bonuses = [];
 
+// Détection des collisions entre balle et ennemis
+function detectCollisions() {
+    for (let i = 0; i < enemies.length; i++) {
+        let enemy = enemies[i];
+        for (let j = 0; j < bullets.length; j++) {
+            let bullet = bullets[j];
+            if (bullet.x > enemy.x && bullet.x < enemy.x + enemy.width &&
+                bullet.y > enemy.y && bullet.y < enemy.y + enemy.height) {
+                enemy.takeDamage();
+                bullets.splice(j, 1); // Supprime la balle
+                displayExplosion(enemy.x, enemy.y); // Affiche l'explosion
+                break;
+            }
+        }
+    }
+}
+
+// Génération d'ennemis aléatoires
+function generateEnemies() {
+    if (Math.random() < 0.05) {
+        let enemyType = ['small', 'medium', 'large', 'boss'][Math.floor(Math.random() * 4)];
+        let x = Math.random() * (canvas.width - 50);
+        let y = -50; // Commence au-dessus de l'écran
+        let enemy = new Enemy(x, y, enemyType);
+        enemies.push(enemy);
+    }
+}
+
+// Mettre à jour l'état du jeu
+function update() {
+    if (!gameRunning) return;
+
+    // Effacer l'écran
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Déplacer et dessiner le joueur
-    player.draw();
+    // Générer les ennemis
+    generateEnemies();
 
-    // Déplacer et dessiner les ennemis
-    if (Math.random() < 0.02) { // Création d'ennemis aléatoires
-        let type = "small"; // Par défaut, petit ennemi
-        if (Math.random() < 0.1) type = "medium";
-        if (Math.random() < 0.05) type = "boss";
-        enemies.push(new Enemy(type));
+    // Déplacer les ennemis
+    for (let i = 0; i < enemies.length; i++) {
+        let enemy = enemies[i];
+        if (!enemy.isDead) {
+            enemy.move();
+            enemy.draw();
+        }
     }
 
-    enemies.forEach(enemy => {
-        enemy.update();
-        enemy.draw();
-        if (enemy.isShooting) {
-            enemy.shoot();
-        }
-    });
-
-    // Déplacer et dessiner les flèches
-    bullets.forEach((bullet, index) => {
-        bullet.update();
+    // Déplacer les balles
+    for (let i = 0; i < bullets.length; i++) {
+        let bullet = bullets[i];
+        bullet.move();
         bullet.draw();
+    }
 
-        // Vérification de la collision entre flèches et ennemis
-        enemies.forEach((enemy, enemyIndex) => {
-            let dx = bullet.x - (enemy.x + enemy.width / 2);
-            let dy = bullet.y - (enemy.y + enemy.height / 2);
-            let distance = Math.sqrt(dx * dx + dy * dy);
+    // Détecter les collisions
+    detectCollisions();
 
-            if (distance < bullet.radius + enemy.width / 2) {
-                // Explosion et suppression de l'ennemi
-                collisionSound.play();
-                score += 10;
-                enemies.splice(enemyIndex, 1);
-                explosions.push({x: enemy.x, y: enemy.y});
-            }
-        });
+    // Dessiner les explosions
+    for (let i = 0; i < explosions.length; i++) {
+        let explosion = explosions[i];
+        ctx.drawImage(explosion.image, explosion.x, explosion.y, 50, 50); // Explosion à taille fixe
+    }
 
-        // Supprimer les flèches en dehors de l'écran
-        if (bullet.y < 0 || bullet.y > canvas.height) {
-            bullets.splice(index, 1);
-        }
-    });
+    // Dessiner le joueur
+    player.draw();
 
-    // Vérification des collisions avec les ennemis
-    enemies.forEach(enemy => {
-        if (enemy.y + enemy.height > player.y && enemy.y < player.y + player.height && enemy.x + enemy.width > player.x && enemy.x < player.x + player.width) {
-            health -= 10;
-            if (health <= 0) {
-                isGameOver = true;
-            }
-        }
-    });
-
-    // Mettre à jour la barre de vie
-    document.getElementById("health").style.width = health + "%";
-    document.getElementById("healthText").textContent = health;
+    // Dessiner les bonus
+    for (let i = 0; i < bonuses.length; i++) {
+        let bonus = bonuses[i];
+        bonus.draw();
+    }
 
     // Mettre à jour le score
-    scoreDisplay.textContent = "Score: " + score;
+    ctx.fillStyle = "white";
+    ctx.font = "20px Arial";
+    ctx.fillText("Score: " + score, 10, 30);
 
-    requestAnimationFrame(gameLoop);
+    // Vérifier la fin du jeu
+    if (player.health <= 0) {
+        gameRunning = false;
+        alert("Game Over!");
+    }
+
+    requestAnimationFrame(update);
 }
 
-// Fonction de gestion de fin de jeu
-function gameOver() {
-    backgroundMusic.pause();
-    gameArea.style.display = "none";
-    gameOverScreen.style.display = "block";
-    document.getElementById("score").textContent = "Score: " + score;
-}
+// Initialisation du joueur
+player = new Player();
 
-document.getElementById("replay").addEventListener("click", startGame);
-document.getElementById("startGame").addEventListener("click", startGame);
-
-// Commandes du joueur
-document.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") player.move("left");
-    if (event.key === "ArrowRight") player.move("right");
-    if (event.key === "ArrowUp") player.move("up");
-    if (event.key === "ArrowDown") player.move("down");
-    if (event.key === "j") player.shoot(); // Attaque
+// Événements du clavier
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'ArrowLeft') player.move('left');
+    if (event.key === 'ArrowRight') player.move('right');
+    if (event.key === 'ArrowUp') player.move('up');
+    if (event.key === 'ArrowDown') player.move('down');
+    if (event.key === 'j') player.shoot();
 });
+
+// Démarrer le jeu
+update();
