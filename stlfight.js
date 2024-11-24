@@ -1,61 +1,3 @@
-// Variables globales
-let canvas = document.getElementById("gameCanvas");
-let ctx = canvas.getContext("2d");
-
-// Paramètres du jeu
-let gameRunning = true;
-let player;
-let enemies = [];
-let bullets = [];
-let score = 0;
-
-// Ajout des images et sons
-let playerImg = new Image();
-playerImg.src = "images/personnage.png";
-let enemyImgs = {
-    small: new Image(),
-    medium: new Image(),
-    large: new Image(),
-    boss: new Image()
-};
-enemyImgs.small.src = "images/petit.png";
-enemyImgs.medium.src = "images/moyen.png";
-enemyImgs.large.src = "images/gros.png";
-enemyImgs.boss.src = "images/boss.png";
-
-// Sons
-let shootSound = new Audio("audio/shoot.mp3");
-
-// Classe du joueur
-class Player {
-    constructor() {
-        this.x = canvas.width / 2;
-        this.y = canvas.height - 50;
-        this.width = 50;
-        this.height = 50;
-        this.speed = 5;
-        this.health = 100;
-        this.image = playerImg;
-    }
-
-    move(direction) {
-        if (direction === 'left' && this.x > 0) this.x -= this.speed;
-        if (direction === 'right' && this.x < canvas.width - this.width) this.x += this.speed;
-        if (direction === 'up' && this.y > 0) this.y -= this.speed;
-        if (direction === 'down' && this.y < canvas.height - this.height) this.y += this.speed;
-    }
-
-    shoot() {
-        let bullet = new Bullet(this.x + this.width / 2, this.y);
-        bullets.push(bullet);
-        shootSound.play();
-    }
-
-    draw() {
-        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-    }
-}
-
 // Classe des ennemis
 class Enemy {
     constructor(x, y, type) {
@@ -66,13 +8,15 @@ class Enemy {
         this.type = type;
         this.speed = Math.random() * 2 + 1; // Vitesse aléatoire
         this.image = enemyImgs[type];
-        this.health = type === 'small' ? 1 : type === 'medium' ? 2 : type === 'large' ? 3 : 5;
+        this.health = this.type === 'small' ? 1 : this.type === 'medium' ? 2 : this.type === 'large' ? 3 : 5;
         this.isDead = false;
     }
 
     move() {
         this.y += this.speed;
-        if (this.type === 'medium' && Math.random() < 0.02) {
+
+        // Ennemis moyens et boss tirent seulement si le joueur est sous eux
+        if ((this.type === 'medium' || this.type === 'boss') && this.y > player.y) {
             this.shoot();
         }
     }
@@ -82,17 +26,27 @@ class Enemy {
         bullets.push(bullet);
     }
 
-    draw() {
-        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-    }
-
     takeDamage() {
         this.health--;
         if (this.health <= 0) {
             this.isDead = true;
             score += 10;
+            explosionSound.play();
             this.dropBonus();
         }
+    }
+
+    // Affichage de la barre de vie
+    drawHealthBar() {
+        ctx.fillStyle = "red";
+        ctx.fillRect(this.x, this.y - 10, this.width, 5);  // Fond de la barre de vie
+        ctx.fillStyle = "green";
+        ctx.fillRect(this.x, this.y - 10, (this.width * this.health) / (this.type === 'boss' ? 5 : this.type === 'large' ? 3 : 1), 5); // Barre de vie
+    }
+
+    draw() {
+        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        this.drawHealthBar();  // Afficher la barre de vie
     }
 
     dropBonus() {
@@ -104,45 +58,22 @@ class Enemy {
     }
 }
 
-// Classe des balles
-class Bullet {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.width = 10;
-        this.height = 20;
-        this.speed = 5;
-    }
+// Fonction pour vérifier les positions des ennemis
+function generateEnemies() {
+    if (Math.random() < 0.05) {
+        let enemyType = ['small', 'medium', 'large', 'boss'][Math.floor(Math.random() * 4)];
+        let x, y;
 
-    move() {
-        this.y -= this.speed;
-    }
+        // Vérification que la position de l'ennemi n'est pas déjà occupée
+        do {
+            x = Math.random() * (canvas.width - 50);
+            y = -50; // Commence au-dessus de l'écran
+        } while (enemies.some(enemy => Math.abs(enemy.x - x) < 50 && Math.abs(enemy.y - y) < 50)); // Évite les superpositions
 
-    draw() {
-        ctx.fillStyle = "yellow";
-        ctx.fillRect(this.x - this.width / 2, this.y, this.width, this.height);
+        let enemy = new Enemy(x, y, enemyType);
+        enemies.push(enemy);
     }
 }
-
-// Classe des bonus
-class Bonus {
-    constructor(x, y, type) {
-        this.x = x;
-        this.y = y;
-        this.type = type;
-        this.width = 30;
-        this.height = 30;
-        this.image = new Image();
-        this.image.src = "images/" + type + ".png"; // Assurez-vous que l'image du bonus existe dans le dossier 'images'
-    }
-
-    draw() {
-        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-    }
-}
-
-// Liste des bonus
-let bonuses = [];
 
 // Détection des collisions entre balle et ennemis
 function detectCollisions() {
@@ -157,17 +88,6 @@ function detectCollisions() {
                 break;
             }
         }
-    }
-}
-
-// Génération d'ennemis aléatoires
-function generateEnemies() {
-    if (Math.random() < 0.05) {
-        let enemyType = ['small', 'medium', 'large', 'boss'][Math.floor(Math.random() * 4)];
-        let x = Math.random() * (canvas.width - 50);
-        let y = -50; // Commence au-dessus de l'écran
-        let enemy = new Enemy(x, y, enemyType);
-        enemies.push(enemy);
     }
 }
 
@@ -222,18 +142,3 @@ function update() {
 
     requestAnimationFrame(update);
 }
-
-// Initialisation du joueur
-player = new Player();
-
-// Événements du clavier
-document.addEventListener('keydown', function (event) {
-    if (event.key === 'ArrowLeft') player.move('left');
-    if (event.key === 'ArrowRight') player.move('right');
-    if (event.key === 'ArrowUp') player.move('up');
-    if (event.key === 'ArrowDown') player.move('down');
-    if (event.key === 'j') player.shoot();
-});
-
-// Démarrer le jeu
-update();
