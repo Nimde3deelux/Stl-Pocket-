@@ -6,13 +6,17 @@ let gameOverScreen = document.getElementById("gameOver");
 let scoreDisplay = document.getElementById("score");
 let score = 0;
 let isGameOver = false;
-let player1, player2;
+let player;
 let enemies = [];
 let enemySpeed = 2;
 let playerSpeed = 5;
 let bullets = [];
-let backgroundMusic = new Audio("background-music.mp3"); // Musique de fond
-let collisionSound = new Audio("collision-sound.mp3"); // Bruit de collision
+let backgroundMusic = new Audio("audio/background-music.mp3"); // Musique de fond
+let collisionSound = new Audio("audio/explosion-sound.mp3"); // Bruit de collision
+
+// Images
+let explosionImage = new Image();
+explosionImage.src = "images/explosion.png"; // Image d'explosion
 
 // Dimensions du canvas
 canvas.width = window.innerWidth;
@@ -71,6 +75,12 @@ class Enemy {
     update() {
         this.y += this.speed;
     }
+
+    explode() {
+        // Afficher l'explosion
+        ctx.drawImage(explosionImage, this.x - 20, this.y - 20, 40, 40);
+        collisionSound.play(); // Bruit d'explosion
+    }
 }
 
 // Classe pour les flèches tirées par les joueurs
@@ -102,8 +112,7 @@ function startGame() {
     enemies = [];
     bullets = [];
     isGameOver = false;
-    player1 = new Player(canvas.width / 4, canvas.height - 30, "#00baff"); // Joueur 1
-    player2 = new Player(3 * canvas.width / 4, canvas.height - 30, "#ff00ff"); // Joueur 2
+    player = new Player(canvas.width / 2, canvas.height - 30, "#00baff"); // Joueur
     backgroundMusic.play();
     gameArea.style.display = "block";
     gameOverScreen.style.display = "none";
@@ -115,20 +124,19 @@ function updateGame() {
     if (isGameOver) return;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height); // Effacer le canvas
-    player1.draw();
-    player2.draw();
+    player.draw();
 
     // Mettre à jour les flèches
-    player1.bullets.forEach((bullet, index) => {
+    player.bullets.forEach((bullet, index) => {
         bullet.update();
         bullet.draw();
 
         // Vérifier la collision avec les ennemis
         enemies.forEach((enemy, enemyIndex) => {
             if (Math.hypot(bullet.x - enemy.x, bullet.y - enemy.y) < bullet.radius + enemy.radius) {
-                collisionSound.play();
+                enemy.explode(); // Effet d'explosion
                 enemies.splice(enemyIndex, 1); // Supprimer l'ennemi
-                player1.bullets.splice(index, 1); // Supprimer la flèche
+                player.bullets.splice(index, 1); // Supprimer la flèche
                 score++; // Ajouter des points
                 // Générer un nouvel ennemi
                 enemies.push(new Enemy());
@@ -145,9 +153,8 @@ function updateGame() {
         enemy.update();
         enemy.draw();
 
-        // Vérifier la collision avec les joueurs
-        if (Math.hypot(enemy.x - player1.x, enemy.y - player1.y) < player1.radius + enemy.radius ||
-            Math.hypot(enemy.x - player2.x, enemy.y - player2.y) < player2.radius + enemy.radius) {
+        // Vérifier la collision avec le joueur
+        if (Math.hypot(enemy.x - player.x, enemy.y - player.y) < player.radius + enemy.radius) {
             isGameOver = true;
             gameOverScreen.style.display = "block";
             scoreDisplay.textContent = "Score: " + score;
@@ -161,16 +168,14 @@ function updateGame() {
 
 // Commandes de jeu
 document.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") player1.move("left");
-    if (event.key === "ArrowRight") player1.move("right");
-    if (event.key === "ArrowUp") player1.move("up");
-    if (event.key === "ArrowDown") player1.move("down");
+    if (event.key === "ArrowLeft") player.move("left");
+    if (event.key === "ArrowRight") player.move("right");
+    if (event.key === "ArrowUp") player.move("up");
+    if (event.key === "ArrowDown") player.move("down");
 
-    if (event.key === "j") player1.shoot(); // Joueur 1 attaque
-
-    if (event.key === "/") player2.shoot(); // Joueur 2 attaque
+    if (event.key === "j") player.shoot(); // Joueur attaque
 });
 
 // Recommencer après la fin du jeu
 document.getElementById("replay").addEventListener("click", startGame);
-document.getElementById("mode1").addEventListener("click", startGame);
+document.getElementById("startGame").addEventListener("click", startGame);
