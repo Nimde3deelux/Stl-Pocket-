@@ -25,7 +25,8 @@ enemyImgs.boss.src = "images/boss.png";
 
 // Sons
 let shootSound = new Audio("audio/shoot.mp3");
-let backgroundMusic = new Audio("audio/background.mp3");
+let explosionSound = new Audio("audio/explosion-sound.mp3");
+let backgroundMusic = new Audio("audio/background-music.mp3");
 backgroundMusic.loop = true; // Musique en boucle
 backgroundMusic.play();
 
@@ -75,26 +76,15 @@ class Enemy {
 
     move() {
         this.y += this.speed;
-        // Ennemis de type "medium" ou "boss" tirent uniquement lorsque le joueur est en dessous
-        if ((this.type === 'medium' || this.type === 'boss') && this.y > player.y) {
-            this.shoot();
-        }
-    }
 
-    shoot() {
-        let bullet = new Bullet(this.x + this.width / 2, this.y + this.height);
-        bullets.push(bullet);
+        // Supprime l'ennemi s'il atteint le bas de l'écran
+        if (this.y > canvas.height) {
+            this.isDead = true;
+        }
     }
 
     draw() {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        // Dessiner la barre de vie pour les ennemis "gros" et "boss"
-        if (this.type === 'large' || this.type === 'boss') {
-            ctx.fillStyle = "red";
-            ctx.fillRect(this.x, this.y - 10, this.width, 5); // Barre de vie au-dessus de l'ennemi
-            ctx.fillStyle = "green";
-            ctx.fillRect(this.x, this.y - 10, (this.width * this.health) / (this.type === 'boss' ? 5 : 3), 5); // Vie restante
-        }
     }
 
     takeDamage() {
@@ -102,15 +92,7 @@ class Enemy {
         if (this.health <= 0) {
             this.isDead = true;
             score += 10;
-            this.dropBonus();
-        }
-    }
-
-    dropBonus() {
-        if (this.type === 'medium' || this.type === 'boss') {
-            let bonusType = Math.random() < 0.5 ? 'speed' : 'shield';  // Exemple de bonus
-            let bonus = new Bonus(this.x, this.y, bonusType);
-            bonuses.push(bonus);
+            explosionSound.play(); // Jouer le son d'explosion
         }
     }
 }
@@ -135,26 +117,6 @@ class Bullet {
     }
 }
 
-// Classe des bonus
-class Bonus {
-    constructor(x, y, type) {
-        this.x = x;
-        this.y = y;
-        this.type = type;
-        this.width = 30;
-        this.height = 30;
-        this.image = new Image();
-        this.image.src = "images/" + type + ".png"; // Assurez-vous que l'image du bonus existe dans le dossier 'images'
-    }
-
-    draw() {
-        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-    }
-}
-
-// Liste des bonus
-let bonuses = [];
-
 // Détection des collisions entre balle et ennemis
 function detectCollisions() {
     for (let i = 0; i < enemies.length; i++) {
@@ -177,9 +139,7 @@ function generateEnemies() {
     let x = Math.random() * (canvas.width - 50);
     let y = -50; // Commence au-dessus de l'écran
     let enemy = new Enemy(x, y, enemyType);
-    if (!enemies.some(e => Math.abs(e.x - x) < 50 && Math.abs(e.y - y) < 50)) { // Évite les collisions sur la position
-        enemies.push(enemy);
-    }
+    enemies.push(enemy);
 }
 
 // Mettre à jour l'état du jeu
@@ -190,20 +150,18 @@ function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Générer les ennemis
-    generateEnemies();
+    if (Math.random() < 0.02) generateEnemies();
 
     // Déplacer les ennemis
-    for (let i = 0; i < enemies.length; i++) {
-        let enemy = enemies[i];
-        if (!enemy.isDead) {
-            enemy.move();
-            enemy.draw();
-        }
+    enemies = enemies.filter(enemy => !enemy.isDead); // Supprime les ennemis morts
+    for (let enemy of enemies) {
+        enemy.move();
+        enemy.draw();
     }
 
     // Déplacer les balles
-    for (let i = 0; i < bullets.length; i++) {
-        let bullet = bullets[i];
+    bullets = bullets.filter(bullet => bullet.y > 0); // Supprime les balles hors écran
+    for (let bullet of bullets) {
         bullet.move();
         bullet.draw();
     }
@@ -213,12 +171,6 @@ function update() {
 
     // Dessiner le joueur
     player.draw();
-
-    // Dessiner les bonus
-    for (let i = 0; i < bonuses.length; i++) {
-        let bonus = bonuses[i];
-        bonus.draw();
-    }
 
     // Mettre à jour le score
     ctx.fillStyle = "white";
