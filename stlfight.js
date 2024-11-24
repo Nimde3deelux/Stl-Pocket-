@@ -10,8 +10,6 @@ let bullets = [];
 let score = 0;
 
 // Ajout des images et sons
-let explosionImg = new Image();
-explosionImg.src = "images/explosion.png";
 let playerImg = new Image();
 playerImg.src = "images/personnage.png";
 let enemyImgs = {
@@ -26,7 +24,6 @@ enemyImgs.large.src = "images/gros.png";
 enemyImgs.boss.src = "images/boss.png";
 
 // Sons
-let explosionSound = new Audio("audio/explosion.mp3");
 let shootSound = new Audio("audio/shoot.mp3");
 
 // Classe du joueur
@@ -94,7 +91,6 @@ class Enemy {
         if (this.health <= 0) {
             this.isDead = true;
             score += 10;
-            explosionSound.play();
             this.dropBonus();
         }
     }
@@ -145,19 +141,7 @@ class Bonus {
     }
 }
 
-// Fonction pour afficher l'explosion pendant 1 seconde
-function displayExplosion(x, y) {
-    let explosion = { x: x, y: y, image: explosionImg };
-    explosions.push(explosion);
-
-    // Retirer l'explosion après 1 seconde
-    setTimeout(() => {
-        explosions = explosions.filter(explosion => explosion.x !== x && explosion.y !== y);
-    }, 1000);
-}
-
-// Liste des explosions
-let explosions = [];
+// Liste des bonus
 let bonuses = [];
 
 // Détection des collisions entre balle et ennemis
@@ -170,7 +154,6 @@ function detectCollisions() {
                 bullet.y > enemy.y && bullet.y < enemy.y + enemy.height) {
                 enemy.takeDamage();
                 bullets.splice(j, 1); // Supprime la balle
-                displayExplosion(enemy.x, enemy.y); // Affiche l'explosion
                 break;
             }
         }
@@ -216,12 +199,6 @@ function update() {
 
     // Détecter les collisions
     detectCollisions();
-
-    // Dessiner les explosions
-    for (let i = 0; i < explosions.length; i++) {
-        let explosion = explosions[i];
-        ctx.drawImage(explosion.image, explosion.x, explosion.y, 50, 50); // Explosion à taille fixe
-    }
 
     // Dessiner le joueur
     player.draw();
