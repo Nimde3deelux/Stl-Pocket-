@@ -8,7 +8,7 @@ let player;
 let enemies = [];
 let bullets = [];
 let enemyBullets = [];
-let floatingOrbs = [];
+let orbs = [];
 let score = 0;
 
 // Ajout des images et sons
@@ -25,18 +25,19 @@ enemyImgs.medium.src = "images/moyen.png";
 enemyImgs.large.src = "images/gros.png";
 enemyImgs.boss.src = "images/boss.png";
 
-let orbColors = {
-    green: "green",
-    yellow: "yellow",
-    red: "red",
-    black: "black"
+// Boules
+const orbTypes = {
+    green: { effect: 'speed', duration: 5, color: 'green' },
+    yellow: { effect: 'doubleDamage', duration: 5, color: 'yellow' },
+    red: { effect: 'multiShot', duration: 5, color: 'red' },
+    black: { effect: 'death', duration: 0, color: 'black' }
 };
 
 // Sons
 let shootSound = new Audio("audio/shoot.mp3");
 let explosionSound = new Audio("audio/explosion-sound.mp3");
 let backgroundMusic = new Audio("audio/background-music.mp3");
-backgroundMusic.loop = true;
+backgroundMusic.loop = true; // Musique en boucle
 backgroundMusic.play();
 
 // Classe du joueur
@@ -49,6 +50,7 @@ class Player {
         this.speed = 5;
         this.health = 100;
         this.image = playerImg;
+        this.powerups = {};
     }
 
     move(direction) {
@@ -59,13 +61,37 @@ class Player {
     }
 
     shoot() {
-        let bullet = new Bullet(this.x + this.width / 2, this.y);
-        bullets.push(bullet);
+        if (this.powerups.multiShot) {
+            for (let angle = 0; angle < 360; angle += 45) {
+                bullets.push(new Bullet(this.x + this.width / 2, this.y, angle));
+            }
+        } else {
+            bullets.push(new Bullet(this.x + this.width / 2, this.y, 90));
+        }
         shootSound.play();
     }
 
     draw() {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+    }
+
+    takeDamage() {
+        this.health -= 10;
+        if (this.health <= 0) {
+            gameRunning = false;
+            alert("Game Over!");
+        }
+    }
+
+    applyPowerup(orb) {
+        if (orb.effect === 'death') {
+            this.health = 0;
+            gameRunning = false;
+            alert("Vous avez pris une boule noire. Game Over!");
+        } else {
+            this.powerups[orb.effect] = true;
+            setTimeout(() => { this.powerups[orb.effect] = false; }, orb.duration * 1000);
+        }
     }
 }
 
@@ -77,7 +103,7 @@ class Enemy {
         this.width = 50;
         this.height = 50;
         this.type = type;
-        this.speed = Math.random() * 2 + 1;
+        this.speed = Math.random() * 2 + 1; // Vitesse aléatoire
         this.image = enemyImgs[type];
         this.health = type === 'small' ? 1 : type === 'medium' ? 2 : type === 'large' ? 3 : 5;
         this.isDead = false;
@@ -86,13 +112,28 @@ class Enemy {
     move() {
         this.y += this.speed;
 
-        if (this.y > canvas.height) this.isDead = true;
+        // Supprime l'ennemi s'il atteint le bas de l'écran
+        if (this.y > canvas.height) {
+            this.isDead = true;
+        }
+    }
+
+    shoot() {
+        if (this.health > 0 && Math.abs(this.x - player.x) < 50) {
+            enemyBullets.push(new Bullet(this.x + this.width / 2, this.y + this.height, -90));
+        }
+    }
+
+    dropOrb() {
+        if (Math.random() < 0.5) {
+            let orbType = Object.keys(orbTypes)[Math.floor(Math.random() * 4)];
+            orbs.push(new Orb(this.x, this.y, orbTypes[orbType]));
+        }
     }
 
     draw() {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
         if (this.type === 'large' || this.type === 'boss') {
-            // Afficher la barre de vie
             ctx.fillStyle = "red";
             ctx.fillRect(this.x, this.y - 10, (this.health / 5) * this.width, 5);
         }
@@ -104,29 +145,25 @@ class Enemy {
             this.isDead = true;
             score += 10;
             explosionSound.play();
-            if (this.type === 'large' || this.type === 'boss') this.dropOrb();
+            this.dropOrb();
         }
-    }
-
-    dropOrb() {
-        let orbTypes = ["green", "yellow", "red", "black"];
-        let randomOrb = orbTypes[Math.floor(Math.random() * orbTypes.length)];
-        floatingOrbs.push(new Orb(this.x + this.width / 2, this.y, randomOrb));
     }
 }
 
 // Classe des balles
 class Bullet {
-    constructor(x, y) {
+    constructor(x, y, angle) {
         this.x = x;
         this.y = y;
         this.width = 10;
         this.height = 20;
         this.speed = 5;
+        this.angle = angle;
     }
 
     move() {
-        this.y -= this.speed;
+        this.x += this.speed * Math.cos((this.angle * Math.PI) / 180);
+        this.y -= this.speed * Math.sin((this.angle * Math.PI) / 180);
     }
 
     draw() {
@@ -135,54 +172,47 @@ class Bullet {
     }
 }
 
-// Classe des balles ennemies
-class EnemyBullet {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.width = 8;
-        this.height = 15;
-        this.speed = 3;
-    }
-
-    move() {
-        this.y += this.speed;
-    }
-
-    draw() {
-        ctx.fillStyle = "red";
-        ctx.fillRect(this.x - this.width / 2, this.y, this.width, this.height);
-    }
-}
-
 // Classe des orbes
 class Orb {
-    constructor(x, y, color) {
+    constructor(x, y, type) {
         this.x = x;
         this.y = y;
-        this.color = color;
-        this.radius = 10;
-        this.lifetime = 10 * 60; // Durée en frames (10 secondes)
+        this.type = type;
+        this.radius = 15;
+        this.timer = 10000;
     }
 
     draw() {
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-        ctx.fillStyle = this.color;
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.type.color;
         ctx.fill();
         ctx.closePath();
     }
 
-    move() {
-        this.lifetime--;
+    update() {
+        this.y += 1; // Orb flotte
+        this.timer -= 100; // Diminue la durée de vie
+        if (this.timer <= 0) orbs = orbs.filter(orb => orb !== this);
     }
 }
 
-// Générer le guide des touches
-function drawGuide() {
+// Détection des collisions entre joueur et orbes
+function detectOrbCollisions() {
+    for (let orb of orbs) {
+        let dist = Math.hypot(player.x - orb.x, player.y - orb.y);
+        if (dist < player.width / 2 + orb.radius) {
+            player.applyPowerup(orb.type);
+            orbs = orbs.filter(o => o !== orb);
+        }
+    }
+}
+
+// Ajouter le guide des touches
+function drawControls() {
     ctx.fillStyle = "white";
-    ctx.font = "14px Arial";
-    ctx.fillText("Guide des touches:", 10, 20);
-    ctx.fillText("Flèches: Déplacement", 10, 40);
+    ctx.font = "16px Arial";
+    ctx.fillText("Contrôles:", 10, 20);
+    ctx.fillText("Flèches: Déplacer", 10, 40);
     ctx.fillText("J: Tirer", 10, 60);
 }
