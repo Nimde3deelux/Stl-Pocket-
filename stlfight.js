@@ -7,8 +7,6 @@ let gameRunning = true;
 let player;
 let enemies = [];
 let bullets = [];
-let enemyBullets = [];
-let orbs = [];
 let score = 0;
 
 // Ajout des images et sons
@@ -24,14 +22,6 @@ enemyImgs.small.src = "images/petit.png";
 enemyImgs.medium.src = "images/moyen.png";
 enemyImgs.large.src = "images/gros.png";
 enemyImgs.boss.src = "images/boss.png";
-
-// Boules
-const orbTypes = {
-    green: { effect: 'speed', duration: 5, color: 'green' },
-    yellow: { effect: 'doubleDamage', duration: 5, color: 'yellow' },
-    red: { effect: 'multiShot', duration: 5, color: 'red' },
-    black: { effect: 'death', duration: 0, color: 'black' }
-};
 
 // Sons
 let shootSound = new Audio("audio/shoot.mp3");
@@ -50,7 +40,6 @@ class Player {
         this.speed = 5;
         this.health = 100;
         this.image = playerImg;
-        this.powerups = {};
     }
 
     move(direction) {
@@ -61,37 +50,13 @@ class Player {
     }
 
     shoot() {
-        if (this.powerups.multiShot) {
-            for (let angle = 0; angle < 360; angle += 45) {
-                bullets.push(new Bullet(this.x + this.width / 2, this.y, angle));
-            }
-        } else {
-            bullets.push(new Bullet(this.x + this.width / 2, this.y, 90));
-        }
+        let bullet = new Bullet(this.x + this.width / 2, this.y);
+        bullets.push(bullet);
         shootSound.play();
     }
 
     draw() {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-    }
-
-    takeDamage() {
-        this.health -= 10;
-        if (this.health <= 0) {
-            gameRunning = false;
-            alert("Game Over!");
-        }
-    }
-
-    applyPowerup(orb) {
-        if (orb.effect === 'death') {
-            this.health = 0;
-            gameRunning = false;
-            alert("Vous avez pris une boule noire. Game Over!");
-        } else {
-            this.powerups[orb.effect] = true;
-            setTimeout(() => { this.powerups[orb.effect] = false; }, orb.duration * 1000);
-        }
     }
 }
 
@@ -118,25 +83,8 @@ class Enemy {
         }
     }
 
-    shoot() {
-        if (this.health > 0 && Math.abs(this.x - player.x) < 50) {
-            enemyBullets.push(new Bullet(this.x + this.width / 2, this.y + this.height, -90));
-        }
-    }
-
-    dropOrb() {
-        if (Math.random() < 0.5) {
-            let orbType = Object.keys(orbTypes)[Math.floor(Math.random() * 4)];
-            orbs.push(new Orb(this.x, this.y, orbTypes[orbType]));
-        }
-    }
-
     draw() {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-        if (this.type === 'large' || this.type === 'boss') {
-            ctx.fillStyle = "red";
-            ctx.fillRect(this.x, this.y - 10, (this.health / 5) * this.width, 5);
-        }
     }
 
     takeDamage() {
@@ -144,26 +92,23 @@ class Enemy {
         if (this.health <= 0) {
             this.isDead = true;
             score += 10;
-            explosionSound.play();
-            this.dropOrb();
+            explosionSound.play(); // Jouer le son d'explosion
         }
     }
 }
 
 // Classe des balles
 class Bullet {
-    constructor(x, y, angle) {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
         this.width = 10;
         this.height = 20;
         this.speed = 5;
-        this.angle = angle;
     }
 
     move() {
-        this.x += this.speed * Math.cos((this.angle * Math.PI) / 180);
-        this.y -= this.speed * Math.sin((this.angle * Math.PI) / 180);
+        this.y -= this.speed;
     }
 
     draw() {
@@ -172,47 +117,86 @@ class Bullet {
     }
 }
 
-// Classe des orbes
-class Orb {
-    constructor(x, y, type) {
-        this.x = x;
-        this.y = y;
-        this.type = type;
-        this.radius = 15;
-        this.timer = 10000;
-    }
-
-    draw() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.type.color;
-        ctx.fill();
-        ctx.closePath();
-    }
-
-    update() {
-        this.y += 1; // Orb flotte
-        this.timer -= 100; // Diminue la durée de vie
-        if (this.timer <= 0) orbs = orbs.filter(orb => orb !== this);
-    }
-}
-
-// Détection des collisions entre joueur et orbes
-function detectOrbCollisions() {
-    for (let orb of orbs) {
-        let dist = Math.hypot(player.x - orb.x, player.y - orb.y);
-        if (dist < player.width / 2 + orb.radius) {
-            player.applyPowerup(orb.type);
-            orbs = orbs.filter(o => o !== orb);
+// Détection des collisions entre balle et ennemis
+function detectCollisions() {
+    for (let i = 0; i < enemies.length; i++) {
+        let enemy = enemies[i];
+        for (let j = 0; j < bullets.length; j++) {
+            let bullet = bullets[j];
+            if (bullet.x > enemy.x && bullet.x < enemy.x + enemy.width &&
+                bullet.y > enemy.y && bullet.y < enemy.y + enemy.height) {
+                enemy.takeDamage();
+                bullets.splice(j, 1); // Supprime la balle
+                break;
+            }
         }
     }
 }
 
-// Ajouter le guide des touches
-function drawControls() {
-    ctx.fillStyle = "white";
-    ctx.font = "16px Arial";
-    ctx.fillText("Contrôles:", 10, 20);
-    ctx.fillText("Flèches: Déplacer", 10, 40);
-    ctx.fillText("J: Tirer", 10, 60);
+// Génération d'ennemis aléatoires
+function generateEnemies() {
+    let enemyType = ['small', 'medium', 'large', 'boss'][Math.floor(Math.random() * 4)];
+    let x = Math.random() * (canvas.width - 50);
+    let y = -50; // Commence au-dessus de l'écran
+    let enemy = new Enemy(x, y, enemyType);
+    enemies.push(enemy);
 }
+
+// Mettre à jour l'état du jeu
+function update() {
+    if (!gameRunning) return;
+
+    // Effacer l'écran
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Générer les ennemis
+    if (Math.random() < 0.02) generateEnemies();
+
+    // Déplacer les ennemis
+    enemies = enemies.filter(enemy => !enemy.isDead); // Supprime les ennemis morts
+    for (let enemy of enemies) {
+        enemy.move();
+        enemy.draw();
+    }
+
+    // Déplacer les balles
+    bullets = bullets.filter(bullet => bullet.y > 0); // Supprime les balles hors écran
+    for (let bullet of bullets) {
+        bullet.move();
+        bullet.draw();
+    }
+
+    // Détecter les collisions
+    detectCollisions();
+
+    // Dessiner le joueur
+    player.draw();
+
+    // Mettre à jour le score
+    ctx.fillStyle = "white";
+    ctx.font = "20px Arial";
+    ctx.fillText("Score: " + score, 10, 30);
+
+    // Vérifier la fin du jeu
+    if (player.health <= 0) {
+        gameRunning = false;
+        alert("Game Over!");
+    }
+
+    requestAnimationFrame(update);
+}
+
+// Initialisation du joueur
+player = new Player();
+
+// Événements du clavier
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'ArrowLeft') player.move('left');
+    if (event.key === 'ArrowRight') player.move('right');
+    if (event.key === 'ArrowUp') player.move('up');
+    if (event.key === 'ArrowDown') player.move('down');
+    if (event.key === 'j') player.shoot();
+});
+
+// Démarrer le jeu
+update();
