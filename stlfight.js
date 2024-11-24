@@ -133,6 +133,22 @@ function detectCollisions() {
     }
 }
 
+// Détection des collisions entre le joueur et les ennemis
+function detectPlayerEnemyCollisions() {
+    for (let enemy of enemies) {
+        if (
+            player.x < enemy.x + enemy.width &&
+            player.x + player.width > enemy.x &&
+            player.y < enemy.y + enemy.height &&
+            player.y + player.height > enemy.y
+        ) {
+            gameRunning = false;
+            alert("Game Over!"); // Fin du jeu
+            return;
+        }
+    }
+}
+
 // Génération d'ennemis aléatoires
 function generateEnemies() {
     let enemyType = ['small', 'medium', 'large', 'boss'][Math.floor(Math.random() * 4)];
@@ -168,6 +184,7 @@ function update() {
 
     // Détecter les collisions
     detectCollisions();
+    detectPlayerEnemyCollisions(); // Nouvelle fonction ajoutée
 
     // Dessiner le joueur
     player.draw();
