@@ -7,6 +7,7 @@ let gameRunning = true;
 let player;
 let enemies = [];
 let bullets = [];
+let powerUps = [];
 let score = 0;
 
 // Ajout des images et sons
@@ -93,6 +94,14 @@ class Enemy {
             this.isDead = true;
             score += 10;
             explosionSound.play(); // Jouer le son d'explosion
+
+            // Ajouter un power-up aléatoire lorsque l'ennemi est détruit
+            if (Math.random() < 0.3) { // 30% de chance de lâcher un power-up
+                let powerUpType = ['speed', 'shield', 'doubleBullet'][Math.floor(Math.random() * 3)];
+                let powerUp = new PowerUp(this.x + this.width / 2, this.y + this.height);
+                powerUp.type = powerUpType;
+                powerUps.push(powerUp);
+            }
         }
     }
 }
@@ -117,6 +126,44 @@ class Bullet {
     }
 }
 
+// Classe des power-ups
+class PowerUp {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.width = 20;
+        this.height = 20;
+        this.speed = 2;
+        this.type = ''; // Type de power-up
+    }
+
+    move() {
+        this.y += this.speed;
+
+        // Supprime le power-up s'il atteint le bas de l'écran
+        if (this.y > canvas.height) {
+            this.isCollected = true;
+        }
+    }
+
+    draw() {
+        switch (this.type) {
+            case 'speed':
+                ctx.fillStyle = 'blue';
+                break;
+            case 'shield':
+                ctx.fillStyle = 'green';
+                break;
+            case 'doubleBullet':
+                ctx.fillStyle = 'red';
+                break;
+        }
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.width / 2, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
+
 // Détection des collisions entre balle et ennemis
 function detectCollisions() {
     for (let i = 0; i < enemies.length; i++) {
@@ -130,6 +177,40 @@ function detectCollisions() {
                 break;
             }
         }
+    }
+}
+
+// Détection des collisions entre le joueur et les power-ups
+function detectPlayerPowerUpCollisions() {
+    for (let i = 0; i < powerUps.length; i++) {
+        let powerUp = powerUps[i];
+        if (
+            player.x < powerUp.x + powerUp.width &&
+            player.x + player.width > powerUp.x &&
+            player.y < powerUp.y + powerUp.height &&
+            player.y + player.height > powerUp.y
+        ) {
+            // Appliquer l'effet du power-up
+            applyPowerUpEffect(powerUp);
+            powerUps.splice(i, 1); // Supprime le power-up après l'avoir collecté
+            i--;
+        }
+    }
+}
+
+// Appliquer l'effet du power-up
+function applyPowerUpEffect(powerUp) {
+    if (powerUp.type === 'speed') {
+        player.speed *= 1.5; // Augmenter la vitesse du joueur
+    } else if (powerUp.type === 'shield') {
+        player.health += 20; // Augmenter la santé du joueur
+    } else if (powerUp.type === 'doubleBullet') {
+        player.shoot = function () {
+            let bullet1 = new Bullet(this.x + this.width / 2 - 10, this.y); // Premier tir
+            let bullet2 = new Bullet(this.x + this.width / 2 + 10, this.y); // Deuxième tir
+            bullets.push(bullet1, bullet2);
+            shootSound.play();
+        };
     }
 }
 
@@ -182,38 +263,36 @@ function update() {
         bullet.draw();
     }
 
+    // Déplacer et dessiner les power-ups
+    powerUps = powerUps.filter(powerUp => !powerUp.isCollected);
+    for (let powerUp of powerUps) {
+        powerUp.move();
+        powerUp.draw();
+    }
+
     // Détecter les collisions
     detectCollisions();
-    detectPlayerEnemyCollisions(); // Nouvelle fonction ajoutée
+    detectPlayerPowerUpCollisions();
+    detectPlayerEnemyCollisions();
 
     // Dessiner le joueur
     player.draw();
 
-    // Mettre à jour le score
+    // Afficher le score
     ctx.fillStyle = "white";
     ctx.font = "20px Arial";
-    ctx.fillText("Score: " + score, 10, 30);
-
-    // Vérifier la fin du jeu
-    if (player.health <= 0) {
-        gameRunning = false;
-        alert("Game Over!");
-    }
-
-    requestAnimationFrame(update);
+    ctx.fillText(`Score: ${score}`, 10, 20);
 }
 
-// Initialisation du joueur
-player = new Player();
-
-// Événements du clavier
-document.addEventListener('keydown', function (event) {
-    if (event.key === 'ArrowLeft') player.move('left');
-    if (event.key === 'ArrowRight') player.move('right');
-    if (event.key === 'ArrowUp') player.move('up');
-    if (event.key === 'ArrowDown') player.move('down');
-    if (event.key === 'j') player.shoot();
+// Écouter les événements de clavier
+document.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") player.move('left');
+    if (e.key === "ArrowRight") player.move('right');
+    if (e.key === "ArrowUp") player.move('up');
+    if (e.key === "ArrowDown") player.move('down');
+    if (e.key === " ") player.shoot();
 });
 
-// Démarrer le jeu
-update();
+// Initialiser le jeu
+player = new Player();
+setInterval(update, 1000 / 60); // 60 FPS
