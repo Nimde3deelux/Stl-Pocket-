@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pictogrammes - Traductions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .container {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pictogram-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 10px;
+            width: 200px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .pictogram-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .pictogram-card img {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        .pictogram-card h2 {
+            font-size: 1.2em;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .pictogram-card p {
+            font-size: 0.9em;
+            color: #666;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Liste des pictogrammes avec traductions</h1>
+        <p>Explorez les pictogrammes les plus utilisés et leur signification en français et en anglais.</p>
+    </header>
+
+    <div class="container">
+        <!-- Exemples de pictogrammes -->
+        <div class="pictogram-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Warning_icon.svg/512px-Warning_icon.svg.png" alt="Attention">
+            <h2>⚠ Attention</h2>
+            <p>Warning</p>
+        </div>
+
+        <div class="pictogram-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/No_smoking_symbol.svg/512px-No_smoking_symbol.svg.png" alt="Interdiction de fumer">
+            <h2>🚭 Interdiction de fumer</h2>
+            <p>No smoking</p>
+        </div>
+
+        <div class="pictogram-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Fire_extinguisher.svg/512px-Fire_extinguisher.svg.png" alt="Extincteur">
+            <h2>🔥 Extincteur</h2>
+            <p>Fire extinguisher</p>
+        </div>
+
+        <div class="pictogram-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Wheelchair_symbol.svg/512px-Wheelchair_symbol.svg.png" alt="Accès handicapé">
+            <h2>♿ Accès handicapé</h2>
+            <p>Accessible</p>
+        </div>
+
+        <div class="pictogram-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Recycling_symbol.svg/512px-Recycling_symbol.svg.png" alt="Recyclage">
+            <h2>♻ Recyclage</h2>
+            <p>Recycling</p>
+        </div>
+    </div>
+</body>
+</html>
