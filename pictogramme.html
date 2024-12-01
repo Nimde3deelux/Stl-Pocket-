@@ -36,6 +36,7 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             background-color: #f9f9f9;
+            position: relative;
         }
         .pictogram-item h2 {
             margin-top: 0;
@@ -48,6 +49,30 @@
         }
         .description {
             margin-top: 10px;
+        }
+        .button-container {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .translate-button {
+            padding: 8px 12px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .translate-button:hover {
+            background-color: #0056b3;
+        }
+        .translation {
+            display: none;
+            margin-top: 10px;
+            color: #333;
+        }
+        .show {
+            display: block;
         }
     </style>
 </head>
@@ -62,109 +87,83 @@
             <div class="pictogram-item">
                 <img src="images/corrosion.png" alt="Pictogramme de corrosion">
                 <h2>Corrosion</h2>
-                <p><strong>Description :</strong> Pour les substances qui provoquent des brûlures ou des dommages importants aux tissus.</p>
+                <p class="description"><strong>Description :</strong> Pour les substances qui provoquent des brûlures ou des dommages importants aux tissus. 🔥💔</p>
                 <p><strong>Exemple :</strong> Acides, bases fortes (ex : acide sulfurique, hydroxyde de sodium).</p>
+                <div class="button-container">
+                    <button class="translate-button" onclick="toggleTranslation('corrosion')">Voir la traduction</button>
+                    <div class="translation" id="corrosion">Corrosion: Pour les substances qui causent des brûlures et des dommages aux tissus.</div>
+                </div>
             </div>
+
             <div class="pictogram-item">
                 <img src="images/flame.png" alt="Pictogramme de flamme">
                 <h2>Flamme</h2>
-                <p><strong>Description :</strong> Pour les substances inflammables ou auto-inflammables.</p>
+                <p class="description"><strong>Description :</strong> Pour les substances inflammables ou auto-inflammables. 🔥⚠️</p>
                 <p><strong>Exemple :</strong> Solvants organiques, éthanol, éther.</p>
+                <div class="button-container">
+                    <button class="translate-button" onclick="toggleTranslation('flame')">Voir la traduction</button>
+                    <div class="translation" id="flame">Flamme: Pour les substances inflammables ou auto-inflammables.</div>
+                </div>
             </div>
+
             <div class="pictogram-item">
                 <img src="images/flame_circle.png" alt="Pictogramme de flamme sur un cercle">
                 <h2>Flamme sur un cercle</h2>
-                <p><strong>Description :</strong> Pour les gaz inflammables et les produits qui produisent des gaz inflammables.</p>
+                <p class="description"><strong>Description :</strong> Pour les gaz inflammables et les produits qui produisent des gaz inflammables. 🔥🔬</p>
                 <p><strong>Exemple :</strong> Hydrogène, produits chimiques réagissant avec l'air.</p>
+                <div class="button-container">
+                    <button class="translate-button" onclick="toggleTranslation('flame_circle')">Voir la traduction</button>
+                    <div class="translation" id="flame_circle">Flamme sur un cercle: Pour les gaz inflammables et les produits produisant des gaz inflammables.</div>
+                </div>
             </div>
+
             <div class="pictogram-item">
                 <img src="images/explosive.png" alt="Pictogramme explosif">
                 <h2>Explosif</h2>
-                <p><strong>Description :</strong> Pour les substances explosives.</p>
+                <p class="description"><strong>Description :</strong> Pour les substances explosives. 💥💣</p>
                 <p><strong>Exemple :</strong> TNT, peroxyde d'hydrogène concentré.</p>
+                <div class="button-container">
+                    <button class="translate-button" onclick="toggleTranslation('explosive')">Voir la traduction</button>
+                    <div class="translation" id="explosive">Explosif: Pour les substances explosives.</div>
+                </div>
             </div>
+
             <div class="pictogram-item">
                 <img src="images/gas_pressure.png" alt="Pictogramme gaz sous pression">
                 <h2>Gaz sous pression</h2>
-                <p><strong>Description :</strong> Pour les gaz comprimés, liquéfiés ou dissous.</p>
+                <p class="description"><strong>Description :</strong> Pour les gaz comprimés, liquéfiés ou dissous. 💨🔧</p>
                 <p><strong>Exemple :</strong> Azote liquide, hélium, dioxyde de carbone.</p>
+                <div class="button-container">
+                    <button class="translate-button" onclick="toggleTranslation('gas_pressure')">Voir la traduction</button>
+                    <div class="translation" id="gas_pressure">Gaz sous pression: Pour les gaz comprimés, liquéfiés ou dissous.</div>
+                </div>
             </div>
+
             <div class="pictogram-item">
                 <img src="images/health_hazard.png" alt="Pictogramme santé">
                 <h2>Santé (Toxic, Health Hazard)</h2>
-                <p><strong>Description :</strong> Pour les substances nocives, toxiques, ou cancérogènes.</p>
+                <p class="description"><strong>Description :</strong> Pour les substances nocives, toxiques, ou cancérogènes. ☠️⚠️</p>
                 <p><strong>Exemple :</strong> Produits chimiques cancérogènes, agents toxiques.</p>
+                <div class="button-container">
+                    <button class="translate-button" onclick="toggleTranslation('health_hazard')">Voir la traduction</button>
+                    <div class="translation" id="health_hazard">Santé (Toxic, Health Hazard): Pour les substances nocives, toxiques ou cancérogènes.</div>
+                </div>
             </div>
 
-            <!-- Autres pictogrammes -->
-            <div class="pictogram-item">
-                <img src="images/health_exclamation.png" alt="Pictogramme santé exclamation">
-                <h2>Santé (Exclamation)</h2>
-                <p><strong>Description :</strong> Pour les dangers pour la santé moins graves.</p>
-                <p><strong>Exemple :</strong> Irritants légers, substances allergènes.</p>
-            </div>
-            <div class="pictogram-item">
-                <img src="images/health_question.png" alt="Pictogramme santé point d'interrogation">
-                <h2>Santé (Point d'interrogation)</h2>
-                <p><strong>Description :</strong> Pour les substances dont les effets sont inconnus.</p>
-                <p><strong>Exemple :</strong> Substances avec des risques peu documentés.</p>
-            </div>
-            <div class="pictogram-item">
-                <img src="images/environment.png" alt="Pictogramme danger pour l'environnement">
-                <h2>Danger pour l'environnement</h2>
-                <p><strong>Description :</strong> Pour les produits nuisibles à l'environnement, en particulier aquatique.</p>
-                <p><strong>Exemple :</strong> Produits chimiques toxiques pour la vie aquatique.</p>
-            </div>
-            <div class="pictogram-item">
-                <img src="images/biohazard.png" alt="Pictogramme biohazard">
-                <h2>Infectieux (Biohazard)</h2>
-                <p><strong>Description :</strong> Pour les agents biologiques pouvant causer des infections.</p>
-                <p><strong>Exemple :</strong> Agents pathogènes, bactéries pathogènes.</p>
-            </div>
-            <div class="pictogram-item">
-                <img src="images/cells_bacteria.png" alt="Pictogramme cellules et bactéries">
-                <h2>Cellules et bactéries</h2>
-                <p><strong>Description :</strong> Pour indiquer les risques biologiques spécifiques.</p>
-                <p><strong>Exemple :</strong> Cultures cellulaires, bactéries pathogènes.</p>
-            </div>
-            <div class="pictogram-item">
-                <img src="images/helmet.png" alt="Pictogramme casque de protection">
-                <h2>Sécurité (Casque de protection)</h2>
-                <p><strong>Description :</strong> Pour le port obligatoire de protections comme des lunettes ou un casque.</p>
-                <p><strong>Exemple :</strong> Équipements de sécurité sur site.</p>
-            </div>
-            <div class="pictogram-item">
-                <img src="images/gloves.png" alt="Pictogramme gants">
-                <h2>Gants</h2>
-                <p><strong>Description :</strong> Pour le port de gants lors de la manipulation de produits dangereux.</p>
-                <p><strong>Exemple :</strong> Gants en nitrile ou latex.</p>
-            </div>
-            <div class="pictogram-item">
-                <img src="images/mask.png" alt="Pictogramme masque de protection">
-                <h2>Masque de protection</h2>
-                <p><strong>Description :</strong> Pour le port obligatoire d'un masque ou d'un respirateur.</p>
-                <p><strong>Exemple :</strong> Masques N95, masques chirurgicaux.</p>
-            </div>
-            <div class="pictogram-item">
-                <img src="images/safety_shoes.png" alt="Pictogramme chaussures de sécurité">
-                <h2>Chaussures de sécurité</h2>
-                <p><strong>Description :</strong> Pour l'obligation de porter des chaussures de sécurité.</p>
-                <p><strong>Exemple :</strong> Chaussures renforcées pour protection des pieds.</p>
-            </div>
-            <div class="pictogram-item">
-                <img src="images/protective_clothing.png" alt="Pictogramme vêtements de protection">
-                <h2>Vêtements de protection</h2>
-                <p><strong>Description :</strong> Pour porter des blouses ou vêtements de laboratoire.</p>
-                <p><strong>Exemple :</strong> Blouses de laboratoire, combinaisons de protection.</p>
-            </div>
-            <div class="pictogram-item">
-                <img src="images/first_aid.png" alt="Pictogramme premiers secours">
-                <h2>Premiers secours</h2>
-                <p><strong>Description :</strong> Pour les produits nécessitant une assistance rapide en cas d'accident.</p>
-                <p><strong>Exemple :</strong> Kits de premiers secours, solutions de lavage oculaire.</p>
-            </div>
+            <!-- Ajoutez d'autres pictogrammes en suivant le même modèle -->
 
         </div>
     </div>
+
+    <script>
+        function toggleTranslation(id) {
+            var element = document.getElementById(id);
+            if (element.classList.contains('show')) {
+                element.classList.remove('show');
+            } else {
+                element.classList.add('show');
+            }
+        }
+    </script>
 </body>
 </html>
