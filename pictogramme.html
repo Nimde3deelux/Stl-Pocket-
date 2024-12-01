@@ -3,101 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pictogrammes de sécurité</title>
+    <title>Pictogrammes de Sécurité en Biotechnologie</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 20px;
+            padding: 10px;
         }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 15px;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
         }
         .pictogram {
-            cursor: pointer;
-            transition: transform 0.2s;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            padding: 5px;
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
         }
-        .pictogram img {
-            max-width: 100%;
-            height: auto;
+        .pictogram-item {
+            flex: 1 1 45%;
+            margin: 10px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
         }
-        .pictogram:hover {
-            transform: scale(1.1);
+        .pictogram-item h2 {
+            margin-top: 0;
+            color: #555;
         }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border: 1px solid #ccc;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            z-index: 1000;
+        .pictogram-item img {
+            max-width: 100px;
+            display: block;
+            margin: 0 auto;
         }
-        .modal img {
-            max-width: 100%;
-            height: auto;
-        }
-        .modal h3 {
+        .description {
             margin-top: 10px;
-        }
-        .modal-close {
-            margin-top: 10px;
-            cursor: pointer;
-            color: red;
-            text-align: right;
         }
     </style>
 </head>
 <body>
-    <h1>Pictogrammes de sécurité en laboratoire de biotechnologie</h1>
-    <div class="grid-container">
-        <!-- Pictogrammes de sécurité -->
-        <!-- Ajoute les pictogrammes ici avec le chemin des images depuis le dossier 'images' -->
-        <div class="pictogram" onclick="showModal('icon1', 'Hand protection')">
-            <img src="images/icon1.png" alt="Protection des mains">
+    <div class="container">
+        <h1>Pictogrammes de Sécurité en Biotechnologie</h1>
+
+        <!-- Pictogramme 1 -->
+        <div class="pictogram">
+            <div class="pictogram-item">
+                <img src="corrosion.png" alt="Pictogramme de corrosion">
+                <h2>Corrosion</h2>
+                <p><strong>Description :</strong> Pour les substances qui provoquent des brûlures graves et des dommages aux tissus vivants, aux métaux et à d'autres matériaux.</p>
+                <p><strong>Exemple :</strong> Acides, bases fortes (ex : acide sulfurique, hydroxyde de sodium).</p>
+            </div>
+
+            <!-- Pictogramme 2 -->
+            <div class="pictogram-item">
+                <img src="flame.png" alt="Pictogramme de flamme">
+                <h2>Flamme</h2>
+                <p><strong>Description :</strong> Pour les substances qui s'enflamment facilement en présence de chaleur, de flamme ou de sources d'étincelles.</p>
+                <p><strong>Exemple :</strong> Solvants organiques, éthanol, éther.</p>
+            </div>
         </div>
-        <div class="pictogram" onclick="showModal('icon2', 'Eye protection')">
-            <img src="images/icon2.png" alt="Protection des yeux">
+
+        <!-- Pictogramme 3 -->
+        <div class="pictogram">
+            <div class="pictogram-item">
+                <img src="flame_circle.png" alt="Pictogramme de flamme sur un cercle">
+                <h2>Flamme sur un cercle</h2>
+                <p><strong>Description :</strong> Pour les gaz inflammables, les substances auto-inflammables ou celles qui peuvent produire un gaz inflammable au contact de l'air.</p>
+                <p><strong>Exemple :</strong> Hydrogène, produits chimiques qui réagissent spontanément avec l'air ou l'humidité.</p>
+            </div>
+
+            <!-- Pictogramme 4 -->
+            <div class="pictogram-item">
+                <img src="explosive.png" alt="Pictogramme explosif">
+                <h2>Explosif</h2>
+                <p><strong>Description :</strong> Pour les substances qui peuvent exploser sous l'effet de chaleur, de choc ou de friction.</p>
+                <p><strong>Exemple :</strong> TNT, peroxyde d'hydrogène concentré.</p>
+            </div>
         </div>
-        <div class="pictogram" onclick="showModal('icon3', 'No smoking')">
-            <img src="images/icon3.png" alt="Interdiction de fumer">
+
+        <!-- Pictogramme 5 -->
+        <div class="pictogram">
+            <div class="pictogram-item">
+                <img src="gas_pressure.png" alt="Pictogramme gaz sous pression">
+                <h2>Gaz sous pression</h2>
+                <p><strong>Description :</strong> Pour les gaz comprimés, liquéfiés, dissous ou réfrigérés qui peuvent causer des blessures en cas de fuite ou de rupture du conteneur.</p>
+                <p><strong>Exemple :</strong> Gaz de laboratoire comme l'azote liquide, l'hélium, le dioxyde de carbone.</p>
+            </div>
+
+            <!-- Pictogramme 6 -->
+            <div class="pictogram-item">
+                <img src="health_hazard.png" alt="Pictogramme santé">
+                <h2>Santé (Toxic, Health Hazard)</h2>
+                <p><strong>Description :</strong> Pour les substances qui peuvent causer des effets graves pour la santé comme des maladies, des lésions des organes, la reproduction, ou des effets carcinogènes.</p>
+                <p><strong>Exemple :</strong> Produits chimiques cancérogènes, agents toxiques.</p>
+            </div>
         </div>
-        <div class="pictogram" onclick="showModal('icon4', 'First aid kit')">
-            <img src="images/icon4.png" alt="Trousse de premiers secours">
-        </div>
-        <div class="pictogram" onclick="showModal('icon5', 'Warning')">
-            <img src="images/icon5.png" alt="Avertissement">
-        </div>
-        <div class="pictogram" onclick="showModal('icon6', 'Caution')">
-            <img src="images/icon6.png" alt="Prudence">
-        </div>
-        <!-- Ajoutez tous les pictogrammes de l'image ici en suivant ce modèle -->
+
+        <!-- Ajoutez plus de sections ici pour les autres pictogrammes -->
+
     </div>
-
-    <div class="modal" id="modal">
-        <div class="modal-close" onclick="closeModal()">X</div>
-        <img id="modal-image" src="" alt="Pictogramme agrandi">
-        <h3 id="modal-text"></h3>
-    </div>
-
-    <script>
-        function showModal(iconId, translation) {
-            document.getElementById('modal-image').src = document.querySelector(`#${iconId} img`).src;
-            document.getElementById('modal-text').innerText = translation;
-            document.getElementById('modal').style.display = 'block';
-        }
-
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-        }
-    </script>
 </body>
 </html>
