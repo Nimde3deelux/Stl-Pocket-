@@ -9,60 +9,62 @@
 <body>
 
     <!-- Page d'accueil -->
-    <div id="accueil">
-        <h1>STL Fight</h1>
-        <p>Bienvenue dans le jeu !</p>
-        <button id="startGame">Démarrer le Jeu</button>
-    </div>
+    <section id="accueil">
+        <header>
+            <h1>STL Fight</h1>
+            <p>Bienvenue dans le jeu !</p>
+        </header>
+        <button id="startGame" class="btn">Démarrer le Jeu</button>
+    </section>
 
     <!-- Zone de jeu -->
-    <div id="jeu" style="display:none;">
-        <div style="flex-grow: 1; display: flex; justify-content: center; align-items: center;">
+    <section id="jeu" style="display:none;">
+        <div class="game-container">
             <canvas id="gameCanvas" width="800" height="600"></canvas>
         </div>
 
         <!-- Description du jeu à droite -->
-        <div id="description">
+        <aside id="description">
             <h2>Histoire du Jeu</h2>
             <p>Vous êtes un scientifique 🧑‍🔬 qui doit protéger son laboratoire contre des virus 🦠, des bactéries 🦠 et des cellules cancéreuses 🧬. Votre mission est de défendre la science et de survivre dans un environnement de plus en plus hostile. Utilisez vos armes et vos compétences pour éliminer les menaces et sauver l'humanité ! 💪</p>
-        </div>
+        </aside>
 
         <!-- Guide des commandes -->
-        <div id="guide">
+        <aside id="guide">
             <h3>Commandes</h3>
             <ul>
                 <li><strong>Flèches directionnelles</strong> : Déplacer le joueur ↑↓←→</li>
                 <li><strong>Space</strong> : Tirer 💥</li>
                 <li><strong>Ctrl</strong> : Utiliser un pouvoir spécial ⚡</li>
             </ul>
-        </div>
+        </aside>
 
         <!-- Affichage de la difficulté -->
-        <div id="difficultyDisplay">
+        <section id="difficultyDisplay">
             <h4>Difficulté : <span id="difficultyLevel">1</span></h4>
-        </div>
+        </section>
 
         <!-- Affichage des objectifs secondaires -->
-        <div id="objectives">
+        <section id="objectives">
             <h4>Objectifs :</h4>
             <ul id="objectivesList">
                 <li>Survivre pendant 2 minutes.</li>
                 <li>Éliminer 10 ennemis.</li>
             </ul>
-        </div>
+        </section>
 
         <!-- Power-up zone -->
-        <div id="powerUpDisplay">
+        <section id="powerUpDisplay">
             <h4>Power-up actif : <span id="activePowerUp">Aucun</span></h4>
-        </div>
-    </div>
+        </section>
+    </section>
 
     <!-- Game Over -->
-    <div id="gameOver" style="display:none;">
+    <section id="gameOver" style="display:none;">
         <h2>Game Over</h2>
         <p id="score">Score: 0</p>
-        <button id="replay">Rejouer</button>
-    </div>
+        <button id="replay" class="btn">Rejouer</button>
+    </section>
 
     <script src="stlfight.js"></script>
     <script>
