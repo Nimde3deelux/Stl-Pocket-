@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Équipements de Sécurité en Biotechnologie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header img {
+            height: 50px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            margin: 0;
+            padding: 0;
+        }
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ff9f00;
+        }
+        .main-container {
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .introduction {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .introduction p {
+            font-size: 1.1rem;
+        }
+        .equipment-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .equipment-item {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .equipment-item img {
+            width: 100%;
+            height: auto;
+        }
+        .equipment-item h2 {
+            padding: 10px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .equipment-item p {
+            padding: 0 10px 10px;
+            color: #555;
+        }
+        .equipment-item:hover {
+            transform: translateY(-5px);
+        }
+        .faq {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .faq h2 {
+            margin-bottom: 10px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+        footer p {
+            margin: 0;
+        }
+        .emoji {
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/logo.png" alt="Logo du site" class="logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="pictogrammes.html">Pictogrammes</a></li>
+                <li><a href="equipement.html">Équipements</a></li>
+                <li><a href="creators.html">Créateurs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-container">
+        <h1>Équipements de Sécurité en Biotechnologie 🛡️</h1>
+        
+        <section class="introduction">
+            <p>Les équipements de sécurité sont essentiels pour protéger les chercheurs et garantir un environnement de travail sain et sécurisé en laboratoire. Découvrez les équipements de base qui assurent votre protection et la réussite de vos expériences. ⚠️</p>
+        </section>
+
+        <section class="equipment-list">
+            <div class="equipment-item">
+                <img src="images/lunettes_protection.jpg" alt="Lunettes de protection">
+                <h2>Lunettes de Protection 👓</h2>
+                <p>Protégez vos yeux des éclaboussures et des particules avec des lunettes adaptées.</p>
+            </div>
+            <div class="equipment-item">
+                <img src="images/gants_lab.jpg" alt="Gants de laboratoire">
+                <h2>Gants de Laboratoire 🧤</h2>
+                <p>Choisissez le bon matériau (latex, nitrile, etc.) pour éviter le contact avec des substances dangereuses.</p>
+            </div>
+            <div class="equipment-item">
+                <img src="images/blouse_lab.jpg" alt="Blouse de laboratoire">
+                <h2>Blouse de Laboratoire 👕</h2>
+                <p>Une protection indispensable contre les produits chimiques et les contaminants.</p>
+            </div>
+            <div class="equipment-item">
+                <img src="images/masque_protection.jpg" alt="Masque de protection">
+                <h2>Masque de Protection 😷</h2>
+                <p>Pour éviter l'inhalation de particules dangereuses lors des manipulations.</p>
+            </div>
+            <div class="equipment-item">
+                <img src="images/hotte_flux.jpg" alt="Hotte à flux laminaire">
+                <h2>Hotte à Flux Laminaire 🔬</h2>
+                <p>Utilisée pour les travaux nécessitant un contrôle strict des flux d'air et des particules.</p>
+            </div>
+            <div class="equipment-item">
+                <img src="images/pipettes.jpg" alt="Pipettes">
+                <h2>Pipettes 💧</h2>
+                <p>Pour des prélèvements précis et des doses exactes dans les expériences.</p>
+            </div>
+        </section>
+
+        <section class="faq">
+            <h2>Questions Fréquemment Posées ❓</h2>
+            <p><strong>Q:</strong> Comment choisir des gants adaptés aux produits chimiques ?</p>
+            <p><strong>R:</strong> Optez pour des gants en nitrile pour une bonne résistance chimique et un confort optimal.</p>
+            <p><strong>Q:</strong> Pourquoi est-il important de porter des lunettes de protection ?</p>
+            <p><strong>R:</strong> Elles protègent vos yeux des éclaboussures de produits chimiques et des particules en suspension.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Pictogrammes Biotech. Tous droits réservés. 🌱</p>
+    </footer>
+</body>
+</html>
