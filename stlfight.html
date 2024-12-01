@@ -19,25 +19,28 @@
 
     <!-- Zone de jeu -->
     <section id="jeu" style="display:none;">
-        <div class="game-container">
-            <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <!-- Conteneur principal de la zone de jeu -->
+        <div class="game-wrapper">
+            <div class="game-container">
+                <canvas id="gameCanvas" width="800" height="600"></canvas>
+            </div>
+
+            <!-- Description du jeu à droite -->
+            <aside id="description">
+                <h2>Histoire du Jeu</h2>
+                <p>Vous êtes un scientifique 🧑‍🔬 qui doit protéger son laboratoire contre des virus 🦠, des bactéries 🦠 et des cellules cancéreuses 🧬. Votre mission est de défendre la science et de survivre dans un environnement de plus en plus hostile. Utilisez vos armes et vos compétences pour éliminer les menaces et sauver l'humanité ! 💪</p>
+            </aside>
+
+            <!-- Guide des commandes -->
+            <aside id="guide">
+                <h3>Commandes</h3>
+                <ul>
+                    <li><strong>Flèches directionnelles</strong> : Déplacer le joueur ↑↓←→</li>
+                    <li><strong>Space</strong> : Tirer 💥</li>
+                    <li><strong>Ctrl</strong> : Utiliser un pouvoir spécial ⚡</li>
+                </ul>
+            </aside>
         </div>
-
-        <!-- Description du jeu à droite -->
-        <aside id="description">
-            <h2>Histoire du Jeu</h2>
-            <p>Vous êtes un scientifique 🧑‍🔬 qui doit protéger son laboratoire contre des virus 🦠, des bactéries 🦠 et des cellules cancéreuses 🧬. Votre mission est de défendre la science et de survivre dans un environnement de plus en plus hostile. Utilisez vos armes et vos compétences pour éliminer les menaces et sauver l'humanité ! 💪</p>
-        </aside>
-
-        <!-- Guide des commandes -->
-        <aside id="guide">
-            <h3>Commandes</h3>
-            <ul>
-                <li><strong>Flèches directionnelles</strong> : Déplacer le joueur ↑↓←→</li>
-                <li><strong>Space</strong> : Tirer 💥</li>
-                <li><strong>Ctrl</strong> : Utiliser un pouvoir spécial ⚡</li>
-            </ul>
-        </aside>
 
         <!-- Affichage de la difficulté -->
         <section id="difficultyDisplay">
