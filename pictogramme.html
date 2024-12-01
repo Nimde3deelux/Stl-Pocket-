@@ -3,107 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pictogrammes - Traductions</title>
+    <title>Pictogrammes de sécurité</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-
-        header {
             text-align: center;
-            background-color: #333;
-            color: #fff;
             padding: 20px;
         }
-
-        header h1 {
-            margin: 0;
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
         }
-
-        .container {
-            padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .pictogram-card {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin: 10px;
-            width: 200px;
+        .pictogram {
+            cursor: pointer;
+            transition: transform 0.2s;
+            border: 2px solid #ddd;
+            border-radius: 10px;
             padding: 10px;
-            text-align: center;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-
-        .pictogram-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2);
+        .pictogram:hover {
+            transform: scale(1.1);
         }
-
-        .pictogram-card img {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 10px;
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
         }
-
-        .pictogram-card h2 {
-            font-size: 1.2em;
-            color: #333;
-            margin: 5px 0;
+        .modal img {
+            max-width: 100%;
+            height: auto;
         }
-
-        .pictogram-card p {
-            font-size: 0.9em;
-            color: #666;
-            margin: 5px 0;
+        .modal h3 {
+            margin-top: 10px;
+        }
+        .modal-close {
+            margin-top: 10px;
+            cursor: pointer;
+            color: red;
+            text-align: right;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Liste des pictogrammes avec traductions</h1>
-        <p>Explorez les pictogrammes les plus utilisés et leur signification en français et en anglais.</p>
-    </header>
-
-    <div class="container">
-        <!-- Exemples de pictogrammes -->
-        <div class="pictogram-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Warning_icon.svg/512px-Warning_icon.svg.png" alt="Attention">
-            <h2>⚠ Attention</h2>
-            <p>Warning</p>
+    <h1>Pictogrammes de sécurité en laboratoire de biotechnologie</h1>
+    <div class="grid-container">
+        <!-- Exemple de pictogramme -->
+        <div class="pictogram" onclick="showModal('pictogram1', 'Hand protection')">
+            <img src="path/to/your/icon1.png" alt="Protection des mains" width="100">
         </div>
-
-        <div class="pictogram-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/No_smoking_symbol.svg/512px-No_smoking_symbol.svg.png" alt="Interdiction de fumer">
-            <h2>🚭 Interdiction de fumer</h2>
-            <p>No smoking</p>
+        <div class="pictogram" onclick="showModal('pictogram2', 'Eye protection')">
+            <img src="path/to/your/icon2.png" alt="Protection des yeux" width="100">
         </div>
-
-        <div class="pictogram-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Fire_extinguisher.svg/512px-Fire_extinguisher.svg.png" alt="Extincteur">
-            <h2>🔥 Extincteur</h2>
-            <p>Fire extinguisher</p>
-        </div>
-
-        <div class="pictogram-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Wheelchair_symbol.svg/512px-Wheelchair_symbol.svg.png" alt="Accès handicapé">
-            <h2>♿ Accès handicapé</h2>
-            <p>Accessible</p>
-        </div>
-
-        <div class="pictogram-card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Recycling_symbol.svg/512px-Recycling_symbol.svg.png" alt="Recyclage">
-            <h2>♻ Recyclage</h2>
-            <p>Recycling</p>
-        </div>
+        <!-- Ajoute plus de pictogrammes ici -->
     </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-close" onclick="closeModal()">X</div>
+        <img id="modal-image" src="" alt="Pictogramme agrandi">
+        <h3 id="modal-text"></h3>
+    </div>
+
+    <script>
+        function showModal(iconId, translation) {
+            document.getElementById('modal-image').src = document.querySelector(`#${iconId} img`).src;
+            document.getElementById('modal-text').innerText = translation;
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
