@@ -12,15 +12,19 @@
         }
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
         }
         .pictogram {
             cursor: pointer;
             transition: transform 0.2s;
             border: 2px solid #ddd;
             border-radius: 10px;
-            padding: 10px;
+            padding: 5px;
+        }
+        .pictogram img {
+            max-width: 100%;
+            height: auto;
         }
         .pictogram:hover {
             transform: scale(1.1);
@@ -55,14 +59,27 @@
 <body>
     <h1>Pictogrammes de sécurité en laboratoire de biotechnologie</h1>
     <div class="grid-container">
-        <!-- Exemple de pictogramme -->
-        <div class="pictogram" onclick="showModal('pictogram1', 'Hand protection')">
-            <img src="path/to/your/icon1.png" alt="Protection des mains" width="100">
+        <!-- Pictogrammes de sécurité -->
+        <!-- Ajoute les pictogrammes ici avec le chemin des images depuis le dossier 'images' -->
+        <div class="pictogram" onclick="showModal('icon1', 'Hand protection')">
+            <img src="images/icon1.png" alt="Protection des mains">
         </div>
-        <div class="pictogram" onclick="showModal('pictogram2', 'Eye protection')">
-            <img src="path/to/your/icon2.png" alt="Protection des yeux" width="100">
+        <div class="pictogram" onclick="showModal('icon2', 'Eye protection')">
+            <img src="images/icon2.png" alt="Protection des yeux">
         </div>
-        <!-- Ajoute plus de pictogrammes ici -->
+        <div class="pictogram" onclick="showModal('icon3', 'No smoking')">
+            <img src="images/icon3.png" alt="Interdiction de fumer">
+        </div>
+        <div class="pictogram" onclick="showModal('icon4', 'First aid kit')">
+            <img src="images/icon4.png" alt="Trousse de premiers secours">
+        </div>
+        <div class="pictogram" onclick="showModal('icon5', 'Warning')">
+            <img src="images/icon5.png" alt="Avertissement">
+        </div>
+        <div class="pictogram" onclick="showModal('icon6', 'Caution')">
+            <img src="images/icon6.png" alt="Prudence">
+        </div>
+        <!-- Ajoutez tous les pictogrammes de l'image ici en suivant ce modèle -->
     </div>
 
     <div class="modal" id="modal">
