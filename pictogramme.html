@@ -9,12 +9,33 @@
             font-family: Arial, sans-serif;
             line-height: 1.6;
             background-color: #f4f4f4;
-            margin: 20px;
-            padding: 10px;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .navbar img {
+            height: 40px;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 16px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
         }
         .container {
             max-width: 1000px;
-            margin: 0 auto;
+            margin: 20px auto;
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
@@ -77,6 +98,16 @@
     </style>
 </head>
 <body>
+    <!-- Barre de navigation -->
+    <div class="navbar">
+        <img src="logo.png" alt="Logo du site">
+        <div>
+            <a href="index.html">Accueil</a>
+            <a href="lab.html">Laboratoire</a>
+            <a href="creators.html">Créateurs</a>
+        </div>
+    </div>
+
     <div class="container">
         <h1>Pictogrammes de Sécurité en Biotechnologie</h1>
 
