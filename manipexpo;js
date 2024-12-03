@@ -13,7 +13,7 @@ function turnPage(direction) {
             next.style.transform = "rotateY(0deg)";
         } else {
             current.style.transform = "rotateY(0deg)";
-            next.style.transform = "rotateY(180deg)";
+            next.style.transform = "rotateY(-180deg)";
         }
 
         currentPage = nextPage;
