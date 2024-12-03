@@ -7,20 +7,30 @@
     <link rel="stylesheet" href="manipexpo.css">
 </head>
 <body>
-    <header>
-        <h1>ManipExpo</h1>
-    </header>
-    <main>
-        <section id="microbiology" onmouseover="highlight('microbiology')" onmouseout="reset('microbiology')" onclick="navigateTo('microbiology.html')">
-            <h2>Microbiologie</h2>
-        </section>
-        <section id="spectrophotometry" onmouseover="highlight('spectrophotometry')" onmouseout="reset('spectrophotometry')" onclick="navigateTo('spectrophotometry.html')">
-            <h2>Spectro Photométrie</h2>
-        </section>
-        <section id="volumetry" onmouseover="highlight('volumetry')" onmouseout="reset('volumetry')" onclick="navigateTo('volumetry.html')">
-            <h2>Volumétrie</h2>
-        </section>
-    </main>
+    <div class="book">
+        <div class="page" id="page1">
+            <div class="content">
+                <h2>Microbiologie</h2>
+                <p>Découvrez les différentes expériences et techniques en microbiologie.</p>
+            </div>
+        </div>
+        <div class="page" id="page2">
+            <div class="content">
+                <h2>Spectro Photométrie</h2>
+                <p>Explorez les méthodes et applications de la spectro photométrie.</p>
+            </div>
+        </div>
+        <div class="page" id="page3">
+            <div class="content">
+                <h2>Volumétrie</h2>
+                <p>Apprenez les bases et les techniques avancées de volumétrie.</p>
+            </div>
+        </div>
+    </div>
+    <div class="controls">
+        <button id="prevBtn" onclick="turnPage(-1)">◀ Précédent</button>
+        <button id="nextBtn" onclick="turnPage(1)">Suivant ▶</button>
+    </div>
     <script src="manipexpo.js"></script>
 </body>
 </html>
