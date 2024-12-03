@@ -1,2 +1,4 @@
-// Message de bienvenue dans la console
-console.log("Bienvenue sur la page des exercices de STL Pocket !");
+// Fonction pour gérer le clic sur un des rectangles
+function handleClick(subject, type) {
+    console.log(`Clique sur ${type} de la matière ${subject}`);
+}
