@@ -4,10 +4,10 @@ function navigateTo(page) {
 
 function highlight(id) {
     const section = document.getElementById(id);
-    section.style.transform = "scale(1.3) translateY(-10px)";
+    section.style.zIndex = 10; // Apporte la carte au premier plan
 }
 
 function reset(id) {
     const section = document.getElementById(id);
-    section.style.transform = "scale(1) translateY(0)";
+    section.style.zIndex = 1; // Remet la carte à sa position originale
 }
