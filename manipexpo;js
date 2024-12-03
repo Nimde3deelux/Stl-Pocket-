@@ -1,3 +1,29 @@
-function navigateTo(page) {
-    window.location.href = page;
+let currentPage = 1;
+
+function turnPage(direction) {
+    const totalPages = 3;
+    const current = document.getElementById(`page${currentPage}`);
+    const nextPage = currentPage + direction;
+
+    if (nextPage > 0 && nextPage <= totalPages) {
+        const next = document.getElementById(`page${nextPage}`);
+
+        if (direction === 1) {
+            current.style.transform = "rotateY(-180deg)";
+            next.style.transform = "rotateY(0deg)";
+        } else {
+            current.style.transform = "rotateY(0deg)";
+            next.style.transform = "rotateY(180deg)";
+        }
+
+        currentPage = nextPage;
+        updateButtons();
+    }
 }
+
+function updateButtons() {
+    document.getElementById("prevBtn").classList.toggle("hidden", currentPage === 1);
+    document.getElementById("nextBtn").classList.toggle("hidden", currentPage === 3);
+}
+
+updateButtons();
