@@ -20,19 +20,31 @@ main {
     display: flex;
     justify-content: space-around;
     margin: 2rem;
+    perspective: 1000px;
 }
 
 section {
     width: 30%;
-    padding: 2rem;
+    height: 200px;
     background-color: #6c757d;
     color: white;
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: transform 0.3s, background-color 0.3s;
+    position: relative;
+    transition: transform 0.5s ease, background-color 0.3s ease;
+}
+
+section h2 {
+    margin: 0;
+    transform: translateZ(20px);
 }
 
 section:hover {
-    transform: scale(1.05);
+    transform: scale(1.2) rotateY(15deg);
     background-color: #495057;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
