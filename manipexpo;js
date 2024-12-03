@@ -2,10 +2,10 @@ let currentPage = 1;
 
 function turnPage(direction) {
     const totalPages = 3;
-    const current = document.getElementById(`page${currentPage}`);
-    const nextPage = currentPage + direction;
 
-    if (nextPage > 0 && nextPage <= totalPages) {
+    if ((direction === -1 && currentPage > 1) || (direction === 1 && currentPage < totalPages)) {
+        const current = document.getElementById(`page${currentPage}`);
+        const nextPage = currentPage + direction;
         const next = document.getElementById(`page${nextPage}`);
 
         if (direction === 1) {
