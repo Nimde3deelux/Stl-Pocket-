@@ -31,3 +31,32 @@ document.addEventListener("DOMContentLoaded", () => {
         updateChapterVisibility();
     });
 });
+
+function showInventory(subject, type) {
+    const inventoryId = `inventory-${subject}`;
+    const inventoryDiv = document.getElementById(inventoryId);
+    const fileType = type === 'exercices' ? 'exochap' : type === 'corriges' ? 'corrchap' : 'contchap';
+    let content = `<h3>${type.charAt(0).toUpperCase() + type.slice(1)} disponibles :</h3>
+                   <div class="chapter-list">`;
+
+    // Générer 10 fichiers PDF organisés en chapitres
+    for (let chapter = 1; chapter <= 10; chapter++) {
+        content += `<div class="chapter">
+                        <h4>Chapitre ${chapter}</h4>
+                        <ul>`;
+        for (let i = 1; i <= 10; i++) {
+            const fileName = `${fileType}${i}${subject.replace(/-/g, '')}.pdf`;
+            content += `<li><a href="pdfs/${fileName}" target="_blank">${fileName}</a></li>`;
+        }
+        content += `</ul>
+                    </div>`;
+    }
+    content += `</div>
+                <div class="navigation-arrows">
+                    <button class="prev">Précédent</button>
+                    <button class="next">Suivant</button>
+                </div>`;
+
+    inventoryDiv.innerHTML = content;
+    inventoryDiv.style.display = 'block';
+}
