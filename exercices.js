@@ -1,16 +1,33 @@
-function showInventory(subject, type) {
-    const inventoryId = `inventory-${subject}`;
-    const inventoryDiv = document.getElementById(inventoryId);
-    const fileType = type === 'exercices' ? 'exochap' : type === 'corriges' ? 'corrchap' : 'contchap';
-    let content = `<h3>${type.charAt(0).toUpperCase() + type.slice(1)} disponibles :</h3><ul>`;
-    
-    // Générer 10 fichiers PDF pour chaque type
-    for (let i = 1; i <= 10; i++) {
-        const fileName = `${fileType}${i}${subject.replace(/-/g, '')}.pdf`;
-        content += `<li><a href="pdfs/${fileName}" target="_blank">${fileName}</a></li>`;
-    }
-    content += '</ul>';
+document.addEventListener("DOMContentLoaded", () => {
+    const inventories = document.querySelectorAll(".inventory");
+    inventories.forEach((inventory) => {
+        let currentChapter = 1;
+        const chapterList = inventory.querySelector(".chapter-list");
+        const chapters = chapterList.querySelectorAll(".chapter");
+        const prevButton = inventory.querySelector(".prev");
+        const nextButton = inventory.querySelector(".next");
 
-    inventoryDiv.innerHTML = content;
-    inventoryDiv.style.display = 'block';
-}
+        const updateChapterVisibility = () => {
+            chapters.forEach((chapter, index) => {
+                chapter.style.display = index === currentChapter - 1 ? "block" : "none";
+            });
+        };
+
+        prevButton.addEventListener("click", () => {
+            if (currentChapter > 1) {
+                currentChapter--;
+                updateChapterVisibility();
+            }
+        });
+
+        nextButton.addEventListener("click", () => {
+            if (currentChapter < chapters.length) {
+                currentChapter++;
+                updateChapterVisibility();
+            }
+        });
+
+        // Initial display
+        updateChapterVisibility();
+    });
+});
