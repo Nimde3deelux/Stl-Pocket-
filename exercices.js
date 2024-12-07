@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // Initial display
+        // Initial display: afficher le premier chapitre
         updateChapterVisibility();
     });
 });
@@ -39,9 +39,9 @@ function showInventory(subject, type) {
     let content = `<h3>${type.charAt(0).toUpperCase() + type.slice(1)} disponibles :</h3>
                    <div class="chapter-list">`;
 
-    // Générer 10 fichiers PDF organisés en chapitres
+    // Générer 10 chapitres avec les fichiers PDF
     for (let chapter = 1; chapter <= 10; chapter++) {
-        content += `<div class="chapter">
+        content += `<div class="chapter" style="display: ${chapter === 1 ? 'block' : 'none'}">
                         <h4>Chapitre ${chapter}</h4>
                         <ul>`;
         for (let i = 1; i <= 10; i++) {
