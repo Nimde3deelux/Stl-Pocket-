@@ -1,21 +1,23 @@
 /* Style général */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+    background: linear-gradient(120deg, #d6e6f2, #f6f8fa);
     color: #333;
 }
 
 header {
-    background-color: #3f51b5;
-    color: white;
+    background-color: #2c3e50;
+    color: #ecf0f1;
     padding: 20px;
     text-align: center;
 }
 
 header h1 {
     margin: 0;
+    font-size: 2.5em;
+    letter-spacing: 1px;
 }
 
 nav ul {
@@ -23,7 +25,7 @@ nav ul {
     justify-content: center;
     list-style: none;
     padding: 0;
-    margin: 10px 0 0 0;
+    margin: 10px 0;
 }
 
 nav ul li {
@@ -31,13 +33,14 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white;
+    color: #ecf0f1;
     text-decoration: none;
     font-weight: bold;
+    transition: color 0.3s;
 }
 
 nav ul li a:hover {
-    text-decoration: underline;
+    color: #1abc9c;
 }
 
 main {
@@ -46,77 +49,123 @@ main {
 
 /* Style des sections */
 .subject {
-    background-color: white;
-    border: 2px solid #3f51b5;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #2c3e50;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 25px;
+    padding: 20px;
+    transition: transform 0.3s;
+}
+
+.subject:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 
 .subject h2 {
-    color: #3f51b5;
+    color: #2c3e50;
+    font-size: 1.8em;
 }
 
 /* Style des boîtes d'exercices */
 .exercises-container {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     margin-top: 15px;
 }
 
 .exercise-box {
     flex: 1;
-    background-color: #e3f2fd;
-    border: 2px solid #3f51b5;
-    border-radius: 8px;
-    padding: 15px;
+    background-color: #e8f8f5;
+    border: 1px solid #1abc9c;
+    border-radius: 10px;
+    padding: 20px;
     text-align: center;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease-in-out;
 }
 
 .exercise-box:hover {
-    background-color: #bbdefb;
+    background-color: #1abc9c;
+    color: white;
 }
 
 /* Style de l'inventaire */
 .inventory {
-    display: none;
-    margin: 20px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #bdc3c7;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .inventory h3 {
-    margin-bottom: 10px;
-    color: #3f51b5;
-    font-size: 1.2em;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    font-size: 1.5em;
 }
 
 .inventory ul {
     list-style-type: none;
     padding: 0;
+    text-align: left;
+    width: 100%;
 }
 
 .inventory ul li {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #dcdde1;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.inventory ul li:hover {
+    background-color: #dcdde1;
 }
 
 .inventory ul li a {
     text-decoration: none;
-    color: #007BFF;
+    color: #2c3e50;
     font-weight: bold;
 }
 
 .inventory ul li a:hover {
-    text-decoration: underline;
+    color: #3498db;
 }
 
-/* Pied de page */
+/* Chronologie avec flèches */
+.navigation-arrows {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.navigation-arrows button {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+.navigation-arrows button:hover {
+    background-color: #16a085;
+}
+
 footer {
-    background-color: #3f51b5;
+    background-color: #2c3e50;
     color: white;
     text-align: center;
     padding: 10px 0;
