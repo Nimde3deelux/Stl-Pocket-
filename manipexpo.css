@@ -72,6 +72,12 @@ body {
     perspective: 2000px;
     transform-style: preserve-3d;
     flex-direction: row; /* Assurez-vous que les cartes sont affichées horizontalement */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    height: 100vh; /* Assure que la hauteur de la fenêtre est prise en compte pour le centrage vertical */
+    width: 100%; /* Prendre toute la largeur de la fenêtre */
+}
+
 }
 
 /* Card Styles */
