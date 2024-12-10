@@ -7,29 +7,20 @@
     <link rel="stylesheet" href="manipexpo.css">
 </head>
 <body>
-    <div class="book">
-        <div class="page" id="page1">
-            <div class="content">
-                <h1>Microbiologie</h1>
-                <p>Découvrez les expériences fascinantes en microbiologie.</p>
-            </div>
+    <div class="container">
+        <div class="card" id="microbiology" onclick="expandCard('Microbiologie')">
+            <h2>Microbiologie</h2>
         </div>
-        <div class="page" id="page2">
-            <div class="content">
-                <h1>Spectro Photométrie</h1>
-                <p>Explorez les mystères de la lumière et de la matière.</p>
-            </div>
+        <div class="card" id="spectroscopy" onclick="expandCard('Spectro Photométrie')">
+            <h2>Spectro Photométrie</h2>
         </div>
-        <div class="page" id="page3">
-            <div class="content">
-                <h1>Volumétrie</h1>
-                <p>Apprenez les bases et techniques avancées en volumétrie.</p>
-            </div>
+        <div class="card" id="volumetry" onclick="expandCard('Volumétrie')">
+            <h2>Volumétrie</h2>
         </div>
     </div>
-    <div class="controls">
-        <button id="prevBtn" onclick="turnPage(-1)">◀ Précédent</button>
-        <button id="nextBtn" onclick="turnPage(1)">Suivant ▶</button>
+    <div class="expanded-card" id="expandedCard">
+        <button id="closeBtn" onclick="closeCard()">✖</button>
+        <div class="content" id="expandedContent"></div>
     </div>
     <script src="manipexpo.js"></script>
 </body>
