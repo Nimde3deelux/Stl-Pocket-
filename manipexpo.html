@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ManipExpo</title>
+    <!-- Lien vers le fichier CSS -->
     <link rel="stylesheet" href="manipexpo.css">
 </head>
 <body>
+    <!-- Conteneur principal des cartes -->
     <div class="container">
         <div class="card" id="microbiology" data-url="microbiologie.html">
             <h2>Microbiologie</h2>
@@ -22,31 +24,7 @@
         </div>
     </div>
 
-    <script>
-        // Ajout de gestionnaires d'événements pour chaque carte
-        document.querySelectorAll('.card').forEach(card => {
-            // Survol : animation vers 2D
-            card.addEventListener('mouseenter', () => {
-                card.style.transition = 'transform 0.8s ease, box-shadow 0.5s ease';
-                card.style.transform = 'translateZ(300px) rotateY(0) rotateX(0) scale(1.5)';
-                card.style.zIndex = '10';
-            });
-
-            // Sortie : retour à la position 3D d'origine
-            card.addEventListener('mouseleave', () => {
-                card.style.transition = 'transform 0.8s ease';
-                card.style.transform = 'rotateY(45deg) rotateX(15deg)';
-                card.style.zIndex = '1';
-            });
-
-            // Clic : navigation vers la page associée
-            card.addEventListener('click', () => {
-                const url = card.getAttribute('data-url'); // Récupération de l'URL dans l'attribut "data-url"
-                if (url) {
-                    window.location.href = url; // Redirection vers la page
-                }
-            });
-        });
-    </script>
+    <!-- Lien vers le fichier JS -->
+    <script src="manipexpo.js"></script>
 </body>
 </html>
