@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
             nextButton.textContent = "Chapitre suivant";
 
             prevButton.addEventListener("click", () => {
-                if (currentChapter > 1) { // Permet de naviguer en arrière jusqu'au chapitre 1
+                if (currentChapter > 1) {
                     currentChapter--;
                     updateChapterVisibility();
                 }
@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
+            // Initialiser la visibilité des chapitres au chargement de la page
             updateChapterVisibility();
         });
     });
@@ -51,7 +52,7 @@ function showInventory(subject, type) {
                             <h4>${category.charAt(0).toUpperCase() + category.slice(1)}</h4>
                             <div class="chapter-list-${category}">`;
 
-            // Affiche les chapitres de 1 à 10
+            // Affiche les chapitres de 1 à 10 avec la même structure
             for (let chapter = 1; chapter <= 10; chapter++) {
                 content += `<div class="chapter-${category}" style="display: ${chapter === 1 ? 'block' : 'none'}">
                                 <h5>Chapitre ${chapter}</h5>
