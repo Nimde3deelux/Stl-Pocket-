@@ -9,7 +9,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('https://github.com/ton-utilisateur/ton-repository/blob/main/images/waves.png?raw=true');
+    background-image: url('https://github.com/ton-utilisateur/ton-repository/blob/main/images/wave.png?raw=true');
     background-size: cover; /* Redimensionne l'image pour qu'elle couvre toute la page */
     background-position: center;
     background-repeat: no-repeat; /* Evite la répétition de l'image */
