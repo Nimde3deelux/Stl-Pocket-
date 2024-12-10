@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const updateChapterVisibility = () => {
                 chapters.forEach((chapter, index) => {
-                    chapter.style.display = index === currentChapter - 1 ? "block" : "none";
+                    chapter.style.display = index + 1 === currentChapter ? "block" : "none";
                 });
             };
 
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
             nextButton.textContent = "Chapitre suivant";
 
             prevButton.addEventListener("click", () => {
-                if (currentChapter > 1) {
+                if (currentChapter > 2) { // Assurez-vous de commencer à partir du chapitre 2
                     currentChapter--;
                     updateChapterVisibility();
                 }
@@ -51,8 +51,8 @@ function showInventory(subject, type) {
                             <h4>${category.charAt(0).toUpperCase() + category.slice(1)}</h4>
                             <div class="chapter-list-${category}">`;
 
-            for (let chapter = 1; chapter <= 10; chapter++) {
-                content += `<div class="chapter-${category}" style="display: ${chapter === 1 ? 'block' : 'none'}">
+            for (let chapter = 2; chapter <= 10; chapter++) { // Commencer à partir du chapitre 2
+                content += `<div class="chapter-${category}" style="display: ${chapter === 2 ? 'block' : 'none'}">
                                 <h5>Chapitre ${chapter}</h5>
                                 <ul>`;
                 for (let i = 1; i <= 10; i++) {
