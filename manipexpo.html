@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="manipexpo.css">
 </head>
 <body>
-    <div class="ocean-background"></div>
     <div class="container">
         <div class="card" id="microbiology" data-url="microbiologie.html">
             <h2>Microbiologie</h2>
@@ -23,16 +22,31 @@
         </div>
     </div>
 
-    <!-- Button to scroll back to the top -->
-    <button id="scrollToTop" class="scroll-btn">Back to Top</button>
+    <script>
+        // Ajout de gestionnaires d'événements pour chaque carte
+        document.querySelectorAll('.card').forEach(card => {
+            // Survol : animation vers 2D
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'transform 0.8s ease, box-shadow 0.5s ease';
+                card.style.transform = 'translateZ(300px) rotateY(0) rotateX(0) scale(1.5)';
+                card.style.zIndex = '10';
+            });
 
-    <!-- Social media sharing buttons -->
-    <div class="social-buttons">
-        <button class="social-btn" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + window.location.href, '_blank')">Facebook</button>
-        <button class="social-btn" onclick="window.open('https://twitter.com/intent/tweet?url=' + window.location.href, '_blank')">Twitter</button>
-        <button class="social-btn" onclick="window.open('https://www.linkedin.com/shareArticle?mini=true&url=' + window.location.href, '_blank')">LinkedIn</button>
-    </div>
+            // Sortie : retour à la position 3D d'origine
+            card.addEventListener('mouseleave', () => {
+                card.style.transition = 'transform 0.8s ease';
+                card.style.transform = 'rotateY(45deg) rotateX(15deg)';
+                card.style.zIndex = '1';
+            });
 
-    <script src="manipexpo.js"></script>
+            // Clic : navigation vers la page associée
+            card.addEventListener('click', () => {
+                const url = card.getAttribute('data-url'); // Récupération de l'URL dans l'attribut "data-url"
+                if (url) {
+                    window.location.href = url; // Redirection vers la page
+                }
+            });
+        });
+    </script>
 </body>
 </html>
