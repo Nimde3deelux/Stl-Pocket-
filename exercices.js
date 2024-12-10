@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const inventories = document.querySelectorAll(".inventory");
     inventories.forEach((inventory) => {
-        // Initialisation pour chaque catégorie d'inventaire
         const categories = ['exercices', 'corriges', 'controles'];
         categories.forEach((type) => {
             let currentChapter = 1;
@@ -30,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            // Initial display: afficher le premier chapitre pour cette catégorie
             updateChapterVisibility();
         });
     });
@@ -43,21 +41,20 @@ function showInventory(subject, type) {
 
     let content = `<h3>${subject.replace(/-/g, ' ')} : Inventaire</h3>`;
 
-    // Générer des listes pour chaque catégorie
     categories.forEach((type) => {
         const fileType = type === 'exercices' ? 'exochap' : type === 'corriges' ? 'corrchap' : 'contchap';
         content += `<div class="category">
                         <h4>${type.charAt(0).toUpperCase() + type.slice(1)}</h4>
                         <div class="chapter-list-${type}">`;
 
-        // Générer 10 chapitres
         for (let chapter = 1; chapter <= 10; chapter++) {
             content += `<div class="chapter-${type}" style="display: ${chapter === 1 ? 'block' : 'none'}">
                             <h5>Chapitre ${chapter}</h5>
                             <ul>`;
             for (let i = 1; i <= 10; i++) {
                 const fileName = `${fileType}${i}${subject.replace(/-/g, '')}.pdf`;
-                content += `<li><a href="pdfs/${fileName}" target="_blank">${fileName}</a></li>`;
+                const filePath = `https://github.com/votre-utilisateur/votre-repo/raw/main/Pdf/${fileName}`;
+                content += `<li><a href="${filePath}" target="_blank">${fileName}</a></li>`;
             }
             content += `</ul>
                         </div>`;
