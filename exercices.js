@@ -53,7 +53,7 @@ function showInventory(subject, type) {
                                 <h5>Chapitre ${chapter}</h5>
                                 <ul>`;
                 for (let i = 1; i <= 10; i++) {
-                    const fileName = `${fileType}${i}${subject.replace(/-/g, '')}.pdf`;
+                    const fileName = `${fileType}${chapter}${subject.replace(/-/g, '')}.pdf`;
                     const filePath = `https://github.com/votre-utilisateur/votre-repo/raw/main/Pdf/${fileName}`;
                     content += `<li><a href="${filePath}" target="_blank">${fileName}</a></li>`;
                 }
