@@ -1,29 +1,12 @@
-let currentPage = 1;
+function expandCard(title) {
+    const expandedCard = document.getElementById('expandedCard');
+    const expandedContent = document.getElementById('expandedContent');
 
-function turnPage(direction) {
-    const totalPages = 3;
-
-    if ((direction === -1 && currentPage > 1) || (direction === 1 && currentPage < totalPages)) {
-        const current = document.getElementById(`page${currentPage}`);
-        const nextPage = currentPage + direction;
-        const next = document.getElementById(`page${nextPage}`);
-
-        if (direction === 1) {
-            current.style.transform = "rotateY(-180deg)";
-            next.style.transform = "rotateY(0deg)";
-        } else {
-            current.style.transform = "rotateY(0deg)";
-            next.style.transform = "rotateY(-180deg)";
-        }
-
-        currentPage = nextPage;
-        updateButtons();
-    }
+    expandedContent.textContent = title;
+    expandedCard.style.display = 'flex';
 }
 
-function updateButtons() {
-    document.getElementById("prevBtn").classList.toggle("hidden", currentPage === 1);
-    document.getElementById("nextBtn").classList.toggle("hidden", currentPage === 3);
+function closeCard() {
+    const expandedCard = document.getElementById('expandedCard');
+    expandedCard.style.display = 'none';
 }
-
-updateButtons();
