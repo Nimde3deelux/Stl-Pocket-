@@ -16,9 +16,14 @@ document.querySelectorAll('.card').forEach(card => {
 
     // Clic : navigation vers la page associée
     card.addEventListener('click', () => {
-        const url = card.getAttribute('data-url'); // Récupération de l'URL dans l'attribut "data-url"
+        const url = card.getAttribute('data-url');
         if (url) {
-            window.location.href = url; // Redirection vers la page
+            window.location.href = url;
         }
     });
+});
+
+// Scroll to Top Button
+document.getElementById('scrollToTop').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
