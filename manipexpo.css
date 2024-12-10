@@ -1,36 +1,140 @@
-/* Container for cards */
-.container {
+
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    height: 100vh;
+    overflow: hidden;
     display: flex;
-    gap: 30px;
-    perspective: 2000px;
-    transform-style: preserve-3d;
-    flex-direction: row; /* Assurez-vous que les cartes sont affichées horizontalement */
-    justify-content: center; /* Centre horizontalement */
-    align-items: center; /* Centre verticalement */
-    height: 100vh; /* Assure que la hauteur de la fenêtre est prise en compte pour le centrage vertical */
-    width: 100%; /* Prendre toute la largeur de la fenêtre */
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
-/* Container for cards */
-.container {
-    display: flex;
-    gap: 30px;
-    perspective: 2000px;
-    transform-style: preserve-3d;
-    flex-direction: row; /* Assurez-vous que les cartes sont affichées horizontalement */
-    justify-content: center; /* Centre horizontalement */
-    align-items: center; /* Centre verticalement */
-    height: 100vh; /* Assure que la hauteur de la fenêtre est prise en compte pour le centrage vertical */
-    width: 100%; /* Prendre toute la largeur de la fenêtre */
+
+/* Ocean background */
+.ocean-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #87ceeb 0%, #4682b4 100%);
+    overflow: hidden;
+    animation: moveOcean 10s linear infinite;
 }
+
+@keyframes moveOcean {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* Simulate the sand */
+.ocean-background::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    background: #f4c542;
+    z-index: -1;
+}
+
+/* Waves animation */
+@keyframes waveMovement {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.ocean-background::after {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: url('https://www.pngall.com/wp-content/uploads/4/Waves-PNG-Image.png') repeat-x;
+    animation: waveMovement 5s linear infinite;
+}
+
 /* Container for cards */
 .container {
     display: flex;
     gap: 30px;
     perspective: 2000px;
     transform-style: preserve-3d;
-    flex-direction: row; /* Assurez-vous que les cartes sont affichées horizontalement */
-    justify-content: center; /* Centre horizontalement */
-    align-items: center; /* Centre verticalement */
-    height: 100vh; /* Assure que la hauteur de la fenêtre est prise en compte pour le centrage vertical */
-    width: 100%; /* Prendre toute la largeur de la fenêtre */
+}
+
+/* Card Styles */
+.card {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(to bottom right, #fff, #ccc);
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transform: rotateY(45deg) rotateX(15deg);
+    transform-origin: center;
+    transition: transform 0.8s ease, box-shadow 0.5s ease, scale 0.5s ease;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card h2 {
+    margin: 10px 0;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #333;
+}
+
+.card p {
+    font-size: 1rem;
+    text-align: center;
+    color: #666;
+}
+
+/* Hover Effect */
+.card:hover {
+    transform: translateZ(300px) rotateY(0) rotateX(0) scale(1.5);
+    z-index: 10;
+    background: linear-gradient(to top right, #ccc, #fff);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Individual Card Colors */
+#microbiology {
+    background: linear-gradient(to bottom right, #ffdd59, #ffeaa7);
+}
+
+#spectroscopy {
+    background: linear-gradient(to bottom right, #74b9ff, #a29bfe);
+}
+
+#volumetry {
+    background: linear-gradient(to bottom right, #55efc4, #81ecec);
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        width: 150px;
+        height: 150px;
+        transform: rotateY(30deg) rotateX(10deg);
+    }
+
+    .card:hover {
+        transform: translateZ(200px) rotateY(0) rotateX(0) scale(1.3);
+    }
 }
