@@ -22,18 +22,3 @@ document.querySelectorAll('.card').forEach(card => {
         }
     });
 });
-document.addEventListener("DOMContentLoaded", function() {
-    const bouncingBallsContainer = document.querySelector('.bouncing-balls');
-
-    for (let i = 0; i < 100; i++) {
-        const ball = document.createElement('div');
-        ball.classList.add('ball');
-
-        // Positionner la balle aléatoirement sur la page
-        ball.style.left = `${Math.random() * 100}vw`;
-        ball.style.top = `${Math.random() * 100}vh`;
-
-        // Ajouter la balle dans le conteneur
-        bouncingBallsContainer.appendChild(ball);
-    }
-});
