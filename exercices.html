@@ -3,79 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercices - STL Pocket</title>
+    <title>STL Pocket - Exercices</title>
     <link rel="stylesheet" href="exercices.css">
 </head>
 <body>
     <header>
-        <h1>STL Pocket - Exercices</h1>
+        <h1>STL Pocket</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="forum.html">Forum</a></li>
-                <li><a href="contact.html">Contactez-nous</a></li>
-                <li><a href="resources.html">Précédent</a></li>
+                <li><a href="notifications.html">Notifications</a></li>
+                <li><a href="ia-assistante.html">IA Assistante</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <!-- Physique-Chimie-Math Section -->
-        <section id="physique-chimie-math" class="subject">
-            <h2>Physique-Chimie-Math</h2>
-            <div class="exercises-container">
-                <div class="exercise-box" onclick="showInventory('physique-chimie-math', 'exercices')">Exercice</div>
-                <div class="exercise-box" onclick="showInventory('physique-chimie-math', 'corriges')">Corrigé</div>
-                <div class="exercise-box" onclick="showInventory('physique-chimie-math', 'controles')">Contrôle</div>
+        <section id="exercices">
+            <h2>Exercices par Matière</h2>
+            <div class="subjects">
+                <div class="subject" onclick="showInventory('physique-chimie-math')">
+                    <h3>Physique-Chimie-Math</h3>
+                </div>
+                <div class="subject" onclick="showInventory('biochimie-biotechnologie')">
+                    <h3>Biochimie-Biotechnologie</h3>
+                </div>
+                <div class="subject" onclick="showInventory('science-laboratoire')">
+                    <h3>Science de Laboratoire</h3>
+                </div>
+                <div class="subject" onclick="showInventory('mathematiques')">
+                    <h3>Mathématiques</h3>
+                </div>
+                <div class="subject" onclick="showInventory('biochimie-biologie')">
+                    <h3>Biochimie-Biologie</h3>
+                </div>
             </div>
-            <div id="inventory-physique-chimie-math" class="inventory"></div>
         </section>
-
-        <!-- Biochimie-Biotechnologie Section -->
-        <section id="biochimie-biotechnologie" class="subject">
-            <h2>Biochimie-Biotechnologie</h2>
-            <div class="exercises-container">
-                <div class="exercise-box" onclick="showInventory('biochimie-biotechnologie', 'exercices')">Exercice</div>
-                <div class="exercise-box" onclick="showInventory('biochimie-biotechnologie', 'corriges')">Corrigé</div>
-                <div class="exercise-box" onclick="showInventory('biochimie-biotechnologie', 'controles')">Contrôle</div>
+        <section id="notifications">
+            <h2>Rappels de Formules</h2>
+            <div id="reminders">
+                <ul>
+                    <li>Formule de vitesse : \( v = \frac{d}{t} \)</li>
+                    <li>Équation chimique : \( C + O_2 \to CO_2 \)</li>
+                </ul>
             </div>
-            <div id="inventory-biochimie-biotechnologie" class="inventory"></div>
         </section>
-
-        <!-- Science Laboratoire Section -->
-        <section id="science-laboratoire" class="subject">
-            <h2>Science Laboratoire</h2>
-            <div class="exercises-container">
-                <div class="exercise-box" onclick="showInventory('science-laboratoire', 'exercices')">Exercice</div>
-                <div class="exercise-box" onclick="showInventory('science-laboratoire', 'corriges')">Corrigé</div>
-                <div class="exercise-box" onclick="showInventory('science-laboratoire', 'controles')">Contrôle</div>
+        <section id="chat">
+            <h2>Chat de Discussion</h2>
+            <div id="chat-box">
+                <input type="text" id="chat-input" placeholder="Écrivez un message...">
+                <button onclick="sendMessage()">Envoyer</button>
+                <div id="messages"></div>
             </div>
-            <div id="inventory-science-laboratoire" class="inventory"></div>
-        </section>
-
-        <!-- Mathématiques Section -->
-        <section id="mathematiques" class="subject">
-            <h2>Mathématiques</h2>
-            <div class="exercises-container">
-                <div class="exercise-box" onclick="showInventory('mathematiques', 'exercices')">Exercice</div>
-                <div class="exercise-box" onclick="showInventory('mathematiques', 'corriges')">Corrigé</div>
-                <div class="exercise-box" onclick="showInventory('mathematiques', 'controles')">Contrôle</div>
-            </div>
-            <div id="inventory-mathematiques" class="inventory"></div>
-        </section>
-
-        <!-- Biochimie-Biologie Section -->
-        <section id="biochimie-biologie" class="subject">
-            <h2>Biochimie-Biologie</h2>
-            <div class="exercises-container">
-                <div class="exercise-box" onclick="showInventory('biochimie-biologie', 'exercices')">Exercice</div>
-                <div class="exercise-box" onclick="showInventory('biochimie-biologie', 'corriges')">Corrigé</div>
-                <div class="exercise-box" onclick="showInventory('biochimie-biologie', 'controles')">Contrôle</div>
-            </div>
-            <div id="inventory-biochimie-biologie" class="inventory"></div>
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 STL Pocket. Tous droits réservés.</p>
+        <p>&copy; 2024 STL Pocket - Créé par Adama Bastien et Berkay</p>
     </footer>
     <script src="exercices.js"></script>
 </body>
