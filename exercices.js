@@ -41,31 +41,33 @@ function showInventory(subject, type) {
 
     let content = `<h3>${subject.replace(/-/g, ' ')} : Inventaire</h3>`;
 
-    categories.forEach((type) => {
-        const fileType = type === 'exercices' ? 'exochap' : type === 'corriges' ? 'corrchap' : 'contchap';
-        content += `<div class="category">
-                        <h4>${type.charAt(0).toUpperCase() + type.slice(1)}</h4>
-                        <div class="chapter-list-${type}">`;
+    categories.forEach((category) => {
+        if (category === type) {
+            const fileType = category === 'exercices' ? 'exochap' : category === 'corriges' ? 'corrchap' : 'contchap';
+            content += `<div class="category">
+                            <h4>${category.charAt(0).toUpperCase() + category.slice(1)}</h4>
+                            <div class="chapter-list-${category}">`;
 
-        for (let chapter = 1; chapter <= 10; chapter++) {
-            content += `<div class="chapter-${type}" style="display: ${chapter === 1 ? 'block' : 'none'}">
-                            <h5>Chapitre ${chapter}</h5>
-                            <ul>`;
-            for (let i = 1; i <= 10; i++) {
-                const fileName = `${fileType}${i}${subject.replace(/-/g, '')}.pdf`;
-                const filePath = `https://github.com/votre-utilisateur/votre-repo/raw/main/Pdf/${fileName}`;
-                content += `<li><a href="${filePath}" target="_blank">${fileName}</a></li>`;
+            for (let chapter = 1; chapter <= 10; chapter++) {
+                content += `<div class="chapter-${category}" style="display: ${chapter === 1 ? 'block' : 'none'}">
+                                <h5>Chapitre ${chapter}</h5>
+                                <ul>`;
+                for (let i = 1; i <= 10; i++) {
+                    const fileName = `${fileType}${i}${subject.replace(/-/g, '')}.pdf`;
+                    const filePath = `https://github.com/votre-utilisateur/votre-repo/raw/main/Pdf/${fileName}`;
+                    content += `<li><a href="${filePath}" target="_blank">${fileName}</a></li>`;
+                }
+                content += `</ul>
+                            </div>`;
             }
-            content += `</ul>
-                        </div>`;
-        }
 
-        content += `</div>
-                    <div class="navigation-arrows">
-                        <button class="prev-${type}">Précédent</button>
-                        <button class="next-${type}">Suivant</button>
-                    </div>
-                </div>`;
+            content += `</div>
+                        <div class="navigation-arrows">
+                            <button class="prev-${category}">Précédent</button>
+                            <button class="next-${category}">Suivant</button>
+                        </div>
+                    </div>`;
+        }
     });
 
     inventoryDiv.innerHTML = content;
