@@ -1,95 +1,84 @@
+/* Global Styles */
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    height: 100vh;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f4f4f9;
-    overflow: hidden;
 }
 
 .container {
     display: flex;
-    gap: 20px;
+    gap: 30px;
+    perspective: 2000px;
+    transform-style: preserve-3d;
 }
 
+/* Card Styles */
 .card {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(to bottom right, #fff, #ccc);
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transform: rotateY(45deg) rotateX(15deg);
+    transform-origin: center;
+    transition: transform 0.8s ease, box-shadow 0.5s ease, scale 0.5s ease;
+    position: relative;
+    cursor: pointer;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: transform 0.5s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: rotateY(45deg);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
 .card h2 {
-    margin: 0;
-    font-size: 1.2rem;
+    margin: 10px 0;
+    font-size: 1.5rem;
     text-align: center;
     color: #333;
 }
 
+.card p {
+    font-size: 1rem;
+    text-align: center;
+    color: #666;
+}
+
+/* Hover Effect */
+.card:hover {
+    transform: translateZ(300px) rotateY(0) rotateX(0) scale(1.5);
+    z-index: 10;
+    background: linear-gradient(to top right, #ccc, #fff);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Individual Card Colors */
 #microbiology {
-    background-color: #ffdd59;
+    background: linear-gradient(to bottom right, #ffdd59, #ffeaa7);
 }
 
 #spectroscopy {
-    background-color: #74b9ff;
+    background: linear-gradient(to bottom right, #74b9ff, #a29bfe);
 }
 
 #volumetry {
-    background-color: #55efc4;
+    background: linear-gradient(to bottom right, #55efc4, #81ecec);
 }
 
-.expanded-card {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: white;
-    z-index: 10;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    animation: expand 0.5s ease forwards;
-}
-
-#closeBtn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #333;
-}
-
-.content {
-    text-align: center;
-    font-size: 2rem;
-    color: #333;
-}
-
-@keyframes expand {
-    from {
-        transform: scale(0.1);
-        opacity: 0;
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        width: 150px;
+        height: 150px;
+        transform: rotateY(30deg) rotateX(10deg);
     }
-    to {
-        transform: scale(1);
-        opacity: 1;
+
+    .card:hover {
+        transform: translateZ(200px) rotateY(0) rotateX(0) scale(1.3);
     }
 }
