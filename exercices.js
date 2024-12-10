@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const chapters = chapterList.querySelectorAll(`.chapter-${type}`);
             const prevButton = inventory.querySelector(`.prev-${type}`);
             const nextButton = inventory.querySelector(`.next-${type}`);
+            const reloadButton = inventory.querySelector(".reload-button");
 
             const updateChapterVisibility = () => {
                 chapters.forEach((chapter, index) => {
@@ -17,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             prevButton.textContent = "Chapitre précédent";
             nextButton.textContent = "Chapitre suivant";
+            reloadButton.textContent = "Recharger la page";
 
             prevButton.addEventListener("click", () => {
                 if (currentChapter > 1) {
@@ -30,6 +32,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     currentChapter++;
                     updateChapterVisibility();
                 }
+            });
+
+            reloadButton.addEventListener("click", () => {
+                // Recharger la page en passant au chapitre suivant, tout en maintenant le code intact
+                currentChapter++;
+                if (currentChapter > chapters.length) {
+                    currentChapter = 1; // Revenir au premier chapitre si on dépasse le dernier
+                }
+                updateChapterVisibility();
             });
 
             // Initialiser la visibilité des chapitres au chargement de la page
@@ -70,6 +81,7 @@ function showInventory(subject, type) {
                         <div class="navigation-arrows">
                             <button class="prev-${category}">Chapitre précédent</button>
                             <button class="next-${category}">Chapitre suivant</button>
+                            <button class="reload-button">Recharger la page</button>
                         </div>
                     </div>`;
         }
