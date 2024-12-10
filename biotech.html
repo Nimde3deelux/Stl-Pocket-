@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Biotechnologie</title>
-    <link rel="stylesheet" href="style.css">
     <style>
-        /* Design amélioré et optimisation des transitions */
+        /* Style global pour le site */
         body {
             background-color: #1a1a1a;
             color: #e6e6e6;
@@ -63,73 +62,45 @@
             width: 80%;
         }
 
-        /* Frise chronologique améliorée */
-        .timeline {
-            display: flex;
-            justify-content: space-evenly;
-            margin-top: 40px;
-            padding: 20px;
-            flex-wrap: wrap;
-            transition: all 0.3s ease;
-        }
-
-        .timeline div {
-            background-color: #ff6600;
-            padding: 25px 35px;
-            color: white;
-            border-radius: 10px;
+        /* Style pour les thèmes et les sous-chapitres */
+        .theme {
+            background-color: #333;
+            color: #e6e6e6;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
             cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
             text-align: center;
-            transition: background-color 0.3s ease-in-out, transform 0.3s;
-            width: 150px;
-            margin: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            font-size: 1.2em;
+            width: 100%;
         }
 
-        .timeline div:hover,
-        .timeline .selected {
-            background-color: #ff9900;
-            transform: scale(1.1);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-        }
-
-        .timeline .chapter1 { background-color: #1E90FF; }
-        .timeline .chapter2 { background-color: #32CD32; }
-        .timeline .chapter3 { background-color: #FF6347; }
-        .timeline .chapter4 { background-color: #FFD700; }
-        .timeline .chapter5 { background-color: #8A2BE2; }
-        .timeline .chapter6 { background-color: #FF4500; }
-        .timeline .chapter7 { background-color: #ADFF2F; }
-        .timeline .chapter8 { background-color: #00CED1; }
-        .timeline .chapter9 { background-color: #D2691E; }
-        .timeline .chapter10 { background-color: #B22222; }
-
-        .chapter-btns {
-            display: none;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        /* Boutons interactifs */
-        .chapter-btns button {
-            background-color: #ff6600;
-            border: none;
-            padding: 15px 30px;
-            color: white;
-            font-size: 1.2em;
-            cursor: pointer;
-            text-transform: uppercase;
-            border-radius: 5px;
-            transition: background-color 0.3s ease-in-out, transform 0.3s ease;
-        }
-
-        .chapter-btns button:hover {
-            background-color: #ff9900;
+        .theme:hover {
+            background-color: #444;
             transform: scale(1.05);
         }
 
-        /* Sections supplémentaires : Cartes mentales, fiches de révision */
+        .chapters {
+            display: none;
+            padding: 10px;
+            margin-top: 10px;
+            border-top: 2px solid #444;
+            background-color: #2E2E2E;
+            border-radius: 8px;
+        }
+
+        .chapter {
+            padding: 8px;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .chapter:hover {
+            background-color: #444;
+        }
+
+        /* Style pour le contenu des chapitres */
         .chapter-content {
             display: none;
             background-color: #2E2E2E;
@@ -139,13 +110,8 @@
             transition: all 0.3s ease;
         }
 
-        .mind-map, .revision-sheet, .course {
-            display: none;
-            margin-top: 20px;
-            color: #FFFFFF;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        .chapter-content.show {
+            display: block;
         }
 
         /* Liens de téléchargement */
@@ -158,42 +124,6 @@
 
         .download-link:hover {
             color: #e6e6e6;
-        }
-
-        /* Animation de transition lors du changement de chapitre */
-        .chapter-content {
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .chapter-content.show {
-            opacity: 1;
-        }
-
-        /* Ajout d'un système de notification */
-        .notification {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background-color: #FF4500;
-            color: white;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            display: none;
-            transition: all 0.3s ease;
-        }
-
-        .notification.show {
-            display: block;
-        }
-
-        /* Mise en page pour mobile */
-        @media (max-width: 768px) {
-            .timeline div {
-                width: 100%;
-                margin: 10px 0;
-            }
         }
     </style>
 </head>
@@ -211,24 +141,45 @@
         <h1>Biotechnologie 📚</h1>
         <p>Bienvenue dans la section Biotechnologie. Découvrez des ressources, exercices et vidéos pour approfondir vos connaissances.</p>
 
-        <!-- Frise chronologique -->
-        <div class="timeline">
-            <div onclick="showChapter(1)" id="chapter1" class="chapter1">Chapitre 1 - Introduction 📖</div>
-            <div onclick="showChapter(2)" id="chapter2" class="chapter2">Chapitre 2 - Méthodes 🧪</div>
-            <div onclick="showChapter(3)" id="chapter3" class="chapter3">Chapitre 3 - Applications 🌱</div>
-            <div onclick="showChapter(4)" id="chapter4" class="chapter4">Chapitre 4 - Études de cas 🔬</div>
-            <div onclick="showChapter(5)" id="chapter5" class="chapter5">Chapitre 5 - Recherche 🧬</div>
-            <div onclick="showChapter(6)" id="chapter6" class="chapter6">Chapitre 6 - Innovations 🚀</div>
-            <div onclick="showChapter(7)" id="chapter7" class="chapter7">Chapitre 7 - Impact 💡</div>
-            <div onclick="showChapter(8)" id="chapter8" class="chapter8">Chapitre 8 - Applications pratiques 🏃</div>
-            <div onclick="showChapter(9)" id="chapter9" class="chapter9">Chapitre 9 - Conclusion 📊</div>
-            <div onclick="showChapter(10)" id="chapter10" class="chapter10">Chapitre 10 - Perspectives 🌍</div>
+        <!-- Thème 1 -->
+        <div class="theme" onclick="toggleChapters('theme1')">
+            Thème 1 - Introduction
+            <div id="theme1" class="chapters">
+                <div class="chapter" onclick="showChapter(1)">Chapitre 1</div>
+                <div class="chapter" onclick="showChapter(2)">Chapitre 2</div>
+                <div class="chapter" onclick="showChapter(3)">Chapitre 3</div>
+                <div class="chapter" onclick="showChapter(4)">Chapitre 4</div>
+                <div class="chapter" onclick="showChapter(5)">Chapitre 5</div>
+                <div class="chapter" onclick="showChapter(6)">Chapitre 6</div>
+                <div class="chapter" onclick="showChapter(7)">Chapitre 7</div>
+                <div class="chapter" onclick="showChapter(8)">Chapitre 8</div>
+                <div class="chapter" onclick="showChapter(9)">Chapitre 9</div>
+                <div class="chapter" onclick="showChapter(10)">Chapitre 10</div>
+            </div>
         </div>
 
-        <!-- Chapitre 1 -->
+        <!-- Thème 2 -->
+        <div class="theme" onclick="toggleChapters('theme2')">
+            Thème 2 - Méthodes
+            <div id="theme2" class="chapters">
+                <div class="chapter" onclick="showChapter(11)">Chapitre 1</div>
+                <div class="chapter" onclick="showChapter(12)">Chapitre 2</div>
+                <div class="chapter" onclick="showChapter(13)">Chapitre 3</div>
+                <div class="chapter" onclick="showChapter(14)">Chapitre 4</div>
+                <div class="chapter" onclick="showChapter(15)">Chapitre 5</div>
+                <div class="chapter" onclick="showChapter(16)">Chapitre 6</div>
+                <div class="chapter" onclick="showChapter(17)">Chapitre 7</div>
+                <div class="chapter" onclick="showChapter(18)">Chapitre 8</div>
+                <div class="chapter" onclick="showChapter(19)">Chapitre 9</div>
+                <div class="chapter" onclick="showChapter(20)">Chapitre 10</div>
+            </div>
+        </div>
+
+        <!-- Ajouter d'autres thèmes ici -->
+
+        <!-- Contenu des chapitres -->
         <div id="content1" class="chapter-content">
             <h2>Chapitre 1 - Introduction à la Biotechnologie</h2>
-            <!-- Carte mentale -->
             <div id="mindMap1" class="mind-map">
                 <h3>Carte mentale</h3>
                 <ul>
@@ -238,7 +189,6 @@
                 </ul>
                 <a href="downloads/mindmap1.pdf" class="download-link">Télécharger la carte mentale</a>
             </div>
-            <!-- Fiche de révision -->
             <div id="revision1" class="revision-sheet">
                 <h3>Fiche de révision</h3>
                 <ul>
@@ -248,7 +198,6 @@
                 </ul>
                 <a href="downloads/revision1.pdf" class="download-link">Télécharger la fiche de révision</a>
             </div>
-            <!-- Vidéo -->
             <div id="video1" class="course">
                 <h3>Vidéo explicative</h3>
                 <video controls>
@@ -258,46 +207,48 @@
             </div>
         </div>
 
-        <!-- Notification -->
-        <div id="notification" class="notification">
-            <p>Un nouveau chapitre a été ajouté !</p>
+        <!-- Répéter la structure pour les autres chapitres -->
+        <div id="content11" class="chapter-content">
+            <h2>Chapitre 11 - Méthodes Avancées</h2>
+            <div class="mind-map">
+                <h3>Carte mentale</h3>
+                <ul>
+                    <li>Méthodes de biotechnologie avancée</li>
+                    <li>Techniques de laboratoire</li>
+                </ul>
+                <a href="downloads/mindmap11.pdf" class="download-link">Télécharger la carte mentale</a>
+            </div>
+            <div class="revision-sheet">
+                <h3>Fiche de révision</h3>
+                <ul>
+                    <li>Techniques d'édition génétique</li>
+                    <li>Applications modernes</li>
+                </ul>
+                <a href="downloads/revision11.pdf" class="download-link">Télécharger la fiche de révision</a>
+            </div>
+            <div class="course">
+                <h3>Vidéo explicative</h3>
+                <video controls>
+                    <source src="videos/methods_advanced.mp4" type="video/mp4">
+                    Votre navigateur ne prend pas en charge la balise vidéo.
+                </video>
+            </div>
         </div>
+
+        <!-- Ajoutez le contenu pour les autres chapitres ici -->
 
     </section>
 
     <script>
-        let currentChapter = null;
+        function toggleChapters(themeId) {
+            const chapters = document.getElementById(themeId);
+            chapters.style.display = (chapters.style.display === "block") ? "none" : "block";
+        }
 
-        // Fonction pour afficher le chapitre sélectionné
         function showChapter(chapterNumber) {
-            if (currentChapter !== null) {
-                document.getElementById('content' + currentChapter).classList.remove('show');
-                document.getElementById('chapter' + currentChapter).classList.remove('selected');
-            }
-
-            document.getElementById('content' + chapterNumber).classList.add('show');
-            document.getElementById('chapter' + chapterNumber).classList.add('selected');
-            currentChapter = chapterNumber;
+            const content = document.getElementById('content' + chapterNumber);
+            content.classList.toggle('show');
         }
-
-        // Afficher la notification
-        function showNotification() {
-            let notification = document.getElementById('notification');
-            notification.classList.add('show');
-            setTimeout(function () {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-
-        // Déclencher la notification lors du changement de chapitre
-        document.querySelectorAll('.timeline div').forEach((element) => {
-            element.addEventListener('click', function () {
-                showNotification();
-            });
-        });
-
-        // Initialiser la première section
-        showChapter(1);
     </script>
 </body>
 
