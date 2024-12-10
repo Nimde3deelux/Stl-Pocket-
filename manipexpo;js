@@ -11,3 +11,11 @@ document.querySelectorAll('.card').forEach(card => {
         card.style.zIndex = '1';
     });
 });
+
+/**
+ * Navigue vers une nouvelle page lorsqu'une rubrique est cliquée.
+ * @param {string} url - URL de la page cible.
+ */
+function navigateTo(url) {
+    window.location.href = url;
+}
