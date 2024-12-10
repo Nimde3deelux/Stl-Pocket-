@@ -1,12 +1,13 @@
-function expandCard(title) {
-    const expandedCard = document.getElementById('expandedCard');
-    const expandedContent = document.getElementById('expandedContent');
+document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+        card.style.transition = 'transform 0.8s ease, box-shadow 0.5s ease';
+        card.style.transform = 'translateZ(300px) rotateY(0) rotateX(0) scale(1.5)';
+        card.style.zIndex = '10';
+    });
 
-    expandedContent.textContent = title;
-    expandedCard.style.display = 'flex';
-}
-
-function closeCard() {
-    const expandedCard = document.getElementById('expandedCard');
-    expandedCard.style.display = 'none';
-}
+    card.addEventListener('mouseleave', () => {
+        card.style.transition = 'transform 0.8s ease';
+        card.style.transform = 'rotateY(45deg) rotateX(15deg)';
+        card.style.zIndex = '1';
+    });
+});
