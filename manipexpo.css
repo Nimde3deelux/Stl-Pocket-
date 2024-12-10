@@ -9,8 +9,64 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
+/* Ocean background */
+.ocean-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #87ceeb 0%, #4682b4 100%);
+    overflow: hidden;
+    animation: moveOcean 10s linear infinite;
+}
+
+@keyframes moveOcean {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* Simulate the sand */
+.ocean-background::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    background: #f4c542;
+    z-index: -1;
+}
+
+/* Waves animation 3D */
+@keyframes waveMovement {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.ocean-background::after {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: url('https://github.com/ton-utilisateur/ton-repository/blob/main/images/waves.png?raw=true') repeat-x;
+    animation: waveMovement 5s linear infinite;
+    z-index: -2;
+}
+
+/* Container for cards */
 .container {
     display: flex;
     gap: 30px;
