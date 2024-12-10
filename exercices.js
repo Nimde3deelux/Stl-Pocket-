@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             };
 
+            prevButton.textContent = "Chapitre précédent";
+            nextButton.textContent = "Chapitre suivant";
+
             prevButton.addEventListener("click", () => {
                 if (currentChapter > 1) {
                     currentChapter--;
@@ -63,8 +66,8 @@ function showInventory(subject, type) {
 
             content += `</div>
                         <div class="navigation-arrows">
-                            <button class="prev-${category}">Précédent</button>
-                            <button class="next-${category}">Suivant</button>
+                            <button class="prev-${category}">Chapitre précédent</button>
+                            <button class="next-${category}">Chapitre suivant</button>
                         </div>
                     </div>`;
         }
