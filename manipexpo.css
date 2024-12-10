@@ -3,16 +3,16 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
+    background: linear-gradient(to bottom, #1e3c72, #2a5298); /* Fond bleu scientifique */
     height: 100vh;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('https://github.com/ton-utilisateur/ton-repository/blob/main/images/wave.png?raw=true');
-    background-size: cover; /* Redimensionne l'image pour qu'elle couvre toute la page */
+    color: white; /* Texte en blanc pour le contraste */
+    background-size: cover;
     background-position: center;
-    background-repeat: no-repeat; /* Evite la répétition de l'image */
+    background-attachment: fixed; /* Pour que l'image de fond reste fixe lors du défilement */
 }
 
 /* Container Style */
