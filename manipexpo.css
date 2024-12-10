@@ -1,17 +1,3 @@
-/* Global Styles */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
 /* Ocean background */
 .ocean-background {
     position: absolute;
@@ -33,44 +19,66 @@ body {
     }
 }
 
-/* Simulate the sand */
-.ocean-background::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 20%;
-    background: #f4c542;
-    z-index: -1;
-}
-
-/* Waves animation */
-@keyframes waveMovement {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
-
-.ocean-background::after {
-    content: '';
-    position: absolute;
-    bottom: 20%;
-    left: 0;
-    width: 100%;
-    height: 20px;
-    background: url('https://www.pngall.com/wp-content/uploads/4/Waves-PNG-Image.png') repeat-x;
-    animation: waveMovement 5s linear infinite;
-}
-
-/* Container for cards */
-.container {
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    height: 100vh;
+    overflow: hidden;
     display: flex;
-    gap: 30px;
-    perspective: 2000px;
-    transform-style: preserve-3d;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Scroll Back to Top Button */
+.scroll-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.scroll-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Social Media Buttons */
+.social-buttons {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.social-btn {
+    background-color: #3b5998;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.social-btn:nth-child(2) {
+    background-color: #1da1f2;
+}
+
+.social-btn:nth-child(3) {
+    background-color: #0077b5;
+}
+
+.social-btn:hover {
+    opacity: 0.7;
 }
 
 /* Card Styles */
@@ -81,8 +89,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     transform: rotateY(45deg) rotateX(15deg);
-    transform-origin: center;
-    transition: transform 0.8s ease, box-shadow 0.5s ease, scale 0.5s ease;
+    transition: transform 0.8s ease, box-shadow 0.5s ease;
     position: relative;
     cursor: pointer;
     display: flex;
@@ -91,25 +98,25 @@ body {
     align-items: center;
 }
 
-.card h2 {
-    margin: 10px 0;
-    font-size: 1.5rem;
-    text-align: center;
-    color: #333;
-}
-
-.card p {
-    font-size: 1rem;
-    text-align: center;
-    color: #666;
-}
-
 /* Hover Effect */
 .card:hover {
     transform: translateZ(300px) rotateY(0) rotateX(0) scale(1.5);
     z-index: 10;
     background: linear-gradient(to top right, #ccc, #fff);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Transitions */
+.card {
+    transition: transform 0.8s ease, background-color 0.5s ease;
+}
+
+.card h2, .card p {
+    transition: opacity 0.5s ease;
+}
+
+.card:hover h2, .card:hover p {
+    opacity: 0.8;
 }
 
 /* Individual Card Colors */
@@ -125,15 +132,21 @@ body {
     background: linear-gradient(to bottom right, #55efc4, #81ecec);
 }
 
+/* Scroll Animation */
+@keyframes waveMovement {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
     .card {
         width: 150px;
         height: 150px;
         transform: rotateY(30deg) rotateX(10deg);
-    }
-
-    .card:hover {
-        transform: translateZ(200px) rotateY(0) rotateX(0) scale(1.3);
     }
 }
