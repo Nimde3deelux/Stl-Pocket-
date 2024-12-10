@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
             nextButton.textContent = "Chapitre suivant";
 
             prevButton.addEventListener("click", () => {
-                if (currentChapter > 2) { // Assurez-vous de commencer à partir du chapitre 2
+                if (currentChapter > 1) { // Permet de naviguer en arrière jusqu'au chapitre 1
                     currentChapter--;
                     updateChapterVisibility();
                 }
@@ -51,8 +51,9 @@ function showInventory(subject, type) {
                             <h4>${category.charAt(0).toUpperCase() + category.slice(1)}</h4>
                             <div class="chapter-list-${category}">`;
 
-            for (let chapter = 2; chapter <= 10; chapter++) { // Commencer à partir du chapitre 2
-                content += `<div class="chapter-${category}" style="display: ${chapter === 2 ? 'block' : 'none'}">
+            // Affiche les chapitres de 1 à 10
+            for (let chapter = 1; chapter <= 10; chapter++) {
+                content += `<div class="chapter-${category}" style="display: ${chapter === 1 ? 'block' : 'none'}">
                                 <h5>Chapitre ${chapter}</h5>
                                 <ul>`;
                 for (let i = 1; i <= 10; i++) {
