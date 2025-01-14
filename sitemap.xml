@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    
+    <!-- Page d'accueil -->
+    <url>
+        <loc>https://stl-pocket.vercel.app/</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- Page des ressources -->
+    <url>
+        <loc>https://stl-pocket.vercel.app/resources.html</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Page du forum -->
+    <url>
+        <loc>https://stl-pocket.vercel.app/forum.html</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Page de contact -->
+    <url>
+        <loc>https://stl-pocket.vercel.app/contact.html</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Page des créateurs -->
+    <url>
+        <loc>https://stl-pocket.vercel.app/creators.html</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Page Physique-Chimie -->
+    <url>
+        <loc>https://stl-pocket.vercel.app/physique.html</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Page Biotechnologie -->
+    <url>
+        <loc>https://stl-pocket.vercel.app/biotech.html</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Page Mathématiques -->
+    <url>
+        <loc>https://stl-pocket.vercel.app/math.html</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <!-- Page Science de laboratoire -->
+    <url>
+        <loc>https://stl-pocket.vercel.app/lab.html</loc>
+        <lastmod>2025-01-14</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+</urlset>
