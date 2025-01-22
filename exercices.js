@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
     const inventories = document.querySelectorAll(".inventory");
     inventories.forEach((inventory) => {
@@ -10,11 +9,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const prevButton = inventory.querySelector(`.prev-${type}`);
             const nextButton = inventory.querySelector(`.next-${type}`);
             const reloadButton = inventory.querySelector(".reload-button");
+            const chapterCounter = inventory.querySelector(`.chapter-counter-${type}`);
 
             const updateChapterVisibility = () => {
                 chapters.forEach((chapter, index) => {
                     chapter.style.display = index + 1 === currentChapter ? "block" : "none";
                 });
+                if (chapterCounter) {
+                    chapterCounter.textContent = `Chapitre ${currentChapter} sur ${chapters.length}`;
+                }
             };
 
             prevButton.textContent = "Chapitre précédent";
@@ -36,15 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             reloadButton.addEventListener("click", () => {
-                // Recharger la page en passant au chapitre suivant, tout en maintenant le code intact
                 currentChapter++;
                 if (currentChapter > chapters.length) {
-                    currentChapter = 1; // Revenir au premier chapitre si on dépasse le dernier
+                    currentChapter = 1;
                 }
                 updateChapterVisibility();
             });
 
-            // Initialiser la visibilité des chapitres au chargement de la page
             updateChapterVisibility();
         });
     });
@@ -64,7 +65,6 @@ function showInventory(subject, type) {
                             <h4>${category.charAt(0).toUpperCase() + category.slice(1)}</h4>
                             <div class="chapter-list-${category}">`;
 
-            // Affiche les chapitres de 1 à 10 avec la même structure
             for (let chapter = 1; chapter <= 10; chapter++) {
                 content += `<div class="chapter-${category}" style="display: ${chapter === 1 ? 'block' : 'none'}">
                                 <h5>Chapitre ${chapter}</h5>
@@ -80,6 +80,7 @@ function showInventory(subject, type) {
 
             content += `</div>
                         <div class="navigation-arrows">
+                            <span class="chapter-counter-${category}" style="margin-right: 10px;"></span>
                             <button class="prev-${category}">Chapitre précédent</button>
                             <button class="next-${category}">Chapitre suivant</button>
                             <button class="reload-button">Recharger la page</button>
@@ -88,6 +89,24 @@ function showInventory(subject, type) {
         }
     });
 
+    content += `<div class="search-section">
+                    <input type="text" class="search-input" placeholder="Rechercher un chapitre..." />
+                    <button class="search-button">Rechercher</button>
+                </div>`;
+
     inventoryDiv.innerHTML = content;
     inventoryDiv.style.display = 'block';
+
+    const searchInput = inventoryDiv.querySelector(".search-input");
+    const searchButton = inventoryDiv.querySelector(".search-button");
+
+    searchButton.addEventListener("click", () => {
+        const query = searchInput.value.toLowerCase();
+        const chapters = inventoryDiv.querySelectorAll(`.chapter-${type}`);
+
+        chapters.forEach((chapter) => {
+            const title = chapter.querySelector("h5").textContent.toLowerCase();
+            chapter.style.display = title.includes(query) ? "block" : "none";
+        });
+    });
 }
