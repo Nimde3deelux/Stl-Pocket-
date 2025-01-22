@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const chapters = chapterList.querySelectorAll(`.chapter-${type}`);
             const prevButton = inventory.querySelector(`.prev-${type}`);
             const nextButton = inventory.querySelector(`.next-${type}`);
-            const toggleButton = inventory.querySelector(".toggle-button");
             const chapterCounter = inventory.querySelector(`.chapter-counter-${type}`);
 
             const updateChapterVisibility = () => {
@@ -20,38 +19,42 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             };
 
-            prevButton.textContent = "Chapitre précédent";
-            nextButton.textContent = "Chapitre suivant";
+            if (prevButton && nextButton) {
+                prevButton.textContent = "Chapitre précédent";
+                nextButton.textContent = "Chapitre suivant";
 
-            prevButton.addEventListener("click", () => {
-                if (currentChapter > 1) {
-                    currentChapter--;
-                    updateChapterVisibility();
-                }
-            });
+                prevButton.addEventListener("click", () => {
+                    if (currentChapter > 1) {
+                        currentChapter--;
+                        updateChapterVisibility();
+                    }
+                });
 
-            nextButton.addEventListener("click", () => {
-                if (currentChapter < chapters.length) {
-                    currentChapter++;
-                    updateChapterVisibility();
-                }
-            });
+                nextButton.addEventListener("click", () => {
+                    if (currentChapter < chapters.length) {
+                        currentChapter++;
+                        updateChapterVisibility();
+                    }
+                });
+            }
 
             updateChapterVisibility();
         });
 
         // Add toggle functionality for subject inventory
         const toggleButton = inventory.querySelector(".toggle-button");
-        toggleButton.addEventListener("click", () => {
-            const content = inventory.querySelector(".inventory-content");
-            if (content.style.display === "none") {
-                content.style.display = "block";
-                toggleButton.textContent = "Ranger l'onglet";
-            } else {
-                content.style.display = "none";
-                toggleButton.textContent = "Afficher l'onglet";
-            }
-        });
+        if (toggleButton) {
+            toggleButton.addEventListener("click", () => {
+                const content = inventory.querySelector(".inventory-content");
+                if (content.style.display === "none") {
+                    content.style.display = "block";
+                    toggleButton.textContent = "Ranger l'onglet";
+                } else {
+                    content.style.display = "none";
+                    toggleButton.textContent = "Afficher l'onglet";
+                }
+            });
+        }
     });
 });
 
@@ -92,25 +95,8 @@ function showInventory(subject, type) {
         }
     });
 
-    content += `<div class="search-section">
-                    <input type="text" class="search-input" placeholder="Rechercher un chapitre..." />
-                    <button class="search-button">Rechercher</button>
-                </div>
-                <button class="toggle-button">Ranger l'onglet</button>`;
+    content += `<button class="toggle-button">Ranger l'onglet</button>`;
 
     inventoryDiv.innerHTML = content;
     inventoryDiv.style.display = 'block';
-
-    const searchInput = inventoryDiv.querySelector(".search-input");
-    const searchButton = inventoryDiv.querySelector(".search-button");
-
-    searchButton.addEventListener("click", () => {
-        const query = searchInput.value.toLowerCase();
-        const chapters = inventoryDiv.querySelectorAll(`.chapter-${type}`);
-
-        chapters.forEach((chapter) => {
-            const title = chapter.querySelector("h5").textContent.toLowerCase();
-            chapter.style.display = title.includes(query) ? "block" : "none";
-        });
-    });
 }
