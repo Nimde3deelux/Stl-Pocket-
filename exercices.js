@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const chapters = chapterList.querySelectorAll(`.chapter-${type}`);
             const prevButton = inventory.querySelector(`.prev-${type}`);
             const nextButton = inventory.querySelector(`.next-${type}`);
-            const reloadButton = inventory.querySelector(".reload-button");
+            const toggleButton = inventory.querySelector(".toggle-button");
             const chapterCounter = inventory.querySelector(`.chapter-counter-${type}`);
 
             const updateChapterVisibility = () => {
@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             prevButton.textContent = "Chapitre précédent";
             nextButton.textContent = "Chapitre suivant";
-            reloadButton.textContent = "Recharger la page";
 
             prevButton.addEventListener("click", () => {
                 if (currentChapter > 1) {
@@ -38,15 +37,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            reloadButton.addEventListener("click", () => {
-                currentChapter++;
-                if (currentChapter > chapters.length) {
-                    currentChapter = 1;
-                }
-                updateChapterVisibility();
-            });
-
             updateChapterVisibility();
+        });
+
+        // Add toggle functionality for subject inventory
+        const toggleButton = inventory.querySelector(".toggle-button");
+        toggleButton.addEventListener("click", () => {
+            const content = inventory.querySelector(".inventory-content");
+            if (content.style.display === "none") {
+                content.style.display = "block";
+                toggleButton.textContent = "Ranger l'onglet";
+            } else {
+                content.style.display = "none";
+                toggleButton.textContent = "Afficher l'onglet";
+            }
         });
     });
 });
@@ -61,7 +65,7 @@ function showInventory(subject, type) {
     categories.forEach((category) => {
         if (category === type) {
             const fileType = category === 'exercices' ? 'exochap' : category === 'corriges' ? 'corrchap' : 'contchap';
-            content += `<div class="category">
+            content += `<div class="category inventory-content">
                             <h4>${category.charAt(0).toUpperCase() + category.slice(1)}</h4>
                             <div class="chapter-list-${category}">`;
 
@@ -83,7 +87,6 @@ function showInventory(subject, type) {
                             <span class="chapter-counter-${category}" style="margin-right: 10px;"></span>
                             <button class="prev-${category}">Chapitre précédent</button>
                             <button class="next-${category}">Chapitre suivant</button>
-                            <button class="reload-button">Recharger la page</button>
                         </div>
                     </div>`;
         }
@@ -92,7 +95,8 @@ function showInventory(subject, type) {
     content += `<div class="search-section">
                     <input type="text" class="search-input" placeholder="Rechercher un chapitre..." />
                     <button class="search-button">Rechercher</button>
-                </div>`;
+                </div>
+                <button class="toggle-button">Ranger l'onglet</button>`;
 
     inventoryDiv.innerHTML = content;
     inventoryDiv.style.display = 'block';
